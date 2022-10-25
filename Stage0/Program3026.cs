@@ -1,6 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System;
-//shish
+
+/// <summary>
+/// Stage0
+/// Shira Kahalany 325283026
+/// Hallel Ishon 212455570
+/// </summary>
 namespace Targil0
 {
     partial class Program
@@ -12,7 +17,6 @@ namespace Targil0
             Console.ReadKey();
         }
         static partial void Welcome5570(); 
-
         private static void Welcome3026()
         {
             Console.Write("Enter your name: ");
