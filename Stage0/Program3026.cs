@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System;
-
+//shish
 namespace Targil0
 {
     partial class Program
@@ -11,7 +11,6 @@ namespace Targil0
             Welcome5570();
             Console.ReadKey();
         }
-        //hyrrreerrrr
         static partial void Welcome5570(); 
 
         private static void Welcome3026()
