@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DO;
 
-namespace DalApi
+
+namespace DalApi;
+
+public interface IProduct : ICrud<Product>
 {
-    internal interface IProduct
-    {
-        int Add(T item);
-        T Get(int id);
-        void Update(T item);
-        void Delete(int id);
+    int Add(Product item);
+    Product GetByID(int id);
+    void Update(Product item);
+    void Delete(int id);
+    
 
-        //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
-        IEnumerable<T> GetAll();
-    }
+    //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
+    IEnumerable<Product> GetAll();
 }

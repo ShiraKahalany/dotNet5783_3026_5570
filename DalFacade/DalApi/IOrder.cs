@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DO;
 
-namespace DalApi
+
+namespace DalApi;
+
+public interface IOrder :ICrud<Order>
 {
-    internal interface IOrder
-    {
-        int Add(T item);
-        T Get(int id);
-        void Update(T item);
-        void Delete(int id);
+    int Add(Order item);
+    Order GetByID(int id);
+    void Update(Order item);
+    void Delete(int id);
 
-        //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
-        IEnumerable<T> GetAll();
-    }
+    //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
+    IEnumerable<Order> GetAll();
 }
