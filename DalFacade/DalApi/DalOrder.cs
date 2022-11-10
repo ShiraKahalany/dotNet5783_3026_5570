@@ -1,6 +1,7 @@
 ﻿namespace DalApi;
-
-public class DalOrder
+using DO;
+using DalApi;
+internal class DalOrder: IOrder
 {
-
+    
 }

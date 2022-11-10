@@ -5,10 +5,14 @@ namespace DalApi;
 
 public interface IOrder :ICrud<Order>
 {
-    int Add(Order item);
-    Order GetByID(int id);
-    void Update(Order item);
-    void Delete(int id);
+    public int Add(Order item) ///////////////////?????????????
+    {
+        
+        return item.ID;
+    }
+    public Order GetByID(int id);
+    public void Update(Order item);
+    public void Delete(int id);
 
     //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
     IEnumerable<Order> GetAll();
