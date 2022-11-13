@@ -4,7 +4,9 @@ namespace Dal;
 internal class DataSource
 {
     internal static DataSource s_instance { get; } = new DataSource();
-    private DataSource() { s_Initialize(); }
+    public DataSource() { s_Initialize(); }    /// <summary>
+    /// ???private??
+    /// </summary>
 
     public readonly Random rnd = new Random(); //a random number
     internal List<Order?> Orders { get;}=new List<Order?> { };

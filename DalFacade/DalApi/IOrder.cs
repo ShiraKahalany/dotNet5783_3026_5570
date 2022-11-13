@@ -5,11 +5,8 @@ namespace DalApi;
 
 public interface IOrder :ICrud<Order>
 {
-    public int Add(Order item) ///////////////////?????????????
-    {
-        
-        return item.ID;
-    }
+    public int Add(Order item);
+   
     public Order GetByID(int id);
     public void Update(Order item);
     public void Delete(int id);
