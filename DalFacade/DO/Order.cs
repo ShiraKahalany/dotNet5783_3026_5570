@@ -3,6 +3,7 @@
 /// Structure for representing  an order of a customer.
 public struct Order
 {
+    public bool IsDeleted { get; set; } 
     //
     public int ID { get; set; }
     //

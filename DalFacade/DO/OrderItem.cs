@@ -3,6 +3,7 @@
 /// Structure for an item on order.
 public struct OrderItem
 {
+    public bool? IsDeleted;
     //
     public int ID { get; set; }
     //

@@ -12,11 +12,18 @@ internal class DalOrder : IOrder
     public Order GetByID(int id) 
     {
         foreach(Order item in dataSource.Orders) { if(item.ID == id) return item; }
-        return null;
+        throw new Exception("The order is not exist");
     }
     public void Update(Order item)
     {
-        
+        foreach(Order temp in dataSource.Orders)
+        {
+            if(temp.ID == item.ID)
+            {
+                foreach(OrderItem item1 in temp.Items) { item1.IsDeleted. }
+                dataSource.Orders.Remove(temp);
+            }
+        }
     }
     public void Delete(int id)
     {
