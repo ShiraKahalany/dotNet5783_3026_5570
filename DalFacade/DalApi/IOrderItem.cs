@@ -13,4 +13,5 @@ public interface IOrderItem : ICrud<OrderItem>
 
     //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
     IEnumerable<OrderItem> GetAll(int id);
+    IEnumerable<OrderItem> GetAll();
 }

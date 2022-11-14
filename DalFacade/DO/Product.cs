@@ -3,7 +3,7 @@
 /// Structure for a product in the store.
 public struct Product
 {
-    public bool? IsDeleted;
+    public bool IsDeleted { get; set; }
     //
     public int ID { get; set; } 
     //
