@@ -24,6 +24,7 @@ internal class DalOrderItem :IOrderItem
         OrderItem? temp = dataSource.OrderItems.Find(x => x.GetValueOrDefault().ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
             throw new Exception("The order is not exist");
+        dataSource.OrderItems.Remove(temp);
         temp.GetValueOrDefault().IsDeleted = true; //update the isdeleted field of the order
     }
     OrderItem GetByOrderAndId(int orderId, int productId)

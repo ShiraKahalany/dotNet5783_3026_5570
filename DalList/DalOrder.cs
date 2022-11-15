@@ -3,7 +3,7 @@ using DO;
 namespace Dal;
 internal class DalOrder : IOrder
 {
-    DataSource dataSource=new DataSource();
+    DataSource dataSource=DataSource.s_instance;
     public int Add(Order item) 
     {
         dataSource.AddOrder(item);
@@ -24,9 +24,9 @@ internal class DalOrder : IOrder
         Order? temp = dataSource.Orders.Find(x => x.GetValueOrDefault().ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
             throw new Exception("The order is not exist");
-        foreach (OrderItem item1 in temp.GetValueOrDefault().Items) { item1.IsDeleted } //update the isdeleted field in each itemorder 
+        foreach (OrderItem item1 in temp.GetValueOrDefault().Items) { } //update the isdeleted field in each itemorder 
 
-        temp.GetValueOrDefault().IsDeleted = true; //update the isdeleted field of the order
+        temp?.IsDeleted => true; //update the isdeleted field of the order
     }
 
     //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);

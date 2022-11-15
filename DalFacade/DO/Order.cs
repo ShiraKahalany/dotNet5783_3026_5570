@@ -23,7 +23,7 @@ public struct Order
     //
     public DateTime? DeliveryrDate { get; set; }
     //
-    public List<OrderItem>? Items { get; set; }
+   // public List<OrderItem>? Items { get; set; }
     //
     public double CalculateTotalPrice() { }
     public double? TotalPrice { get; set; }

@@ -16,7 +16,7 @@ internal class DataSource
     public void AddOrderItem(OrderItem orderitem) { OrderItems.Add(orderitem); }
     public void AddProduct(Product product) { Products.Add(product); }
 
-    internal static class Config
+    internal static class Config //static?????
     {
         //nextOrderNumber
         internal const int s_startOrderNumber = 1000;
@@ -28,6 +28,13 @@ internal class DataSource
         internal static int NextOrderItemNumber { get => ++s_nextOrderItemNumber; }
 
     }
+    private void s_Initialize()
+    {
+        createProducts();
+        createOrders();
+        createOrderItems();
+    }
+
     string[] namesArr = { "Moshe", "Dina", "Shira", "Hallel", "Dani", "Yael", "Josef", "Michael", "Ruth", "Daniel", "Roei", "Shay", "Ron", "Yaron", "Shoshana", "Miryam", "Reut", "Eva", "Ayala", "Tikva", "Tirza", "Dikla", "Moriya", "Hadas", "Yafit", "Yossi", "Avi", "Merav", "Gital", "Helen" };
     string[] lastNamesArr = { "Azulay", "Edri", "Cohen", "Levi", "Biton", "Fridman", "Hadad", "Gabai", "Catz", "Zilberstein", "Malka", "Avraham", "Cherner", "Ben-David", "Orgad", "Ichler", "Alush", "Amsalem", "Papel", "Rapaport", "Buchner", "Bibass", "Bechman", "Block", "Blich", "Ben-shabat", "Braun", "Malool", "Dagan", "Glick", "Hod" };
     string[] citiesArr = { "Ben-Yehuda", "Elyakim", "Jerusalem", "Yokneam", "Raanana", "Tel-Aviv", "Beer-Sheva", "Eilat", "Avivim", "Netanya", "Tzfat", "Ashdod", "Heifa", "Afula", "Bet-Shean", "Ofakim", "Yeruham", "Hadera", "Dimona", "Bet-Shemesh", "Modiin", "Bat-Yam", "Yavne" };
@@ -35,6 +42,11 @@ internal class DataSource
     string[] productnamesArr = { "Kitchen rug", "Sea view picture", "Table cloth", "Pine wood youth bed", "Children's bed", "One and a half beds", "Double bed", "White kitchen cabinet", "Wooden chest of drawers", "Iron dresser", "Kitchen chair", "Room mirror", "Body mirror", "Duck bath rug", "Large white fridge", "Small white fridge", "Black oven", "White kettle", "Black microwave", "toaster", "large stainless steel pot", "large glass pot", "small glass pot", "medium glass pot", "medium stainless steel pot", "small stainless steel pot", "green leather sofa", "microwave White", "powerful red microwave", "blue fabric sofa", "glass kettle", "vintage kettle", "white lamb", "Yellow lamb" };
     private void createOrders()
     {
+
+        Order order = new
+        {
+            ID=///////
+        }
         for (int i = 0; i < 20; i++)
             Orders.Add(
             new Order
@@ -43,13 +55,13 @@ internal class DataSource
                 CustomerName = (namesArr[rnd.Next(namesArr.Length)]) + " " + (lastNamesArr[rnd.Next(lastNamesArr.Length)]),
                 CustomerEmail = CustomerName + "@gmail.com",
                 CustomerAdress = (streetArr[rnd.Next(streetArr.Length)]) + " " + rnd.Next(200) + ", " + citiesArr[rnd.Next(citiesArr.Length)],
-                //OrderDate = DateTime.Now -new TimeSpan(rnd.NextInt64(10L *1000L *3600L *24L*10L)),
-                ////Status = , 
-                //PaymentDate =DateTime.Now -new TimeSpan(rnd.NextInt64(10L *1000L *3600L *24L*10L)),
-                ////shipDate = ,
-                //DeliveryrDate =,
-                Items = new List<OrderItem>() //??
-                //TotalPrice = ,
+                OrderDate = DateTime.Now -new TimeSpan(rnd.NextInt64(10L *1000L *3600L *24L*10L)),
+                Status = , 
+               PaymentDate =DateTime.Now -new TimeSpan(rnd.NextInt64(10L *1000L *3600L *24L*10L)),
+                shipDate = null,
+                DeliveryrDate =null,
+           //     Items = new List<OrderItem>() //??
+                TotalPrice = null,
             });
     }
     private void createProducts()
@@ -166,12 +178,7 @@ internal class DataSource
                 ) ;
         }
     }
-    private void s_Initialize()
-    {
-        createProducts();
-        createOrders();
-        createOrderItems();
-    } 
+    
 
     
 }

@@ -6,10 +6,10 @@ class Program
     public static void PrintMenu()
     {
         Console.WriteLine("@ enter 1 to add" +
-                          "enter 2 to delete" +
-                          "enter 3 to update" +
-                          "enter 4 to get by id" +
-                          "enter 5 to print all of the objects");
+                          "  enter 2 to delete" +
+                          "  enter 3 to update" +
+                          "  enter 4 to get by id" +
+                          "  enter 5 to print all of the objects");
     }
     public static int GetAnswer()
     {
