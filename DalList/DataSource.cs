@@ -42,33 +42,44 @@ internal class DataSource
     string[] productnamesArr = { "Kitchen rug", "Sea view picture", "Table cloth", "Pine wood youth bed", "Children's bed", "One and a half beds", "Double bed", "White kitchen cabinet", "Wooden chest of drawers", "Iron dresser", "Kitchen chair", "Room mirror", "Body mirror", "Duck bath rug", "Large white fridge", "Small white fridge", "Black oven", "White kettle", "Black microwave", "toaster", "large stainless steel pot", "large glass pot", "small glass pot", "medium glass pot", "medium stainless steel pot", "small stainless steel pot", "green leather sofa", "microwave White", "powerful red microwave", "blue fabric sofa", "glass kettle", "vintage kettle", "white lamb", "Yellow lamb" };
     private void createOrders()
     {
+        int myID;
+        string? myCustomerName, myCustomerEmail, myCustomerAdress;
+        DateTime? myOrderDate, myShipDate, myDeliveryDate;
 
-        Order order = new
-        {
-            ID=///////
-        }
         for (int i = 0; i < 20; i++)
+        {
+            myID = Config.NextOrderNumber;
+            myCustomerName = (namesArr[rnd.Next(namesArr.Length)]) + " " + (lastNamesArr[rnd.Next(lastNamesArr.Length)]);
+            myCustomerEmail = myCustomerName + "@gmail.com";
+            myCustomerAdress = (streetArr[rnd.Next(streetArr.Length)]) + " " + rnd.Next(200) + ", " + citiesArr[rnd.Next(citiesArr.Length)];
+            myOrderDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 100L));
+            myShipDate = null;
+            if (i < 16)
+                myShipDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 50L));
+            myDeliveryDate = null;
+            if (i < 12)
+                myDeliveryDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 20L));
+           
             Orders.Add(
             new Order
             {
-                ID = Config.NextOrderNumber,
-                CustomerName = (namesArr[rnd.Next(namesArr.Length)]) + " " + (lastNamesArr[rnd.Next(lastNamesArr.Length)]),
-                CustomerEmail = CustomerName + "@gmail.com",
-                CustomerAdress = (streetArr[rnd.Next(streetArr.Length)]) + " " + rnd.Next(200) + ", " + citiesArr[rnd.Next(citiesArr.Length)],
-                OrderDate = DateTime.Now -new TimeSpan(rnd.NextInt64(10L *1000L *3600L *24L*10L)),
-                Status = , 
-               PaymentDate =DateTime.Now -new TimeSpan(rnd.NextInt64(10L *1000L *3600L *24L*10L)),
-                shipDate = null,
-                DeliveryrDate =null,
-           //     Items = new List<OrderItem>() //??
-                TotalPrice = null,
+                IsDeleted=false,
+                ID= myID,
+                CustomerName= myCustomerName,
+                CustomerEmail= myCustomerEmail,
+                CustomerAdress= myCustomerAdress,
+                OrderDate= myOrderDate,
+                shipDate= myShipDate,
+                DeliveryrDate= myDeliveryDate
             });
+        }
     }
     private void createProducts()
     {
         Products.Add(
         new Product
         {
+            IsDeleted = false,
             ID = 175894,
             Name = "Kitchen rug",
             Price = 79.99,
@@ -79,6 +90,7 @@ internal class DataSource
         Products.Add(
         new Product
         {
+            IsDeleted = false,
             ID = 576346,
             Name = "Duck bath rug",
             Price = 39.99,
@@ -88,6 +100,7 @@ internal class DataSource
         Products.Add(
         new Product
         {
+            IsDeleted = false,
             ID = 864357,
             Name = "powerful red microwave",
             Price = 299.99,
@@ -97,6 +110,7 @@ internal class DataSource
         Products.Add(
         new Product
         {
+            IsDeleted = false,
             ID = 853267,
             Name = "Children's bed",
             Price = 1999.99,
@@ -107,6 +121,7 @@ internal class DataSource
         Products.Add(
         new Product
         {
+            IsDeleted = false,
             ID = 923654,
             Name = "Garden swing",
             Price = 859.99,
@@ -117,6 +132,7 @@ internal class DataSource
         Products.Add(
         new Product
         {
+            IsDeleted = false,
             ID = 856245,
             Name = "green leather sofa",
             Price = 7589.99,
@@ -127,6 +143,7 @@ internal class DataSource
         Products.Add(
         new Product
         {
+            IsDeleted = false,
             ID = 235765,
             Name = "Sea view picture",
             Price = 139.99,
@@ -137,6 +154,7 @@ internal class DataSource
         Products.Add(
         new Product
         {
+            IsDeleted = false,
             ID = 834675,
             Name = "Room mirror",
             Price = 279.99,
@@ -146,6 +164,7 @@ internal class DataSource
         Products.Add(
         new Product
         {
+            IsDeleted = false,
             ID = 235676,
             Name = "Colorful garden umbrella",
             Price = 499.99,
@@ -155,6 +174,7 @@ internal class DataSource
         Products.Add(
         new Product
         {
+            IsDeleted = false,
             ID = 153217,
             Name = "Bath curtain",
             Price = 49.99,
@@ -164,18 +184,34 @@ internal class DataSource
     }
     private void createOrderItems()
     {
-        for(int i = 0; i < 40; i++)
+        int ordersCounter = 0;
+        for(int i = 0, j=0; i < 40; j++)
         {
-            Product? product = Products[rnd.Next(Products.Count)];
+            Product? product = Products[rnd.Next(Products.Count - 1)];
+            while (product?.IsDeleted == true)
+                product = Products[++j];
+            int NumOfItemsToThisOrder = rnd.Next(4);
+            Order? order = Orders[j];
+            while (order?.IsDeleted == true)
+                order = Orders[++j];
+            ordersCounter++;
+            for (int k=0; k < NumOfItemsToThisOrder; k++)
+            {
             OrderItems.Add(
                 new OrderItem
                 {
+                    IsDeleted = false,
                     ID = Config.NextOrderItemNumber,
                     ProductID = product?.ID ?? 0,
+                    OrderID = order?.ID ?? 0,
                     Price = product?.Price ?? 0,
                     Amount = rnd.Next(5)
-                }
-                ) ;
+                });
+                product = Products[rnd.Next(Products.Count - 1)];
+                i++;
+                if (ordersCounter == 20)
+                    j = 0;
+            }           
         }
     }
     
