@@ -10,7 +10,7 @@ class Program
         try
         {
             Console.WriteLine(@"test order:
-                Choose one of the following:
+                Enter your choice:
                 a - ADD ORDER
                 b - GET ORDER BY ID
                 c - GET THE ORDERS LIST
@@ -79,7 +79,7 @@ class Program
         try
         {
             Console.WriteLine(@"test order item:
-                Choose one of the following:
+                Enter your choice:
                 a - ADD ORDER ITEM
                 b - GET ORDER ITEM
                 c - GET ORDER-ITEMS LIST
@@ -161,7 +161,7 @@ class Program
         try
         {
             Console.WriteLine(@"test product:
-                Choose one of the following:
+                Enter your choice:
                 a - ADD PRODUCT
                 b - GET PRODUCT BY ID
                 c - GET THE PRODUCTS LIST
@@ -296,7 +296,7 @@ class Program
         while (num != 0)
         {
             Console.WriteLine(@"Hello!
-                Choose one of the following:
+                Enter your choice:
                 0-exit
                 1-test Order
                 2-test OrderItem
