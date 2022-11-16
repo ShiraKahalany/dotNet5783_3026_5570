@@ -14,10 +14,11 @@ public struct OrderItem
     public double? Price { get; set; }
    //
     public int? Amount { get; set; }
- //   public override string ToString() => $@"
-	//OrderItem ID={ID}: {ID}, 
-	//ProductID - {ProductID}
- //   	Price: {Price}
- //   	Amount: {Amount}
-	//";
+
+    public override string ToString() => $@"
+	OrderItem ID={ID}: {ID}, 
+	ProductID - {ProductID}
+    	Price: {Price}
+    	Amount: {Amount}
+	";
 }

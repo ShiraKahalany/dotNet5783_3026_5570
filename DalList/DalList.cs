@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using DalApi;
 namespace Dal;
 
-sealed internal class DalList:IDal
+sealed internal class DalList : IDal
 {
-    public IOrder order => new DalOrder() ;
-    public IProduct product => new DalProduct() ;
-    public IOrderItem orderItem => new DalOrderItem() ;
+    public static IDal Instance { get; }=new DalList();
+    private DalList() { }
+    public IOrder Order => new DalOrder() ;
+    public IProduct Product => new DalProduct() ;
+    public IOrderItem OrderItem => new DalOrderItem() ;
 }

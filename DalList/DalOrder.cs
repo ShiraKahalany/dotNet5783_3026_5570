@@ -9,7 +9,7 @@ public class DalOrder : IOrder
         //מתודה שמקבלת הזמנה ומוסיפה אותה לרשימת ההזמנות
     {
         Order? temp = dataSource.Orders.Find(x => x?.ID == item.ID);
-        if (temp == null)
+        if (temp != null&&temp?.IsDeleted==false)
             throw new Exception("The order already exists");
         dataSource.Orders.Add(item);
         //dataSource.Orders.Add(new Order { ID = item.ID, IsDeleted = false, CustomerAdress=item.CustomerAdress, CustomerEmail=item.CustomerEmail, CustomerName=item.CustomerName, DeliveryrDate=item.DeliveryrDate, OrderDate=item.OrderDate, shipDate=item.shipDate }); ;

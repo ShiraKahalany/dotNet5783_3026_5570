@@ -12,9 +12,10 @@ internal class DataSource
     internal List<Order?> Orders { get;}=new List<Order?> { };
     internal List<Product?> Products { get; } = new List<Product?> { };
     internal List<OrderItem?> OrderItems { get; } = new List<OrderItem?> { };
-    public void AddOrder(Order order) { Orders.Add(order); }
-    public void AddOrderItem(OrderItem orderitem) { OrderItems.Add(orderitem); }
-    public void AddProduct(Product product) { Products.Add(product); }
+
+    //public void AddOrder(Order order) { Orders.Add(order); }
+   // public void AddOrderItem(OrderItem orderitem) { OrderItems.Add(orderitem); }
+   // public void AddProduct(Product product) { Products.Add(product); }
 
     internal static class Config //static?????
     {

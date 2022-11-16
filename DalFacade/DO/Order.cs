@@ -23,21 +23,19 @@ public struct Order
     //
     public DateTime? DeliveryrDate { get; set; }
     //
-   // public List<OrderItem>? Items { get; set; }
+    // public List<OrderItem>? Items { get; set; }
     //
     //public double CalculateTotalPrice() { }
     //public double? TotalPrice { get; set; }
-//    public override string ToString() => $@"
-//	Order ID={ID}: {ID}, 
-//	CustomerName- {CustomerName}
-//    	CustomerEmail: {CustomerEmail}
-//    	CustomerAdress: {CustomerAdress}
-//    	OrderDate: {OrderDate}
-//    	Status: {Status}
-//    	PaymentDate: {PaymentDate}
-//    	shipDate: {shipDate}
-//    	DeliveryrDate: {DeliveryrDate}
-//    	Items: {Items}
-//    	TotalPrice: {TotalPrice}
-//	";
+
+    public override string ToString() => $@"
+	Order ID={ID}: {ID}, 
+	CustomerName- {CustomerName}
+    	CustomerEmail: {CustomerEmail}
+    	CustomerAdress: {CustomerAdress}
+    	OrderDate: {OrderDate}
+    	shipDate: {shipDate}
+    	DeliveryrDate: {DeliveryrDate}
+
+	";
 }

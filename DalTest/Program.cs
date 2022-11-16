@@ -103,7 +103,7 @@ class Program
                 Console.WriteLine("enter the order item ID");
                 int myId;
                 int.TryParse(Console.ReadLine(), out myId);
-                Console.WriteLine(item.GetById(myId));
+                Console.WriteLine(item.GetByID(myId));
                 break;
             case "c":
                 foreach (OrderItem oItem in item.GetAll())
@@ -161,29 +161,29 @@ class Program
                 Console.WriteLine("enter the new product name");
                 tmpProduct.Name = Console.ReadLine();
                 Console.WriteLine(@"enter the new product catgory: 
-                                        Clothes-0, 
-                                        Toys-1, 
-                                        Carts-2, 
-                                        Bottles-3, 
-                                        Diapers-4");
+                                        Garden-0, 
+                                        Bed_room-1, 
+                                        Living_room-2, 
+                                        Bath_room-3, 
+                                        Kitchen-4");
                 int.TryParse(Console.ReadLine(), out id);
                 int ctg = id;
                 switch (ctg)
                 {
                     case 0:
-                        tmpProduct.Category = Category.Clothes;
+                        tmpProduct.Category = Category.Garden;
                         break;
                     case 1:
-                        tmpProduct.Category = Category.Toys;
+                        tmpProduct.Category = Category.Bed_room;
                         break;
                     case 2:
-                        tmpProduct.Category = Category.Carts;
+                        tmpProduct.Category = Category.Living_room;
                         break;
                     case 3:
-                        tmpProduct.Category = Category.Bottles;
+                        tmpProduct.Category = Category.Bath_room;
                         break;
                     case 4:
-                        tmpProduct.Category = Category.Diapers;
+                        tmpProduct.Category = Category.Kitchen;
                         break;
                     default:
                         Console.WriteLine("ERROR");
@@ -201,7 +201,7 @@ class Program
                 Console.WriteLine("enter the product ID");
                 int myId;
                 int.TryParse(Console.ReadLine(), out myId);
-                Console.WriteLine(product.GetById(myId));
+                Console.WriteLine(product.GetByID(myId));
                 break;
             case "c":
                 foreach (Product item in product.GetAll())
@@ -219,28 +219,28 @@ class Program
                 Console.WriteLine("enter the new product name");
                 tmpProduct2.Name = Console.ReadLine();
                 Console.WriteLine(@"enter the new product catgory: 
-                                        Clothes-0, 
-                                        Toys-1, 
-                                        Carts-2, 
-                                        Bottles-3, 
-                                        Diapers-4");
+                                        Garden-0, 
+                                        Bed_room-1, 
+                                        Living_room-2, 
+                                        Bath_room-3, 
+                                        Kitchen-4");
                 int.TryParse(Console.ReadLine(), out ctg);
                 switch (ctg)
                 {
                     case 0:
-                        tmpProduct2.Category = Category.Clothes;
+                        tmpProduct2.Category = Category.Garden;
                         break;
                     case 1:
-                        tmpProduct2.Category = Category.Toys;
+                        tmpProduct2.Category = Category.Bed_room;
                         break;
                     case 2:
-                        tmpProduct2.Category = Category.Carts;
+                        tmpProduct2.Category = Category.Living_room;
                         break;
                     case 3:
-                        tmpProduct2.Category = Category.Bottles;
+                        tmpProduct2.Category = Category.Bath_room;
                         break;
                     case 4:
-                        tmpProduct2.Category = Category.Diapers;
+                        tmpProduct2.Category = Category.Kitchen;
                         break;
                     default:
                         Console.WriteLine("ERROR");
