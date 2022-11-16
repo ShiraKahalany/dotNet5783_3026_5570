@@ -44,14 +44,16 @@ internal class DataSource
     private void createOrders()
     {
         int myID;
-        string? myCustomerName, myCustomerEmail, myCustomerAdress;
+        string? myCustomerName, myCustomerEmail, myCustomerAdress, myCusFirstName, myCusLastName;
         DateTime? myOrderDate, myShipDate, myDeliveryDate;
 
         for (int i = 0; i < 20; i++)
         {
             myID = Config.NextOrderNumber;
-            myCustomerName = (namesArr[rnd.Next(namesArr.Length)]) + " " + (lastNamesArr[rnd.Next(lastNamesArr.Length)]);
-            myCustomerEmail = myCustomerName + "@gmail.com";
+            myCusFirstName = namesArr[rnd.Next(namesArr.Length)];
+            myCusLastName = lastNamesArr[rnd.Next(lastNamesArr.Length)];
+            myCustomerName = myCusFirstName + " " + myCusLastName;
+            myCustomerEmail = myCusFirstName + myCusLastName + "@gmail.com";
             myCustomerAdress = (streetArr[rnd.Next(streetArr.Length)]) + " " + rnd.Next(200) + ", " + citiesArr[rnd.Next(citiesArr.Length)];
             myOrderDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 100L));
             myShipDate = null;

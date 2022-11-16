@@ -16,8 +16,8 @@ public struct OrderItem
     public int? Amount { get; set; }
 
     public override string ToString() => $@"
-	OrderItem ID={ID}: {ID}, 
-	ProductID - {ProductID}
+	OrderItem ID: {ID}, 
+	ProductID: {ProductID}
     	Price: {Price}
     	Amount: {Amount}
 	";

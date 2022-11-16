@@ -24,7 +24,7 @@ class Program
                 int.TryParse(Console.ReadLine(), out id);
                 tmpOrder.ID = id;
                 Console.WriteLine("enter the costumer name");
-                tmpOrder.CustomerEmail = Console.ReadLine();
+                tmpOrder.CustomerName = Console.ReadLine();
                 Console.WriteLine("enter the costumer email");
                 tmpOrder.CustomerEmail = Console.ReadLine();
                 Console.WriteLine("enter the costumer adress");

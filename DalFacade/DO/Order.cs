@@ -29,8 +29,8 @@ public struct Order
     //public double? TotalPrice { get; set; }
 
     public override string ToString() => $@"
-	Order ID={ID}: {ID}, 
-	CustomerName- {CustomerName}
+	Order ID: {ID}, 
+	CustomerName: {CustomerName}
     	CustomerEmail: {CustomerEmail}
     	CustomerAdress: {CustomerAdress}
     	OrderDate: {OrderDate}
