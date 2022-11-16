@@ -3,7 +3,7 @@ using DO;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Dal;
-internal class DalOrderItem :IOrderItem
+public class DalOrderItem :IOrderItem
 {
     //מימוש ממשק המוצרים-בהזמנה
     DataSource dataSource = DataSource.s_instance;

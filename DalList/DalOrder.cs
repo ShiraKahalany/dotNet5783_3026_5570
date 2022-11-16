@@ -1,7 +1,7 @@
 ﻿using DalApi;
 using DO;
 namespace Dal;
-internal class DalOrder : IOrder
+public class DalOrder : IOrder
 {
     //מימוש ממשק ההזמנות
     DataSource dataSource =DataSource.s_instance;
