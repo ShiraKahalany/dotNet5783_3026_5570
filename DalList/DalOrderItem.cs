@@ -3,7 +3,7 @@ using DO;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Dal;
-internal class DalOrderItem :IOrderItem
+public class DalOrderItem :IOrderItem
 {
     DataSource dataSource = DataSource.s_instance;
     int Add(OrderItem item)

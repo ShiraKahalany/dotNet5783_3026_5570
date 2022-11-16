@@ -1,7 +1,7 @@
 ﻿using DalApi;
 using DO;
 namespace Dal;
-internal class DalOrder : IOrder
+public class DalOrder : IOrder
 {
     DataSource dataSource=DataSource.s_instance;
     public int Add(Order item) 
