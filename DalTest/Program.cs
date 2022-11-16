@@ -49,12 +49,12 @@ class Program
                 Console.WriteLine("enter the order ID");
                 int.TryParse(Console.ReadLine(), out id);
                 tmpOrder2.ID = id;
-
-                Console.WriteLine("enter the costumer name");
+                Console.WriteLine(order.GetByID(id));
+                Console.WriteLine("enter the new costumer name");
                 tmpOrder2.CustomerName = Console.ReadLine();
-                Console.WriteLine("enter the costumer email");
+                Console.WriteLine("enter the new costumer email");
                 tmpOrder2.CustomerEmail = Console.ReadLine();
-                Console.WriteLine("enter the costumer adress");
+                Console.WriteLine("enter the new costumer adress");
                 tmpOrder2.CustomerAdress = Console.ReadLine();
                 order.Update(tmpOrder2);
                 break;
@@ -117,6 +117,7 @@ class Program
                 Console.WriteLine("enter the item ID");
                 int.TryParse(Console.ReadLine(), out id);
                 tmpItem2.ID = id;
+                Console.WriteLine(item.GetByID(id));
                 Console.WriteLine("enter the new product ID");
                 int.TryParse(Console.ReadLine(), out id);
                 tmpItem2.ProductID = id;
@@ -213,9 +214,10 @@ class Program
                 break;
             case "d":
                 Product tmpProduct2 = new Product();
-                Console.WriteLine("enter the new product ID");
+                Console.WriteLine("enter the product ID");
                 int.TryParse(Console.ReadLine(), out id);
                 tmpProduct2.ID = id;
+                Console.WriteLine(product.GetByID(id));
                 Console.WriteLine("enter the new product name");
                 tmpProduct2.Name = Console.ReadLine();
                 Console.WriteLine(@"enter the new product catgory: 
