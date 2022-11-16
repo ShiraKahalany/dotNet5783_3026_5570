@@ -6,8 +6,10 @@ namespace Dal;
 
 public class DalProduct:IProduct
 {
+    //מימוש ממשק המוצרים
     DataSource dataSource = DataSource.s_instance;
     int Add(Product item)
+        //מתחודה שמקבלת מוצר ומוסיפה אותו אל רשימת כל המוצרים
     {
         Product? temp = dataSource.Products.Find(x => x?.ID == item.ID);
         if (temp == null)
@@ -18,11 +20,13 @@ public class DalProduct:IProduct
 
     }
     Product GetByID(int id)
+        //מתודה המקבלת מספר ת"ז ומחזירה את המוצר המתאים לה
     {
         foreach (Product? item in dataSource.Products) { if (item?.IsDeleted==false && item?.ID == id) return (Product)item; }
         throw new Exception("The product is not exist");
     }
     void Update(Product item)
+        //מתודה המעדכנת את המוצר עם ה "ז שהתקבל בהתאם למוצר המעודכן שהתקבל כפרמטר
     {
         Product? temp = dataSource.Products.Find(x => x?.ID == item.ID);
         if (temp == null) //if it is not exist throw exception
@@ -33,6 +37,7 @@ public class DalProduct:IProduct
         Add(item);
     }
     void Delete(int id)
+        //מתודה המוחקת אץת המוצר על ה ת"ז שהתקבלה
     {
         Product? temp = dataSource.Products.Find(x => x.GetValueOrDefault().ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
@@ -47,6 +52,7 @@ public class DalProduct:IProduct
 
     //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
     IEnumerable<Product> GetAll()
+        //מתודה המחזירה את רשימת כל המוצרים
     {
         List<Product> listGet = new List<Product>();
         foreach (Product? item in dataSource.Products) {if(item?.IsDeleted==false) listGet.Add((Product)item); }

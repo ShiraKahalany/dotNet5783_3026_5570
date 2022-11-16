@@ -3,8 +3,10 @@ using DO;
 namespace Dal;
 internal class DalOrder : IOrder
 {
-    DataSource dataSource=DataSource.s_instance;
-    public int Add(Order item) 
+    //מימוש ממשק ההזמנות
+    DataSource dataSource =DataSource.s_instance;
+    public int Add(Order item)
+        //מתודה שמקבלת הזמנה ומוסיפה אותה לרשימת ההזמנות
     {
         Order? temp = dataSource.Orders.Find(x => x?.ID == item.ID);
         if (temp == null)
@@ -14,11 +16,13 @@ internal class DalOrder : IOrder
         return item.ID;
     }
     public Order GetByID(int id) 
+        //מתודה המקבלת מספר ת"ז ומחזירה את ההזמנה המתאימה
     {
         foreach(Order? item in dataSource.Orders) { if(item?.IsDeleted==false && item.GetValueOrDefault().ID == id) return (Order)item; }
         throw new Exception("The order is not exist");
     }
-    public void Update(Order item) //delete and Add the item to the end of the list
+    public void Update(Order item)
+        //מתודה המעדכנת את הזמנה להזמנה המעודכנת שהתקבלה (שיש לה אותו ת"ז)ו
     {
         Order? temp = dataSource.Orders.Find(x => x?.ID == item.ID);
         if (temp == null) //if it is not exist throw exception
@@ -29,6 +33,7 @@ internal class DalOrder : IOrder
         Add(item);
     }
     public void Delete(int id)
+        //מתודה המוחקת את ההזמנה בעלת הת"ז שהתקבל
     {
         Order? temp = dataSource.Orders.Find(x => x?.ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
@@ -42,6 +47,7 @@ internal class DalOrder : IOrder
 
     //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
    public IEnumerable<Order> GetAll()
+        //מתודה שמחזירה את רשימת כל ההזמנות
     {
         List<Order> listGet = new List<Order>();
         foreach (Order? item in dataSource.Orders) { if(item?.IsDeleted==false)listGet.Add((Order)item); }
