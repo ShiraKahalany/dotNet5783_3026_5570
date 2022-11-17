@@ -136,7 +136,7 @@ class Program
                     Console.WriteLine("enter the new order item price");
                     double pri;
                     double.TryParse(Console.ReadLine(), out pri);
-                    tmpItem2.Price = id;
+                    tmpItem2.Price = pri;
 
                     Console.WriteLine("enter the new order item amount");
                     int.TryParse(Console.ReadLine(), out id);
@@ -269,7 +269,7 @@ class Program
                     double pri;
                     Console.WriteLine("enter the new product price");
                     double.TryParse(Console.ReadLine(), out pri);
-                    tmpProduct2.Price = id;
+                    tmpProduct2.Price = pri;
                     Console.WriteLine("enter the new product amount");
                     int.TryParse(Console.ReadLine(), out id);
                     tmpProduct2.InStock = id;
