@@ -101,8 +101,9 @@ class Program
                     int.TryParse(Console.ReadLine(), out id);
                     tmpItem.OrderID = id;
                     Console.WriteLine("enter the new order item price");
-                    int.TryParse(Console.ReadLine(), out id);
-                    tmpItem.Price = id;
+                    double pri;
+                    double.TryParse(Console.ReadLine(), out pri);
+                    tmpItem.Price = pri;
                     Console.WriteLine("enter the new order item amount");
                     int.TryParse(Console.ReadLine(), out id);
                     tmpItem.Amount = id;
@@ -209,8 +210,9 @@ class Program
                             break;
                     }
                     Console.WriteLine("enter the new product price");
-                    int.TryParse(Console.ReadLine(), out id);
-                    tmpProduct.Price = id;
+                    double pri;
+                    double.TryParse(Console.ReadLine(), out pri);
+                    tmpProduct.Price = pri;
                     Console.WriteLine("enter the new product amount");
                     int.TryParse(Console.ReadLine(), out id);
                     tmpProduct.InStock = id;
