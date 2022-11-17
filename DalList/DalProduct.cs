@@ -58,4 +58,12 @@ public class DalProduct : IProduct
         foreach (Product? item in dataSource.Products) {if(item?.IsDeleted==false) listGet.Add((Product)item); }
         return listGet;
     }
+//מתודה המחזירה את רשימת כל המוצרים, כולל אלו שנחמקו
+    public IEnumerable<Product> GetAllWithDeleted()
+    //מתודה המחזירה את רשימת כל המוצרים, כולל אלו שנחמקו
+    {
+        List<Product> listGet = new List<Product>();
+        foreach (Product? item in dataSource.Products) {listGet.Add((Product)item); }
+        return listGet;
+    }
 }

@@ -73,4 +73,12 @@ public class DalOrderItem :IOrderItem
         foreach (OrderItem? item in dataSource.OrderItems) { if(item?.IsDeleted==false)listGet.Add((OrderItem)item); }
         return listGet;
     }
+
+    public IEnumerable<OrderItem> GetAllWithDeleted()
+    //מתודה המחזירה את רשימת כל המוצרים, כולל אלו שנחמקו
+    {
+        List<OrderItem> listGet = new List<OrderItem>();
+        foreach (OrderItem? item in dataSource.OrderItems) {listGet.Add((OrderItem)item); }
+        return listGet;
+    }
 }

@@ -12,6 +12,6 @@ public interface ICrud<T> where T : struct
     //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
     IEnumerable<T> GetAll();
 
-    
+    IEnumerable<T> GetAllWithDeleted();
 
 }

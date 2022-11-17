@@ -53,4 +53,11 @@ public class DalOrder : IOrder
         foreach (Order? item in dataSource.Orders) { if(item?.IsDeleted==false)listGet.Add((Order)item); }
         return listGet;
     }
+
+   public IEnumerable<Order> GetAllWithDeleted()
+    {
+        List<Order> listGet = new List<Order>();
+        foreach (Order? item in dataSource.Orders) {listGet.Add((Order)item); }
+        return listGet;
+    }
 }
