@@ -55,6 +55,7 @@ public class DalOrder : IOrder
     }
 
    public IEnumerable<Order> GetAllWithDeleted()
+        //מתודה המחזירה את רשימת כל ההזמנות, כולל אלו שנמחקו
     {
         List<Order> listGet = new List<Order>();
         foreach (Order? item in dataSource.Orders) {listGet.Add((Order)item); }
