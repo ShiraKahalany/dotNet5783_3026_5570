@@ -3,9 +3,9 @@ using DO;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Dal;
+//מימוש ממשק המוצרים-בהזמנה
 public class DalOrderItem :IOrderItem
 {
-    //מימוש ממשק המוצרים-בהזמנה
     DataSource dataSource = DataSource.s_instance;
     public int Add(OrderItem item)
         //מתודת הוספת מוצר בהזמנה

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using DalApi;
 namespace Dal;
 
+//מחלקת דל-ליסט המממשת את הממשק איי-דל
 sealed internal class DalList : IDal
 {
-    public static IDal Instance { get; }=new DalList();
-    private DalList() { }
-    public IOrder Order => new DalOrder() ;
-    public IProduct Product => new DalProduct() ;
-    public IOrderItem OrderItem => new DalOrderItem() ;
+    public static IDal Instance { get; }=new DalList();  //יצירת אןבייקט מסוג DalList
+    private DalList() { }   //בנאי (פרטי)
+    public IOrder Order => new DalOrder() ;  //יצירת הזמנה
+    public IProduct Product => new DalProduct() ;  //יצירת מוצר
+    public IOrderItem OrderItem => new DalOrderItem() ;  //יצירת פריט-בהזמנה
 }

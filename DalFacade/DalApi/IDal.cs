@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace DalApi;
 
 public interface IDal
+    //ממשק המגדיר פרופרטיז עבור כל ישות
 {
     IOrder Order { get; }
     IProduct Product { get; }

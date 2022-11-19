@@ -1,23 +1,22 @@
 ﻿using DO;
 namespace Dal;
 
+
+//מחלקה עבור הנתונים
 internal class DataSource
 {
-    internal static DataSource s_instance { get; } = new DataSource();
+    internal static DataSource s_instance { get; } = new DataSource();   //יצירת מופע נתונים
     public DataSource() { s_Initialize(); }    /// <summary>
     /// ???private??
     /// </summary>
 
     public readonly Random rnd = new Random(); //a random number
-    internal List<Order?> Orders { get;}=new List<Order?> { };
-    internal List<Product?> Products { get; } = new List<Product?> { };
-    internal List<OrderItem?> OrderItems { get; } = new List<OrderItem?> { };
-
-    //public void AddOrder(Order order) { Orders.Add(order); }
-   // public void AddOrderItem(OrderItem orderitem) { OrderItems.Add(orderitem); }
-   // public void AddProduct(Product product) { Products.Add(product); }
+    internal List<Order?> Orders { get;}=new List<Order?> { };  //רשימת הזמנות
+    internal List<Product?> Products { get; } = new List<Product?> { };  //רשימת מוצרים
+    internal List<OrderItem?> OrderItems { get; } = new List<OrderItem?> { };  //רשימת פריטי הזמנות
 
     internal static class Config //static?????
+        //מחלקה עבור הגדרת מספרים רצים להזמנות ולפריטי ההזמנות
     {
         //nextOrderNumber
         internal const int s_startOrderNumber = 1000;
@@ -30,19 +29,20 @@ internal class DataSource
 
     }
     private void s_Initialize()
+        // יצירת מופע נתונים
     {
         createProducts();
         createOrders();
         createOrderItems();
     }
 
-    string[] namesArr = { "Moshe", "Dina", "Shira", "Hallel", "Dani", "Yael", "Josef", "Michael", "Ruth", "Daniel", "Roei", "Shay", "Ron", "Yaron", "Shoshana", "Miryam", "Reut", "Eva", "Ayala", "Tikva", "Tirza", "Dikla", "Moriya", "Hadas", "Yafit", "Yossi", "Avi", "Merav", "Gital", "Helen" };
-    string[] lastNamesArr = { "Azulay", "Edri", "Cohen", "Levi", "Biton", "Fridman", "Hadad", "Gabai", "Catz", "Zilberstein", "Malka", "Avraham", "Cherner", "Ben-David", "Orgad", "Ichler", "Alush", "Amsalem", "Papel", "Rapaport", "Buchner", "Bibass", "Bechman", "Block", "Blich", "Ben-shabat", "Braun", "Malool", "Dagan", "Glick", "Hod" };
-    string[] citiesArr = { "Ben-Yehuda", "Elyakim", "Jerusalem", "Yokneam", "Raanana", "Tel-Aviv", "Beer-Sheva", "Eilat", "Avivim", "Netanya", "Tzfat", "Ashdod", "Heifa", "Afula", "Bet-Shean", "Ofakim", "Yeruham", "Hadera", "Dimona", "Bet-Shemesh", "Modiin", "Bat-Yam", "Yavne" };
-    string[] streetArr = { "Hashaked", "Hagefen", "Hazait", "Hertzel", "Ben-Guryon", "Bialik", "Migdal", "Hateena", "Eli-Cohen", "Hardufim", "Rambam", "Hertzog", "Berner" };
-    string[] productnamesArr = { "Kitchen rug", "Sea view picture", "Table cloth", "Pine wood youth bed", "Children's bed", "One and a half beds", "Double bed", "White kitchen cabinet", "Wooden chest of drawers", "Iron dresser", "Kitchen chair", "Room mirror", "Body mirror", "Duck bath rug", "Large white fridge", "Small white fridge", "Black oven", "White kettle", "Black microwave", "toaster", "large stainless steel pot", "large glass pot", "small glass pot", "medium glass pot", "medium stainless steel pot", "small stainless steel pot", "green leather sofa", "microwave White", "powerful red microwave", "blue fabric sofa", "glass kettle", "vintage kettle", "white lamb", "Yellow lamb" };
-    private void createOrders()
+    private void createOrders()  //יצירת הזמנות
     {
+        string[] namesArr = { "Moshe", "Dina", "Shira", "Hallel", "Dani", "Yael", "Josef", "Michael", "Ruth", "Daniel", "Roei", "Shay", "Ron", "Yaron", "Shoshana", "Miryam", "Reut", "Eva", "Ayala", "Tikva", "Tirza", "Dikla", "Moriya", "Hadas", "Yafit", "Yossi", "Avi", "Merav", "Gital", "Helen" };
+        string[] lastNamesArr = { "Azulay", "Edri", "Cohen", "Levi", "Biton", "Fridman", "Hadad", "Gabai", "Catz", "Zilberstein", "Malka", "Avraham", "Cherner", "Ben-David", "Orgad", "Ichler", "Alush", "Amsalem", "Papel", "Rapaport", "Buchner", "Bibass", "Bechman", "Block", "Blich", "Ben-shabat", "Braun", "Malool", "Dagan", "Glick", "Hod" };
+        string[] citiesArr = { "Ben-Yehuda", "Elyakim", "Jerusalem", "Yokneam", "Raanana", "Tel-Aviv", "Beer-Sheva", "Eilat", "Avivim", "Netanya", "Tzfat", "Ashdod", "Heifa", "Afula", "Bet-Shean", "Ofakim", "Yeruham", "Hadera", "Dimona", "Bet-Shemesh", "Modiin", "Bat-Yam", "Yavne" };
+        string[] streetArr = { "Hashaked", "Hagefen", "Hazait", "Hertzel", "Ben-Guryon", "Bialik", "Migdal", "Hateena", "Eli-Cohen", "Hardufim", "Rambam", "Hertzog", "Berner" };
+
         int myID;
         string? myCustomerName, myCustomerEmail, myCustomerAdress, myCusFirstName, myCusLastName;
         DateTime? myOrderDate, myShipDate, myDeliveryDate;
@@ -77,8 +77,9 @@ internal class DataSource
             });
         }
     }
-    private void createProducts()
+    private void createProducts()  //יצירת מוצרים
     {
+        string[] productnamesArr = { "Kitchen rug", "Sea view picture", "Table cloth", "Pine wood youth bed", "Children's bed", "One and a half beds", "Double bed", "White kitchen cabinet", "Wooden chest of drawers", "Iron dresser", "Kitchen chair", "Room mirror", "Body mirror", "Duck bath rug", "Large white fridge", "Small white fridge", "Black oven", "White kettle", "Black microwave", "toaster", "large stainless steel pot", "large glass pot", "small glass pot", "medium glass pot", "medium stainless steel pot", "small stainless steel pot", "green leather sofa", "microwave White", "powerful red microwave", "blue fabric sofa", "glass kettle", "vintage kettle", "white lamb", "Yellow lamb" };
         Products.Add(
         new Product
         {
@@ -185,7 +186,7 @@ internal class DataSource
             InStock = 82
         });
     }
-    private void createOrderItems()
+    private void createOrderItems()  // יצירת פריטי-הזמנה
     {
         int ordersCounter = 0;
         for(int i = 0, j=0; i < 40; j++)

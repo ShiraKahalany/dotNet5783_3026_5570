@@ -1,9 +1,10 @@
 ﻿using DalApi;
 using DO;
 namespace Dal;
+
+//מימוש ממשק ההזמנות
 public class DalOrder : IOrder
 {
-    //מימוש ממשק ההזמנות
     DataSource dataSource =DataSource.s_instance;
     public int Add(Order item)
         //מתודה שמקבלת הזמנה ומוסיפה אותה לרשימת ההזמנות

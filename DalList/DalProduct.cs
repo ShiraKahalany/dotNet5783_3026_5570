@@ -4,9 +4,9 @@ using DO;
 namespace Dal;
 //namespace DalApi;
 
+//מימוש ממשק המוצרים
 public class DalProduct : IProduct
 {
-    //מימוש ממשק המוצרים
     DataSource dataSource = DataSource.s_instance;
   public int Add(Product item)
         //מתחודה שמקבלת מוצר ומוסיפה אותו אל רשימת כל המוצרים
