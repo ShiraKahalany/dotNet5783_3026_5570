@@ -2,7 +2,6 @@
 using DalApi;
 using DO;
 namespace Dal;
-
 //תכנית ראשית לבדיקות - שלב מספר1
 //שירה קהלניוהלל אישון
 class Program
