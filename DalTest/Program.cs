@@ -17,7 +17,7 @@ class Program
                 c - GET THE ORDERS LIST
                 d - UPDATE ORDER
                 e - DELETE ORDER");
-            string option = Console.ReadLine();
+            string? option = Console.ReadLine();
             switch (option)
             {
                 case "a":
@@ -86,7 +86,7 @@ class Program
                 c - GET ORDER-ITEMS LIST
                 d - UPDATE ORDER ITEM
                 e - DELETE ORDER ITEM");
-            string option = Console.ReadLine();
+            string? option = Console.ReadLine();
             switch (option)
             {
                 case "a":
@@ -170,7 +170,7 @@ class Program
                 c - GET THE PRODUCTS LIST
                 d - UPDATE PRODUCT
                 e - DELETE PRODUCT");
-            string option = Console.ReadLine();
+            string? option = Console.ReadLine();
             switch (option)
             {
                 case "a":
