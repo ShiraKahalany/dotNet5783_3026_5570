@@ -12,8 +12,8 @@ public class DalProduct : IProduct
         //מתחודה שמקבלת מוצר ומוסיפה אותו אל רשימת כל המוצרים
     {
         Product? temp = dataSource.Products.Find(x => x?.ID == item.ID);
-        if (temp != null)
-            throw new Exception("The product already exists");
+        if (temp != null&& temp?.IsDeleted == false)
+            throw new MyException("The item already exists");
         dataSource.Products.Add(item);
         //dataSource.Products.Add(new Product { ID = item.ID, IsDeleted = false, Price=item.Price, Category=item.Category, InStock=item.InStock, Name=item.Name}); ;
         return item.ID;
@@ -23,16 +23,16 @@ public class DalProduct : IProduct
         //מתודה המקבלת מספר ת"ז ומחזירה את המוצר המתאים לה
     {
         foreach (Product? item in dataSource.Products) { if (item?.IsDeleted==false && item?.ID == id) return (Product)item; }
-        throw new Exception("The product is not exist");
+        throw new MyException("The item is not exist");
     }
     public void Update(Product item)
         //מתודה המעדכנת את המוצר עם ה "ז שהתקבל בהתאם למוצר המעודכן שהתקבל כפרמטר
     {
         Product? temp = dataSource.Products.Find(x => x?.ID == item.ID);
         if (temp == null) //if it is not exist throw exception
-            throw new Exception("The Product is not exist");
+            throw new MyException("The item is not exist");
         if (temp?.IsDeleted == true)
-            throw new Exception("The Product is deleted");
+            throw new MyException("The item is not exist");
         Delete(item.ID);
         Add(item);
     }
@@ -41,9 +41,9 @@ public class DalProduct : IProduct
     {
         Product? temp = dataSource.Products.Find(x => x.GetValueOrDefault().ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
-            throw new Exception("The product is not exist");
+            throw new MyException("The item is not exist");
         if(temp?.IsDeleted==true)
-            throw new Exception("The product is already deleted");
+            throw new MyException("The item is already deleted");
         dataSource.Products.Remove(temp);
         Product product=new Product { IsDeleted=true, Category=temp?.Category, InStock=temp?.InStock, Name=temp?.Name, Price=temp?.Price, ID= temp.GetValueOrDefault().ID};
         Add(product);

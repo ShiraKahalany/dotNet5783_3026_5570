@@ -11,7 +11,7 @@ public class DalOrder : IOrder
     {
         Order? temp = dataSource.Orders.Find(x => x?.ID == item.ID);
         if (temp != null&&temp?.IsDeleted==false)
-            throw new Exception("The order already exists");
+            throw new MyException("The item already exists");
         dataSource.Orders.Add(item);
         //dataSource.Orders.Add(new Order { ID = item.ID, IsDeleted = false, CustomerAdress=item.CustomerAdress, CustomerEmail=item.CustomerEmail, CustomerName=item.CustomerName, DeliveryrDate=item.DeliveryrDate, OrderDate=item.OrderDate, shipDate=item.shipDate }); ;
         return item.ID;
@@ -20,16 +20,16 @@ public class DalOrder : IOrder
         //מתודה המקבלת מספר ת"ז ומחזירה את ההזמנה המתאימה
     {
         foreach(Order? item in dataSource.Orders) { if(item?.IsDeleted==false && item.GetValueOrDefault().ID == id) return (Order)item; }
-        throw new Exception("The order is not exist");
+        throw new MyException("The item is not exist");
     }
     public void Update(Order item)
         //מתודה המעדכנת את הזמנה להזמנה המעודכנת שהתקבלה (שיש לה אותו ת"ז)ו
     {
         Order? temp = dataSource.Orders.Find(x => x?.ID == item.ID);
         if (temp == null) //if it is not exist throw exception
-            throw new Exception("The Order is not exist");
+            throw new MyException("The item is not exist");
         if (temp?.IsDeleted == true)
-            throw new Exception("The Order is deleted");
+            throw new MyException("The item is not exist");
         Delete(item.ID);
         Add(item);
     }
@@ -38,9 +38,9 @@ public class DalOrder : IOrder
     {
         Order? temp = dataSource.Orders.Find(x => x?.ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
-            throw new Exception("The order is not exist");
+            throw new MyException("The item is not exist");
         if (temp?.IsDeleted == true)
-            throw new Exception("The order is already deleted");
+            throw new MyException("The item is already deleted");
         dataSource.Orders.Remove(temp);
         Order order = new Order { IsDeleted = true, ID = temp.GetValueOrDefault().ID, CustomerAdress = temp?.CustomerAdress, CustomerEmail = temp?.CustomerEmail, CustomerName = temp?.CustomerName, DeliveryrDate = temp?.DeliveryrDate, OrderDate = temp?.OrderDate, shipDate = temp?.OrderDate };
         Add((Order)order);

@@ -11,8 +11,8 @@ public class DalOrderItem :IOrderItem
         //מתודת הוספת מוצר בהזמנה
     {
         OrderItem? temp = dataSource.OrderItems.Find(x => x?.ID == item.ID);
-        if (temp != null)
-            throw new Exception("The orderItem already exists");
+        if (temp != null && temp?.IsDeleted == false)
+            throw new MyException("The item already exists");
        dataSource.OrderItems.Add(item);
         //dataSource.OrderItems.Add(new OrderItem { ID = item.ID, Amount = item.Amount, IsDeleted = false, OrderID = item.OrderID, Price = item.Price, ProductID = item.ProductID }); ;
         return item.ID;
@@ -21,16 +21,16 @@ public class DalOrderItem :IOrderItem
         //מתודה המקבלת מספר ייחודי של מוצר-בהזמנה, ומחזירה את המוצר-בהזמנה
     {
         foreach(OrderItem? item in dataSource.OrderItems) { if(item?.IsDeleted==false && item.GetValueOrDefault().ID == id) return (OrderItem)item; }
-        throw new Exception("The orderitem is not exist");
+        throw new MyException("The item is not exist");
     }
     public void Update(OrderItem item)
         //מתודת עידכון. מקבלת עצם חדש, ומעדכנת את העצם עם הת"ז הזה להיות העצם המעודכן
     {
         OrderItem? temp = dataSource.OrderItems.Find(x => x?.ID == item.ID);
         if (temp == null) //if it is not exist throw exception
-            throw new Exception("The OrderItem is not exist");
+            throw new MyException("The item is not exist");
         if (temp?.IsDeleted == true)
-            throw new Exception("The OrderItem is deleted");
+            throw new MyException("The item is not exist");
         Delete(item.ID);
         Add(item);
     }
@@ -39,9 +39,9 @@ public class DalOrderItem :IOrderItem
     {
         OrderItem? temp = dataSource.OrderItems.Find(x => x?.ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
-            throw new Exception("The orderItem is not exist");
+            throw new MyException("The item is not exist");
         if (temp?.IsDeleted == true)
-            throw new Exception("The orderItem is already deleted");
+            throw new MyException("The item is already deleted");
         dataSource.OrderItems.Remove(temp);
         OrderItem orderItem = new OrderItem { IsDeleted=true, ID=temp.GetValueOrDefault().ID, Amount=temp?.Amount, OrderID=temp?.OrderID, Price=temp?.Price, ProductID=temp?.ProductID};
         Add(orderItem);
@@ -50,7 +50,7 @@ public class DalOrderItem :IOrderItem
         //מתודה המקבלת מספר מוצר ומספר הזמנה ומחזירה את המוצר-בהזמנה שמתאים להזמנה הזאת ולמוצר הזה
     {
         foreach(OrderItem? item in dataSource.OrderItems) { if(item?.IsDeleted==false&&item?.ProductID == productId && item?.OrderID==orderId) return (OrderItem)item; }
-        throw new Exception("The product is not exist");
+        throw new MyException("The item is not exist");
     }
 
     //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
@@ -59,9 +59,9 @@ public class DalOrderItem :IOrderItem
     {
         Order? order = dataSource.Orders.Find(x => x.GetValueOrDefault().ID == id);
         if (order == null)
-            throw new Exception("The order is not exist");
+            throw new MyException("The item is not exist");
         if(order?.IsDeleted==true)
-            throw new Exception("The order is deleted");
+            throw new MyException("The item is deleted");
         List<OrderItem> listGet = new List<OrderItem>();
         foreach (OrderItem? item in dataSource.OrderItems) {if(item?.OrderID==id) listGet.Add((OrderItem)item); }
         return listGet;
