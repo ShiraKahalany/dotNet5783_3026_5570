@@ -19,11 +19,6 @@ public class Product
     public Category? Category { get; set; }
     //
     public int? InStock { get; set; }
-
-    public override string ToString() => $@"
-	Product ID: {ID}, 
-	category: {Category}
-    	Price: {Price}
-    	Amount in stock: {InStock}
-	";
+    public string? path = null;
+    public override string ToString() => this.ToStringProperty();
 }

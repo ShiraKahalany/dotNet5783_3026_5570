@@ -32,14 +32,5 @@ public class Order
     //
     public double? TotalPrice { get; set; }
 
-    public override string ToString() => $@"
-	Order ID: {ID}, 
-	CustomerName: {CustomerName}
-    	CustomerEmail: {CustomerEmail}
-    	CustomerAdress: {CustomerAdress}
-    	OrderDate: {OrderDate}
-    	shipDate: {shipDate}
-    	DeliveryrDate: {DeliveryrDate}
-
-	";
+    public override string ToString() => this.ToStringProperty();
 }

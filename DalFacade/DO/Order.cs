@@ -15,14 +15,7 @@ public struct Order
     public DateTime? DeliveryrDate { get; set; }  //תאריך מסירה
    
     //מתודת הפיכת הזמנה למחרוזת
-    public override string ToString() => $@"  
-	Order ID: {ID}, 
-	CustomerName: {CustomerName}
-    	CustomerEmail: {CustomerEmail}
-    	CustomerAdress: {CustomerAdress}
-    	OrderDate: {OrderDate}
-    	shipDate: {shipDate}
-    	DeliveryrDate: {DeliveryrDate}
-
-	";
+    public override string ToString() { return Tools.ToStringProperty(this); }
+	
+	
 }

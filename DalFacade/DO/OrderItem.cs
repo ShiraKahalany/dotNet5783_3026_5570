@@ -11,10 +11,6 @@ public struct OrderItem
     public int? Amount { get; set; }  //כמות מהמוצר בהזמנה
 
     //תאור פריט כמחרוזת
- public override string ToString() => $@"
-	OrderItem ID: {ID}, 
-	ProductID: {ProductID}
-    	Price: {Price}
-    	Amount: {Amount}
-	";
+    public override string ToString() { return Tools.ToStringProperty(this); }
+
 }

@@ -18,10 +18,5 @@ public class OrderItem
     //
     public int? Amount { get; set; }
 
-    public override string ToString() => $@"
-	OrderItem ID: {ID}, 
-	ProductID: {ProductID}
-    	Price: {Price}
-    	Amount: {Amount}
-	";
+    public override string ToString() => this.ToStringProperty();
 }

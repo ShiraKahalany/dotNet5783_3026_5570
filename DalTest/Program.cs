@@ -69,7 +69,7 @@ class Program
                     break;
             }
         }
-        catch (Exception ex)
+        catch (MyException ex)
         {
             Console.WriteLine(ex);
         }      
@@ -306,7 +306,7 @@ class Program
                 1-test Order
                 2-test OrderItem
                 3-test Product");
-            string option = Console.ReadLine();
+            string? option = Console.ReadLine();
             bool b = int.TryParse(option, out num);
             if (!b)
             {
