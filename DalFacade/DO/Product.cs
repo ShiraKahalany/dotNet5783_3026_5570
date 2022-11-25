@@ -11,7 +11,7 @@ public struct Product
     public int? InStock { get; set; }  //כמה פריטים מהמוצר יש במלאי
     public string? path = null;
     //תיאור מוצר כמחרוזת
-    public override string ToString() { return Tools.ToStringProperty(this); }
+    public override string ToString() =>  Tools.ToStringProperty(this);
 
 
 }

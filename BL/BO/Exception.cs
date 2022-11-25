@@ -25,7 +25,16 @@ public class MyExceptionNotExist : Exception
     protected MyExceptionNotExist(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
 }
 
-    [Serializable]
+[Serializable]
+public class MyExceptionInAnOrder : Exception
+{
+    public MyExceptionInAnOrder() : base() { }
+    public MyExceptionInAnOrder(string message) : base(message) { }
+    public MyExceptionInAnOrder(string message, Exception innerException) : base(message, innerException) { }
+    protected MyExceptionInAnOrder(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
+
+[Serializable]
     public class MyExceptionNoItems : Exception
     {
         //public MyExceptionNoItems() : base() {}

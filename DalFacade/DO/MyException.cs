@@ -18,6 +18,15 @@ public class MyException : Exception
 }
 
 [Serializable]
+public class DalConfigException : Exception
+{
+    public DalConfigException() : base() { }
+    public DalConfigException(string message) : base(message) { }
+    public DalConfigException(string message, Exception innerException) : base(message, innerException) { }
+    protected DalConfigException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
+
+[Serializable]
 public class MyExceptionNotExist : Exception
 {
     public MyExceptionNotExist() : base() { }

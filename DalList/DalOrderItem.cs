@@ -46,11 +46,12 @@ public class DalOrderItem :IOrderItem
         OrderItem orderItem = new OrderItem { IsDeleted=true, ID=temp.GetValueOrDefault().ID, Amount=temp?.Amount, OrderID=temp?.OrderID, Price=temp?.Price, ProductID=temp?.ProductID};
         Add(orderItem);
     }
-    public OrderItem GetByOrderAndId(int orderId, int productId)
+    public OrderItem? GetByOrderAndId(int orderId, int productId)
         //מתודה המקבלת מספר מוצר ומספר הזמנה ומחזירה את המוצר-בהזמנה שמתאים להזמנה הזאת ולמוצר הזה
     {
         foreach(OrderItem? item in dataSource.OrderItems) { if(item?.IsDeleted==false&&item?.ProductID == productId && item?.OrderID==orderId) return (OrderItem)item; }
-        throw new MyExceptionNotExist("The item is not exist");
+        return null;
+        //throw new MyExceptionNotExist("The item is not exist");
     }
 
     //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);

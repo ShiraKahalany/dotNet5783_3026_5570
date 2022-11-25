@@ -120,7 +120,7 @@ internal class Product : IProduct
             }
             throw new BO.MyExceptionNotExist();
         }
-        catch 
+        catch(Exception ex) 
         {
             throw new Exception(ex.Message);
         }
@@ -146,9 +146,29 @@ internal class Product : IProduct
     public void DeleteProduct(int id)
     //מחיקת מוצר עבור מנהל
     {
+        try
+        {
+            if(id<0)
+                throw new BO.MyExceptionNotExist();
+            DO.Product prod = dal.Product.GetByID(id); //?אמור לזרוק חרידה מה די-או אם המוצר לא קיים - האם זה מספיק
+            IEnumerable<DO.Order> lst = dal.Order.GetAll();
+            foreach (DO.Order order in lst)
+            {
+                if(dal.OrderItem.GetByOrderAndId(order.ID, id)!=null)
+                    throw new BO.MyExceptionInAnOrder();
+            }
+            dal.Product.Delete(id);
+        }
+        catch(Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+    public void UpdateProduct(BO.Product newproduct)
+    //עידכון נתוני מוצר עבור מנהל
+    {
 
     }
-    public void UpdateProduct(BO.Product newproduct); //עידכון נתוני מוצר עבור מנהל
 
 
 
