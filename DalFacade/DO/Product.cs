@@ -1,4 +1,5 @@
-﻿namespace DO;
+﻿using 
+namespace DO;
 
 /// Structure for a product in the store.
 public struct Product

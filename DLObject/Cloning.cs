@@ -7,9 +7,9 @@ using System.Reflection;
 namespace Dal;
 
 internal static class Cloning 
-//מרחיבה באופן אוטומטי כל טיפוס ב DO
+//משבטת באופן אוטומטי כל טיפוס ב DO
 {
-    internal static T Clone<T>(this T original) where T :new()
+    internal static T Clone<T>(this T original) where T :new()   // internal static V Clone??
     {
         T copyToObject =new T();
         foreach(PropertyInfo propertyInfo in typeof (T).GetProperties())
