@@ -166,10 +166,11 @@ internal class Product : IProduct
     public void UpdateProduct(BO.Product newproduct)
     //עידכון נתוני מוצר עבור מנהל
     {
-        try
-        {
+
             if(!((newproduct.ID > 0) && (newproduct.Name != null) && (newproduct.Price > 0) && (newproduct.InStock >= 0)))
                 throw new BO.MyExceptionNotExist();
+        try
+        {
             dal.Product.Add(Product.Clone<DO.Product>());
             dal.Cloning.Clone<DO.Product>(product);
         }
@@ -177,7 +178,6 @@ internal class Product : IProduct
         {
             throw new Exception(ex.Message);
         }
-
 
     }
 
