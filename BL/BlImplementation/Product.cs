@@ -17,37 +17,40 @@ internal class Product : IProduct
     public IEnumerable<BO.ProductForList> GetListedProducts() 
      //עבור מנהל ועבור קטלוג קונה .בקשת רשימת מוצרים
     {
-        try
-        {
         IEnumerable<DO.Product> listpro = dal.Product.GetAll();
-            if (!listpro.Any()) throw new MyExceptionNoItems();
+        if (!listpro.Any())
+            throw new NoItemsException();
         List<BO.ProductForList> listproducts = new List<BO.ProductForList> ();
         foreach (DO.Product product in listpro)
         {
-            listproducts.Add(new ProductForList
+            try
             {
-                IsDeleted = false,
-                ID = product.ID,
-                Name = product.Name,
-                Price = product.Price,
-                Category = (BO.Category?)product.Category
-            }) ;
+                listproducts.Add(new ProductForList
+                {
+                    IsDeleted = false,
+                    ID = product.ID,
+                    Name = product.Name,
+                    Price = product.Price,
+                    Category = (BO.Category?)product.Category
+
+                });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }       
         return listproducts;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
-
     }
+
     public IEnumerable<BO.ProductForList> GetListedProductsWithDeleted()
     // בקשת רשימת מוצרים -כולל מחוקים- עבור המנהל ועבור קטלוג קונה
     {
         try
         {
             IEnumerable<DO.Product> listpro = dal.Product.GetAllWithDeleted();
-            if (!listpro.Any()) throw new MyExceptionNoItems();
+            if (!listpro.Any())
+                throw new NoItemsException();
             List<BO.ProductForList> listproducts = new List<BO.ProductForList>();
             foreach (DO.Product product in listpro)
             {
@@ -87,7 +90,7 @@ internal class Product : IProduct
                 };
                     return prod;
             }
-            throw new BO.MyExceptionNotExist();
+            throw new BO.NotExistException();
         }
         catch (Exception ex)
         {
@@ -117,7 +120,7 @@ internal class Product : IProduct
                 };
                 return prod;
             }
-            throw new BO.MyExceptionNotExist();
+            throw new BO.NotExistException();
         }
         catch(Exception ex) 
         {
@@ -148,13 +151,13 @@ internal class Product : IProduct
         try
         {
             if(id<0)
-                throw new BO.MyExceptionNotExist();
+                throw new BO.NotExistException();
             DO.Product prod = dal.Product.GetByID(id); //?אמור לזרוק חרידה מה די-או אם המוצר לא קיים - האם זה מספיק
             IEnumerable<DO.Order> lst = dal.Order.GetAll();
             foreach (DO.Order order in lst)
             {
                 if(dal.OrderItem.GetByOrderAndId(order.ID, id)!=null)
-                    throw new BO.MyExceptionInAnOrder();
+                    throw new BO.InAnOrderException();
             }
             dal.Product.Delete(id);
         }
@@ -168,7 +171,7 @@ internal class Product : IProduct
     {
 
             if(!((newproduct.ID > 0) && (newproduct.Name != null) && (newproduct.Price > 0) && (newproduct.InStock >= 0)))
-                throw new BO.MyExceptionNotExist();
+                throw new BO.NotExistException();
         try
         {
             dal.Product.Add(Product.Clone<DO.Product>());
@@ -181,9 +184,35 @@ internal class Product : IProduct
 
     }
 
+    public IEnumerable<BO.ProductItem> GetKatalog()
+    //עבור מנהל ועבור קטלוג קונה .בקשת רשימת מוצרים
+    {
+        IEnumerable<DO.Product> listpro = dal.Product.GetAll();
+        if (!listpro.Any())
+            throw new NoItemsException();
+        List<BO.ProductItem> listproducts = new List<BO.ProductItem>();
+        foreach (DO.Product product in listpro)
+        {
+            try
+            {
+                listproducts.Add(new ProductItem
+                {
+                    IsDeleted = false,
+                    ID = product.ID,
+                    Name = product.Name,
+                    Price = product.Price,
+                    Category = (BO.Category?)product.Category,
+                    InStock = (product.InStock>0)
+                }) ;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+            return listproducts;
+    }
 
-
-    
     //public IEnumerable<ProductItem> GetProducts()
 
     //{
