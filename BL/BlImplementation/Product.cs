@@ -134,7 +134,7 @@ internal class Product : IProduct
         {
             if ((product.ID > 0) && (product.Name != null) && (product.Price > 0) && (product.InStock >= 0))
             {
-                dal.Product.Add(Cloning.Clone(product));
+                dal.Product.Add(Clone(product);
             }
             else
                 throw new BO.MyException();
