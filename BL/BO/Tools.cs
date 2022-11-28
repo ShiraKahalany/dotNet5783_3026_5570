@@ -27,24 +27,18 @@ static class Tools
     }
 
 
-    public static string CopyFields<T,V>(this T t,V newObject )
+    public static V CopyFields<T, V>(this T t2, V newObject)
     {
-
-
-        foreach (PropertyInfo prop in t.GetType().GetProperties())
+        foreach (PropertyInfo prop in newObject.GetType().GetProperties())
         {
-            if(prop.Name==)
+            foreach (PropertyInfo prop2 in t2.GetType().GetProperties())
+            {
+                if (prop.Name == prop2.Name)
 
-
-
-            var value = prop.GetValue(t, null);
-            if (value is IEnumerable)
-                foreach (var item in (IEnumerable)value)
-                    str += item.ToStringProperty("   ");
-            else
-                str += "\n" + suffix + prop.Name + ": " + value;
+                    prop.SetValue(t2, prop2, null);
+            }
         }
-        return str;
+        return newObject;
     }
 
 }

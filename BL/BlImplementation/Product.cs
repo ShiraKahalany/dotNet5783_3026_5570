@@ -25,15 +25,8 @@ internal class Product : IProduct
         {
             try
             {
-                listproducts.Add(new ProductForList
-                {
-                    IsDeleted = false,
-                    ID = product.ID,
-                    Name = product.Name,
-                    Price = product.Price,
-                    Category = (BO.Category?)product.Category
-
-                });
+                ProductForList p=new ProductForList();
+                listproducts.Add(product.CopyFields(p));
             }
             catch (Exception ex)
             {
@@ -54,14 +47,8 @@ internal class Product : IProduct
             List<BO.ProductForList> listproducts = new List<BO.ProductForList>();
             foreach (DO.Product product in listpro)
             {
-                listproducts.Add(new ProductForList
-                {
-                    IsDeleted = false,
-                    ID = product.ID,
-                    Name = product.Name,
-                    Price = product.Price,
-                    Category = (BO.Category?)product.Category
-                });
+                ProductForList p = new ProductForList();
+                listproducts.Add(product.CopyFields(p));
             }
             return listproducts;
         }
@@ -78,17 +65,8 @@ internal class Product : IProduct
             if (id > 0)
             {
                 DO.Product pro = dal.Product.GetByID(id);
-                BO.Product prod = new BO.Product
-                {
-                    ID = pro.ID,
-                    IsDeleted = pro.IsDeleted,
-                    Name = pro.Name,
-                    Price = pro.Price,
-                    Category = (BO.Category?)pro.Category,
-                    InStock = pro.InStock
-                    ////path???????????
-                };
-                    return prod;
+               BO.Product product = new BO.Product();
+               return pro.CopyFields(product);
             }
             throw new BO.NotExistException();
         }
@@ -134,7 +112,8 @@ internal class Product : IProduct
         {
             if ((product.ID > 0) && (product.Name != null) && (product.Price > 0) && (product.InStock >= 0))
             {
-                dal.Product.Add(Clone(product);
+                DO.Product p = new DO.Product();
+                dal.Product.Add(product.CopyFields(p));
             }
             else
                 throw new BO.MyException();
@@ -152,14 +131,13 @@ internal class Product : IProduct
         {
             if(id<0)
                 throw new BO.NotExistException();
-            DO.Product prod = dal.Product.GetByID(id); //?אמור לזרוק חרידה מה די-או אם המוצר לא קיים - האם זה מספיק
             IEnumerable<DO.Order> lst = dal.Order.GetAll();
             foreach (DO.Order order in lst)
             {
                 if(dal.OrderItem.GetByOrderAndId(order.ID, id)!=null)
                     throw new BO.InAnOrderException();
             }
-            dal.Product.Delete(id);
+            dal.Product.Delete(id); 
         }
         catch(Exception ex)
         {
@@ -170,12 +148,12 @@ internal class Product : IProduct
     //עידכון נתוני מוצר עבור מנהל
     {
 
-            if(!((newproduct.ID > 0) && (newproduct.Name != null) && (newproduct.Price > 0) && (newproduct.InStock >= 0)))
-                throw new BO.NotExistException();
+      if(!((newproduct.ID > 0) && (newproduct.Name != null) && (newproduct.Price > 0) && (newproduct.InStock >= 0)))
+           throw new BO.NotExistException();
         try
         {
-            dal.Product.Add(Product.Clone<DO.Product>());
-            dal.Cloning.Clone<DO.Product>(product);
+            DO.Product p =new DO.Product();
+            dal.Product.Add(newproduct.CopyFields(p));
         }
         catch (Exception ex)
         {
@@ -195,30 +173,14 @@ internal class Product : IProduct
         {
             try
             {
-                listproducts.Add(new ProductItem
-                {
-                    IsDeleted = false,
-                    ID = product.ID,
-                    Name = product.Name,
-                    Price = product.Price,
-                    Category = (BO.Category?)product.Category,
-                    InStock = (product.InStock>0)
-                }) ;
+                ProductItem p = new ProductItem();
+                listproducts.Add(product.CopyFields(p));
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-            return listproducts;
+        return listproducts;
     }
-
-    //public IEnumerable<ProductItem> GetProducts()
-
-    //{
-
-    //    //implementaiton needed
-
-    //    throw new NotImplementedException();
-    //}
 }
