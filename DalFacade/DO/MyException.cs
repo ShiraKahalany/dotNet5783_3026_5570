@@ -43,3 +43,4 @@ public class MyExceptionAlreadyExist : Exception
     public MyExceptionAlreadyExist(string message, Exception innerException) : base(message, innerException) { }
     protected MyExceptionAlreadyExist(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
 }
+

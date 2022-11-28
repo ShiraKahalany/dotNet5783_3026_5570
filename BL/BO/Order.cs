@@ -16,7 +16,7 @@ public class Order
     //
     public string? CustomerEmail { get; set; }
     //
-    public string? CustomerAdress { get; set; }
+    public string? CustomerAddress { get; set; }
     //
     public DateTime? OrderDate { get; set; }
     //

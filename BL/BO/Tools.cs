@@ -34,7 +34,6 @@ static class Tools
             foreach (PropertyInfo prop2 in t2.GetType().GetProperties())
             {
                 if (prop.Name == prop2.Name)
-
                     prop.SetValue(t2, prop2, null);
             }
         }

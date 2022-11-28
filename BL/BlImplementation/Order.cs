@@ -11,6 +11,7 @@ internal class Order:IOrder
 {
     DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");
     public List<BO.OrderForList> GetOrders()
+        //מחזירה את רשימת ההזמנות
     {
         IEnumerable<DO.Order> listor = dal.Order.GetAll();
         if (!listor.Any())
@@ -21,7 +22,23 @@ internal class Order:IOrder
             try
             {
                 OrderForList or = new OrderForList();
-                list.Add(order.CopyFields(or));
+                if (order.DeliveryDate < DateTime.Now)
+                    or.Status = OrderStatus.Delivered;
+                else
+                {
+                    if (order.ShipDate > DateTime.Now)
+                        or.Status = OrderStatus.Shipped;
+                    else
+                    {
+                    if (order.OrderDate < DateTime.Now)
+                        or.Status = OrderStatus.Ordered;
+                    else 
+                            or.Status = OrderStatus.None;
+                    }
+                }
+                IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(order.ID);
+
+             list.Add(order.CopyFields(or));
             }
             catch (Exception ex)
             {

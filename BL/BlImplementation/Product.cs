@@ -36,6 +36,27 @@ internal class Product : IProduct
         return listproducts;
     }
 
+    public IEnumerable<BO.Product> GetProducts()
+    //עבור מנהל ועבור קטלוג קונה .בקשת רשימת מוצרים
+    {
+        IEnumerable<DO.Product> listpro = dal.Product.GetAll();
+        if (!listpro.Any())
+            throw new NoItemsException();
+        List<BO.Product> listproducts = new List<BO.Product>();
+        foreach (DO.Product product in listpro)
+        {
+            try
+            {
+                BO.Product p = new BO.Product();
+                listproducts.Add(product.CopyFields(p));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        return listproducts;
+    }
     public IEnumerable<BO.ProductForList> GetListedProductsWithDeleted()
     // בקשת רשימת מוצרים -כולל מחוקים- עבור המנהל ועבור קטלוג קונה
     {
@@ -57,7 +78,7 @@ internal class Product : IProduct
             throw new Exception(ex.Message);
         }
     }
-    public BO.Product GetProducts(int id)
+    public BO.Product GetProduct(int id)
     //בקשת פרטי מוצר עבור מנהל
     {
         try
@@ -75,7 +96,7 @@ internal class Product : IProduct
             throw new Exception(ex.Message);
         }
     }
-    public ProductItem GetProducts(int id,BO.Cart cart)
+    public ProductItem GetProduct(int id,BO.Cart cart)
     // בקשת פרטי מוצר עבור הקונה
     {
         try
@@ -93,7 +114,7 @@ internal class Product : IProduct
                     Price = pro.Price,
                     Category = (BO.Category?)pro.Category,
                     Amount = counter,
-                    InStock = (counter > 0) 
+                    IsInStock = (counter > 0) 
                     ////path???????????
                 };
                 return prod;
@@ -162,25 +183,4 @@ internal class Product : IProduct
 
     }
 
-    public IEnumerable<BO.ProductItem> GetKatalog()
-    //עבור מנהל ועבור קטלוג קונה .בקשת רשימת מוצרים
-    {
-        IEnumerable<DO.Product> listpro = dal.Product.GetAll();
-        if (!listpro.Any())
-            throw new NoItemsException();
-        List<BO.ProductItem> listproducts = new List<BO.ProductItem>();
-        foreach (DO.Product product in listpro)
-        {
-            try
-            {
-                ProductItem p = new ProductItem();
-                listproducts.Add(product.CopyFields(p));
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-        return listproducts;
-    }
 }

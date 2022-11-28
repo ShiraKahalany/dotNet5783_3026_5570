@@ -51,3 +51,49 @@ public class AlreadyExistException : Exception
     public AlreadyExistException(string message, Exception innerException) : base(message, innerException) { }
     protected AlreadyExistException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
 }
+
+[Serializable]
+public class NotInStockException : Exception
+{
+    public NotInStockException() : base() { }
+    public NotInStockException(string message) : base(message) { }
+    public NotInStockException(string message, Exception innerException) : base(message, innerException) { }
+    protected NotInStockException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
+
+[Serializable]
+public class NoNameException : Exception
+{
+    public NoNameException() : base() { }
+    public NoNameException(string message) : base(message) { }
+    public NoNameException(string message, Exception innerException) : base(message, innerException) { }
+    protected NoNameException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
+
+[Serializable]
+public class IllegalEmailException : Exception
+{
+    public IllegalEmailException() : base() { }
+    public IllegalEmailException(string message) : base(message) { }
+    public IllegalEmailException(string message, Exception innerException) : base(message, innerException) { }
+    protected IllegalEmailException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
+
+
+[Serializable]
+public class AmountNotPossitiveException : Exception
+{
+    public AmountNotPossitiveException() : base() { }
+    public AmountNotPossitiveException(string message) : base(message) { }
+    public AmountNotPossitiveException(string message, Exception innerException) : base(message, innerException) { }
+    protected AmountNotPossitiveException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
+
+[Serializable]
+public class NoAddressException : Exception
+{
+    public NoAddressException() : base() { }
+    public NoAddressException(string message) : base(message) { }
+    public NoAddressException(string message, Exception innerException) : base(message, innerException) { }
+    protected NoAddressException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
