@@ -26,6 +26,15 @@ public class NotExistException : Exception
 }
 
 [Serializable]
+public class OrderNotExistException : Exception
+{
+    public OrderNotExistException() : base() { }
+    public OrderNotExistException(string message) : base(message) { }
+    public OrderNotExistException(string message, Exception innerException) : base(message, innerException) { }
+    protected OrderNotExistException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
+
+[Serializable]
 public class InAnOrderException : Exception
 {
     public InAnOrderException() : base() { }
@@ -97,3 +106,40 @@ public class NoAddressException : Exception
     public NoAddressException(string message, Exception innerException) : base(message, innerException) { }
     protected NoAddressException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
 }
+
+[Serializable]
+public class OrderHasShippedException : Exception
+{
+    public OrderHasShippedException() : base() { }
+    public OrderHasShippedException(string message) : base(message) { }
+    public OrderHasShippedException(string message, Exception innerException) : base(message, innerException) { }
+    protected OrderHasShippedException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
+
+[Serializable]
+public class OrderHasDeliveredException : Exception
+{
+    public OrderHasDeliveredException() : base() { }
+    public OrderHasDeliveredException(string message) : base(message) { }
+    public OrderHasDeliveredException(string message, Exception innerException) : base(message, innerException) { }
+    protected OrderHasDeliveredException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
+
+[Serializable]
+public class OrderHasNotShippedException : Exception
+{
+    public OrderHasNotShippedException() : base() { }
+    public OrderHasNotShippedException(string message) : base(message) { }
+    public OrderHasNotShippedException(string message, Exception innerException) : base(message, innerException) { }
+    protected OrderHasNotShippedException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
+
+[Serializable]
+public class CanNotUpdateOrderException : Exception
+{
+    public CanNotUpdateOrderException() : base() { }
+    public CanNotUpdateOrderException(string message) : base(message) { }
+    public CanNotUpdateOrderException(string message, Exception innerException) : base(message, innerException) { }
+    protected CanNotUpdateOrderException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
+

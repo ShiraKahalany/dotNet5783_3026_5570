@@ -13,7 +13,7 @@ public struct Order
     //כתובת המייל של המזמין
     public string? CustomerEmail { get; set; }    
     //כתובת המגורים של המזמין
-    public string? CustomerAdress { get; set; }
+    public string? CustomerAddress { get; set; }
     //תאריך ביצוע ההזמנה
     public DateTime? OrderDate { get; set; }
     // תאריך משלוח

@@ -107,9 +107,8 @@ internal class Cart:ICart
                 if (item.Amount <= 0)
                     throw new AmountNotPossitiveException();
                 newlist.Add(item);
-                product.InStock--;
             }
-            BO.Order neworder = new BO.Order
+            DO.Order neworder = new DO.Order
             {
                 IsDeleted = false,
                 ID = 1234,///how to bring id
@@ -117,13 +116,18 @@ internal class Cart:ICart
                 CustomerEmail = cart.CustomerEmail,
                 CustomerAddress = cart.CustomerAddress,
                 OrderDate = DateTime.Now,
-                Status = BO.OrderStatus.Ordered,
-                PaymentDate = null, ///???איך מאפסים תאריך
-                shipDate = null,
-                DeliveryrDate = null,
-                Items = newlist,
-                TotalPrice = cart.TotalPrice
+                ShipDate = null, ///היה כתוב לאפס.זה לאפס?
+                DeliveryDate = null
             };
+            dal.Order.Add(neworder);
+            foreach(OrderItem item in newlist)
+            {
+                DO.Product product = dal.Product.GetByID(item?.ProductID ?? 0);
+                DO.OrderItem temp=new DO.OrderItem();
+                temp.OrderID=neworder.ID;
+                dal.OrderItem.Add(item.CopyFields(temp));
+                product.InStock-=item.Amount;
+            }
         }
         catch (Exception ex)
         {

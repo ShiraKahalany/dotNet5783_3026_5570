@@ -24,9 +24,9 @@ public class Order
     //
     public DateTime? PaymentDate { get; set; }
     //
-    public DateTime? shipDate { get; set; }
+    public DateTime? ShipDate { get; set; }
     //
-    public DateTime? DeliveryrDate { get; set; }
+    public DateTime? DeliveryDate { get; set; }
     //
     public List<OrderItem>? Items { get; set; }
     //

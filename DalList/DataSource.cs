@@ -70,7 +70,7 @@ internal class DataSource
                 ID= myID,
                 CustomerName= myCustomerName,
                 CustomerEmail= myCustomerEmail,
-                CustomerAdress= myCustomerAdress,
+                CustomerAddress= myCustomerAdress,
                 OrderDate= myOrderDate,
                 shipDate= myShipDate,
                 DeliveryrDate= myDeliveryDate

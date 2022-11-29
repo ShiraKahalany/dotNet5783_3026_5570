@@ -8,6 +8,7 @@ public interface IOrderItem : ICrud<OrderItem>
 { 
     OrderItem? GetByOrderAndId(int orderId, int productId);  //מתודה להחזרת מוצר-בהזמנה על פי מספר הזמנה ומוצר
 
+    public IEnumerable<OrderItem> GetAll(int id);
     //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
-    //IEnumerable<OrderItem> GetAll(int id);
+   
 }
