@@ -21,8 +21,8 @@ public class Order
     public DateTime? OrderDate { get; set; }
     //
     public OrderStatus? Status { get; set; }
-    //
-    public DateTime? PaymentDate { get; set; }
+    
+    
     //
     public DateTime? ShipDate { get; set; }
     //

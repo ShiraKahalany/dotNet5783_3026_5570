@@ -3,34 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+
 using System.Threading.Tasks;
 using DO;
 namespace DalApi;
+using System.Reflection;
+using static DalApi.DalConfig;
 
-public class DalFactory
+public static class DalFactory
 {
-    public static IDal GetDal()  ///IDaL?   - NUULABLE?
+    public static IDal? GetDal()
     {
-        // IDal? dal = new Instance;
+        string dalType = s_dalName
+            ?? throw new DalConfigException($"DAL name is not extracted from the configuration");
+        string dal = s_dalPackages[dalType]
+           ?? throw new DalConfigException($"Package for {dalType} is not found in packages list");
 
-        string dalType = DataSource.DalConfig.DalName;
-        string dalPkg = DalConfig.DalPackages[dalType];
-        if (dalPkg == null) throw new DalConfigException($"Package {dalType} is not found in packages list in dal-config.xml");
+        try
+        {
+            Assembly.Load(dal ?? throw new DalConfigException($"Package {dal} is null"));
+        }
+        catch (Exception)
+        {
+            throw new DalConfigException("Failed to load {dal}.dll package");
+        }
 
-        try { Assembly.Load(dalPkg); }
-        catch (Exception) { throw new DalConfigException("Failed to load the dal-config.xml file"); }
+        Type? type = Type.GetType($"Dal.{dal}, {dal}")
+            ?? throw new DalConfigException($"Class Dal.{dal} was not found in {dal}.dll");
 
-        Type type = Type.GetType($"Dal.{dalPkg}, {dalPkg}");
-        if (type == null) throw new DalConfigException($"Class {dalPkg} was not found in the {dalPkg}.dll");
-
-        IDal dal = (IDal)type.GetProperty("Instance",
-                  BindingFlags.Public | BindingFlags.Static).GetValue(null);
-        if (dal == null) throw new DalConfigException($"Class {dalPkg} is not a singleton or wrong propertry name for Instance");
-
-        return dal;
-
+        return type.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?
+                   .GetValue(null) as IDal
+            ?? throw new DalConfigException($"Class {dal} is not singleton or Instance property not found");
     }
-
-   // internal static DataSource s_instance { get; } = new DataSource();   //יצירת מופע נתונים
-
 }

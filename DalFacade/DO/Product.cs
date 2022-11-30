@@ -1,4 +1,4 @@
-﻿using 
+﻿ 
 namespace DO;
 
 /// Structure for a product in the store.
@@ -10,7 +10,7 @@ public struct Product
     public double? Price { get; set; }  //מחיר המוצר
     public Category? Category { get; set; }  //לאיזה קטגוריה המוצר משתייך
     public int? InStock { get; set; }  //כמה פריטים מהמוצר יש במלאי
-    public string? path = null;
+    public string? path;
     //תיאור מוצר כמחרוזת
     public override string ToString() =>  Tools.ToStringProperty(this);
 

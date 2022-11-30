@@ -31,7 +31,7 @@ class Program
                     Console.WriteLine("enter the costumer email");
                     tmpOrder.CustomerEmail = Console.ReadLine();
                     Console.WriteLine("enter the costumer adress");
-                    tmpOrder.CustomerAdress = Console.ReadLine();
+                    tmpOrder.CustomerAddress = Console.ReadLine();
                     order.Add(tmpOrder);
                     break;
                 case "b":
@@ -58,7 +58,7 @@ class Program
                     Console.WriteLine("enter the new costumer email");
                     tmpOrder2.CustomerEmail = Console.ReadLine();
                     Console.WriteLine("enter the new costumer adress");
-                    tmpOrder2.CustomerAdress = Console.ReadLine();
+                    tmpOrder2.CustomerAddress = Console.ReadLine();
                     order.Update(tmpOrder2);
                     break;
                 case "e":

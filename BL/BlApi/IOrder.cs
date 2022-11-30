@@ -13,6 +13,6 @@ public interface IOrder
     public BO.Order UpdateStatusToShipped  (int id);
     public BO.Order UpdateStatusToProvided(int id);
     public BO.OrderTracking FollowOrder (int id);
-    public BO.Order UpdateAmountOfProduct (BO.Order order,int productId, int amount);
+    public BO.Order UpdateAmountOfProduct (int orderId,int productId, int amount);
     
 }

@@ -15,7 +15,7 @@ internal class DataSource
     internal List<Product?> Products { get; } = new List<Product?> { };  //רשימת מוצרים
     internal List<OrderItem?> OrderItems { get; } = new List<OrderItem?> { };  //רשימת פריטי הזמנות
 
-    internal static class Config //static?????
+    internal static class Config 
         //מחלקה עבור הגדרת מספרים רצים להזמנות ולפריטי ההזמנות
     {
         //nextOrderNumber
@@ -72,8 +72,8 @@ internal class DataSource
                 CustomerEmail= myCustomerEmail,
                 CustomerAddress= myCustomerAdress,
                 OrderDate= myOrderDate,
-                shipDate= myShipDate,
-                DeliveryrDate= myDeliveryDate
+                ShipDate= myShipDate,
+                DeliveryDate= myDeliveryDate
             });
         }
     }

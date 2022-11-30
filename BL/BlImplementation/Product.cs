@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlApi;
-using DalApi;
-
 namespace BlImplementation;
 using BO;
-using DO;
+
+
 
 internal class Product : IProduct 
 {

@@ -12,6 +12,7 @@ using BO;
 internal class Cart:ICart
 {
     DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");
+    
     public BO.Cart AddProductToCart(BO.Cart cart, int id)
     {
         try
@@ -88,7 +89,7 @@ internal class Cart:ICart
         }
     }
 
-    public void MakeAnOrder(BO.Cart cart)
+    public int MakeAnOrder(BO.Cart cart)
     {
         try
         {
@@ -116,7 +117,7 @@ internal class Cart:ICart
                 CustomerEmail = cart.CustomerEmail,
                 CustomerAddress = cart.CustomerAddress,
                 OrderDate = DateTime.Now,
-                ShipDate = null, ///היה כתוב לאפס.זה לאפס?
+                ShipDate = null, 
                 DeliveryDate = null
             };
             dal.Order.Add(neworder);
@@ -128,6 +129,7 @@ internal class Cart:ICart
                 dal.OrderItem.Add(item.CopyFields(temp));
                 product.InStock-=item.Amount;
             }
+            return neworder.ID;
         }
         catch (Exception ex)
         {

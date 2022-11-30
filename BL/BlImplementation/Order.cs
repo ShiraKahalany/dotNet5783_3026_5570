@@ -77,7 +77,7 @@ internal class Order : IOrder
                         or.Status = OrderStatus.None;
                 }
             }
-            or.PaymentDate = order.OrderDate;
+            
             IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
             List<BO.OrderItem> list = new List<BO.OrderItem>();
 
@@ -109,7 +109,7 @@ internal class Order : IOrder
             BO.Order or = new BO.Order();
             or = order.CopyFields(or);
             or.Status =BO.OrderStatus.Shipped;
-            or.PaymentDate = or.OrderDate;
+            
             IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
             List<BO.OrderItem> list = new List<BO.OrderItem>();
 
@@ -143,7 +143,7 @@ internal class Order : IOrder
             BO.Order or = new BO.Order();
             or = order.CopyFields(or);
             or.Status = BO.OrderStatus.Delivered;
-            or.PaymentDate = or.OrderDate;
+            
             IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
             List<BO.OrderItem> list = new List<BO.OrderItem>();
 
@@ -194,26 +194,40 @@ internal class Order : IOrder
             throw new Exception(ex.Message);
         }
     }
-    public BO.Order UpdateAmountOfProduct(BO.Order order ,int productId, int amount)
+    public BO.Order UpdateAmountOfProduct(int orderIId ,int productId, int amount)
     {
         try
         {
-            if (order.Status == OrderStatus.Shipped || order.Status == OrderStatus.Delivered)
+            DO.Order order =dal.Order.GetByID(orderIId);
+            if (order.ShipDate< DateTime.Now)
                 throw new CanNotUpdateOrderException();
             DO.Product product = dal.Product.GetByID(productId);
-            
+            DO.OrderItem? myItem = dal.OrderItem.GetByOrderAndId(orderIId, productId);
+            dal.OrderItem.Update(new DO.OrderItem
+            {
+                ID = myItem.GetValueOrDefault().ID,
+                OrderID = orderIId,
+                ProductID = productId,
+                Price = myItem.GetValueOrDefault().Price,
+                Amount = amount,
+                IsDeleted = false
+            });
 
+            BO.Order or = new BO.Order();
+            or = order.CopyFields(or);
+            or.Status = BO.OrderStatus.Delivered;
+            IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(orderIId);
+            List<BO.OrderItem> list = new List<BO.OrderItem>();
 
-
-            foreach (BO.OrderItem item in order.Items)
+            foreach (BO.OrderItem item in or.Items)
             {
                 if (item.ProductID == productId)
                 {
                     if (amount == 0)
                     {
-                        order.Items.Remove(item);
-                        order.TotalPrice -= item.Price * item.Amount;
-                        return order;
+                        or.Items.Remove(item);
+                        or.TotalPrice -= item.Price * item.Amount;
+                        return or;
                     }
                     int? difference = amount - item.Amount;
                     if (item.Amount < amount)
@@ -221,18 +235,18 @@ internal class Order : IOrder
                         if (!(product.InStock >= difference))
                             throw new NotInStockException();
                         item.Amount = amount;
-                        order.TotalPrice += item.Price * difference;
-                        return order;
+                        or.TotalPrice += item.Price * difference;
+                        return or;
                     }
                     if (item.Amount > amount)
                     {
                         item.Amount = amount;
-                        order.TotalPrice += item.Price * difference;
-                        return order;
+                        or.TotalPrice += item.Price * difference;
+                        return or;
                     }
                 }
             }
-            return order;
+            return or;
         }
         catch (Exception ex)
         {

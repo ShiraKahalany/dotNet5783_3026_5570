@@ -16,7 +16,7 @@ public interface IProduct
     public void AddProduct(BO.Product product); //הוספת מוצר עבור מנהל
     public void DeleteProduct(int id); //מחיקת מוצר עבור מנהל
     public void UpdateProduct(BO.Product newproduct); //עידכון נתוני מוצר עבור מנהל
-    public IEnumerable<BO.ProductItem> GetKatalog();  //בקשת קטלוג עבור הקונה
+   // public IEnumerable<BO.ProductItem> GetKatalog();  //בקשת קטלוג עבור הקונה
 
     //    public override string ToString() =>  Tools.ToStringProperty(this);
     //public override BO.Product Clone() => Cloning.Clone(this);
