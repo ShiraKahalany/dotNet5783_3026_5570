@@ -11,24 +11,24 @@ class Program
     static void testOrder(IBL bOrder)
     {
         int id;
-        Console.WriteLine(@"test order:
+        Console.WriteLine(@"Test Order:
                 Choose one of the following:
-                a - TRACKING ORDER8*
-                b - DISPLAY ORDER DETAILS
-                c - DISPLAY ORDER LIST
-                d - UPDATE SHIP DATE ORDER
-                e - UPDATE DELIVERY DATE ORDER
+                a - TRACKING ORDER
+                b - GET ORDER DETAILS
+                c - GET ORDER LIST
+                d - UPDATE SHIP DATE
+                e - UPDATE DELIVERY DATE
                 f - UPDATE ORDER");
         string option = Console.ReadLine();
         switch (option)
         {
             case "a":
-                Console.WriteLine("enter the order ID");
+                Console.WriteLine("Enter the order ID");
                 int.TryParse(Console.ReadLine(), out id);
                 Console.WriteLine(bOrder.Order.FollowOrder(id));
                 break;
             case "b":
-                Console.WriteLine("enter the order ID");
+                Console.WriteLine("Enter the order ID");
                 int.TryParse(Console.ReadLine(), out id);
                 Console.WriteLine(bOrder.Order.GetOrderById(id));
                 break;
@@ -40,23 +40,23 @@ class Program
                 /// מדפיסים את הכל
                 break;
             case "d":
-                Console.WriteLine("enter the order ID:");
+                Console.WriteLine("Enter the order ID:");
                 int.TryParse(Console.ReadLine(), out id);
                 Console.WriteLine(bOrder.Order.UpdateStatusToShipped(id));
                 break;
             case "e":
-                Console.WriteLine("enter the order ID:");
+                Console.WriteLine("Enter the order ID:");
                 int.TryParse(Console.ReadLine(), out id);
                 Console.WriteLine(bOrder.Order.UpdateStatusToProvided(id));
                 break;
             case "f":
-                Console.WriteLine("enter the order ID:");
+                Console.WriteLine("Enter the order ID:");
                 int.TryParse(Console.ReadLine(), out id);
                 int orderID = id;
-                Console.WriteLine("enter the product ID:");
+                Console.WriteLine("Enter the product ID:");
                 int.TryParse(Console.ReadLine(), out id);
                 int productID = id;
-                Console.WriteLine("enter the new amount:");
+                Console.WriteLine("Enter the new amount:");
                 int amount;
                 int.TryParse(Console.ReadLine(), out amount);
                 Console.WriteLine(bOrder.Order.UpdateAmountOfProduct(orderID, productID, amount));
@@ -71,10 +71,10 @@ class Program
         while (option != "d")
         {
             int numOfProduct = myCart.Items.Count();
-            Console.WriteLine("Your basket has" + numOfProduct + "products");
+            Console.WriteLine("Your cart has" + numOfProduct + "products");
             Console.WriteLine(@"Choose one of the following:
-                a - ADD PRODUCT TO THE CART
-                b - UPDATE AMOUNT OF PRODUCT
+                a - ADD  PRODUCT TO THE CART
+                b - UPDATE AMOUNT OF  PRODUCT
                 c - APPROVE ORDER
                 d - BACK TO THE MAIN MENU
                 ");
@@ -82,21 +82,21 @@ class Program
             switch (option)
             {
                 case "a":
-                    Console.WriteLine("enter the product ID:");
+                    Console.WriteLine("Enter the product ID:");
                     int.TryParse(Console.ReadLine(), out id);
                     Console.WriteLine(bCart.Cart.AddProductToCart(myCart, id));
                     break;
                 case "b":
-                    Console.WriteLine("enter the product ID:");
+                    Console.WriteLine("Enter the product ID:");
                     int.TryParse(Console.ReadLine(), out id);
-                    Console.WriteLine("enter the new amount:");
+                    Console.WriteLine("Enter the new amount:");
                     int amount;
                     int.TryParse(Console.ReadLine(), out amount);
                     Console.WriteLine(bCart.Cart.UpdateAmountOfProductInCart(myCart, id, amount));
                     break;
                 case "c":
                     id = bCart.Cart.MakeAnOrder(myCart);
-                    Console.WriteLine("Your order has been confirmed.");
+                    Console.WriteLine("Nice! Your order has been confirmed");
                     Console.WriteLine("Your order id is: " + id);
                     break;
                 case "d":
@@ -111,7 +111,7 @@ class Program
     static void testProduct(IBL bProduct)
     {
         int id;
-        Console.WriteLine(@"test product:
+        Console.WriteLine(@"Test product:
                 Choose one of the following:
                 a - Get product list to the manager
                 b - Get product details
@@ -130,106 +130,106 @@ class Program
                 /// מדפיסים את הכל
                 break;
             case "b":
-                Console.WriteLine("enter the product ID");
+                Console.WriteLine("Enter the product ID");
                 int.TryParse(Console.ReadLine(), out id);
                 Console.WriteLine(bProduct.Product.GetProduct(id));
                 break;
             case "c":
                 BO.Product? tmpProduct = new BO.Product();
-                Console.WriteLine("enter the new product ID");
+                Console.WriteLine("Enter the new product ID");
                 int.TryParse(Console.ReadLine(), out id);
                 tmpProduct.ID = id;
-                Console.WriteLine("enter the new product name");
+                Console.WriteLine("Enter the new product name");
                 tmpProduct.Name = Console.ReadLine();
-                Console.WriteLine(@"enter the new product catgory: 
-                                        Clothes-0, 
-                                        Toys-1, 
-                                        Carts-2, 
-                                        Bottles-3, 
-                                        Diapers-4");
+                Console.WriteLine(@"Enter the new product catgory: 
+                                        0: Living-room, 
+                                        1: Bathroom, 
+                                        2: Kitchen, 
+                                        3: Bedroom, 
+                                        4: Garden");
                 int.TryParse(Console.ReadLine(), out id);
                 int ctg = id;
                 switch (ctg)
                 {
                     case 0:
-                        tmpProduct.Category = BO.Category.Bed_room;
-                        break;
-                    case 1:
-                        tmpProduct.Category = BO.Category.Bath_room;
-                        break;
-                    case 2:
                         tmpProduct.Category = BO.Category.Living_room;
                         break;
+                    case 1:
+                        tmpProduct.Category = BO.Category.Bathroom;
+                        break;
+                    case 2:
+                        tmpProduct.Category = BO.Category.Kitchen;
+                        break;
                     case 3:
-                        tmpProduct.Category = BO.Category.Garden;
+                        tmpProduct.Category = BO.Category.Bedroom;
                         break;
                     case 4:
-                        tmpProduct.Category = BO.Category.Kitchen;
+                        tmpProduct.Category = BO.Category.Garden;
                         break;
                     default:
                         Console.WriteLine("ERROR");
                         break;
                 }
-                Console.WriteLine("enter the new product price");
+                Console.WriteLine("Enter the new product price");
                 int.TryParse(Console.ReadLine(), out id);
                 tmpProduct.Price = id;
-                Console.WriteLine("enter the new product amount");
+                Console.WriteLine("Enter the new product amount");
                 int.TryParse(Console.ReadLine(), out id);
                 tmpProduct.InStock = id;
                 bProduct.Product.AddProduct(tmpProduct);
                 break;
             case "d":
-                Console.WriteLine("enter the product ID");
+                Console.WriteLine("Enter the product ID");
                 int.TryParse(Console.ReadLine(), out id);
                 bProduct.Product.DeleteProduct(id);
                 Console.WriteLine("DELETED");
                 break;
             case "e":
                 BO.Product? tmpProduct2 = new BO.Product();
-                Console.WriteLine("enter the new product ID");
+                Console.WriteLine("Enter the new product ID");
                 int.TryParse(Console.ReadLine(), out id);
                 tmpProduct2.ID = id;
-                Console.WriteLine("enter the new product name");
+                Console.WriteLine("Enter the new product name");
                 tmpProduct2.Name = Console.ReadLine();
-                Console.WriteLine(@"enter the new product catgory: 
-                                        Clothes-0, 
-                                        Toys-1, 
-                                        Carts-2, 
-                                        Bottles-3, 
-                                        Diapers-4");
+                Console.WriteLine(@"Enter the new product catgory: 
+                                        0: Living-room, 
+                                        1: Bathroom, 
+                                        2: Kitchen, 
+                                        3: Bedroom, 
+                                        4: Garden");
                 int.TryParse(Console.ReadLine(), out id);
                 ctg = id;
                 switch (ctg)
                 {
                     case 0:
-                        tmpProduct2.Category = BO.Category.Bed_room;
-                        break;
-                    case 1:
-                        tmpProduct2.Category = BO.Category.Bath_room;
-                        break;
-                    case 2:
                         tmpProduct2.Category = BO.Category.Living_room;
                         break;
+                    case 1:
+                        tmpProduct2.Category = BO.Category.Bathroom;
+                        break;
+                    case 2:
+                        tmpProduct2.Category = BO.Category.Kitchen;
+                        break;
                     case 3:
-                        tmpProduct2.Category = BO.Category.Garden;
+                        tmpProduct2.Category = BO.Category.Bedroom;
                         break;
                     case 4:
-                        tmpProduct2.Category = BO.Category.Kitchen;
+                        tmpProduct2.Category = BO.Category.Garden;
                         break;
                     default:
                         Console.WriteLine("ERROR");
                         break;
                 }
-                Console.WriteLine("enter the new product price");
+                Console.WriteLine("Enter the new product price");
                 int.TryParse(Console.ReadLine(), out id);
                 tmpProduct2.Price = id;
-                Console.WriteLine("enter the new product amount");
+                Console.WriteLine("Enter the new product amount");
                 int.TryParse(Console.ReadLine(), out id);
                 tmpProduct2.InStock = id;
                 bProduct.Product.UpdateProduct(tmpProduct2);
                 break;
             case "f":
-                foreach (var item in bProduct.Product.GetListedProducts())//לשנות לקטלוג!!
+                foreach (var item in bProduct.Product.GetListedProducts())
                 {
                     Console.WriteLine(item);
                 }
