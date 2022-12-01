@@ -37,6 +37,8 @@ public class DalOrder : IOrder
     {
         foreach (Order? item in dataSource.Orders)
         {
+            if (item == null)
+                throw new MyExceptionNotExist("The item is not exist");
             if (item?.ID == id)
             {
                 if (item?.IsDeleted == false)
@@ -98,7 +100,11 @@ public class DalOrder : IOrder
         //מתודה שמחזירה את רשימת כל ההזמנות
     {
         List<Order> listGet = new List<Order>();
-        foreach (Order? item in dataSource.Orders) { if(item?.IsDeleted==false)listGet.Add((Order)item); }
+        foreach (Order? item in dataSource.Orders)
+        {
+            if(item!=null && item?.IsDeleted==false)
+                listGet.Add((Order)item);
+        }
         return listGet;
     }
 
@@ -106,7 +112,11 @@ public class DalOrder : IOrder
         //מתודה המחזירה את רשימת כל ההזמנות, כולל אלו שנמחקו
     {
         List<Order> listGet = new List<Order>();
-        foreach (Order? item in dataSource.Orders) {listGet.Add((Order)item); }
+        foreach (Order? item in dataSource.Orders)
+        {
+            if(item != null)
+            listGet.Add((Order)item);
+        }
         return listGet;
     }
 
@@ -114,7 +124,10 @@ public class DalOrder : IOrder
     public IEnumerable<Order> GetAllDeleted()
     {
         List<Order> listGet = new List<Order>();
-        foreach (Order? item in dataSource.Orders) { if (item?.IsDeleted == true) listGet.Add((Order)item); }
+        foreach (Order? item in dataSource.Orders)
+        {
+            if (item != null && item?.IsDeleted == true)
+                listGet.Add((Order)item); }
         return listGet;
     }
 }

@@ -27,7 +27,11 @@ public class DalOrderItem :IOrderItem
     public OrderItem GetByID(int id)
         //מתודה המקבלת מספר ייחודי של מוצר-בהזמנה, ומחזירה את המוצר-בהזמנה
     {
-        foreach(OrderItem? item in dataSource.OrderItems) { if(item?.IsDeleted==false && item.GetValueOrDefault().ID == id) return (OrderItem)item; }
+        foreach(OrderItem? item in dataSource.OrderItems)
+        {
+            if(item != null && item?.IsDeleted==false && item?.ID == id)
+                return (OrderItem)item;
+        }
         throw new MyExceptionNotExist("The item is not exist");
     }
 
@@ -36,14 +40,13 @@ public class DalOrderItem :IOrderItem
     {
         foreach (OrderItem? item in dataSource.OrderItems)
         {
-            if (item?.ID == id)
+            if (item != null && item?.ID == id)
             {
                 if (item?.IsDeleted == false)
                     throw new MyExceptionNotExist("The item is not deleted");
                 return (OrderItem)item;
             }
         }
-
         throw new MyExceptionNotExist("The item is not exist");
     }
 
@@ -75,7 +78,7 @@ public class DalOrderItem :IOrderItem
     {
         OrderItem? temp = dataSource.OrderItems.Find(x => x?.ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new MyExceptionNotExist("The order is not exist");
         if (temp?.IsDeleted == false)
             throw new MyExceptionNotExist("The item is not deleted - cant delete permanently");
         dataSource.OrderItems.Remove(temp);
@@ -86,39 +89,59 @@ public class DalOrderItem :IOrderItem
     {
         OrderItem? temp = dataSource.OrderItems.Find(x => x?.ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new MyExceptionNotExist("The order is not exist");
         if (temp?.IsDeleted == true)
-            throw new MyExceptionNotExist("The item is already deleted");
+            throw new MyExceptionNotExist("The order is already deleted");
         dataSource.OrderItems.Remove(temp);
-        OrderItem orderItem = new OrderItem { IsDeleted=true, ID=temp.GetValueOrDefault().ID, Amount=temp?.Amount, OrderID=temp?.OrderID, Price=temp?.Price, ProductID=temp?.ProductID};
+        OrderItem orderItem = new OrderItem
+        {
+            IsDeleted=true,
+            ID=temp.GetValueOrDefault().ID,
+            Amount=temp?.Amount,
+            OrderID=temp?.OrderID,
+            Price=temp?.Price,
+            ProductID=temp?.ProductID
+        };
         Add(orderItem);
     }
     public OrderItem? GetByOrderAndId(int orderId, int productId)
         //מתודה המקבלת מספר מוצר ומספר הזמנה ומחזירה את המוצר-בהזמנה שמתאים להזמנה הזאת ולמוצר הזה
     {
-        foreach(OrderItem? item in dataSource.OrderItems) { if(item?.IsDeleted==false&&item?.ProductID == productId && item?.OrderID==orderId) return (OrderItem)item; }
+        foreach(OrderItem? item in dataSource.OrderItems)
+        {
+            if(item != null && item?.IsDeleted==false && item?.ProductID == productId && item?.OrderID==orderId)
+                return (OrderItem)item;
+        }
         return null;
         //throw new MyExceptionNotExist("The item is not exist");
     }
 
     //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
-    public IEnumerable<OrderItem> GetAll(int id)
+    public IEnumerable<OrderItem>? GetAll(int id)
         //מתודה המחזירה את כל המוצרים-בהזמנה של ההזמנה שהת"ז שלה התקבל
     {
         Order? order = dataSource.Orders.Find(x => x.GetValueOrDefault().ID == id);
         if (order == null)
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new MyExceptionNotExist("The order is not exist");
         if(order?.IsDeleted==true)
-            throw new MyExceptionNotExist("The item is deleted");
-        List<OrderItem> listGet = new List<OrderItem>();
-        foreach (OrderItem? item in dataSource.OrderItems) {if(item?.OrderID==id) listGet.Add((OrderItem)item); }
+            throw new MyExceptionNotExist("The order is deleted");
+        List<OrderItem>? listGet = new List<OrderItem>();
+        foreach (OrderItem? item in dataSource.OrderItems)
+        {
+            if(item!=null && item?.OrderID==id)
+                listGet.Add((OrderItem)item);
+        }
         return listGet;
     }
     public IEnumerable<OrderItem> GetAll()
         //מתודה המחזירה רשימה של כל המוצרים-בהזמנה
     {
         List<OrderItem> listGet = new List<OrderItem>();
-        foreach (OrderItem? item in dataSource.OrderItems) { if(item?.IsDeleted==false)listGet.Add((OrderItem)item); }
+        foreach (OrderItem? item in dataSource.OrderItems)
+        {
+            if(item != null && item?.IsDeleted==false)
+                listGet.Add((OrderItem)item);
+        }
         return listGet;
     }
 
@@ -126,14 +149,22 @@ public class DalOrderItem :IOrderItem
     //מתודה המחזירה את רשימת כל המוצרים, כולל אלו שנחמקו
     {
         List<OrderItem> listGet = new List<OrderItem>();
-        foreach (OrderItem? item in dataSource.OrderItems) {listGet.Add((OrderItem)item); }
+        foreach (OrderItem? item in dataSource.OrderItems)
+        {
+            if(item != null)
+            listGet.Add((OrderItem)item);
+        }
         return listGet;
     }
 
     public IEnumerable<OrderItem> GetAllDeleted()
     {
         List<OrderItem> listGet = new List<OrderItem>();
-        foreach (OrderItem? item in dataSource.OrderItems) { if (item?.IsDeleted == true) listGet.Add((OrderItem)item); }
+        foreach (OrderItem? item in dataSource.OrderItems)
+        { 
+            if (item != null && item?.IsDeleted == true)
+                listGet.Add((OrderItem)item);
+        }
         return listGet;
     }
 

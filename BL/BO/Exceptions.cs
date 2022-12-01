@@ -90,6 +90,15 @@ public class IllegalEmailException : Exception
 
 
 [Serializable]
+public class IllegalIdException : Exception
+{
+    public IllegalIdException() : base() { }
+    public IllegalIdException(string message) : base(message) { }
+    public IllegalIdException(string message, Exception innerException) : base(message, innerException) { }
+    protected IllegalIdException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
+
+[Serializable]
 public class AmountNotPossitiveException : Exception
 {
     public AmountNotPossitiveException() : base() { }
