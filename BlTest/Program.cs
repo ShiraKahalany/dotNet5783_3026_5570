@@ -84,7 +84,10 @@ class Program
                 case "a":
                     Console.WriteLine("Enter the product ID:");
                     int.TryParse(Console.ReadLine(), out id);
-                    Console.WriteLine(bCart.Cart.AddProductToCart(myCart, id));
+                    Console.WriteLine("Enter the amount to add:");
+                    int amountToAdd = 1;
+                    int.TryParse(Console.ReadLine(), out amountToAdd);
+                    Console.WriteLine(bCart.Cart.AddProductToCart(myCart, id, amountToAdd));
                     break;
                 case "b":
                     Console.WriteLine("Enter the product ID:");
@@ -118,7 +121,10 @@ class Program
                 c - Add product
                 d - Remove product
                 e - Update product details
-                f - Get catalog");
+                f - Get catalog
+                g - Get the list of deleted products (manager)
+                h - Get the complete products list (including deleted products)
+                i - Restore a deleted product (manager)");
         string option = Console.ReadLine();
         switch (option)
         {
@@ -233,8 +239,34 @@ class Program
                 {
                     Console.WriteLine(item);
                 }
-                /// מדפיסים את הכל
                 break;
+            case "g":
+                foreach (var item in bProduct.Product.GetListedDeletedProducts())
+                {
+                    Console.WriteLine(item);
+                }
+                break;
+            case "h":
+                foreach (var item in bProduct.Product.GetListedProductsWithDeleted())
+                {
+                    Console.WriteLine(item);
+                }
+                break;
+            case "i":
+                Console.WriteLine("Enter the deleted product ID");
+                int.TryParse(Console.ReadLine(), out id);
+                BO.Product? tmpProduct3 = bProduct.Product.GetDeletedById(id);
+                Console.WriteLine("The product is:");
+                Console.WriteLine(tmpProduct3);
+                Console.WriteLine("Do you want to restore it? 1- YES, 0- NO");
+                if(id==1)
+                {
+                    tmpProduct3.IsDeleted = false;
+                    bProduct.Product.Restore(id);
+                }
+                Console.WriteLine("Restored successfully!");
+                break;
+
         }
     }
     //[STAThread]
@@ -246,12 +278,12 @@ class Program
         int num = 1;
         while (num != 0)
         {
-            Console.WriteLine(@"welcome to our store!
+            Console.WriteLine(@"Hello!
                 Choose one of the following:
                 0-exit
-                1-test Order
-                2-test Cart
-                3-test Product");
+                1-Test order
+                2-Test cart
+                3-Test product");
             string option = Console.ReadLine();
             bool b = int.TryParse(option, out num);
             try
@@ -280,7 +312,7 @@ class Program
             {
                 Console.WriteLine(ex);
             }
-            //, או לעשות קצ' כללי או להוסיף עוד קצ'ים
+            
         }
     }
 }

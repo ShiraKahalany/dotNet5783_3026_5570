@@ -143,3 +143,11 @@ public class CanNotUpdateOrderException : Exception
     protected CanNotUpdateOrderException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
 }
 
+[Serializable]
+public class NotItemsInCartException : Exception
+{
+    public NotItemsInCartException() : base() { }
+    public NotItemsInCartException(string message) : base(message) { }
+    public NotItemsInCartException(string message, Exception innerException) : base(message, innerException) { }
+    protected NotItemsInCartException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}

@@ -16,28 +16,56 @@ static class Tools
         string str = "";
         foreach (PropertyInfo prop in t.GetType().GetProperties())
         {
+            if (prop.Name == "IsDeleted")
+            {
+                bool? val = (bool?)prop.GetValue(t, null);
+                if (val??false)
+                    str += "\t * * * DELETED * * *: \n";
+                continue;
+            }
             var value = prop.GetValue(t, null);
-            if (value is IEnumerable)
+            if (value is not string && value is IEnumerable)
+            {
+                str = str +"\n"+ prop.Name + ":";
                 foreach (var item in (IEnumerable)value)
-                    str += item.ToStringProperty("   ");
+                    str += item.ToStringProperty("      ");
+            }
+
             else
                 str += "\n" + suffix + prop.Name + ": " + value;
         }
+        str += "\n";
         return str;
     }
 
 
-    public static V CopyFields<T, V>(this T t2, V newObject)
+    public static V CopyFields<T, V>(this T from, V to)
     {
-        foreach (PropertyInfo prop in newObject.GetType().GetProperties())
+        foreach (PropertyInfo propTo in to.GetType().GetProperties())
         {
-            foreach (PropertyInfo prop2 in t2.GetType().GetProperties())
-            {
-                if (prop.Name == prop2.Name)
-                    prop.SetValue(t2, prop2, null);
-            }
+
+            PropertyInfo propFrom = from.GetType().GetProperty(propTo.Name);
+            if (propFrom == null)
+                continue;
+            var value = propFrom.GetValue(from, null);
+            if (value is ValueType || value is string)
+                propTo.SetValue(to, value);
         }
-        return newObject;
+
+
+
+
+
+        //foreach (PropertyInfo propFrom in from.GetType().GetProperties())
+        //    {
+
+
+
+        //        if (propTo.Name == propFrom.Name)
+        //            propTo.SetValue(from, propFrom, null);
+        //    }
+        //}
+        return to;
     }
 
 }

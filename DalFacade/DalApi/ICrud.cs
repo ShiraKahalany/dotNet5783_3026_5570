@@ -1,5 +1,7 @@
 ﻿
 
+using DO;
+
 namespace DalApi;
 
 public interface ICrud<T> where T : struct
@@ -7,12 +9,18 @@ public interface ICrud<T> where T : struct
 {
     int Add(T item);  //הוספת ישות
     T GetByID(int id);  //קבלת ישות לפי המספר המזהה שלה
+    T GetDeletedById(int id);
     void Update(T item);  //עידכון פרטי ישות קיימת
     void Delete(int id); //
+  void DeletePermanently(int id);
+    void Restore(T item);
 
     //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
     IEnumerable<T> GetAll();  //קבלת כל העצמים הקיימים מישות מסויימת
 
     IEnumerable<T> GetAllWithDeleted();  //קבלת כל העצמים הקיימים מישות מסויימת, כולל אלו שנמחקו בעבר
+
+    IEnumerable<T> GetAllDeleted();
+
 
 }

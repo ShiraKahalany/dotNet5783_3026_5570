@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using BlApi;
 namespace BlImplementation;
 using BO;
+
+//מימוש ממשק ההזמנות
 internal class Order : IOrder
 {
-    DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");
+    DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
     public List<BO.OrderForList> GetOrders()
-    //מחזירה את רשימת ההזמנות
+    //מתודה לקבלת רשימת כל ההזמנות התקפות
     {
         IEnumerable<DO.Order> listor = dal.Order.GetAll();
         if (!listor.Any())
@@ -42,7 +44,7 @@ internal class Order : IOrder
                 int? counter = 0;
                 double? sum = 0;
                 foreach (DO.OrderItem item in items) { counter += item.Amount; sum += item.Price * item.Amount; }
-                or.TotalPrice = sum;
+                or.TotalPrice = Math.Round(sum??0, 2);
                 or.AmountOfItems = counter;
                 list.Add(or);
             }
@@ -55,6 +57,7 @@ internal class Order : IOrder
         return list;
     }
     public BO.Order GetOrderById(int id)
+        //קבלת הזמנה לפי מספר מזהה
     {
         if (id <= 0)
             throw new OrderNotExistException();
@@ -81,15 +84,15 @@ internal class Order : IOrder
             IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
             List<BO.OrderItem> list = new List<BO.OrderItem>();
 
-            double? total = 0;
+            double? sum = 0;
             foreach (DO.OrderItem item in items)
             {
-                total += item.Amount * item.Price;
+                sum += item.Amount * item.Price;
                 BO.OrderItem temp = new BO.OrderItem();
                 list.Add(item.CopyFields(temp));
             }
             or.Items = list;
-            or.TotalPrice = total;
+            or.TotalPrice = Math.Round(sum ?? 0, 2);
             return or;
         }
         catch (Exception ex)
@@ -98,6 +101,7 @@ internal class Order : IOrder
         }
     }
     public BO.Order UpdateStatusToShipped(int id)
+        //עידכון הזמנה ששולחה
     {
         try
         {
@@ -113,15 +117,15 @@ internal class Order : IOrder
             IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
             List<BO.OrderItem> list = new List<BO.OrderItem>();
 
-            double? total = 0;
+            double? sum = 0;
             foreach (DO.OrderItem item in items)
             {
-                total += item.Amount * item.Price;
+                sum += item.Amount * item.Price;
                 BO.OrderItem temp = new BO.OrderItem();
                 list.Add(item.CopyFields(temp));
             }
             or.Items = list;
-            or.TotalPrice = total;
+            or.TotalPrice = Math.Round(sum ?? 0, 2);
             return or;
         }
         catch (Exception ex)
@@ -130,6 +134,7 @@ internal class Order : IOrder
         }
     }
     public BO.Order UpdateStatusToProvided(int id)
+        //עידכון הזמנה שסופקה
     {
         try
         {
@@ -155,7 +160,7 @@ internal class Order : IOrder
                 list.Add(item.CopyFields(temp));
             }
             or.Items = list;
-            or.TotalPrice = total;
+            or.TotalPrice = Math.Round(total ?? 0, 2);
             return or;
         }
         catch (Exception ex)
@@ -164,6 +169,7 @@ internal class Order : IOrder
         }
     }
     public BO.OrderTracking FollowOrder(int id)
+        //מעקב הזמנה - הצגת האירועים של ההזמנה והתאריכים שלהם
     {
         try
         {
@@ -195,6 +201,7 @@ internal class Order : IOrder
         }
     }
     public BO.Order UpdateAmountOfProduct(int orderIId ,int productId, int amount)
+        //עידכון כמות מוצר בהזמנה
     {
         try
         {
@@ -236,12 +243,14 @@ internal class Order : IOrder
                             throw new NotInStockException();
                         item.Amount = amount;
                         or.TotalPrice += item.Price * difference;
+                        or.TotalPrice = Math.Round(or.TotalPrice ?? 0, 2);
                         return or;
                     }
                     if (item.Amount > amount)
                     {
                         item.Amount = amount;
                         or.TotalPrice += item.Price * difference;
+                        or.TotalPrice = Math.Round(or.TotalPrice ?? 0, 2);
                         return or;
                     }
                 }
@@ -254,4 +263,186 @@ internal class Order : IOrder
         }
     }
 
+    public BO.Order GetDeletedOrderById(int id)
+        //קבלת הזמנה שנמחקה, לפי מזהה הזמנה
+    {
+
+        if (id <= 0)
+            throw new OrderNotExistException();
+        try
+        {
+            DO.Order order = dal.Order.GetByID(id);
+            BO.Order or = new BO.Order();
+            or = order.CopyFields(or);
+            if (order.DeliveryDate < DateTime.Now)
+                or.Status = OrderStatus.Delivered;
+            else
+            {
+                if (order.ShipDate < DateTime.Now)
+                    or.Status = OrderStatus.Shipped;
+                else
+                {
+                    if (order.OrderDate < DateTime.Now)
+                        or.Status = OrderStatus.Ordered;
+                    else
+                        or.Status = OrderStatus.None;
+                }
+            }
+
+            IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
+            List<BO.OrderItem> list = new List<BO.OrderItem>();
+
+            double? sum = 0;
+            foreach (DO.OrderItem item in items)
+            {
+                sum += item.Amount * item.Price;
+                BO.OrderItem temp = new BO.OrderItem();
+                list.Add(item.CopyFields(temp));
+            }
+            or.Items = list;
+            or.TotalPrice = Math.Round(sum ?? 0, 2);
+            return or;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+    public List<BO.OrderForList> GetDeletedOrders()
+        //קבלת רשימת כל ההזמנות המחוקות
+    {
+        IEnumerable<DO.Order> listor = dal.Order.GetAllDeleted();
+        if (!listor.Any())
+            throw new NoItemsException();
+        List<BO.OrderForList> list = new List<BO.OrderForList>();
+        foreach (DO.Order order in listor)
+        {
+            try
+            {
+                OrderForList or = new OrderForList();
+                if (order.DeliveryDate <= DateTime.Now)
+                    or.Status = OrderStatus.Delivered;
+                else
+                {
+                    if (order.ShipDate <= DateTime.Now)
+                        or.Status = OrderStatus.Shipped;
+                    else
+                    {
+                        if (order.OrderDate <= DateTime.Now)
+                            or.Status = OrderStatus.Ordered;
+                        else
+                            or.Status = OrderStatus.None;
+                    }
+                }
+                IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(order.ID);
+
+                list.Add(order.CopyFields(or));
+                int? counter = 0;
+                double? sum = 0;
+                foreach (DO.OrderItem item in items) { counter += item.Amount; sum += item.Price * item.Amount; }
+                or.TotalPrice = Math.Round(sum ?? 0, 2);
+                or.AmountOfItems = counter;
+                list.Add(or);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+        return list;
+    }
+
+    public List<BO.OrderForList> GetOrdersWithDeleted()
+        //קבלת רשימת כל ההזמנות - כולל אלו שנמחקו
+    {
+        IEnumerable<DO.Order> listor = dal.Order.GetAllWithDeleted();
+        if (!listor.Any())
+            throw new NoItemsException();
+        List<BO.OrderForList> list = new List<BO.OrderForList>();
+        foreach (DO.Order order in listor)
+        {
+            try
+            {
+                OrderForList or = new OrderForList();
+                if (order.DeliveryDate <= DateTime.Now)
+                    or.Status = OrderStatus.Delivered;
+                else
+                {
+                    if (order.ShipDate <= DateTime.Now)
+                        or.Status = OrderStatus.Shipped;
+                    else
+                    {
+                        if (order.OrderDate <= DateTime.Now)
+                            or.Status = OrderStatus.Ordered;
+                        else
+                            or.Status = OrderStatus.None;
+                    }
+                }
+                IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(order.ID);
+
+                list.Add(order.CopyFields(or));
+                int? counter = 0;
+                double? sum = 0;
+                foreach (DO.OrderItem item in items) { counter += item.Amount; sum += item.Price * item.Amount; }
+                or.TotalPrice = Math.Round(sum ?? 0, 2);
+                or.AmountOfItems = counter;
+                list.Add(or);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+        return list;
+    }
+
+    public void Restore(int id)
+        //שיחזור הזמנה שנמחקה, לפי מזהה הזמנה
+    {
+        if (id <= 0)
+            throw new BO.NotExistException();
+        try
+        {
+            DO.Order o = dal.Order.GetDeletedById(id);
+            dal.Order.Restore(o);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+
+    //public BO.Order Restore(int id)
+    //{
+    //    try
+    //    {
+    //        DO.Order order = dal.Order.GetDeletedById(id);
+    //        order.IsDeleted = false;
+    //        dal.Order.Restore(order);
+    //        BO.Order or = new BO.Order();
+    //        or = order.CopyFields(or);
+    //        or.Status = BO.OrderStatus.Shipped;
+
+    //        IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
+    //        List<BO.OrderItem> list = new List<BO.OrderItem>();
+
+    //        double? sum = 0;
+    //        foreach (DO.OrderItem item in items)
+    //        {
+    //            sum += item.Amount * item.Price;
+    //            BO.OrderItem temp = new BO.OrderItem();
+    //            list.Add(item.CopyFields(temp));
+    //        }
+    //        or.Items = list;
+    //        or.TotalPrice = Math.Round(sum ?? 0, 2);
+    //        return or;
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        throw new Exception(ex.Message);
+    //    }
+    //}
 }

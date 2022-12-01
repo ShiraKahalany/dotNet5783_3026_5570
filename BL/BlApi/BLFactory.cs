@@ -7,8 +7,9 @@ using BlApi;
 using BlImplementation;
 namespace BlApi;
 
+
+//יצרן שכבת הלוגיקה
 public static class BLFactory
 {
-    public static IBL GetBL() => BL.instance;
-
+    public static IBL GetBL() => BL.instance;  
 }

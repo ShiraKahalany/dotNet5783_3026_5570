@@ -77,6 +77,30 @@ internal class Product : IProduct
             throw new Exception(ex.Message);
         }
     }
+
+
+    public IEnumerable<BO.ProductForList> GetListedDeletedProducts()
+    {
+        try
+        {
+            IEnumerable<DO.Product> listpro = dal.Product.GetAllDeleted();
+            if (!listpro.Any())
+                throw new NoItemsException();
+            List<BO.ProductForList> listproducts = new List<BO.ProductForList>();
+            foreach (DO.Product product in listpro)
+            {
+                ProductForList p = new ProductForList();
+                listproducts.Add(product.CopyFields(p));
+            }
+            return listproducts;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+
     public BO.Product GetProduct(int id)
     //בקשת פרטי מוצר עבור מנהל
     {
@@ -95,6 +119,43 @@ internal class Product : IProduct
             throw new Exception(ex.Message);
         }
     }
+
+
+    public BO.Product GetDeletedById(int id)
+    {
+        try
+        {
+            if (id > 0)
+            {
+                DO.Product pro = dal.Product.GetDeletedById(id);
+                BO.Product product = new BO.Product();
+                return pro.CopyFields(product);
+            }
+            throw new BO.NotExistException();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+
+    public void Restore(int id)
+    {
+        if(id<=0)
+            throw new BO.NotExistException();
+        try
+        {
+            DO.Product p = dal.Product.GetDeletedById(id);
+            dal.Product.Restore(p);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+
+    }
+
     public ProductItem GetProduct(int id,BO.Cart cart)
     // בקשת פרטי מוצר עבור הקונה
     {

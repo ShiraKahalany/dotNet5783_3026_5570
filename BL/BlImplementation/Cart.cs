@@ -4,42 +4,57 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlApi;
-using DalApi;
-
-namespace BlImplementation;
 using BO;
+namespace BlImplementation;
 
+//מימוש המתודות של סל קניות
 internal class Cart:ICart
 {
-    DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");
+    DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
     
-    public BO.Cart AddProductToCart(BO.Cart cart, int id)
+    public BO.Cart? AddProductToCart(BO.Cart? cart, int id, int amountToAdd)
+        //מתודה המקבלת עגלה,מספר מזהה של מוצר, וכמות להוספה, ומוסיפה את המוצר לעגלה
     {
+        if (cart == null)
+            throw new ArgumentNullException();
         try
         {
             DO.Product product = dal.Product.GetByID(id);
-            if (!(product.InStock < 0))
+            if (product.InStock < amountToAdd)
                 throw new NotInStockException();
-            foreach (BO.OrderItem? item in cart.Items)
+
+            if(cart.Items!=null)
             {
-                if (item.ProductID == id) //אם המוצר קיים בסל קניות
+                foreach (BO.OrderItem? item in cart.Items)
                 {
-                        item.Amount++;
-                        cart.TotalPrice+=product.Price;
+                    if (item == null)
+                        break;
+                    if (item.ProductID == id) //אם המוצר קיים בסל קניות
+                    {
+                        item.Amount+=amountToAdd;
+                        cart.TotalPrice += product.Price*amountToAdd;
+                        cart.TotalPrice = Math.Round(cart.TotalPrice??0, 2);
                         return cart;
+                    }
                 }
             }
-            Random rand = new Random();
-            int newId = rand.Next(8999)+1000;
+            //אם המוצר עוד לא קיים בסל הקניות
             BO.OrderItem temp = new BO.OrderItem
             {
-                ID = newId, /////how he should put
+                ID = 0,
                 ProductID = id,
                 Price = product.Price,
                 IsDeleted = false,
-                Amount = 1
+                Amount = amountToAdd
             };
-            cart.Items.Add(temp);
+
+            if(cart.Items!=null)
+                cart.Items.Add(temp);
+            else
+            {
+                cart.Items=new List<BO.OrderItem>();
+                cart.Items.Add(temp);
+            }
             cart.TotalPrice += product.Price;
             return cart;
         }
@@ -50,13 +65,17 @@ internal class Cart:ICart
     }
 
     public BO.Cart UpdateAmountOfProductInCart(BO.Cart cart, int id, int amount)
+        //מתודה המקבלת סל קניות, מזהה מוצר, וכמות רצויה - ומעדכנת את הכמות של המורצ בסל לכמות הרצויה
     {
         try
         {
             DO.Product product = dal.Product.GetByID(id);
+            if (cart.Items == null)
+                throw new NotExistException();
+
             foreach (BO.OrderItem item in cart.Items)
             {
-                if (item.ProductID == id)
+                if (item!=null && item.ProductID == id)
                 {
                    if(amount ==0)
                     {
@@ -89,8 +108,11 @@ internal class Cart:ICart
         }
     }
 
-    public int MakeAnOrder(BO.Cart cart)
+    public int MakeAnOrder(BO.Cart? cart)
+        //מתודה המקבלת סל קניות ויוצרת ממנו הזמנה
     {
+        if (cart == null)
+            throw new NotExistException();
         try
         {
             if (cart.CustomerName == null)
@@ -99,20 +121,30 @@ internal class Cart:ICart
                 throw new NoAddressException();
             if ((cart.CustomerEmail == null)||(!cart.CustomerEmail.Contains('@')))
                 throw new IllegalEmailException();
-            List <OrderItem> newlist = new List<OrderItem>();  
+            List <OrderItem> newlist = new List<OrderItem>();
+            if (cart.Items == null)
+                throw new NotItemsInCartException();
+
+            //בדיקת זמינות המוצרים במלאי
             foreach (OrderItem item in cart.Items)
             {
                 DO.Product product = dal.Product.GetByID(item?.ProductID??0);
-                if(product.InStock<=0)
+                if (item == null)
+                    break;
+                if(product.InStock<=item.Amount)
                     throw new NotInStockException();
                 if (item.Amount <= 0)
                     throw new AmountNotPossitiveException();
                 newlist.Add(item);
             }
+            if (newlist.Count < 0)
+                throw new NotItemsInCartException();
+
+            //יצירת ההזמנה
             DO.Order neworder = new DO.Order
             {
                 IsDeleted = false,
-                ID = 1234,///how to bring id
+                ID = 0,
                 CustomerName = cart.CustomerName,
                 CustomerEmail = cart.CustomerEmail,
                 CustomerAddress = cart.CustomerAddress,
@@ -120,8 +152,11 @@ internal class Cart:ICart
                 ShipDate = null, 
                 DeliveryDate = null
             };
-            dal.Order.Add(neworder);
-            foreach(OrderItem item in newlist)
+            
+            dal.Order.Add(neworder);  //הוספת ההזמנה למאגר ההזמנות
+
+           //עידכון מלאי המוצרים
+            foreach (OrderItem item in newlist)
             {
                 DO.Product product = dal.Product.GetByID(item?.ProductID ?? 0);
                 DO.OrderItem temp=new DO.OrderItem();
@@ -137,4 +172,26 @@ internal class Cart:ICart
         }
     }
 
+
+
+
+    //public void Restore(int id)
+    //{
+    //    if (id <= 0)
+    //        throw new BO.NotExistException();
+    //    try
+    //    {
+
+    //        BO.Cart cart= new BO.Cart();
+    //        cart.IsDeleted
+
+
+    //        DO.Order c = dal.Order.GetDeletedById(id);
+    //        dal.Cart.Restore(c);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        throw new Exception(ex.Message);
+    //    }
+    //}
 }
