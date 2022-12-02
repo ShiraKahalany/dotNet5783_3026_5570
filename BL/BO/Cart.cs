@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace BO;
 
+//סל קניות של לקוח
 public class Cart
 {
-    public bool IsDeleted { get; set; }
-    public string? CustomerName { get; set; }
-    public string? CustomerEmail { get; set; }
-    public string? CustomerAddress { get; set; }
-    public List<BO.OrderItem?>? Items { get; set; }
-    public double? TotalPrice { get; set; }
-    public override string ToString() => this.ToStringProperty();
+    public bool IsDeleted { get; set; }   //האם העגלה מחוקה
+    public string? CustomerName { get; set; }   //שם הלקוח
+    public string? CustomerEmail { get; set; }   //כתובת אימייל של הלקוח
+    public string? CustomerAddress { get; set; }    //כתובת מגורים של הלקוח
+    public List<BO.OrderItem?>? Items { get; set; }   //רשימת המוצרים שיש בעגלה
+    public double? TotalPrice { get; set; }   //מחיר כולל
+    public override string ToString() => this.ToStringProperty();   //הפיכה למחרוזת
 }

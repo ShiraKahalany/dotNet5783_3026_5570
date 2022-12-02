@@ -7,7 +7,7 @@ using BlApi;
 
 namespace BlImplementation;
 
-//
+//שכבת הלוגיקה
 public class BL:IBL
 {
     public static IBL instance { get; }=new BL();
