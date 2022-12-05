@@ -7,14 +7,6 @@ using System.Runtime.Serialization;
 
 namespace BO;
 
-[Serializable]
-public class MyException : Exception
-{
-    public MyException() : base() { }
-    public MyException(string message) : base(message) { }
-    public MyException(string message, Exception innerException) : base(message, innerException) { }
-    protected MyException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
-}
 
 [Serializable]
 public class NotExistException : Exception
@@ -159,4 +151,23 @@ public class NotItemsInCartException : Exception
     public NotItemsInCartException(string message) : base(message) { }
     public NotItemsInCartException(string message, Exception innerException) : base(message, innerException) { }
     protected NotItemsInCartException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
+
+
+[Serializable]
+public class WrongDetailsException : Exception
+{
+    public WrongDetailsException() : base() { }
+    public WrongDetailsException(string message) : base(message) { }
+    public WrongDetailsException(string message, Exception innerException) : base(message, innerException) { }
+    protected WrongDetailsException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+}
+
+[Serializable]
+public class CantCancelOrderException : Exception
+{
+    public CantCancelOrderException() : base() { }
+    public CantCancelOrderException(string message) : base(message) { }
+    public CantCancelOrderException(string message, Exception innerException) : base(message, innerException) { }
+    protected CantCancelOrderException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlApi;
-using BO;
 namespace BlImplementation;
 
 //מימוש המתודות של סל קניות
@@ -21,8 +20,7 @@ internal class Cart:ICart
         {
             DO.Product product = dal.Product.GetByID(id);
             if (product.InStock < amountToAdd)
-                throw new NotInStockException();
-
+                throw new BO.NotInStockException();
             if(cart.Items!=null)
             {
                 foreach (BO.OrderItem? item in cart.Items)
@@ -71,7 +69,7 @@ internal class Cart:ICart
         {
             DO.Product product = dal.Product.GetByID(id);
             if (cart.Items == null)
-                throw new NotExistException();
+                throw new BO.NotExistException();
 
             foreach (BO.OrderItem item in cart.Items)
             {
@@ -87,7 +85,7 @@ internal class Cart:ICart
                     if (item.Amount < amount)
                     {
                         if (!(product.InStock >= difference))
-                            throw new NotInStockException();
+                            throw new BO.NotInStockException();
                         item.Amount = amount;
                         cart.TotalPrice += item.Price *difference;
                         return cart;
@@ -112,33 +110,33 @@ internal class Cart:ICart
         //מתודה המקבלת סל קניות ויוצרת ממנו הזמנה
     {
         if (cart == null)
-            throw new NotExistException();
+            throw new BO.NotExistException();
         try
         {
             if (cart.CustomerName == null)
-                throw new NoNameException();
+                throw new BO.NoNameException();
             if (cart.CustomerAddress == null)
-                throw new NoAddressException();
+                throw new BO.NoAddressException();
             if ((cart.CustomerEmail == null)||(!cart.CustomerEmail.Contains('@')))
-                throw new IllegalEmailException();
-            List <OrderItem> newlist = new List<OrderItem>();
+                throw new BO.IllegalEmailException();
+            List <BO.OrderItem> newlist = new List<BO.OrderItem>();
             if (cart.Items == null)
-                throw new NotItemsInCartException();
+                throw new BO.NotItemsInCartException();
 
             //בדיקת זמינות המוצרים במלאי
-            foreach (OrderItem item in cart.Items)
+            foreach (BO.OrderItem item in cart.Items)
             {
                 DO.Product product = dal.Product.GetByID(item?.ProductID??0);
                 if (item == null)
                     break;
                 if(product.InStock<=item.Amount)
-                    throw new NotInStockException();
+                    throw new BO.NotInStockException();
                 if (item.Amount <= 0)
-                    throw new AmountNotPossitiveException();
+                    throw new BO.AmountNotPossitiveException();
                 newlist.Add(item);
             }
             if (newlist.Count < 0)
-                throw new NotItemsInCartException();
+                throw new BO.NotItemsInCartException();
 
             //יצירת ההזמנה
             DO.Order neworder = new DO.Order
@@ -156,7 +154,7 @@ internal class Cart:ICart
             dal.Order.Add(neworder);  //הוספת ההזמנה למאגר ההזמנות
 
            //עידכון מלאי המוצרים
-            foreach (OrderItem item in newlist)
+            foreach (BO.OrderItem item in newlist)
             {
                 DO.Product product = dal.Product.GetByID(item?.ProductID ?? 0);
                 DO.OrderItem temp=new DO.OrderItem();

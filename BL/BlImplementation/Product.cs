@@ -5,26 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using BlApi;
 namespace BlImplementation;
-using BO;
 
 
-
+//מימוש ממשק מוצר
 internal class Product : IProduct 
 {
-    DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");
+    DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
    
     public IEnumerable<BO.ProductForList> GetListedProducts() 
-     //עבור מנהל ועבור קטלוג קונה .בקשת רשימת מוצרים
+     //מתודה לקבלת רשימת כל המוצרים התקפים
     {
         IEnumerable<DO.Product> listpro = dal.Product.GetAll();
         if (!listpro.Any())
-            throw new NoItemsException();
+            throw new BO.NoItemsException();
         List<BO.ProductForList> listproducts = new List<BO.ProductForList> ();
         foreach (DO.Product product in listpro)
-        {
+        {    
             try
             {
-                ProductForList p=new ProductForList();
+                BO.ProductForList p=new BO.ProductForList();
                 listproducts.Add(product.CopyFields(p));
             }
             catch (Exception ex)
@@ -40,7 +39,7 @@ internal class Product : IProduct
     {
         IEnumerable<DO.Product> listpro = dal.Product.GetAll();
         if (!listpro.Any())
-            throw new NoItemsException();
+            throw new BO.NoItemsException();
         List<BO.Product> listproducts = new List<BO.Product>();
         foreach (DO.Product product in listpro)
         {
@@ -57,17 +56,17 @@ internal class Product : IProduct
         return listproducts;
     }
     public IEnumerable<BO.ProductForList> GetListedProductsWithDeleted()
-    // בקשת רשימת מוצרים -כולל מחוקים- עבור המנהל ועבור קטלוג קונה
+    // בקשת רשימת מוצרים -כולל מחוקים- עבור המנהל 
     {
         try
         {
             IEnumerable<DO.Product> listpro = dal.Product.GetAllWithDeleted();
             if (!listpro.Any())
-                throw new NoItemsException();
+                throw new BO.NoItemsException();
             List<BO.ProductForList> listproducts = new List<BO.ProductForList>();
             foreach (DO.Product product in listpro)
             {
-                ProductForList p = new ProductForList();
+                BO.ProductForList p = new BO.ProductForList();
                 listproducts.Add(product.CopyFields(p));
             }
             return listproducts;
@@ -85,11 +84,11 @@ internal class Product : IProduct
         {
             IEnumerable<DO.Product> listpro = dal.Product.GetAllDeleted();
             if (!listpro.Any())
-                throw new NoItemsException();
+                throw new BO.NoItemsException();
             List<BO.ProductForList> listproducts = new List<BO.ProductForList>();
             foreach (DO.Product product in listpro)
             {
-                ProductForList p = new ProductForList();
+                BO.ProductForList p = new BO.ProductForList();
                 listproducts.Add(product.CopyFields(p));
             }
             return listproducts;
@@ -156,7 +155,7 @@ internal class Product : IProduct
 
     }
 
-    public ProductItem GetProduct(int id,BO.Cart cart)
+    public BO.ProductItem GetProduct(int id,BO.Cart cart)
     // בקשת פרטי מוצר עבור הקונה
     {
         try
@@ -197,7 +196,7 @@ internal class Product : IProduct
                 dal.Product.Add(product.CopyFields(p));
             }
             else
-                throw new BO.MyException();
+                throw new BO.WrongDetailsException();
         }
         catch (Exception ex)
         {
@@ -240,6 +239,8 @@ internal class Product : IProduct
         {
             throw new Exception(ex.Message);
         }
+
+
 
     }
 

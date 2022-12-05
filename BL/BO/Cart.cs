@@ -9,7 +9,6 @@ namespace BO;
 //סל קניות של לקוח
 public class Cart
 {
-    public bool IsDeleted { get; set; }   //האם העגלה מחוקה
     public string? CustomerName { get; set; }   //שם הלקוח
     public string? CustomerEmail { get; set; }   //כתובת אימייל של הלקוח
     public string? CustomerAddress { get; set; }    //כתובת מגורים של הלקוח

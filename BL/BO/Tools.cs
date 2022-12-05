@@ -23,7 +23,7 @@ static class Tools
                     str += "\t * * * DELETED * * *: \n";
                 continue;
             }
-            var value = prop.GetValue(t, null);
+            var value = prop.GetValue(t, null);   
             if (value is not string && value is IEnumerable)
             {
                 str = str +"\n"+ prop.Name + ":";
