@@ -40,7 +40,7 @@ internal class Order : IOrder
                 }
                 IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(order.ID);
 
-                list.Add(BO.Tools.CopyFields(order, or));
+                list.Add(order.CopyFields(or));
                 int? counter = 0;
                 double? sum = 0;
                 foreach (DO.OrderItem item in items)

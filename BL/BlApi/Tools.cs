@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Reflection;
-namespace BO;
+namespace BlApi;
 
 //מתודות הרחבה
-static class Tools
+public static class Tools
 {
     public static string ToStringProperty<T>(this T t, string suffix = "")
         //מתודה להפיכת ישות למחרוזת לצורך הצגת הפרטים
@@ -38,7 +38,7 @@ static class Tools
         return str;
     }
 
-    public static V CopyFields<T, V>(T from, V to)
+    public static V CopyFields<T, V>(this T from, V to)
     //מתודה להעתקת שדות עם שם זהה בין שתי ישויות שונות
     {
         foreach (PropertyInfo propTo in to.GetType().GetProperties())
@@ -51,6 +51,7 @@ static class Tools
             if (value is ValueType || value is string)
                 propTo.SetValue(to, value);
         }
+
 
         //foreach (PropertyInfo propFrom in from.GetType().GetProperties())
         //    {
