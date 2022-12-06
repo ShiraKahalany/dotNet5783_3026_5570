@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 namespace BO;
-
+using BlApi;
 //מחלקה שמייצגת מוצר ברשימת המוצרים
 public class ProductForList
 {

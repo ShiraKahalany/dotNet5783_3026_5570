@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using BlApi;
 namespace BO;
 //מחלקה עבור מסך רשימת הזמנות - מייצגת הזמנה ברשימת ההזמנות
 public class OrderForList

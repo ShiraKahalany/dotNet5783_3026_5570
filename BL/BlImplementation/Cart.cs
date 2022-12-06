@@ -159,7 +159,7 @@ internal class Cart:ICart
                 DO.Product product = dal.Product.GetByID(item?.ProductID ?? 0);
                 DO.OrderItem temp=new DO.OrderItem();
                 temp.OrderID=neworder.ID;
-                dal.OrderItem.Add(BO.Tools.CopyFields(item,temp));
+                dal.OrderItem.Add(item.CopyFields(temp));
                 product.InStock-=item.Amount;
             }
             return neworder.ID;

@@ -24,7 +24,7 @@ internal class Product : IProduct
             try
             {
                 BO.ProductForList p=new BO.ProductForList();
-                listproducts.Add(BO.Tools.CopyFields(product,p));
+                listproducts.Add(product.CopyFields(p));
             }
             catch (Exception ex)
             {
@@ -46,7 +46,7 @@ internal class Product : IProduct
             try
             {
                 BO.Product p = new BO.Product();
-                listproducts.Add(BO.Tools.CopyFields(product,p));
+                listproducts.Add(product.CopyFields(p));
             }
             catch (Exception ex)
             {
@@ -67,7 +67,7 @@ internal class Product : IProduct
             foreach (DO.Product product in listpro)
             {
                 BO.ProductForList p = new BO.ProductForList();
-                listproducts.Add(BO.Tools.CopyFields(product,p));
+                listproducts.Add(product.CopyFields(p));
             }
             return listproducts;
         }
@@ -89,7 +89,7 @@ internal class Product : IProduct
             foreach (DO.Product product in listpro)
             {
                 BO.ProductForList p = new BO.ProductForList();
-                listproducts.Add(BO.Tools.CopyFields(product,p));
+                listproducts.Add(product.CopyFields(p));
             }
             return listproducts;
         }
@@ -109,7 +109,7 @@ internal class Product : IProduct
             {
                 DO.Product pro = dal.Product.GetByID(id);
                BO.Product product = new BO.Product();
-               return BO.Tools.CopyFields(pro,product);
+               return pro.CopyFields(product);
             }
             throw new BO.NotExistException();
         }
@@ -128,7 +128,7 @@ internal class Product : IProduct
             {
                 DO.Product pro = dal.Product.GetDeletedById(id);
                 BO.Product product = new BO.Product();
-                return BO.Tools.CopyFields(pro,product);
+                return pro.CopyFields(product);
             }
             throw new BO.NotExistException();
         }
@@ -193,7 +193,7 @@ internal class Product : IProduct
             if ((product.ID > 0) && (product.Name != null) && (product.Price > 0) && (product.InStock >= 0))
             {
                 DO.Product p = new DO.Product();
-                dal.Product.Add(BO.Tools.CopyFields(product, p));
+                dal.Product.Add(product.CopyFields(p));
             }
             else
                 throw new BO.WrongDetailsException();
@@ -233,7 +233,7 @@ internal class Product : IProduct
         try
         {
             DO.Product p =new DO.Product();
-            dal.Product.Add(BO.Tools.CopyFields(newproduct,p));
+            dal.Product.Add(newproduct.CopyFields(p));
         }
         catch (Exception ex)
         {

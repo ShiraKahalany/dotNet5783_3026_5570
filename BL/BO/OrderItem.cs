@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 namespace BO;
-
+using BlApi;
 
 //מחלקה לייצוג פריט בהזמנה
 public class OrderItem
