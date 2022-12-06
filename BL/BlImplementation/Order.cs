@@ -40,7 +40,7 @@ internal class Order : IOrder
                 }
                 IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(order.ID);
 
-                list.Add(order.CopyFields(or));
+                list.Add(BO.Tools.CopyFields(order, or));
                 int? counter = 0;
                 double? sum = 0;
                 foreach (DO.OrderItem item in items)
@@ -69,7 +69,7 @@ internal class Order : IOrder
         {
             DO.Order order = dal.Order.GetByID(id);
             BO.Order or = new BO.Order();
-            or = order.CopyFields(or);
+            or = (BO.Tools.CopyFields(order, or));
             if (order.DeliveryDate != null && order.DeliveryDate < DateTime.Now)
                 or.Status = BO.OrderStatus.Delivered;
             else
@@ -93,7 +93,7 @@ internal class Order : IOrder
             {
                 sum += item.Amount * item.Price;
                 BO.OrderItem temp = new BO.OrderItem();
-                list.Add(item.CopyFields(temp));
+                list.Add(BO.Tools.CopyFields(item,temp));
             }
             or.Items = list;
             or.TotalPrice = Math.Round(sum ?? 0, 2);
@@ -115,7 +115,7 @@ internal class Order : IOrder
             order.ShipDate = DateTime.Now;
             dal.Order.Update(order);
             BO.Order or = new BO.Order();
-            or = order.CopyFields(or);
+            or = (BO.Tools.CopyFields(order, or));
             or.Status = BO.OrderStatus.Shipped;
 
             IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
@@ -126,7 +126,7 @@ internal class Order : IOrder
             {
                 sum += item.Amount * item.Price;
                 BO.OrderItem temp = new BO.OrderItem();
-                list.Add(item.CopyFields(temp));
+                list.Add(BO.Tools.CopyFields(item,temp));
             }
             or.Items = list;
             or.TotalPrice = Math.Round(sum ?? 0, 2);
@@ -150,7 +150,7 @@ internal class Order : IOrder
             order.DeliveryDate = DateTime.Now;
             dal.Order.Update(order);
             BO.Order or = new BO.Order();
-            or = order.CopyFields(or);
+            or = (BO.Tools.CopyFields(order, or));
             or.Status = BO.OrderStatus.Delivered;
 
             IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
@@ -161,7 +161,7 @@ internal class Order : IOrder
             {
                 total += item.Amount * item.Price;
                 BO.OrderItem temp = new BO.OrderItem();
-                list.Add(item.CopyFields(temp));
+                list.Add(BO.Tools.CopyFields(item,temp));
             }
             or.Items = list;
             or.TotalPrice = Math.Round(total ?? 0, 2);
@@ -214,7 +214,7 @@ internal class Order : IOrder
                 throw new BO.CanNotUpdateOrderException();
             DO.Product product = dal.Product.GetByID(productId);
             BO.Order or = new BO.Order();
-            or = order.CopyFields(or);
+            or = (BO.Tools.CopyFields(order, or));
             or.Status = BO.OrderStatus.Ordered;
             IEnumerable<DO.OrderItem>? items = dal.OrderItem.GetAll(orderIId);
             List<BO.OrderItem?> list = new List<BO.OrderItem?>();
@@ -266,7 +266,7 @@ internal class Order : IOrder
         {
             DO.Order order = dal.Order.GetByID(id);
             BO.Order or = new BO.Order();
-            or = order.CopyFields(or);
+            or = (BO.Tools.CopyFields(order, or));
             if (order.DeliveryDate != null && order.DeliveryDate < DateTime.Now)
                 or.Status = BO.OrderStatus.Delivered;
             else
@@ -294,7 +294,7 @@ internal class Order : IOrder
                     break;
                 sum += item?.Amount * item?.Price;
                 BO.OrderItem temp = new BO.OrderItem();
-                list.Add(item.CopyFields(temp));
+                list.Add(BO.Tools.CopyFields(item,temp));
             }
             or.Items = list;
             or.TotalPrice = Math.Round(sum ?? 0, 2);
@@ -336,7 +336,7 @@ internal class Order : IOrder
                 IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(order.ID);
                 if (!items.Any())
                     throw new BO.NotItemsInCartException();
-                list.Add(order.CopyFields(or));
+                list.Add(BO.Tools.CopyFields(order, or));
                 int? counter = 0;
                 double? sum = 0;
                 foreach (DO.OrderItem item in items)
@@ -385,7 +385,7 @@ internal class Order : IOrder
                 }
                 IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(order.ID);
 
-                list.Add(order.CopyFields(or));
+                list.Add((BO.Tools.CopyFields(order, or)));
                 int? counter = 0;
                 double? sum = 0;
                 foreach (DO.OrderItem item in items) { counter += item.Amount; sum += item.Price * item.Amount; }

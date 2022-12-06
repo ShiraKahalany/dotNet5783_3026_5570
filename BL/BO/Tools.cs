@@ -38,9 +38,8 @@ static class Tools
         return str;
     }
 
-
-    public static V CopyFields<T, V>(this T from, V to)
-        //מתודה להעתקת שדות עם שם זהה בין שתי ישויות שונות
+    public static V CopyFields<T, V>(T from, V to)
+    //מתודה להעתקת שדות עם שם זהה בין שתי ישויות שונות
     {
         foreach (PropertyInfo propTo in to.GetType().GetProperties())
         {
@@ -53,10 +52,6 @@ static class Tools
                 propTo.SetValue(to, value);
         }
 
-
-
-
-
         //foreach (PropertyInfo propFrom in from.GetType().GetProperties())
         //    {
 
@@ -68,5 +63,7 @@ static class Tools
         //}
         return to;
     }
+
+
 
 }
