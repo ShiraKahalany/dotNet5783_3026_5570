@@ -303,9 +303,12 @@ class Program
                 Console.WriteLine("The product is:");
                 Console.WriteLine(tmpProduct3);
                 Console.WriteLine("Do you want to restore it? 1- YES, 0- NO");
-                if(id==1)
+                int.TryParse(Console.ReadLine(), out id);
+                if (id == 1)
+                {
                     bProduct.Product.Restore(id);
                 Console.WriteLine("Restored successfully!");
+                }
                 break;
         }
     }

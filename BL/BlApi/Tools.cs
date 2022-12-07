@@ -20,7 +20,7 @@ public static class Tools
             {
                 bool? val = (bool?)prop.GetValue(t, null);
                 if (val??false)
-                    str += "\t * * * DELETED * * *: \n";
+                    str += " * * * DELETED * * *:";
                 continue;
             }
             var value = prop.GetValue(t, null);   
