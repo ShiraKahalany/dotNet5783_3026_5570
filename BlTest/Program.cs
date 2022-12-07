@@ -166,7 +166,6 @@ class Program
                 c - Add product
                 d - Remove product
                 e - Update product details
-                f - Get catalog
                 g - Get the list of deleted products (manager)
                 h - Get the complete products list (including deleted products)
                 i - Restore a deleted product (manager)");

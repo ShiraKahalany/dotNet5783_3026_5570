@@ -12,6 +12,6 @@ public class ProductForList
     public int ID { get; set; }  //מספר מזהה של המוצר
     public string? Name { get; set; }  //שם המוצר
     public double? Price { get; set; }  //מחיר המוצר
-    public Category? Category { get; set; }  //הקטגוריה אליה שייך המוצר
+    public Category Category { get; set; }  //הקטגוריה אליה שייך המוצר
     public override string ToString() => this.ToStringProperty();  //הפיכה למחרוזת
 }

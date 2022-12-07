@@ -23,7 +23,7 @@ internal class Product : IProduct
         {    
             try
             {
-                BO.ProductForList p=new BO.ProductForList();
+                BO.ProductForList? p=new BO.ProductForList();
                 listproducts.Add(product.CopyFields(p));
             }
             catch (Exception ex)
@@ -171,7 +171,7 @@ internal class Product : IProduct
                     ID = pro.ID,
                     Name = pro.Name,
                     Price = pro.Price,
-                    Category = (BO.Category?)pro.Category,
+                    Category = (BO.Category)pro.Category,
                     Amount = counter,
                     IsInStock = (counter > 0) 
                     ////path???????????
@@ -192,8 +192,8 @@ internal class Product : IProduct
         {
             if ((product.ID > 0) && (product.Name != null) && (product.Price > 0) && (product.InStock >= 0))
             {
-                DO.Product p = new DO.Product();
-                dal.Product.Add(product.CopyFields(p));
+                //DO.Product p = new DO.Product();
+                dal.Product.Add((DO.Product)Tools.CopyPropToStruct(product,typeof(DO.Product)));
             }
             else
                 throw new BO.WrongDetailsException();
@@ -232,8 +232,8 @@ internal class Product : IProduct
            throw new BO.NotExistException();
         try
         {
-            DO.Product p =new DO.Product();
-            dal.Product.Add(newproduct.CopyFields(p));
+            //DO.Product p =new DO.Product();
+            dal.Product.Update((DO.Product)Tools.CopyPropToStruct(newproduct, typeof(DO.Product)));
         }
         catch (Exception ex)
         {

@@ -8,7 +8,7 @@ public struct Product
     public int ID { get; set; }   //שזה המציין את המספר המזהה של המוצר בחנות
     public string? Name { get; set; }  //שם המוצר
     public double? Price { get; set; }  //מחיר המוצר
-    public Category? Category { get; set; }  //לאיזה קטגוריה המוצר משתייך
+    public Category Category { get; set; }  //לאיזה קטגוריה המוצר משתייך
     public int? InStock { get; set; }  //כמה פריטים מהמוצר יש במלאי
     public string? path;
     //תיאור מוצר כמחרוזת

@@ -12,7 +12,7 @@ public class Product
     public int ID { get; set; }  // מספר מזהה של המוצר
     public string? Name { get; set; }  //שם המוצר
     public double? Price { get; set; }  //מחיר המוצר
-    public Category? Category { get; set; }  //הקטגוריה אליה שייך המוצר
+    public Category Category { get; set; }  //הקטגוריה אליה שייך המוצר
     public int? InStock { get; set; }  //כמה פריטים של המוצר יש במלאי
     
     public string? path = null;  //כתובת תמונה של המוצר
