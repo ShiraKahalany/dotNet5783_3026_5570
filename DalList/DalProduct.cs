@@ -75,6 +75,7 @@ public class DalProduct : IProduct
         if (temp?.IsDeleted == false)
             throw new MyExceptionNotExist("The item is not deleted");
         DeletePermanently(item.ID);
+        item.IsDeleted = false;
         Add(item);
     }
 

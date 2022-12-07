@@ -16,9 +16,14 @@ class Program
                 a - TRACKING ORDER
                 b - GET ORDER DETAILS
                 c - GET ORDER LIST
-                d - UPDATE SHIP DATE
-                e - UPDATE DELIVERY DATE
-                f - UPDATE ORDER");
+                d - UPDATE STATUS TO SHIPPED
+                e - UPDATE STATUS TO DELIVERED
+                f - UPDATE PRODUCT IN THE ORDER
+                g - Get the list of deleted orders (manager)
+                h - Get the complete orders list (including deleted)
+                i - Restore a deleted order
+                j- Cancel an order"
+                );
         string option = Console.ReadLine();
         switch (option)
         {
@@ -61,11 +66,41 @@ class Program
                 int.TryParse(Console.ReadLine(), out amount);
                 Console.WriteLine(bOrder.Order.UpdateAmountOfProduct(orderID, productID, amount));
                 break;
+            case "g":
+                foreach (BO.OrderForList item in bOrder.Order.GetDeletedOrders())
+                {
+                    Console.WriteLine(item);
+                }
+                break;
+            case "h":
+                foreach (BO.OrderForList item in bOrder.Order.GetOrdersWithDeleted())
+                {
+                    Console.WriteLine(item);
+                }
+                break;
+            case "i":
+                Console.WriteLine("Enter the deleted order ID");
+                int.TryParse(Console.ReadLine(), out id);
+                BO.Order? tmpProduct3 = bOrder.Order.GetDeletedOrderById(id);
+                Console.WriteLine("The order details:");
+                Console.WriteLine(tmpProduct3);
+                Console.WriteLine("Do you want to restore it? 1- YES, 0- NO");
+                if (id == 1)
+                    bOrder.Order.Restore(id);
+                Console.WriteLine("Restored successfully!");
+                break;
+            case "j":
+                Console.WriteLine("Enter the product ID");
+                int.TryParse(Console.ReadLine(), out id);
+                bOrder.Order.CancelOrder(id);
+                Console.WriteLine("DELETED");
+                break;
         }
     }
 
     static void testCart(IBL bCart, BO.Cart? myCart)
     {
+        //יצירת סל
         myCart=myCart ?? new BO.Cart();
         Console.WriteLine("enter your name:");
         myCart.CustomerName = Console.ReadLine();
@@ -76,9 +111,11 @@ class Program
         myCart.Items = new List<BO.OrderItem?> { };
         int id = 0;
         string option = "";
+        int numOfProduct = 0;
         while (option != "d")
         {
-            int numOfProduct = myCart.Items.Count();
+            if(myCart.Items!=null)
+                numOfProduct=myCart.Items.Count;
             Console.WriteLine("Your cart has" + numOfProduct + "products");
             Console.WriteLine(@"Choose one of the following:
                 a - ADD  PRODUCT TO THE CART
@@ -137,7 +174,7 @@ class Program
         switch (option)
         {
             case "a":
-                foreach (var item in bProduct.Product.GetListedProducts())
+                foreach (BO.ProductForList item in bProduct.Product.GetListedProducts())
                 {
                     Console.WriteLine(item);
                 }
@@ -268,13 +305,9 @@ class Program
                 Console.WriteLine(tmpProduct3);
                 Console.WriteLine("Do you want to restore it? 1- YES, 0- NO");
                 if(id==1)
-                {
-                    tmpProduct3.IsDeleted = false;
                     bProduct.Product.Restore(id);
-                }
                 Console.WriteLine("Restored successfully!");
                 break;
-
         }
     }
     //[STAThread]
