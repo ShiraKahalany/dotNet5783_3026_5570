@@ -98,7 +98,7 @@ internal class DataSource
             ID = 576346,
             Name = "Duck bath rug",
             Price = 39.99,
-            Category = Category.Bath_room,
+            Category = Category.Bathroom,
             InStock = 198
         });
         Products.Add(
@@ -118,7 +118,7 @@ internal class DataSource
             ID = 853267,
             Name = "Children's bed",
             Price = 1999.99,
-            Category = Category.Bed_room,
+            Category = Category.Bedroom,
             InStock = 8
         });
 
@@ -162,7 +162,7 @@ internal class DataSource
             ID = 834675,
             Name = "Room mirror",
             Price = 279.99,
-            Category = Category.Bed_room,
+            Category = Category.Bedroom,
             InStock = 38
         });
         Products.Add(
@@ -182,7 +182,7 @@ internal class DataSource
             ID = 153217,
             Name = "Bath curtain",
             Price = 49.99,
-            Category = Category.Bath_room,
+            Category = Category.Bathroom,
             InStock = 82
         });
     }
