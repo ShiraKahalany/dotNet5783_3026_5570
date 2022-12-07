@@ -33,7 +33,7 @@ class Program
                 Console.WriteLine(bOrder.Order.GetOrderById(id));
                 break;
             case "c":
-                foreach (var item in bOrder.Order.GetOrders())
+                foreach (BO.OrderForList item in bOrder.Order.GetOrders())
                 {
                     Console.WriteLine(item);
                 }
@@ -66,6 +66,9 @@ class Program
 
     static void testCart(IBL bCart, BO.Cart? myCart)
     {
+        myCart=myCart ?? new BO.Cart();
+
+
         int id = 0;
         string option = "";
         while (option != "d")
