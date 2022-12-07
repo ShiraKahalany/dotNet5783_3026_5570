@@ -66,6 +66,14 @@ class Program
 
     static void testCart(IBL bCart, BO.Cart? myCart)
     {
+        myCart = myCart ?? new BO.Cart();
+        Console.WriteLine("enter your name:");
+        myCart.CustomerName = Console.ReadLine();
+        Console.WriteLine("enter your email:");
+        myCart.CustomerEmail = Console.ReadLine();
+        Console.WriteLine("enter your adress:");
+        myCart.CustomerAddress = Console.ReadLine();
+        myCart.Items = new List<BO.OrderItem?> { };
         int id = 0;
         string option = "";
         while (option != "d")
