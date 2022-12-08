@@ -183,9 +183,9 @@ class Program
                     tmpProduct.Name = Console.ReadLine();
                     Console.WriteLine(@"enter the new product catgory: 
                                         Garden-0, 
-                                        Bed_room-1, 
-                                        Living_room-2, 
-                                        Bath_room-3, 
+                                        Bedroom-1, 
+                                        Livin_groom-2, 
+                                        Bathroom-3, 
                                         Kitchen-4");
                     int.TryParse(Console.ReadLine(), out id);
                     int ctg = id;
@@ -195,13 +195,13 @@ class Program
                             tmpProduct.Category = Category.Garden;
                             break;
                         case 1:
-                            tmpProduct.Category = Category.Bed_room;
+                            tmpProduct.Category = Category.Bedroom;
                             break;
                         case 2:
                             tmpProduct.Category = Category.Living_room;
                             break;
                         case 3:
-                            tmpProduct.Category = Category.Bath_room;
+                            tmpProduct.Category = Category.Bathroom;
                             break;
                         case 4:
                             tmpProduct.Category = Category.Kitchen;
@@ -254,13 +254,13 @@ class Program
                             tmpProduct2.Category = Category.Garden;
                             break;
                         case 1:
-                            tmpProduct2.Category = Category.Bed_room;
+                            tmpProduct2.Category = Category.Bedroom;
                             break;
                         case 2:
                             tmpProduct2.Category = Category.Living_room;
                             break;
                         case 3:
-                            tmpProduct2.Category = Category.Bath_room;
+                            tmpProduct2.Category = Category.Bathroom;
                             break;
                         case 4:
                             tmpProduct2.Category = Category.Kitchen;
