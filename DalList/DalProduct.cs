@@ -63,7 +63,8 @@ public class DalProduct : IProduct
             throw new MyExceptionNotExist("The item is not exist");
         if (temp?.IsDeleted == true)
             throw new MyExceptionNotExist("The item is not exist");
-        Delete(item.ID);
+        item.IsDeleted = true;
+        DeletePermanently(item.ID);
         Add(item);
     }
 
