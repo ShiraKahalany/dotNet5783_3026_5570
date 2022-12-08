@@ -15,11 +15,7 @@ public class DalOrder : IOrder
             return item.ID;
         }
         item.ID = DataSource.Config.NextOrderNumber;
-        //Order? temp = dataSource.Orders.Find(x => x?.ID == item.ID);  //כנראה שהבדיקה  מיותרת כי את המספר מזהה יוצרים בעצמינו.
-        //if (temp != null)
-        //    throw new MyExceptionAlreadyExist("The item already exists");
         dataSource.Orders.Add(item);
-        //dataSource.Orders.Add(new Order { ID = item.ID, IsDeleted = false, CustomerAdress=item.CustomerAdress, CustomerEmail=item.CustomerEmail, CustomerName=item.CustomerName, DeliveryrDate=item.DeliveryrDate, OrderDate=item.OrderDate, shipDate=item.shipDate }); ;
         return item.ID;
     }
     public Order GetByID(int id) 
@@ -27,7 +23,7 @@ public class DalOrder : IOrder
     {
         foreach(Order? item in dataSource.Orders)
         {
-            if((item?.IsDeleted==false) && (item.GetValueOrDefault().ID == id))
+            if((item?.IsDeleted==false) && (item?.ID == id))
                 return (Order)item;
         }
         throw new MyExceptionNotExist("The item is not exist");
@@ -80,8 +76,8 @@ public class DalOrder : IOrder
         Order? temp = dataSource.Orders.Find(x => x?.ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
             throw new MyExceptionNotExist("The item is not exist");
-        if (temp?.IsDeleted == false)
-            throw new MyExceptionNotExist("The item is not deleted - cant delete permanently");
+        //if (temp?.IsDeleted == false)
+        //    throw new MyExceptionNotExist("The item is not deleted - cant delete permanently");
         dataSource.Orders.Remove(temp);
     }
     public void Delete(int id)

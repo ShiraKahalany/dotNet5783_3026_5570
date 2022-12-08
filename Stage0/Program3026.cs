@@ -12,9 +12,18 @@ namespace Targil0
     {
         static void Main(string[] args)
         {
-            Welcome3026();
-            Welcome5570();
-            Console.ReadKey();
+            //Welcome3026();
+            //Welcome5570();
+           // Console.ReadKey();
+           Random random = new Random();
+            List<int> list = new List<int>();
+            for (int i = 0; i < 10; i++)
+                list.Add(i);
+            Console.WriteLine(list[random.Next(10)]);
+            int index = list.IndexOf(0);
+            Console.WriteLine(index);
+            //Console.WriteLine(list[9]);
+
         }
         static partial void Welcome5570(); 
         private static void Welcome3026()

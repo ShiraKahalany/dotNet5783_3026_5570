@@ -24,23 +24,22 @@ internal class Order : IOrder
             try
             {
                 BO.OrderForList or = new BO.OrderForList();
-                if (order.DeliveryDate != null && order.DeliveryDate <= DateTime.Now)
+                or = order.CopyFields(or);
+                if (order.DeliveryDate != null && order.DeliveryDate < DateTime.Now)
                     or.Status = BO.OrderStatus.Delivered;
                 else
                 {
-                    if (order.DeliveryDate != null && order.ShipDate <= DateTime.Now)
+                    if (order.ShipDate != null && order.ShipDate < DateTime.Now)
                         or.Status = BO.OrderStatus.Shipped;
                     else
                     {
-                        if (order.DeliveryDate != null && order.OrderDate <= DateTime.Now)
+                        if (order.OrderDate != null && order.OrderDate < DateTime.Now)
                             or.Status = BO.OrderStatus.Ordered;
                         else
                             or.Status = BO.OrderStatus.None;
                     }
                 }
                 IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(order.ID);
-
-                list.Add(order.CopyFields(or));
                 int? counter = 0;
                 double? sum = 0;
                 foreach (DO.OrderItem item in items)
@@ -74,11 +73,11 @@ internal class Order : IOrder
                 or.Status = BO.OrderStatus.Delivered;
             else
             {
-                if (order.DeliveryDate != null && order.ShipDate < DateTime.Now)
+                if (order.ShipDate != null && order.ShipDate < DateTime.Now)
                     or.Status = BO.OrderStatus.Shipped;
                 else
                 {
-                    if (order.DeliveryDate != null && order.OrderDate < DateTime.Now)
+                    if (order.OrderDate != null && order.OrderDate < DateTime.Now)
                         or.Status = BO.OrderStatus.Ordered;
                     else
                         or.Status = BO.OrderStatus.None;
@@ -115,7 +114,7 @@ internal class Order : IOrder
             order.ShipDate = DateTime.Now;
             dal.Order.Update(order);
             BO.Order or = new BO.Order();
-            or = (order.CopyFields(or));
+            or = order.CopyFields(or);
             or.Status = BO.OrderStatus.Shipped;
 
             IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
@@ -186,12 +185,12 @@ internal class Order : IOrder
                 orderTracking.Status = BO.OrderStatus.Ordered;
                 tuples.Add(Tuple.Create(order.OrderDate, "The order was successfully received"));
             }
-            if (order.OrderDate != null && order.ShipDate <= DateTime.Now)
+            if (order.ShipDate != null && order.ShipDate <= DateTime.Now)
             {
                 orderTracking.Status = BO.OrderStatus.Shipped;
                 tuples.Add(Tuple.Create(order.ShipDate, "The order was shipped"));
             }
-            if (order.OrderDate != null && order.DeliveryDate <= DateTime.Now)
+            if (order.DeliveryDate != null && order.DeliveryDate <= DateTime.Now)
             {
                 orderTracking.Status = BO.OrderStatus.Delivered;
                 tuples.Add(Tuple.Create(order.DeliveryDate, "The order was delivered"));
@@ -271,11 +270,11 @@ internal class Order : IOrder
                 or.Status = BO.OrderStatus.Delivered;
             else
             {
-                if (order.DeliveryDate != null && order.ShipDate < DateTime.Now)
+                if (order.ShipDate != null && order.ShipDate < DateTime.Now)
                     or.Status = BO.OrderStatus.Shipped;
                 else
                 {
-                    if (order.DeliveryDate != null && order.OrderDate < DateTime.Now)
+                    if (order.OrderDate != null && order.OrderDate < DateTime.Now)
                         or.Status = BO.OrderStatus.Ordered;
                     else
                         or.Status = BO.OrderStatus.None;
@@ -319,15 +318,15 @@ internal class Order : IOrder
             try
             {
                 BO.OrderForList or = new BO.OrderForList();
-                if (order.DeliveryDate != null && order.DeliveryDate <= DateTime.Now)
+                if (order.DeliveryDate != null && order.DeliveryDate < DateTime.Now)
                     or.Status = BO.OrderStatus.Delivered;
                 else
                 {
-                    if (order.DeliveryDate != null && order.ShipDate <= DateTime.Now)
+                    if (order.ShipDate != null && order.ShipDate < DateTime.Now)
                         or.Status = BO.OrderStatus.Shipped;
                     else
                     {
-                        if (order.DeliveryDate != null && order.OrderDate <= DateTime.Now)
+                        if (order.OrderDate != null && order.OrderDate < DateTime.Now)
                             or.Status = BO.OrderStatus.Ordered;
                         else
                             or.Status = BO.OrderStatus.None;
@@ -336,7 +335,7 @@ internal class Order : IOrder
                 IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(order.ID);
                 if (!items.Any())
                     throw new BO.NotItemsInCartException();
-                list.Add(order.CopyFields(or));
+                or=order.CopyFields(or);
                 int? counter = 0;
                 double? sum = 0;
                 foreach (DO.OrderItem item in items)
@@ -385,7 +384,7 @@ internal class Order : IOrder
                 }
                 IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(order.ID);
 
-                list.Add((order.CopyFields(or)));
+                or=order.CopyFields(or);
                 int? counter = 0;
                 double? sum = 0;
                 foreach (DO.OrderItem item in items) { counter += item.Amount; sum += item.Price * item.Amount; }

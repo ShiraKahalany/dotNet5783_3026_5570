@@ -191,12 +191,12 @@ internal class DataSource
         int ordersCounter = 0;
         for(int i = 0, j=0; i < 40; j++)
         {
-            Product? product = Products[rnd.Next(Products.Count - 1)];
+            Product? product = Products[rnd.Next(10)];
             while (product?.IsDeleted == true)
-                product = Products[++j];
-            int NumOfItemsToThisOrder = rnd.Next(4);
+                product = Products[rnd.Next(10)];
+            int NumOfItemsToThisOrder = rnd.Next(5);
             Order? order = Orders[j];
-            while (order?.IsDeleted == true)
+            while ((order?.IsDeleted == true)&&(j<Orders.Count))
                 order = Orders[++j];
             ordersCounter++;
             for (int k=0; k < NumOfItemsToThisOrder; k++)
@@ -209,9 +209,9 @@ internal class DataSource
                     ProductID = product?.ID ?? 0,
                     OrderID = order?.ID ?? 0,
                     Price = product?.Price ?? 0,
-                    Amount = rnd.Next(5)
+                    Amount = rnd.Next(1,5)
                 });
-                product = Products[rnd.Next(Products.Count - 1)];
+                product = Products[rnd.Next(10)];
                 i++;
                 if (ordersCounter == 20)
                     j = 0;
