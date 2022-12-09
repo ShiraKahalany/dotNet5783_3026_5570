@@ -112,11 +112,11 @@ class Program
         int id = 0;
         string option = "";
         int numOfProduct = 0;
-        while (option != "d")
+        while (option != "d"&&option!="c")
         {
             if(myCart.Items!=null)
                 numOfProduct=myCart.Items.Count;
-            Console.WriteLine("Your cart has" + numOfProduct + "products");
+            Console.WriteLine("Your cart has " + numOfProduct + " products");
             Console.WriteLine(@"Choose one of the following:
                 a - ADD  PRODUCT TO THE CART
                 b - UPDATE AMOUNT OF  PRODUCT
@@ -355,7 +355,7 @@ class Program
             {
                 Console.WriteLine(ex);
             }
-            
+            Console.WriteLine();
         }
     }
 }

@@ -188,17 +188,17 @@ internal class DataSource
     }
     private void createOrderItems()  // יצירת פריטי-הזמנה
     {
-        int ordersCounter = 0;
-        for(int i = 0, j=0; i < 40; j++)
+        //int ordersCounter = 0;
+        for(/*int i = 0,*/int j=0; j < 20; j++)
         {
             Product? product = Products[rnd.Next(10)];
-            while (product?.IsDeleted == true)
-                product = Products[rnd.Next(10)];
-            int NumOfItemsToThisOrder = rnd.Next(5);
+            //while (product?.IsDeleted == true)
+            //    product = Products[rnd.Next(10)];
+            int NumOfItemsToThisOrder = rnd.Next(1,5);
             Order? order = Orders[j];
-            while ((order?.IsDeleted == true)&&(j<Orders.Count))
-                order = Orders[++j];
-            ordersCounter++;
+            //while ((order?.IsDeleted == true)&&(j<Orders.Count))
+            //    order = Orders[++j];
+            //ordersCounter++;
             for (int k=0; k < NumOfItemsToThisOrder; k++)
             {
             OrderItems.Add(
@@ -212,9 +212,9 @@ internal class DataSource
                     Amount = rnd.Next(1,5)
                 });
                 product = Products[rnd.Next(10)];
-                i++;
-                if (ordersCounter == 20)
-                    j = 0;
+                //i++;
+                //if (ordersCounter == 20)
+                // j = 0;
             }           
         }
     }

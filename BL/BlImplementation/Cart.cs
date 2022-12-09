@@ -30,7 +30,7 @@ internal class Cart:ICart
                     if (item.ProductID == id) //אם המוצר קיים בסל קניות
                     {
                         item.Amount+=amountToAdd;
-                        cart.TotalPrice += product.Price*amountToAdd;
+                        cart.TotalPrice = (cart.TotalPrice??0) + (product.Price*amountToAdd);
                         cart.TotalPrice = Math.Round(cart.TotalPrice??0, 2);
                         return cart;
                     }
@@ -39,7 +39,7 @@ internal class Cart:ICart
             //אם המוצר עוד לא קיים בסל הקניות
             BO.OrderItem temp = new BO.OrderItem
             {
-                ID = 0,
+                ID = cart.Items.Count+1,
                 ProductID = id,
                 Price = product.Price,
                 IsDeleted = false,
@@ -53,7 +53,8 @@ internal class Cart:ICart
                 cart.Items=new List<BO.OrderItem>();
                 cart.Items.Add(temp);
             }
-            cart.TotalPrice += product.Price;
+            cart.TotalPrice = (cart.TotalPrice??0)+ (product.Price*amountToAdd);
+            cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
             return cart;
         }
         catch (Exception ex)
@@ -78,7 +79,8 @@ internal class Cart:ICart
                    if(amount ==0)
                     {
                         cart.Items.Remove(item);
-                        cart.TotalPrice -= item.Price * item.Amount;
+                        cart.TotalPrice = cart.TotalPrice??0 - (item.Price * item.Amount);
+                        cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
                         return cart;
                     }
                     int? difference = amount - item.Amount;
@@ -87,13 +89,15 @@ internal class Cart:ICart
                         if (!(product.InStock >= difference))
                             throw new BO.NotInStockException();
                         item.Amount = amount;
-                        cart.TotalPrice += item.Price *difference;
+                        cart.TotalPrice = (cart.TotalPrice??0) + (item.Price *difference);
+                        cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
                         return cart;
                     }
                     if (item.Amount > amount)
                     {
                         item.Amount = amount;
-                        cart.TotalPrice += item.Price * difference;
+                        cart.TotalPrice = (cart.TotalPrice??0 )+ (item.Price * difference);
+                        cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
                         return cart;
                     }
                 }
@@ -151,7 +155,7 @@ internal class Cart:ICart
                 DeliveryDate = null
             };
             
-            dal.Order.Add(neworder);  //הוספת ההזמנה למאגר ההזמנות
+            int newId=dal.Order.Add(neworder);  //הוספת ההזמנה למאגר ההזמנות
 
            //עידכון מלאי המוצרים
             foreach (BO.OrderItem item in newlist)
@@ -159,10 +163,12 @@ internal class Cart:ICart
                 DO.Product product = dal.Product.GetByID(item?.ProductID ?? 0);
                 DO.OrderItem temp=new DO.OrderItem();
                 temp.OrderID=neworder.ID;
-                dal.OrderItem.Add(item.CopyFields(temp));
+                temp=item.CopyFields(temp);
+                temp.OrderID = newId;
+                dal.OrderItem.Add(temp);
                 product.InStock-=item.Amount;
             }
-            return neworder.ID;
+            return newId;
         }
         catch (Exception ex)
         {
