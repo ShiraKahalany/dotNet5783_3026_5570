@@ -11,7 +11,7 @@ public class DalProduct : IProduct
   public int Add(Product item)
         //מתחודה שמקבלת מוצר ומוסיפה אותו אל רשימת כל המוצרים
     {
-        if(item.ID >= 1000 && dataSource.Products.Find(x => x?.ID == item.ID) == null)
+        if(item.ID >= 100000 && dataSource.Products.Find(x => x?.ID == item.ID) == null)
         {
             dataSource.Products.Add(item);
             return item.ID;
@@ -63,7 +63,6 @@ public class DalProduct : IProduct
             throw new MyExceptionNotExist("The item is not exist");
         if (temp?.IsDeleted == true)
             throw new MyExceptionNotExist("The item is not exist");
-        item.IsDeleted = true;
         DeletePermanently(item.ID);
         Add(item);
     }
@@ -85,8 +84,8 @@ public class DalProduct : IProduct
         Product? temp = dataSource.Products.Find(x => x?.ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
             throw new MyExceptionNotExist("The item is not exist");
-        if (temp?.IsDeleted == false)
-            throw new MyExceptionNotExist("The item is not deleted - cant delete permanently");
+        //if (temp?.IsDeleted == false)
+        //    throw new MyExceptionNotExist("The item is not deleted - cant delete permanently");
         dataSource.Products.Remove(temp);
     }
     public void Delete(int id)

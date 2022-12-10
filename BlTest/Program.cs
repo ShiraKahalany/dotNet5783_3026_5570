@@ -159,6 +159,7 @@ class Program
     static void testProduct(IBL bProduct)
     {
         int id;
+        double price;
         Console.WriteLine(@"Test product:
                 Choose one of the following:
                 a - Get product list to the manager
@@ -198,6 +199,11 @@ class Program
                                         3: Bedroom, 
                                         4: Garden");
                 int.TryParse(Console.ReadLine(), out id);
+                while(id>4 ||id<0)
+                {
+                    Console.WriteLine("ERROR - enter again");
+                    int.TryParse(Console.ReadLine(), out id);
+                }
                 int ctg = id;
                 switch (ctg)
                 {
@@ -216,13 +222,10 @@ class Program
                     case 4:
                         tmpProduct.Category = BO.Category.Garden;
                         break;
-                    default:
-                        Console.WriteLine("ERROR");
-                        break;
                 }
                 Console.WriteLine("Enter the new product price");
-                int.TryParse(Console.ReadLine(), out id);
-                tmpProduct.Price = id;
+                double.TryParse(Console.ReadLine(), out price);
+                tmpProduct.Price = price;
                 Console.WriteLine("Enter the new product amount");
                 int.TryParse(Console.ReadLine(), out id);
                 tmpProduct.InStock = id;
@@ -231,12 +234,21 @@ class Program
             case "d":
                 Console.WriteLine("Enter the product ID");
                 int.TryParse(Console.ReadLine(), out id);
-                bProduct.Product.DeleteProduct(id);
+                int ID = id;
+                BO.Product? tmpProduct0 = bProduct.Product.GetProduct(ID);
+                Console.WriteLine("The product is:");
+                Console.WriteLine(tmpProduct0);
+                Console.WriteLine("Do you want to delete it? 1- YES, 0- NO");
+                int.TryParse(Console.ReadLine(), out id);
+                if (id == 1)
+                {
+                bProduct.Product.DeleteProduct(ID);
                 Console.WriteLine("DELETED");
+                }
                 break;
             case "e":
                 BO.Product? tmpProduct2 = new BO.Product();
-                Console.WriteLine("Enter the new product ID");
+                Console.WriteLine("Enter the product ID");
                 int.TryParse(Console.ReadLine(), out id);
                 tmpProduct2.ID = id;
                 Console.WriteLine("Enter the new product name");
@@ -248,6 +260,11 @@ class Program
                                         3: Bedroom, 
                                         4: Garden");
                 int.TryParse(Console.ReadLine(), out id);
+                while (id > 4 || id < 0)
+                {
+                    Console.WriteLine("ERROR - enter again");
+                    int.TryParse(Console.ReadLine(), out id);
+                }
                 ctg = id;
                 switch (ctg)
                 {
@@ -271,8 +288,8 @@ class Program
                         break;
                 }
                 Console.WriteLine("Enter the new product price");
-                int.TryParse(Console.ReadLine(), out id);
-                tmpProduct2.Price = id;
+                double.TryParse(Console.ReadLine(), out price);
+                tmpProduct2.Price =price;
                 Console.WriteLine("Enter the new product amount");
                 int.TryParse(Console.ReadLine(), out id);
                 tmpProduct2.InStock = id;
@@ -299,6 +316,7 @@ class Program
             case "i":
                 Console.WriteLine("Enter the deleted product ID");
                 int.TryParse(Console.ReadLine(), out id);
+                int TheID = id;
                 BO.Product? tmpProduct3 = bProduct.Product.GetDeletedById(id);
                 Console.WriteLine("The product is:");
                 Console.WriteLine(tmpProduct3);
@@ -306,7 +324,7 @@ class Program
                 int.TryParse(Console.ReadLine(), out id);
                 if (id == 1)
                 {
-                    bProduct.Product.Restore(id);
+                    bProduct.Product.Restore(TheID);
                 Console.WriteLine("Restored successfully!");
                 }
                 break;

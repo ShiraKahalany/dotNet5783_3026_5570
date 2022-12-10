@@ -144,7 +144,7 @@ internal class Order : IOrder
             DO.Order order = dal.Order.GetByID(id);
             if (order.DeliveryDate != null && order.DeliveryDate < DateTime.Now)
                 throw new BO.OrderHasDeliveredException();
-            if (order.DeliveryDate == null || order.ShipDate > DateTime.Now)
+            if (order.ShipDate == null /*|| order.ShipDate > DateTime.Now*/)
                 throw new BO.OrderHasNotShippedException();
             order.DeliveryDate = DateTime.Now;
             dal.Order.Update(order);
@@ -213,11 +213,16 @@ internal class Order : IOrder
                 throw new BO.CanNotUpdateOrderException();
             DO.Product product = dal.Product.GetByID(productId);
             BO.Order or = new BO.Order();
-            or = (order.CopyFields(or));
+            or = order.CopyFields(or);
             or.Status = BO.OrderStatus.Ordered;
             IEnumerable<DO.OrderItem>? items = dal.OrderItem.GetAll(orderIId);
             List<BO.OrderItem?> list = new List<BO.OrderItem?>();
-            if (or.Items == null) return or;
+            if (items == null) return or;
+            foreach(DO.OrderItem it in items)
+            {
+                list.Add(it.CopyFields(new BO.OrderItem()));
+            }
+
             foreach (BO.OrderItem item in or.Items)
             {
                 if (item != null && item.ProductID == productId)

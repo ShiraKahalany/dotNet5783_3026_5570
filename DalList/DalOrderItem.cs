@@ -79,8 +79,8 @@ public class DalOrderItem :IOrderItem
         OrderItem? temp = dataSource.OrderItems.Find(x => x?.ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
             throw new MyExceptionNotExist("The order is not exist");
-        if (temp?.IsDeleted == false)
-            throw new MyExceptionNotExist("The item is not deleted - cant delete permanently");
+        //if (temp?.IsDeleted == false)
+        //    throw new MyExceptionNotExist("The item is not deleted - cant delete permanently");
         dataSource.OrderItems.Remove(temp);
     }
 

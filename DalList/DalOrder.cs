@@ -53,7 +53,6 @@ public class DalOrder : IOrder
             throw new MyExceptionNotExist("The item is not exist");
         if (temp?.IsDeleted == true)
             throw new MyExceptionNotExist("The item is not exist");
-        item.IsDeleted = true;
         DeletePermanently(item.ID);
         Add(item);
     }

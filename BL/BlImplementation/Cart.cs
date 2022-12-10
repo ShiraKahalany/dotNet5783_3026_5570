@@ -124,7 +124,7 @@ internal class Cart:ICart
             if ((cart.CustomerEmail == null)||(!cart.CustomerEmail.Contains('@')))
                 throw new BO.IllegalEmailException();
             List <BO.OrderItem> newlist = new List<BO.OrderItem>();
-            if (cart.Items == null)
+            if (cart.Items==null||cart.Items.Count==0)
                 throw new BO.NotItemsInCartException();
 
             //בדיקת זמינות המוצרים במלאי
