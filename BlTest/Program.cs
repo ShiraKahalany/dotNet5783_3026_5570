@@ -15,7 +15,7 @@ class Program
                 Choose one of the following:
                 a - TRACKING ORDER
                 b - GET ORDER DETAILS
-                c - GET ORDER LIST
+                c - GET ORDERS LIST
                 d - UPDATE STATUS TO SHIPPED
                 e - UPDATE STATUS TO DELIVERED
                 f - UPDATE PRODUCT IN THE ORDER

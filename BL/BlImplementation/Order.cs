@@ -86,7 +86,6 @@ internal class Order : IOrder
 
             IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
             List<BO.OrderItem> list = new List<BO.OrderItem>();
-
             double? sum = 0;
             foreach (DO.OrderItem item in items)
             {
@@ -94,7 +93,7 @@ internal class Order : IOrder
                 BO.OrderItem temp = new BO.OrderItem();
                 list.Add(item.CopyFields(temp));
             }
-            or.Items = list;
+            or.Items = list;        
             or.TotalPrice = Math.Round(sum ?? 0, 2);
             return or;
         }
@@ -203,56 +202,93 @@ internal class Order : IOrder
             throw new Exception(ex.Message);
         }
     }
-    public BO.Order UpdateAmountOfProduct(int orderIId, int productId, int amount)
+    public BO.Order UpdateAmountOfProduct(int orderId, int productId, int amount)
     //עידכון כמות מוצר בהזמנה
     {
         try
         {
-            DO.Order order = dal.Order.GetByID(orderIId);
+            DO.Order order = dal.Order.GetByID(orderId);
             if (order.ShipDate != null && order.ShipDate < DateTime.Now)
                 throw new BO.CanNotUpdateOrderException();
             DO.Product product = dal.Product.GetByID(productId);
-            BO.Order or = new BO.Order();
-            or = order.CopyFields(or);
-            or.Status = BO.OrderStatus.Ordered;
-            IEnumerable<DO.OrderItem>? items = dal.OrderItem.GetAll(orderIId);
+            BO.Order border = new BO.Order();
+            border = order.CopyFields(border);
+            DO.OrderItem? theItem = dal.OrderItem.GetByOrderAndId(orderId, productId);
+            border.Status = BO.OrderStatus.Ordered;
+            IEnumerable<DO.OrderItem>? items = dal.OrderItem.GetAll(orderId);
             List<BO.OrderItem?> list = new List<BO.OrderItem?>();
-            if (items == null) return or;
-            foreach(DO.OrderItem it in items)
+            if (items == null||!items.Any())
+                return border;
+            int difference = 0;
+            foreach (DO.OrderItem it in items)
             {
-                list.Add(it.CopyFields(new BO.OrderItem()));
+                if (productId == it.ProductID)
+                {
+                    if (amount == 0)
+                        break;
+                    difference = amount - it.Amount??0;
+                    if (difference>0)
+                        if (product.InStock < amount)
+                            throw new BO.NotInStockException();
+                    BO.OrderItem temp = new BO.OrderItem();
+                    temp=it.CopyFields(temp);
+                    temp.Amount = amount;
+                    list.Add(temp);
+                }
+                else
+                    list.Add(it.CopyFields(new BO.OrderItem()));
             }
 
-            foreach (BO.OrderItem item in or.Items)
+            border.TotalPrice += product.Price * difference;
+            border.TotalPrice = Math.Round(border.TotalPrice ?? 0, 2);
+            border.Items= list;
+            if(amount==0)
             {
-                if (item != null && item.ProductID == productId)
-                {
-                    if (item.Amount == amount)
-                        return or;
-                    int? difference = amount - item.Amount ?? 0;
-                    if (amount == 0)
-                        or.Items.Remove(item);
-                    if ((item.Amount < amount) && (amount != 0))
-                        if (product.InStock != null && (product.InStock <= difference))
-                            throw new BO.NotInStockException();
-                    DO.OrderItem? myItem = dal.OrderItem.GetByOrderAndId(orderIId, productId); //update in the DO the amount of this orderItem
-                    dal.OrderItem.Update(new DO.OrderItem
-                    {
-                        ID = myItem?.ID ?? 0,
-                        OrderID = orderIId,
-                        ProductID = productId,
-                        Price = myItem?.Price ?? 0,
-                        Amount = amount,
-                        IsDeleted = false
-                    });
-                    item.Amount = amount; //update in the BO the amount
-                    or.TotalPrice += item.Price * difference;
-                    or.TotalPrice = Math.Round(or.TotalPrice ?? 0, 2);
-                }
-                list.Add(item);
+                dal.OrderItem.Delete(theItem?.ID ?? 0);
+                return border;
             }
-            or.Items=list;
-            return or;
+            dal.OrderItem.Update(new DO.OrderItem
+            {
+                ID = theItem?.ID ?? 0,
+                OrderID = orderId,
+                ProductID = productId,
+                Price = theItem?.Price ?? 0,
+                Amount = amount,
+                IsDeleted = false
+            });
+            return border;
+
+
+            //foreach (BO.OrderItem item in or.Items)
+            //{
+            //    if (item != null && item.ProductID == productId)
+            //    {
+            //        if (item.Amount == amount)
+            //            return or;
+            //        int? difference = amount - item.Amount ?? 0;
+            //        if (amount == 0)
+            //            or.Items.Remove(item);
+            //        if ((item.Amount < amount) && (amount != 0))
+            //            if (product.InStock != null && (product.InStock <= difference))
+            //                throw new BO.NotInStockException();
+            //        DO.OrderItem? myItem = dal.OrderItem.GetByOrderAndId(orderIId, productId); //update in the DO the amount of this orderItem
+            //        dal.OrderItem.Update(new DO.OrderItem
+            //        {
+            //            ID = myItem?.ID ?? 0,
+            //            OrderID = orderIId,
+            //            ProductID = productId,
+            //            Price = myItem?.Price ?? 0,
+            //            Amount = amount,
+            //            IsDeleted = false
+            //        });
+            //        item.Amount = amount; //update in the BO the amount
+            //        or.TotalPrice += item.Price * difference;
+            //        or.TotalPrice = Math.Round(or.TotalPrice ?? 0, 2);
+            //    }
+            //    list.Add(item);
+            //}
+            //or.Items=list;
+            //return or;
         }
         catch (Exception ex)
         {
