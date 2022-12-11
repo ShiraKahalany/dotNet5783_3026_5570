@@ -11,7 +11,7 @@ namespace BlApi;
 public static class Tools
 {
     public static string ToStringProperty<T>(this T t, string suffix = "")
-        //מתודה להפיכת ישות למחרוזת לצורך הצגת הפרטים
+    //מתודה להפיכת ישות למחרוזת לצורך הצגת הפרטים
     {
         string str = "";
         foreach (PropertyInfo prop in t.GetType().GetProperties())
@@ -19,14 +19,14 @@ public static class Tools
             if (prop.Name == "IsDeleted")
             {
                 bool? val = (bool?)prop.GetValue(t, null);
-                if (val??false)
+                if (val ?? false)
                     str += " * * * DELETED * * *:";
                 continue;
             }
-            var value = prop.GetValue(t, null);   
+            var value = prop.GetValue(t, null);
             if (value is not string && value is IEnumerable)
             {
-                str = str +"\n"+ prop.Name + ":";
+                str = str + "\n" + prop.Name + ":";
                 foreach (var item in (IEnumerable)value)
                     str += item.ToStringProperty("      ");
             }
@@ -67,33 +67,85 @@ public static class Tools
         return to;
     }
 
-
-    //public static V CopyFields<T, V>(this T from, V to)
-    ////מתודה להעתקת שדות עם שם זהה בין שתי ישויות שונות
-    //{
-    //    foreach (PropertyInfo propTo in to.GetType().GetProperties())
-    //    {
-
-    //        PropertyInfo propFrom = from.GetType().GetProperty(propTo.Name);
-    //        if (propFrom == null)
-    //            continue;
-    //        var value = propFrom.GetValue(from, null);
-    //        if (value is ValueType || value is string)
-    //            propTo.SetValue(to, value);
-    //    }
-
-
-        //foreach (PropertyInfo propFrom in from.GetType().GetProperties())
-        //    {
-
-
-
-        //        if (propTo.Name == propFrom.Name)
-        //            propTo.SetValue(from, propFrom, null);
-        //    }
-        //}
-        //return to;
+    public static BO.OrderStatus GetStatus (this DO.Order order)
+    {
+        if (order.DeliveryDate != null && order.DeliveryDate < DateTime.Now)
+            return BO.OrderStatus.Delivered;
+        else
+        {
+            if (order.ShipDate != null && order.ShipDate < DateTime.Now)
+                return BO.OrderStatus.Shipped;
+            else
+            {
+                if (order.OrderDate != null && order.OrderDate < DateTime.Now)
+                    return BO.OrderStatus.Ordered;
+                else
+                    return BO.OrderStatus.None;
+            }
+        }
     }
 
+    public static List<BO.OrderItem> GetItems(this DO.Order order,ref double totalprice)
+    {
+        DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
+        IEnumerable<DO.OrderItem?> items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == order.ID && orderItem.GetValueOrDefault().IsDeleted == false);
+        List<BO.OrderItem> list = new List<BO.OrderItem>();
+        double? sum = 0;
+        foreach (DO.OrderItem item in items)
+        {
+            sum += item.Amount * item.Price;
+            BO.OrderItem temp = new BO.OrderItem();
+            list.Add(item.CopyFields(temp));
+        }
+        totalprice = Math.Round(sum ?? 0, 2);
+        return list;
+    }
+
+
+
+    public static BO.Order OrderToBO(this DO.Order order)
+        //
+    {
+        BO.Order or = new BO.Order();
+        or = order.CopyFields(or);
+        or.Status = order.GetStatus();
+        double totalPrice = 0;
+        or.Items = order.GetItems(ref totalPrice);
+        or.TotalPrice = totalPrice;
+        return or;
+    }
+
+    public static BO.OrderForList OrderToOrderForList(this DO.Order order)
+        //
+    {
+        BO.OrderForList or = new BO.OrderForList();
+        or = order.CopyFields(or);
+        or.Status = order.GetStatus();
+        double totalPrice = 0;
+        int amountOfItems = 0;
+        order.CalcPriceAndAmount(ref totalPrice, ref amountOfItems);
+        or.TotalPrice = totalPrice;
+        or.AmountOfItems = amountOfItems;
+        return or;
+    }
+
+    public static void CalcPriceAndAmount(this DO.Order order, ref double totalPrice, ref int amountOfItems)
+    {
+        DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
+        IEnumerable<DO.OrderItem?> items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == order.ID && orderItem.GetValueOrDefault().IsDeleted == false);
+        foreach (DO.OrderItem item in items)
+        {
+            amountOfItems += item.Amount??0;
+            totalPrice += item.Price * item.Amount ??0;
+        }
+        totalPrice = Math.Round(totalPrice, 2);
+    }
+
+
+
+
+}
+
+    
 
 

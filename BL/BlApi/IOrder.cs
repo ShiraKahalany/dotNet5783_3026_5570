@@ -24,4 +24,6 @@ public interface IOrder
     public BO.OrderTracking? FollowOrder (int id);  //מעקב הזמנה, הצגת השלבים של ההזמנה והתאריכים
     public BO.Order? UpdateAmountOfProduct (int orderId,int productId, int amount);   //עידכון כמות של מוצר בהזמנה
     public void CancelOrder(int id); //ביטול הזמנה
+
+   // public BO.Order GetOrder(Func<BO.Order?, bool> filter);
 }
