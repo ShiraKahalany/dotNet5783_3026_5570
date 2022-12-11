@@ -88,7 +88,7 @@ internal class DataSource
             Name = "Kitchen rug",
             Price = 79.99,
             Category = Category.Kitchen,
-            InStock = 0
+            InStock = 3
         });
 
         Products.Add(

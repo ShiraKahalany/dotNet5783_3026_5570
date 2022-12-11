@@ -162,11 +162,12 @@ internal class Cart:ICart
             {
                 DO.Product product = dal.Product.GetByID(item?.ProductID ?? 0);
                 DO.OrderItem temp=new DO.OrderItem();
-                temp.OrderID=neworder.ID;
-                temp=item.CopyFields(temp);
+                temp.ProductID=product.ID;
+                temp = (DO.OrderItem)Tools.CopyPropToStruct(item, typeof(DO.OrderItem));
                 temp.OrderID = newId;
                 dal.OrderItem.Add(temp);
                 product.InStock-=item.Amount;
+                dal.Product.Update(product);
             }
             return newId;
         }

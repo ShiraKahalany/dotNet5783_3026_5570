@@ -304,7 +304,7 @@ internal class Order : IOrder
             throw new BO.IllegalIdException();
         try
         {
-            DO.Order order = dal.Order.GetByID(id);
+            DO.Order order = dal.Order.GetDeletedById(id);
             BO.Order or = new BO.Order();
             or = (order.CopyFields(or));
             if (order.DeliveryDate != null && order.DeliveryDate < DateTime.Now)

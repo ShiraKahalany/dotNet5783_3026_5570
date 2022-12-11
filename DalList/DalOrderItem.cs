@@ -123,8 +123,8 @@ public class DalOrderItem :IOrderItem
         Order? order = dataSource.Orders.Find(x => x.GetValueOrDefault().ID == id);
         if (order == null)
             throw new MyExceptionNotExist("The order is not exist");
-        if(order?.IsDeleted==true)
-            throw new MyExceptionNotExist("The order is deleted");
+        //if(order?.IsDeleted==true)
+        //    throw new MyExceptionNotExist("The order is deleted");
         List<OrderItem>? listGet = new List<OrderItem>();
         foreach (OrderItem? item in dataSource.OrderItems)
         {

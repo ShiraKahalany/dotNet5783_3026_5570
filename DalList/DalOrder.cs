@@ -33,9 +33,9 @@ public class DalOrder : IOrder
     {
         foreach (Order? item in dataSource.Orders)
         {
-            if (item == null)
-                throw new MyExceptionNotExist("The item is not exist");
-            if (item?.ID == id)
+            //if (item == null)
+            //    throw new MyExceptionNotExist("The item is not exist");
+            if (item != null && item?.ID == id)
             {
                 if (item?.IsDeleted == false)
                     throw new MyExceptionNotExist("The item is not deleted");
