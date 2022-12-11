@@ -163,8 +163,8 @@ internal class Product : IProduct
             if (id > 0)
             {
                 DO.Product pro = dal.Product.GetByID(id);
-                int counter = 0;
-                foreach(BO.OrderItem? item in cart.Items) { if(item?.ProductID==id) counter++; }
+                int? counter = 0;
+                foreach(BO.OrderItem? item in cart.Items) { if(item?.ProductID==id) counter=item?.Amount; }
                 BO.ProductItem prod = new BO.ProductItem
                 {
                     IsDeleted = pro.IsDeleted,
