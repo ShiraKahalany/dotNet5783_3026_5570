@@ -15,12 +15,13 @@ public interface ICrud<T> where T : struct
   void DeletePermanently(int id);
     void Restore(T item);
 
-    //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
-    IEnumerable<T> GetAll();  //קבלת כל העצמים הקיימים מישות מסויימת
+    IEnumerable<T?> GetAll();  //קבלת כל העצמים הקיימים מישות מסויימת
 
-    IEnumerable<T> GetAllWithDeleted();  //קבלת כל העצמים הקיימים מישות מסויימת, כולל אלו שנמחקו בעבר
+    IEnumerable<T?> GetAllWithDeleted();  //קבלת כל העצמים הקיימים מישות מסויימת, כולל אלו שנמחקו בעבר
 
-    IEnumerable<T> GetAllDeleted();
+    IEnumerable<T?> GetAllDeleted();
+    IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
+    T? GetTByFilter(Func<T?, bool> filter);
 
 
 }

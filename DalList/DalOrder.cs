@@ -93,10 +93,10 @@ public class DalOrder : IOrder
     }
 
     //IEnumerable<T?> GetAll(Func<T?, bool>? filter = null);
-   public IEnumerable<Order> GetAll()
+   public IEnumerable<Order?> GetAll()
         //מתודה שמחזירה את רשימת כל ההזמנות
     {
-        List<Order> listGet = new List<Order>();
+        List<Order?> listGet = new List<Order?>();
         foreach (Order? item in dataSource.Orders)
         {
             if(item!=null && item?.IsDeleted==false)
@@ -105,10 +105,10 @@ public class DalOrder : IOrder
         return listGet;
     }
 
-   public IEnumerable<Order> GetAllWithDeleted()
+   public IEnumerable<Order?> GetAllWithDeleted()
         //מתודה המחזירה את רשימת כל ההזמנות, כולל אלו שנמחקו
     {
-        List<Order> listGet = new List<Order>();
+        List<Order?> listGet = new List<Order?>();
         foreach (Order? item in dataSource.Orders)
         {
             if(item != null)
@@ -118,13 +118,36 @@ public class DalOrder : IOrder
     }
 
 
-    public IEnumerable<Order> GetAllDeleted()
+    public IEnumerable<Order?> GetAllDeleted()
     {
-        List<Order> listGet = new List<Order>();
+        List<Order?> listGet = new List<Order?>();
         foreach (Order? item in dataSource.Orders)
         {
             if (item != null && item?.IsDeleted == true)
                 listGet.Add((Order)item); }
         return listGet;
     }
+
+    public IEnumerable<Order?> GetAll(Func<Order?, bool>? filter = null)
+    {
+        if(filter == null)
+            return dataSource.Orders;
+        var ieorders=from order in dataSource.Orders
+                    where filter(order) ==true 
+                    select order;
+        if (!ieorders.Any())
+            throw new Exception("Not Exist");
+        return ieorders;
+    }
+
+    public Order? GetTByFilter(Func<Order?, bool> filter)
+    {
+        var x = (from order in dataSource.Orders
+                where filter(order) == true
+                select order).First();
+        if (x == null)
+            throw new Exception("Not Exist");
+      return x;
+    }
+
 }
