@@ -13,7 +13,7 @@ public class ProductItem
     public string? Name { get; set; }  //שם המוצר
     public double? Price { get; set; }  //מחיר המוצר
     public Category Category { get; set; }  //הקטגוריה של המוצר
-    public int? Amount { get; set; }  //כמה יש מהמוצר
+    public int? Amount { get; set; }  //כמה יש מהמוצר בסל
     public bool? IsInStock { get; set; }  //האם המוצר קיים במלאי
     public override string ToString() => this.ToStringProperty();  //הפיכה למחרוזת
 }

@@ -124,7 +124,8 @@ class Program
                 a - ADD  PRODUCT TO THE CART
                 b - UPDATE AMOUNT OF  PRODUCT
                 c - APPROVE ORDER
-                d - BACK TO THE MAIN MENU
+                d- GET DETAILS OF PRODUCT IN THE CART 
+                e - BACK TO THE MAIN MENU
                 ");
             option = Console.ReadLine();
             switch (option)
@@ -151,6 +152,11 @@ class Program
                     Console.WriteLine("Your order id is: " + id);
                     break;
                 case "d":
+                    Console.WriteLine("Enter the product ID:");
+                    int.TryParse(Console.ReadLine(), out id);
+                    Console.WriteLine(bCart.Product.GetProduct(id,myCart));
+                    break;
+                case "e":
                     break;
                 default:
                     Console.WriteLine("ERROR");
