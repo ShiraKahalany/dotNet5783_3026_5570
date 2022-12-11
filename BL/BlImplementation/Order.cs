@@ -15,7 +15,7 @@ internal class Order : IOrder
     public List<BO.OrderForList?>? GetOrders()
     //מתודה לקבלת רשימת כל ההזמנות התקפות
     {
-        IEnumerable<DO.Order?> listor = dal.Order.GetAll((DO.Order? order)=> order.GetValueOrDefault().IsDeleted);
+        IEnumerable<DO.Order?> listor = dal.Order.GetAll((DO.Order? order)=> order.GetValueOrDefault().IsDeleted==false);
         if (!listor.Any())
             throw new BO.NoItemsException();
         List<BO.OrderForList?> list = new List<BO.OrderForList?>();
@@ -84,7 +84,7 @@ internal class Order : IOrder
                 }
             }
 
-            IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
+            IEnumerable<DO.OrderItem?> items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID==order.ID&& orderItem.GetValueOrDefault().IsDeleted==false);
             List<BO.OrderItem> list = new List<BO.OrderItem>();
             double? sum = 0;
             foreach (DO.OrderItem item in items)
