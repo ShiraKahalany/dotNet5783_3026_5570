@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Carts\" />
     <Folder Include="OrderItems\" />
     <Folder Include="Orders\" />
   </ItemGroup>

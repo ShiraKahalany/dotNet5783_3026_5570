@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BlApi;
-using PL.Products;
 
-namespace PL
+namespace PL.Products
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ProductListWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProductListWindow : Window
     {
-        private IBL bl= BLFactory.GetBL();
-        public MainWindow()
+        public ProductListWindow()
         {
             InitializeComponent();
         }
-
-        private void showCatalog_Click(object sender, RoutedEventArgs e) => new ProductListWindow().Show();
     }
 }

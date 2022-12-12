@@ -37,8 +37,8 @@ internal class Order : IOrder
             throw new BO.IllegalIdException();
         try
         {
-            DO.Order order = dal.Order.GetByID(id);
-            return order.OrderToBO();
+            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false) ;
+            return order?.OrderToBO();
         }
         catch (Exception ex)
         {
@@ -51,28 +51,13 @@ internal class Order : IOrder
     {
         try
         {
-            DO.Order order = dal.Order.GetByID(id);
+            DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
             if (order.ShipDate != null && order.ShipDate < DateTime.Now)
                 throw new BO.OrderHasShippedException();
             order.ShipDate = DateTime.Now;
-            dal.Order.Update(order);
-            BO.Order or = new BO.Order();
-            or = order.CopyFields(or);
-            or.Status = BO.OrderStatus.Shipped;
+            dal.Order.Update((DO.Order)order);
 
-            IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
-            List<BO.OrderItem> list = new List<BO.OrderItem>();
-
-            double? sum = 0;
-            foreach (DO.OrderItem item in items)
-            {
-                sum += item.Amount * item.Price;
-                BO.OrderItem temp = new BO.OrderItem();
-                list.Add(item.CopyFields(temp));
-            }
-            or.Items = list;
-            or.TotalPrice = Math.Round(sum ?? 0, 2);
-            return or;
+            return order.OrderToBO();
         }
         catch (Exception ex)
         {
@@ -84,30 +69,14 @@ internal class Order : IOrder
     {
         try
         {
-            DO.Order order = dal.Order.GetByID(id);
+            DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
             if (order.DeliveryDate != null && order.DeliveryDate < DateTime.Now)
                 throw new BO.OrderHasDeliveredException();
-            if (order.ShipDate == null /*|| order.ShipDate > DateTime.Now*/)
+            if (order.ShipDate == null)
                 throw new BO.OrderHasNotShippedException();
             order.DeliveryDate = DateTime.Now;
-            dal.Order.Update(order);
-            BO.Order or = new BO.Order();
-            or = (order.CopyFields(or));
-            or.Status = BO.OrderStatus.Delivered;
-
-            IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
-            List<BO.OrderItem> list = new List<BO.OrderItem>();
-
-            double? total = 0;
-            foreach (DO.OrderItem item in items)
-            {
-                total += item.Amount * item.Price;
-                BO.OrderItem temp = new BO.OrderItem();
-                list.Add(item.CopyFields(temp));
-            }
-            or.Items = list;
-            or.TotalPrice = Math.Round(total ?? 0, 2);
-            return or;
+            dal.Order.Update((DO.Order)order);
+            return order.OrderToBO();
         }
         catch (Exception ex)
         {
@@ -119,24 +88,24 @@ internal class Order : IOrder
     {
         try
         {
-            DO.Order order = dal.Order.GetByID(id);
+            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
             BO.OrderTracking orderTracking = new BO.OrderTracking();
-            orderTracking.ID = order.ID;
+            orderTracking.ID = order.GetValueOrDefault().ID;
             List<Tuple<DateTime?, string>?>? tuples = new List<Tuple<DateTime?, string>?>();
-            if (order.OrderDate != null && order.OrderDate <= DateTime.Now)
+            if (order?.OrderDate != null && order?.OrderDate <= DateTime.Now)
             {
                 orderTracking.Status = BO.OrderStatus.Ordered;
-                tuples.Add(Tuple.Create(order.OrderDate, "The order was successfully received"));
+                tuples.Add(Tuple.Create(order?.OrderDate, "The order was successfully received"));
             }
-            if (order.ShipDate != null && order.ShipDate <= DateTime.Now)
+            if (order?.ShipDate != null && order?.ShipDate <= DateTime.Now)
             {
                 orderTracking.Status = BO.OrderStatus.Shipped;
-                tuples.Add(Tuple.Create(order.ShipDate, "The order was shipped"));
+                tuples.Add(Tuple.Create(order?.ShipDate, "The order was shipped"));
             }
-            if (order.DeliveryDate != null && order.DeliveryDate <= DateTime.Now)
+            if (order?.DeliveryDate != null && order?.DeliveryDate <= DateTime.Now)
             {
                 orderTracking.Status = BO.OrderStatus.Delivered;
-                tuples.Add(Tuple.Create(order.DeliveryDate, "The order was delivered"));
+                tuples.Add(Tuple.Create(order?.DeliveryDate, "The order was delivered"));
             }
             orderTracking.Tracking = tuples;
             return orderTracking;
@@ -151,15 +120,15 @@ internal class Order : IOrder
     {
         try
         {
-            DO.Order order = dal.Order.GetByID(orderId);
-            if (order.ShipDate != null && order.ShipDate < DateTime.Now)
+            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == orderId) && order.GetValueOrDefault().IsDeleted==false);
+            if (order?.ShipDate != null && order?.ShipDate < DateTime.Now)
                 throw new BO.CanNotUpdateOrderException();
-            DO.Product product = dal.Product.GetByID(productId);
+            DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == productId) && product.GetValueOrDefault().IsDeleted == false);
             BO.Order border = new BO.Order();
             border = order.CopyFields(border);
-            DO.OrderItem? theItem = dal.OrderItem.GetByOrderAndId(orderId, productId);
+            DO.OrderItem? theItem = dal.OrderItem.GetTByFilter((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == orderId && orderItem.GetValueOrDefault().IsDeleted == false &&orderItem.GetValueOrDefault().ProductID ==productId);
             border.Status = BO.OrderStatus.Ordered;
-            IEnumerable<DO.OrderItem>? items = dal.OrderItem.GetAll(orderId);
+            IEnumerable<DO.OrderItem?>? items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == order?.ID && orderItem.GetValueOrDefault().IsDeleted == false);
             List<BO.OrderItem?> list = new List<BO.OrderItem?>();
             if (items == null || !items.Any())
                 return border;
@@ -172,7 +141,7 @@ internal class Order : IOrder
                         break;
                     difference = amount - it.Amount ?? 0;
                     if (difference > 0)
-                        if (product.InStock < amount)
+                        if (product?.InStock < amount)
                             throw new BO.NotInStockException();
                     BO.OrderItem temp = new BO.OrderItem();
                     temp = it.CopyFields(temp);
@@ -183,7 +152,7 @@ internal class Order : IOrder
                     list.Add(it.CopyFields(new BO.OrderItem()));
             }
 
-            border.TotalPrice += product.Price * difference;
+            border.TotalPrice += product?.Price * difference;
             border.TotalPrice = Math.Round(border.TotalPrice ?? 0, 2);
             border.Items = list;
             if (amount == 0)
@@ -212,31 +181,12 @@ internal class Order : IOrder
     //קבלת הזמנה שנמחקה, לפי מזהה הזמנה
     {
 
-        if (id <= 1000)
+        if (id < 1000)
             throw new BO.IllegalIdException();
         try
         {
-            DO.Order order = dal.Order.GetDeletedById(id);
-            BO.Order or = new BO.Order();
-            or = (order.CopyFields(or));
-            or.Status = order.GetStatus();
-            IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(id);
-            if (items == null || !items.Any())
-                throw new BO.NotItemsInCartException();
-            List<BO.OrderItem> list = new List<BO.OrderItem>();
-
-            double? sum = 0;
-            foreach (DO.OrderItem? item in items)
-            {
-                if (item == null)
-                    break;
-                sum += item?.Amount * item?.Price;
-                BO.OrderItem temp = new BO.OrderItem();
-                list.Add(item.CopyFields(temp));
-            }
-            or.Items = list;
-            or.TotalPrice = Math.Round(sum ?? 0, 2);
-            return or;
+            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order)=>(order.GetValueOrDefault().ID ==id) && order.GetValueOrDefault().IsDeleted);
+            return order?.OrderToBO();
         }
         catch (Exception ex)
         {
@@ -246,72 +196,37 @@ internal class Order : IOrder
     public List<BO.OrderForList?>? GetDeletedOrders()
     //קבלת רשימת כל ההזמנות המחוקות
     {
-        IEnumerable<DO.Order> listor = dal.Order.GetAllDeleted();
+        IEnumerable<DO.Order?> listor = dal.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted);
         if (!listor.Any())
             throw new BO.NoItemsException();
-        List<BO.OrderForList> list = new List<BO.OrderForList>();
-        if (!listor.Any())
-            return null;
-        foreach (DO.Order order in listor)
+        try
         {
-            try
-            {
-                BO.OrderForList or = new BO.OrderForList();
-                or.Status = order.GetStatus();
-                IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(order.ID);
-                if (!items.Any())
-                    throw new BO.NotItemsInCartException();
-                or = order.CopyFields(or);
-                int? counter = 0;
-                double? sum = 0;
-                foreach (DO.OrderItem item in items)
-                {
-                    counter += item.Amount;
-                    sum += item.Price * item.Amount;
-                }
-                or.TotalPrice = Math.Round(sum ?? 0, 2);
-                or.AmountOfItems = counter;
-                list.Add(or);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-
+            var x = from DO.Order order in listor
+                    select order.OrderToOrderForList();
+            return x.ToList();
         }
-        return list;
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 
     public List<BO.OrderForList?> GetOrdersWithDeleted()
     //קבלת רשימת כל ההזמנות - כולל אלו שנמחקו
     {
-        IEnumerable<DO.Order> listor = dal.Order.GetAllWithDeleted();
+        IEnumerable<DO.Order?> listor = dal.Order.GetAll(null);
         if (!listor.Any())
             throw new BO.NoItemsException();
-        List<BO.OrderForList> list = new List<BO.OrderForList>();
-        foreach (DO.Order order in listor)
+        try
         {
-            try
-            {
-                BO.OrderForList or = new BO.OrderForList();
-                or.Status = order.GetStatus();
-                IEnumerable<DO.OrderItem> items = dal.OrderItem.GetAll(order.ID);
-
-                or = order.CopyFields(or);
-                int? counter = 0;
-                double? sum = 0;
-                foreach (DO.OrderItem item in items) { counter += item.Amount; sum += item.Price * item.Amount; }
-                or.TotalPrice = Math.Round(sum ?? 0, 2);
-                or.AmountOfItems = counter;
-                list.Add(or);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-
+            var x = from DO.Order order in listor
+                    select order.OrderToOrderForList();
+            return x.ToList();
         }
-        return list;
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 
     public void Restore(int id)
@@ -321,8 +236,8 @@ internal class Order : IOrder
             throw new BO.NotExistException();
         try
         {
-            DO.Order o = dal.Order.GetDeletedById(id);
-            dal.Order.Restore(o);
+            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted);
+            dal.Order.Restore((DO.Order)order);
         }
         catch (Exception ex)
         {
@@ -333,11 +248,12 @@ internal class Order : IOrder
     public void CancelOrder(int id)
     //מתודה לביטול הזמנה
     {
-        DO.Order order = dal.Order.GetByID(id);
-        if (order.ShipDate != null && order.ShipDate < DateTime.Now)
+        //DO.Order order = dal.Order.GetByID(id);
+        DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false) ;
+        if (order?.ShipDate != null && order?.ShipDate < DateTime.Now)
             throw new BO.CanNotUpdateOrderException();
         TimeSpan twentyfourhours = new TimeSpan(24, 00, 00);
-        if ((order.OrderDate != null) && (DateTime.Now - order.OrderDate) < twentyfourhours)
+        if ((order?.OrderDate != null) && (DateTime.Now - order?.OrderDate) < twentyfourhours)
             dal.Order.Delete(id);
         else
             throw new BO.CantCancelOrderException();

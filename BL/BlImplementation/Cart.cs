@@ -18,19 +18,19 @@ internal class Cart:ICart
             throw new ArgumentNullException();
         try
         {
-            DO.Product product = dal.Product.GetByID(id);
-            if (product.InStock < amountToAdd)
+            DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == id) && product.GetValueOrDefault().IsDeleted == false);
+            if (product?.InStock < amountToAdd)
                 throw new BO.NotInStockException();
             if(cart.Items!=null)
             {
-                foreach (BO.OrderItem? item in cart.Items)
+                foreach (BO.OrderItem? item in cart.Items) ////////////////////////////nurit
                 {
                     if (item == null)
                         break;
                     if (item.ProductID == id) //אם המוצר קיים בסל קניות
                     {
                         item.Amount+=amountToAdd;
-                        cart.TotalPrice = (cart.TotalPrice??0) + (product.Price*amountToAdd);
+                        cart.TotalPrice = (cart.TotalPrice??0) + (product?.Price*amountToAdd);
                         cart.TotalPrice = Math.Round(cart.TotalPrice??0, 2);
                         return cart;
                     }
@@ -41,7 +41,7 @@ internal class Cart:ICart
             {
                 ID = cart.Items.Count+1,
                 ProductID = id,
-                Price = product.Price,
+                Price = product?.Price,
                 IsDeleted = false,
                 Amount = amountToAdd
             };
@@ -53,7 +53,7 @@ internal class Cart:ICart
                 cart.Items=new List<BO.OrderItem>();
                 cart.Items.Add(temp);
             }
-            cart.TotalPrice = (cart.TotalPrice??0)+ (product.Price*amountToAdd);
+            cart.TotalPrice = (cart.TotalPrice??0)+ (product?.Price*amountToAdd);
             cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
             return cart;
         }
@@ -68,7 +68,7 @@ internal class Cart:ICart
     {
         try
         {
-            DO.Product product = dal.Product.GetByID(id);
+            DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == id) && product.GetValueOrDefault().IsDeleted == false);
             if (cart.Items == null)
                 throw new BO.NotExistException();
 
@@ -86,7 +86,7 @@ internal class Cart:ICart
                     int? difference = amount - item.Amount;
                     if (item.Amount < amount)
                     {
-                        if (!(product.InStock >= difference))
+                        if (!(product?.InStock >= difference))
                             throw new BO.NotInStockException();
                         item.Amount = amount;
                         cart.TotalPrice = (cart.TotalPrice??0) + (item.Price *difference);
@@ -130,10 +130,10 @@ internal class Cart:ICart
             //בדיקת זמינות המוצרים במלאי
             foreach (BO.OrderItem item in cart.Items)
             {
-                DO.Product product = dal.Product.GetByID(item?.ProductID??0);
+                DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
                 if (item == null)
                     break;
-                if(product.InStock<=item.Amount)
+                if(product?.InStock<=item.Amount)
                     throw new BO.NotInStockException();
                 if (item.Amount <= 0)
                     throw new BO.AmountNotPossitiveException();
@@ -160,14 +160,14 @@ internal class Cart:ICart
            //עידכון מלאי המוצרים
             foreach (BO.OrderItem item in newlist)
             {
-                DO.Product product = dal.Product.GetByID(item?.ProductID ?? 0);
+                DO.Product product = (DO.Product)dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
                 DO.OrderItem temp=new DO.OrderItem();
                 temp.ProductID=product.ID;
                 temp = (DO.OrderItem)Tools.CopyPropToStruct(item, typeof(DO.OrderItem));
                 temp.OrderID = newId;
                 dal.OrderItem.Add(temp);
-                product.InStock-=item.Amount;
-                dal.Product.Update(product);
+                product.InStock = product.InStock -item.Amount;
+                dal.Product.Update((DO.Product)product);
             }
             return newId;
         }
@@ -177,26 +177,4 @@ internal class Cart:ICart
         }
     }
 
-
-
-
-    //public void Restore(int id)
-    //{
-    //    if (id <= 0)
-    //        throw new BO.NotExistException();
-    //    try
-    //    {
-
-    //        BO.Cart cart= new BO.Cart();
-    //        cart.IsDeleted
-
-
-    //        DO.Order c = dal.Order.GetDeletedById(id);
-    //        dal.Cart.Restore(c);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        throw new Exception(ex.Message);
-    //    }
-    //}
 }

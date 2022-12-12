@@ -15,7 +15,7 @@ internal class Product : IProduct
     public IEnumerable<BO.ProductForList> GetListedProducts() 
      //מתודה לקבלת רשימת כל המוצרים התקפים
     {
-        IEnumerable<DO.Product> listpro = dal.Product.GetAll();
+        IEnumerable<DO.Product?> listpro = dal.Product.GetAll(null);
         if (!listpro.Any())
             throw new BO.NoItemsException();
         List<BO.ProductForList> listproducts = new List<BO.ProductForList> ();
@@ -37,7 +37,7 @@ internal class Product : IProduct
     public IEnumerable<BO.Product> GetProducts()
     //עבור מנהל ועבור קטלוג קונה .בקשת רשימת מוצרים
     {
-        IEnumerable<DO.Product> listpro = dal.Product.GetAll();
+        IEnumerable<DO.Product?> listpro = dal.Product.GetAll((DO.Product? product) => product.GetValueOrDefault().IsDeleted == false);
         if (!listpro.Any())
             throw new BO.NoItemsException();
         List<BO.Product> listproducts = new List<BO.Product>();
@@ -60,7 +60,7 @@ internal class Product : IProduct
     {
         try
         {
-            IEnumerable<DO.Product> listpro = dal.Product.GetAllWithDeleted();
+            IEnumerable<DO.Product?> listpro = dal.Product.GetAll(null);
             if (!listpro.Any())
                 throw new BO.NoItemsException();
             List<BO.ProductForList> listproducts = new List<BO.ProductForList>();
@@ -82,7 +82,7 @@ internal class Product : IProduct
     {
         try
         {
-            IEnumerable<DO.Product> listpro = dal.Product.GetAllDeleted();
+            IEnumerable<DO.Product?> listpro = dal.Product.GetAll((DO.Product? product) => product.GetValueOrDefault().IsDeleted);
             if (!listpro.Any())
                 throw new BO.NoItemsException();
             List<BO.ProductForList> listproducts = new List<BO.ProductForList>();
@@ -107,7 +107,7 @@ internal class Product : IProduct
         {
             if (id > 0)
             {
-                DO.Product pro = dal.Product.GetByID(id);
+                DO.Product? pro = dal.Product.GetTByFilter((DO.Product? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().ID ==id));
                BO.Product product = new BO.Product();
                return pro.CopyFields(product);
             }
@@ -126,7 +126,7 @@ internal class Product : IProduct
         {
             if (id > 0)
             {
-                DO.Product pro = dal.Product.GetDeletedById(id);
+                DO.Product? pro = dal.Product.GetTByFilter((DO.Product? product) => product.GetValueOrDefault().IsDeleted && (product.GetValueOrDefault().ID == id));
                 BO.Product product = new BO.Product();
                 return pro.CopyFields(product);
             }
@@ -145,8 +145,8 @@ internal class Product : IProduct
             throw new BO.NotExistException();
         try
         {
-            DO.Product p = dal.Product.GetDeletedById(id);
-            dal.Product.Restore(p);
+            DO.Product? p = dal.Product.GetTByFilter((DO.Product? product) => product.GetValueOrDefault().IsDeleted && (product.GetValueOrDefault().ID == id));
+            dal.Product.Restore((DO.Product)p);
         }
         catch (Exception ex)
         {
@@ -162,16 +162,16 @@ internal class Product : IProduct
         {
             if (id > 0)
             {
-                DO.Product pro = dal.Product.GetByID(id);
+                DO.Product? pro = dal.Product.GetTByFilter((DO.Product? product) => product.GetValueOrDefault().IsDeleted ==false && (product.GetValueOrDefault().ID == id)); ;
                 int? counter = 0;
                 foreach(BO.OrderItem? item in cart.Items) { if(item?.ProductID==id) counter=item?.Amount; }
                 BO.ProductItem prod = new BO.ProductItem
                 {
-                    IsDeleted = pro.IsDeleted,
-                    ID = pro.ID,
-                    Name = pro.Name,
-                    Price = pro.Price,
-                    Category = (BO.Category)pro.Category,
+                    IsDeleted = pro.GetValueOrDefault().IsDeleted,
+                    ID = pro.GetValueOrDefault().ID,
+                    Name = pro.GetValueOrDefault().Name,
+                    Price = pro?.Price,
+                    Category = (BO.Category)pro?.Category,
                     Amount = counter,
                     IsInStock = (counter > 0) 
                     ////path???????????
@@ -211,7 +211,7 @@ internal class Product : IProduct
         {
             if(id<0)
                 throw new BO.NotExistException();
-            IEnumerable<DO.Order> lst = dal.Order.GetAll();
+            IEnumerable<DO.Order?> lst = dal.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false);
             foreach (DO.Order order in lst)
             {
                 if(dal.OrderItem.GetByOrderAndId(order.ID, id)!=null)
