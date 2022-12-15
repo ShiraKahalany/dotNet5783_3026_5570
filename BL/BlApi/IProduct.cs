@@ -11,11 +11,11 @@ public interface IProduct
 {
     public IEnumerable<BO.ProductForList?> GetListedProducts(); //בקשת רשימת מוצרים (קטלוג) עבור המנהל או הלקוח
 
-    public IEnumerable<BO.ProductForList?>? GetListedProductsWithDeleted();  // קבלת רשימת כל המוצרים שהיו או כעת בחנות
-    public IEnumerable<BO.ProductForList?>? GetListedDeletedProducts();  //קבלת רשימת כל המוצרים שנמחקו
-    public BO.Product? GetProduct(int id); //בקשת פרטי מוצר (עבור מנהל
+    //public IEnumerable<BO.ProductForList?>? GetListedProductsWithDeleted();  // קבלת רשימת כל המוצרים שהיו או כעת בחנות
+    //public IEnumerable<BO.ProductForList?>? GetListedDeletedProducts();  //קבלת רשימת כל המוצרים שנמחקו
+    //public BO.Product? GetProduct(int id); //בקשת פרטי מוצר (עבור מנהל
 
-    public BO.Product? GetDeletedById(int id); //בקשת פרטי מוצר מחוק (עבור מנהל
+    //public BO.Product? GetDeletedById(int id); //בקשת פרטי מוצר מחוק (עבור מנהל
     public void Restore(int id); //שיחזור מוצר מחוק (מנהל בלבד
     public BO.ProductItem? GetProduct(int id, BO.Cart? cart); // בקשת פרטי מוצר (עבור הקונה
     public void AddProduct(BO.Product? product); //הוספת מוצר (עבור מנהל

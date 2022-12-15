@@ -23,36 +23,29 @@ internal class Cart:ICart
                 throw new BO.NotInStockException();
             if(cart.Items!=null)
             {
-                foreach (BO.OrderItem? item in cart.Items) ////////////////////////////nurit
+                BO.OrderItem orderitem = cart.Items.Find(x => x != null && x.ProductID == id)!;
+                if(orderitem!=null)
                 {
-                    if (item == null)
-                        break;
-                    if (item.ProductID == id) //אם המוצר קיים בסל קניות
-                    {
-                        item.Amount+=amountToAdd;
-                        cart.TotalPrice = (cart.TotalPrice??0) + (product?.Price*amountToAdd);
-                        cart.TotalPrice = Math.Round(cart.TotalPrice??0, 2);
-                        return cart;
-                    }
-                }
+                    cart.Items.Remove(orderitem);
+                    orderitem.Amount += amountToAdd;
+                    cart.TotalPrice = (cart.TotalPrice ?? 0) + (product?.Price * amountToAdd);
+                    cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
+                    cart.Items.Add(orderitem);
+                    return cart;
+                }           
             }
             //אם המוצר עוד לא קיים בסל הקניות
             BO.OrderItem temp = new BO.OrderItem
             {
-                ID = cart.Items.Count+1,
+                ID = 0,
                 ProductID = id,
                 Price = product?.Price,
                 IsDeleted = false,
                 Amount = amountToAdd
             };
-
-            if(cart.Items!=null)
-                cart.Items.Add(temp);
-            else
-            {
-                cart.Items=new List<BO.OrderItem>();
-                cart.Items.Add(temp);
-            }
+            if(cart.Items==null)
+                cart.Items=new List<BO.OrderItem?>();
+            cart.Items.Add(temp);
             cart.TotalPrice = (cart.TotalPrice??0)+ (product?.Price*amountToAdd);
             cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
             return cart;
