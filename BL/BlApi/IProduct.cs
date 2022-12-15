@@ -21,12 +21,12 @@ public interface IProduct
     public void AddProduct(BO.Product? product); //הוספת מוצר (עבור מנהל
     public void DeleteProduct(int id); //מחיקת מוצר (עבור מנהל
     public void UpdateProduct(BO.Product? newproduct); //עידכון נתוני מוצר (עבור מנהל
-
-
+    //public IEnumerable<BO.ProductForList> GetByCategory(BO.Category ct);
+    public IEnumerable<BO.ProductForList> GetProductList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null);
 
    // public IEnumerable<BO.ProductItem> GetKatalog();  //בקשת קטלוג עבור הקונה
-    //    public override string ToString() =>  Tools.ToStringProperty(this);
-    
+   //    public override string ToString() =>  Tools.ToStringProperty(this);
+
     // public IEnumerable<ProductItem> GetProducts(int id); //בקשת פרטי מוצר עבור מנהל
     //public IEnumerable<ProductItem> GetProducts(); // בקשת פרטי מוצר עבור הקונה
 

@@ -20,9 +20,11 @@ VerticalAlignment="Stretch" Width="auto">
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions >
                 <Label Content="Category:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Foreground="#FFF43737" FontSize="30" FontFamily="Candara Light" Margin="30,0,0,0" Grid.Column="0" FontWeight="Bold"/>
-                <ComboBox Grid.Column="1" Name="AttributeSelector" />
+                <ComboBox Grid.Column="1" Name="AttributeSelector" HorizontalAlignment="Stretch" SelectionChanged="AttributeSelector_SelectionChanged" />
             </Grid>
-            <ListBox Name="Catalog" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="17"/>
+            <ListView Name="ProductListView" MouseDoubleClick="ProductListView_MouseDoubleClick" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="10" Margin="0,10,0,-9" Grid.Row="1" Grid.RowSpan="1"/>
+            <Button Name="AddProduct" Content="הוספת מוצר חדש" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProduct_Click"/>
+
         </Grid>
     </Grid>
 </Window>

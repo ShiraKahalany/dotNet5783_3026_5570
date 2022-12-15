@@ -133,10 +133,10 @@ public static class Tools
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
         IEnumerable<DO.OrderItem?> items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == order.ID && orderItem.GetValueOrDefault().IsDeleted == false);
-        foreach (DO.OrderItem item in items)
+        foreach (var item in items)
         {
-            amountOfItems += item.Amount ?? 0;
-            totalPrice += item.Price * item.Amount ?? 0;
+            amountOfItems += item?.Amount ?? 0;
+            totalPrice += item?.Price * item?.Amount ?? 0;
         }
         totalPrice = Math.Round(totalPrice, 2);
     }

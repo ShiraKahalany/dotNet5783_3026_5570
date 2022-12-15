@@ -28,6 +28,6 @@ namespace PL
             InitializeComponent();
         }
 
-        private void showCatalog_Click(object sender, RoutedEventArgs e) => new ProductListWindow().Show();
+        private void showProducts_Click(object sender, RoutedEventArgs e) => new ProductListWindow().Show();
     }
 }

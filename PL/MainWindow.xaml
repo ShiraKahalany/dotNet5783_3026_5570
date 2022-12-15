@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Name ="showCatalog" Content="Button" HorizontalAlignment="Left" Margin="344,184,0,0" VerticalAlignment="Top" Click="showCatalog_Click"/>
+    <Grid Background="PapayaWhip">
+        <Button Name ="showProducts" Content="רשימת המוצרים" BorderBrush="WhiteSmoke" Foreground="#fc03e3" FontStyle="Normal"  Background="WhiteSmoke" FontSize="20" HorizontalAlignment="Left" Margin="597,34,0,0" VerticalAlignment="Top" Click="showProducts_Click" Height="70" Width="169"/>
 
     </Grid>
 </Window>
