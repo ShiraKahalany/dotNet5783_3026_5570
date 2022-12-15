@@ -34,6 +34,24 @@ internal class Product : IProduct
         }
     }
 
+    public BO.Product GetProduct(int id)
+    //בקשת פרטי מוצר עבור מנהל
+    {
+        try
+        {
+            if (id > 0)
+            {
+                DO.Product? pro = dal.Product.GetTByFilter((DO.Product? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().ID == id));
+                BO.Product product = new BO.Product();
+                return pro.CopyFields(product);
+            }
+            throw new BO.NotExistException();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
     public IEnumerable<BO.Product> GetProducts()
     //עבור מנהל ועבור קטלוג קונה .בקשת רשימת מוצרים
     {

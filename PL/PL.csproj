@@ -13,6 +13,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="2403655.png" />
+    <None Remove="Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" />
+    <None Remove="order.png" />
+    <None Remove="Products\download.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
   </ItemGroup>
 
@@ -20,6 +27,13 @@
     <Folder Include="Carts\" />
     <Folder Include="OrderItems\" />
     <Folder Include="Orders\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="2403655.png" />
+    <Resource Include="Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" />
+    <Resource Include="order.png" />
+    <Resource Include="Products\download.png" />
   </ItemGroup>
 
 </Project>

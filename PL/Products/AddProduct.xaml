@@ -23,6 +23,7 @@
         <Label Content=":קטגוריה" HorizontalAlignment="Left" Margin="670,291,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="26" Width="55"/>
         <Label Content="הוספת מוצר חדש" HorizontalAlignment="Left" Margin="546,0,0,0" VerticalAlignment="Top" Height="50" Width="244" FontSize="30" Grid.ColumnSpan="2"/>
         <Button Content="הוסף" HorizontalAlignment="Left" Margin="412,345,0,0" VerticalAlignment="Top" Height="23" Width="47" RenderTransformOrigin="1.111,1.387" Click="Button_Click"/>
+        <Image HorizontalAlignment="Left" Height="47" Margin="499,3,0,0" VerticalAlignment="Top" Width="99" Source="/Products/download.png" RenderTransformOrigin="1.231,0.428"/>
 
     </Grid>
 </Window>

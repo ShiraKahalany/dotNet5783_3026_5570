@@ -26,6 +26,7 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         private void showProducts_Click(object sender, RoutedEventArgs e) => new ProductListWindow().Show();
