@@ -162,7 +162,7 @@ internal class Product : IProduct
         {
             if (id > 0)
             {
-                DO.Product? pro = dal.Product.GetTByFilter((DO.Product? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().ID == id)); ;
+                DO.Product? pro = dal.Product.GetTByFilter((DO.Product? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().ID == id)) ;
                 int? counter = 0;
                 foreach (BO.OrderItem? item in cart.Items) { if (item?.ProductID == id) counter = item?.Amount; }
                 BO.ProductItem prod = new BO.ProductItem
@@ -214,7 +214,7 @@ internal class Product : IProduct
             IEnumerable<DO.Order?> lst = dal.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false);
             foreach (DO.Order order in lst)
             {
-                if (dal.OrderItem.GetByOrderAndId(order.ID, id) != null)
+                if (dal.OrderItem.GetTByFilter((DO.OrderItem? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().OrderID == order.ID) && (product.GetValueOrDefault().ProductID == id)) != null)
                     throw new BO.InAnOrderException();
             }
             dal.Product.Delete(id);
