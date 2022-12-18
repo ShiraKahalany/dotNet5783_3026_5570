@@ -5,38 +5,66 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Reflection;
+//namespace BO;
 namespace BlApi;
 
 //מתודות הרחבה
-public static class Tools
-{
-    public static string ToStringProperty<T>(this T t, string suffix = "")
-    //מתודה להפיכת ישות למחרוזת לצורך הצגת הפרטים
-    {
-        string str = "";
-        foreach (PropertyInfo prop in t.GetType().GetProperties())
-        {
-            if (prop.Name == "IsDeleted")
-            {
-                bool? val = (bool?)prop.GetValue(t, null);
-                if (val ?? false)
-                    str += " * * * DELETED * * *:";
-                continue;
-            }
-            var value = prop.GetValue(t, null);
-            if (value is not string && value is IEnumerable)
-            {
-                str = str + "\n" + prop.Name + ":";
-                foreach (var item in (IEnumerable)value)
-                    str += item.ToStringProperty("      ");
-            }
+//public static class Tools
+//{
 
-            else
-                str += "\n" + suffix + prop.Name + ": " + value;
-        }
-        str += "\n";
-        return str;
-    }
+internal static class Tools
+{
+    public static string ToStringProperty<T>(this T t, string suffix = "") =>
+
+        t!.GetType().GetProperties().Aggregate(suffix, (str, prop) =>
+
+        {
+
+            str += "\n" + suffix;
+
+            var value = prop!.GetValue(t, null);
+
+            if (prop.Name == "isDeleted" && (bool)value!) return str + " * * * DELETED * * *:";
+
+            str += prop.Name + ": ";
+
+            if (value is not string && value is IEnumerable)
+
+                return str + ((IEnumerable<object>)value).Aggregate("", (str, item) => str + item.ToStringProperty(suffix + "    "));
+
+            return str + value;
+
+        })
+
+        + "\n" + suffix + "==============";
+
+    //public static string ToStringProperty<T>(this T t, string suffix = "")
+    ////מתודה להפיכת ישות למחרוזת לצורך הצגת הפרטים
+    //{
+    //    string str = "";
+    //    foreach (PropertyInfo prop in t.GetType().GetProperties())
+    //    {
+    //        if (prop.Name == "IsDeleted")
+    //        {
+    //            bool? val = (bool?)prop.GetValue(t, null);
+    //            if (val ?? false)
+    //                str += " * * * DELETED * * *:";
+    //            continue;
+    //        }
+    //        var value = prop.GetValue(t, null);
+    //        if (value is not string && value is IEnumerable)
+    //        {
+    //            str = str + "\n" + prop.Name + ":";
+    //            foreach (var item in (IEnumerable)value)
+    //                str += item.ToStringProperty("      ");
+    //        }
+
+    //        else
+    //            str += "\n" + suffix + prop.Name + ": " + value;
+    //    }
+    //    str += "\n";
+    //    return str;
+    //}
 
     public static Target CopyFields<Source, Target>(this Source source, Target target)
     {
