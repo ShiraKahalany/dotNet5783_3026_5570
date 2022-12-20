@@ -70,8 +70,6 @@ internal class Product : IProduct
         {
             throw new Exception(ex.Message);
         }
-
-
     }
 
     public void Restore(int id)
