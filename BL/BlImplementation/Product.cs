@@ -232,12 +232,12 @@ internal class Product : IProduct
                 throw new BO.NotExistException();
             IEnumerable<DO.Order?> lst = dal.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false);
             List<DO.Order?> lst2 = lst.ToList();
-            if((lst2.Find((DO.Order? order) => (dal.OrderItem.GetTByFilter ((DO.OrderItem? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().OrderID == order?.ID) && (product.GetValueOrDefault().ProductID == id)) != null)))!=null)
+            if(lst2.Find((DO.Order? order) => dal.OrderItem.GetTByFilter ((DO.OrderItem? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().OrderID == order?.ID) && (product.GetValueOrDefault().ProductID == id)) != null)!=null)
                 throw new BO.InAnOrderException();
         }
         catch (Exception ex)
         {
-            if (ex.Message.Contains("Not Exist"))//אם המוצר לא מופיע באף הזמנה אפשר למחוק אותו
+            if (ex.Message.Contains("not exist")|| ex.Message.Contains("Not Exist")|| ex.Message.Contains("elements"))//אם המוצר לא מופיע באף הזמנה אפשר למחוק אותו
                 dal.Product.Delete(id);
             else
                 throw new Exception(ex.Message);

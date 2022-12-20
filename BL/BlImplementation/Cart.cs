@@ -65,6 +65,11 @@ internal class Cart:ICart
             if (cart.Items == null)
                 throw new BO.NotExistException();
 
+            //var x = from item in cart.Items
+            //        where item.ProductID == id && item != null
+            //        where amount == 0
+            //        select BlApi.Tools.UpdateTotalpriceInCart(ref cart, item, item?.Amount ?? 0)
+
             foreach (BO.OrderItem item in cart.Items)
             {
                 if (item!=null && item.ProductID == id)

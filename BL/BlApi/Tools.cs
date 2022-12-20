@@ -169,6 +169,12 @@ internal static class Tools
         totalPrice = Math.Round(totalPrice, 2);
     }
 
+    public static void UpdateTotalpriceInCart (ref BO.Cart cart, BO.OrderItem item, int dif)
+    {
+        cart.TotalPrice = (cart.TotalPrice ?? 0) + (item.Price * dif);
+        cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
+        //return cart;
+    }
    
 
 }
