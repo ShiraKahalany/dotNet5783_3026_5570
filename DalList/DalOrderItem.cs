@@ -51,9 +51,9 @@ public class DalOrderItem : IOrderItem
     {
         OrderItem? temp = dataSource.OrderItems.Find(x => x?.ID == item.ID);
         if (temp == null) //if it is not exist throw exception
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new DO.NotExistException("The item is not exist");
         if (temp?.IsDeleted == true)
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new DO.NotExistException("The item is not exist");
         DeletePermanently(item.ID);
         Add(item);
     }
@@ -63,9 +63,9 @@ public class DalOrderItem : IOrderItem
     {
         OrderItem? temp = dataSource.OrderItems.Find(x => x?.ID == item.ID);
         if (temp == null) //if it is not exist throw exception
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new DO.NotExistException("The item is not exist");
         if (temp?.IsDeleted == false)
-            throw new MyExceptionNotExist("The item is not deleted");
+            throw new DO.NotExistException("The item is not deleted");
         DeletePermanently(item.ID);
         Add(item);
     }
@@ -74,7 +74,7 @@ public class DalOrderItem : IOrderItem
     {
         OrderItem? temp = dataSource.OrderItems.Find(x => x?.ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
-            throw new MyExceptionNotExist("The order is not exist");
+            throw new DO.NotExistException("The order is not exist");
         dataSource.OrderItems.Remove(temp);
     }
 
@@ -83,9 +83,9 @@ public class DalOrderItem : IOrderItem
     {
         OrderItem? temp = dataSource.OrderItems.Find(x => x?.ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
-            throw new MyExceptionNotExist("The order is not exist");
+            throw new DO.NotExistException("The order is not exist");
         if (temp?.IsDeleted == true)
-            throw new MyExceptionNotExist("The order is already deleted");
+            throw new DO.NotExistException("The order is already deleted");
         dataSource.OrderItems.Remove(temp);
         OrderItem orderItem = new OrderItem
         {
@@ -170,8 +170,9 @@ public class DalOrderItem : IOrderItem
         var ieorderitems = from orderitem in dataSource.OrderItems
                            where filter(orderitem) == true
                            select orderitem;
+        //if (!ieorderitems.Any())   //???
+        //    throw new DO.NotExistException("Not Exist");///??
         return ieorderitems;
-
     }
 
     public OrderItem? GetTByFilter(Func<OrderItem?, bool> filter)
@@ -181,7 +182,7 @@ public class DalOrderItem : IOrderItem
                  where filter(orderitem) == true
                  select orderitem).First();
         if (x == null)
-            throw new Exception("Not Exist");
+            throw new DO.NotExistException("Not Exist - OrderItem");
         return x;
     }
 }

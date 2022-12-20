@@ -69,6 +69,17 @@ internal class Cart:ICart
             //        where item.ProductID == id && item != null
             //        where amount == 0
             //        select BlApi.Tools.UpdateTotalpriceInCart(ref cart, item, item?.Amount ?? 0)
+            var x = from item in cart.Items
+                    where item != null
+                    where !(item.ProductID == id && amount == 0)
+                    select new BO.OrderItem {
+                        ID = item.ID,
+                        ProductID = item.ProductID,
+                        IsDeleted = false,
+                        Price = item.Price,
+                        Amount = (item.ProductID == id) ? item.CheckAmount(amount) : item.Amount };
+            cart.TotalPrice = Math.Round(x.Sum(item => (double)item.Price*item.Amount), 2);
+
 
             foreach (BO.OrderItem item in cart.Items)
             {

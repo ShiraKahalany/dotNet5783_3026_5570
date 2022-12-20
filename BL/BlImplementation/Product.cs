@@ -134,6 +134,10 @@ internal class Product : IProduct
             else
                 throw new BO.WrongDetailsException();
         }
+        catch(DO.AlreadyExistException)
+        {
+            throw new BO.AlreadyExistException();
+        }
         catch (Exception ex)
         {
             throw new Exception(ex.Message);
@@ -152,11 +156,12 @@ internal class Product : IProduct
             if(lst2.Find((DO.Order? order) => dal.OrderItem.GetTByFilter ((DO.OrderItem? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().OrderID == order?.ID) && (product.GetValueOrDefault().ProductID == id)) != null)!=null)
                 throw new BO.InAnOrderException();
         }
+        catch(DO.NotExistException)
+        {
+            dal.Product.Delete(id);  //אם המוצר לא מופיע באף הזמנה אפשר למחוק אותו
+        }
         catch (Exception ex)
         {
-            if (ex.Message.Contains("not exist")|| ex.Message.Contains("Not Exist")|| ex.Message.Contains("elements"))//אם המוצר לא מופיע באף הזמנה אפשר למחוק אותו
-                dal.Product.Delete(id);
-            else
                 throw new Exception(ex.Message);
         }
     }

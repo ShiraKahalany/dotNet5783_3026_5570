@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Reflection;
+using DalApi;
 //namespace BO;
 namespace BlApi;
 
@@ -175,6 +176,17 @@ internal static class Tools
         cart.TotalPrice = (cart.TotalPrice ?? 0) + (item.Price * dif);
         cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
         //return cart;
+    }
+
+    public static int CheckAmount(this BO.OrderItem item, int amount)
+    //בדיקה האם ניתן להוסיף את הכמות המבוקשת לפי הזמינות במלאי. אם ניתן - החזרת הכמות
+    {
+        DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
+        DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
+        int? difference = amount - item.Amount;
+        if (product?.InStock < difference)  //אם אין מספיק במלאי מהמוצר
+            throw new BO.NotInStockException();
+        return amount;
     }
    
 

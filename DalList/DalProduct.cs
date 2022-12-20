@@ -11,7 +11,9 @@ public class DalProduct : IProduct
   public int Add(Product item)
         //מתחודה שמקבלת מוצר ומוסיפה אותו אל רשימת כל המוצרים
     {
-        if(item.ID >= 100000 && dataSource.Products.Find(x => x?.ID == item.ID) == null) // בדיקת תקינות המספר המזהה
+        if (dataSource.Products.Find(x => x?.ID == item.ID) != null)
+            throw new DO.AlreadyExistException("This number is in use");
+        if(item.ID >= 100000) // בדיקת תקינות המספר המזהה
         {
             dataSource.Products.Add(item);
             return item.ID;
@@ -51,9 +53,9 @@ public class DalProduct : IProduct
     {
         Product? temp = dataSource.Products.Find(x => x?.ID == item.ID);
         if (temp == null) //if it is not exist throw exception
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new DO.NotExistException("The item is not exist");
         if (temp?.IsDeleted == true)
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new DO.NotExistException("The item is not exist");
         DeletePermanently(item.ID);
         Add(item);
     }
@@ -62,9 +64,9 @@ public class DalProduct : IProduct
     {
         Product? temp = dataSource.Products.Find(x => x?.ID == item.ID);
         if (temp == null) //if it is not exist throw exception
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new DO.NotExistException("The item is not exist");
         if (temp?.IsDeleted == false)
-            throw new MyExceptionNotExist("The item is not deleted");
+            throw new DO.NotExistException("The item is not deleted");
         DeletePermanently(item.ID);
         item.IsDeleted = false;
         Add(item);
@@ -75,7 +77,7 @@ public class DalProduct : IProduct
     {
         Product? temp = dataSource.Products.Find(x => x?.ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new DO.NotExistException("The item is not exist");
         dataSource.Products.Remove(temp);
     }
     public void Delete(int id)
@@ -83,9 +85,9 @@ public class DalProduct : IProduct
     {
         Product? temp = dataSource.Products.Find(x => x?.ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new DO.NotExistException("The item is not exist");
         if(temp?.IsDeleted==true)
-            throw new MyExceptionNotExist("The item is already deleted");
+            throw new DO.NotExistException("The item is already deleted");
         dataSource.Products.Remove(temp);
         Product product=new Product { IsDeleted=true, Category=temp?.Category??0, InStock=temp?.InStock, Name=temp?.Name, Price=temp?.Price, ID= temp.GetValueOrDefault().ID};
         Add(product);
@@ -123,6 +125,8 @@ public class DalProduct : IProduct
         var ieproducts = from product in dataSource.Products
                        where filter(product) == true
                        select product;
+        //if (!ieorderitems.Any())   //???
+        //    throw new DO.NotExistException("Not Exist");///??
         return ieproducts;
     }
 
@@ -132,7 +136,7 @@ public class DalProduct : IProduct
                  where filter(product) == true
                  select product).First();
         if (x == null)
-            throw new Exception("Not Exist");
+            throw new DO.NotExistException("Not Exist");
         return x;
     }
 }

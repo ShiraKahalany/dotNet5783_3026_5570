@@ -51,9 +51,9 @@ public class DalOrder : IOrder
     {
         Order? temp = dataSource.Orders.Find(x => x?.ID == item.ID);
         if (temp == null) //if it is not exist throw exception
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new DO.NotExistException("The item is not exist");
         if (temp?.IsDeleted == true)
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new DO.NotExistException("The item is not exist");
         DeletePermanently(item.ID);
         Add(item);
     }
@@ -63,9 +63,9 @@ public class DalOrder : IOrder
     {
         Order? temp = dataSource.Orders.Find(x => x?.ID == item.ID);
         if (temp == null) //if it is not exist throw exception
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new DO.NotExistException("The item is not exist");
         if (temp?.IsDeleted == false)
-            throw new MyExceptionNotExist("The item is not deleted");
+            throw new DO.NotExistException("The item is not deleted");
         DeletePermanently(item.ID);
         item.IsDeleted = false;
         Add(item);
@@ -75,7 +75,7 @@ public class DalOrder : IOrder
     {
         Order? temp = dataSource.Orders.Find(x => x?.ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new DO.NotExistException("The item is not exist");
         dataSource.Orders.Remove(temp);
     }
     public void Delete(int id)
@@ -83,9 +83,9 @@ public class DalOrder : IOrder
     {
         Order? temp = dataSource.Orders.Find(x => x?.ID == id); //check if the element exist in the orders list
         if (temp == null) //if it is not exist throw exception
-            throw new MyExceptionNotExist("The item is not exist");
+            throw new DO.NotExistException("The item is not exist");
         if (temp?.IsDeleted == true)
-            throw new MyExceptionNotExist("The item is already deleted");
+            throw new DO.NotExistException("The item is already deleted");
         dataSource.Orders.Remove(temp);
         Order order = new Order { IsDeleted = true, ID = temp.GetValueOrDefault().ID, CustomerAddress = temp?.CustomerAddress, CustomerEmail = temp?.CustomerEmail, CustomerName = temp?.CustomerName, DeliveryDate = temp?.DeliveryDate, OrderDate = temp?.OrderDate, ShipDate = temp?.OrderDate };
         Add((Order)order);
@@ -134,7 +134,7 @@ public class DalOrder : IOrder
                     where filter(order) ==true 
                     select order;
         if (!ieorders.Any())
-            throw new Exception("Not Exist");
+            throw new DO.NotExistException("No Orders");
         return ieorders;
     }
 
@@ -144,7 +144,7 @@ public class DalOrder : IOrder
                 where filter(order) == true
                 select order).First();
         if (x == null)
-            throw new Exception("Not Exist");
+            throw new DO.NotExistException("Not Exist");
       return x;
     }
 
