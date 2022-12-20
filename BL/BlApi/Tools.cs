@@ -113,6 +113,7 @@ internal static class Tools
         }
     }
 
+
     public static List<BO.OrderItem> GetItems(this DO.Order order, ref double totalprice)
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
