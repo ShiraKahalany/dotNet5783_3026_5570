@@ -9,9 +9,11 @@
     <Grid Margin="0,16,0,-16">
         <Image Source="/Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" RenderTransformOrigin="0.841,0.493" Height="533" VerticalAlignment="Top" Margin="-32,-99,-37,0"/>
 
-        <Button x:Name ="showProducts" Content="רשימת המוצרים"   BorderBrush="White" Foreground="Black" FontStyle="Normal"   Background="WhiteSmoke" FontSize="20" HorizontalAlignment="Left" Margin="580,25,0,0" VerticalAlignment="Top" Click="showProducts_Click" Height="41" Width="169"/>
-        <Button Content="" HorizontalAlignment="Left" Margin="28,8,0,0" VerticalAlignment="Top" Height="42" Width="42"/>
-        <Image HorizontalAlignment="Left" Height="36" Margin="32,12,0,0" VerticalAlignment="Top" Width="34" Source="/order.png" RenderTransformOrigin="1.192,1.758"/>
+        <Button x:Name ="showProducts" Content="רשימת המוצרים"   BorderBrush="White" Foreground="Black" FontStyle="Normal"   Background="WhiteSmoke" FontSize="20" HorizontalAlignment="Left" Margin="552,21,0,0" VerticalAlignment="Top" Click="showProducts_Click" Height="41" Width="169"/>
+        <Button Content="" HorizontalAlignment="Left" Margin="743,21,0,0" VerticalAlignment="Top" Height="42" Width="42"/>
+        <Image HorizontalAlignment="Left" Height="36" Margin="747,25,0,0" VerticalAlignment="Top" Width="34" Source="/order.png" RenderTransformOrigin="1.192,1.758"/>
+        <Button x:Name="Connection" Content="התחברות" HorizontalAlignment="Left" Margin="35,20,0,0" VerticalAlignment="Top" Height="22" Width="100" Click="Connection_Click"/>
+
 
     </Grid>
 </Window>

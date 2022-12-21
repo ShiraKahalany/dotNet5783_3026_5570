@@ -38,7 +38,7 @@ class Program
                     Console.WriteLine("enter the order ID");
                     int.TryParse(Console.ReadLine(), out id);
                     int myId = id;
-                    Console.WriteLine(order.GetByID(myId));
+                    //Console.WriteLine(order.GetByID(myId));
                     break;
                 case "c":
                     foreach (Order? item in order.GetAll())
@@ -52,7 +52,7 @@ class Program
                     Console.WriteLine("enter the order ID");
                     int.TryParse(Console.ReadLine(), out id);
                     tmpOrder2.ID = id;
-                    Console.WriteLine(order.GetByID(id));
+                   // Console.WriteLine(order.GetByID(id));
                     Console.WriteLine("enter the new costumer name");
                     tmpOrder2.CustomerName = Console.ReadLine();
                     Console.WriteLine("enter the new costumer email");
@@ -69,7 +69,7 @@ class Program
                     break;
             }
         }
-        catch (MyException ex)
+        catch (Exception ex)
         {
             Console.WriteLine(ex);
         }      
@@ -114,10 +114,10 @@ class Program
                     Console.WriteLine("enter the order item ID");
                     int myId;
                     int.TryParse(Console.ReadLine(), out myId);
-                    Console.WriteLine(item.GetByID(myId));
+                    //Console.WriteLine(item.GetByID(myId));
                     break;
                 case "c":
-                    foreach (OrderItem oItem in item.GetAll())
+                    foreach (OrderItem? oItem in item.GetAll())
                     {
                         Console.WriteLine(oItem);
                     }
@@ -128,7 +128,7 @@ class Program
                     Console.WriteLine("enter the item ID");
                     int.TryParse(Console.ReadLine(), out id);
                     tmpItem2.ID = id;
-                    Console.WriteLine(item.GetByID(id));
+                    //Console.WriteLine(item.GetByID(id));
                     Console.WriteLine("enter the new product ID");
                     int.TryParse(Console.ReadLine(), out id);
                     tmpItem2.ProductID = id;
@@ -223,10 +223,10 @@ class Program
                     Console.WriteLine("enter the product ID");
                     int myId;
                     int.TryParse(Console.ReadLine(), out myId);
-                    Console.WriteLine(product.GetByID(myId));
+                    //Console.WriteLine(product.GetByID(myId));
                     break;
                 case "c":
-                    foreach (Product item in product.GetAll())
+                    foreach (Product? item in product.GetAll())
                     {
                         Console.WriteLine(item);
                     }
@@ -238,7 +238,7 @@ class Program
                     Console.WriteLine("enter the product ID");
                     int.TryParse(Console.ReadLine(), out id);
                     tmpProduct2.ID = id;
-                    Console.WriteLine(product.GetByID(id));
+                    //Console.WriteLine(product.GetByID(id));
                     Console.WriteLine("enter the new product name");
                     tmpProduct2.Name = Console.ReadLine();
                     Console.WriteLine(@"enter the catgory: 

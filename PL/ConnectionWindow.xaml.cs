@@ -10,28 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BlApi;
-using PL.Products;
 
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ConnectionWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ConnectionWindow : Window
     {
-        private IBL bl= BLFactory.GetBL();
-        public MainWindow()
+        public ConnectionWindow()
         {
             InitializeComponent();
-
         }
 
-        private void showProducts_Click(object sender, RoutedEventArgs e) => new ProductListWindow().Show();
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
-        private void Connection_Click(object sender, RoutedEventArgs e)=>new ConnectionWindow().Show();
-        
+        }
     }
 }
