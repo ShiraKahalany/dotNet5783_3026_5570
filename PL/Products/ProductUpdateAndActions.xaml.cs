@@ -58,5 +58,10 @@ namespace PL.Products
             MessageBox.Show("Seccessfully", "מחיקת מוצר", MessageBoxButton.OK);
             Close();
         }
+
+        private void InserId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

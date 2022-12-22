@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ProductUpdateAndActions" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="InserId" IsEnabled="False" HorizontalAlignment="Right" FontSize="10" Margin="0,86,159,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" TextAlignment="Right" Height="27" />
+        <TextBox x:Name="InserId" IsEnabled="False" HorizontalAlignment="Right" FontSize="10" Margin="0,86,159,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" TextAlignment="Right" Height="27" TextChanged="InserId_TextChanged" />
         <TextBox Name="InsertName" HorizontalAlignment="Left" Margin="502,136,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" Height="27" />
         <TextBox Name="InsertPrice" HorizontalAlignment="Left" Margin="601,190,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" Height="27"/>
         <TextBox Name="InsertAmount" HorizontalAlignment="Left" Margin="601,234,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" Height="27" RenderTransformOrigin="2.818,0.141"/>

@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL.Products"
         mc:Ignorable="d"
         Title="ProductListWindow" Height="640" Width="800">
+    
     <Grid>
         <Grid Name="MainGrid">
             <Grid.RowDefinitions>
@@ -20,7 +20,7 @@ VerticalAlignment="Stretch" Width="auto">
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions >
                 <Label Content="Category:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Foreground="#FFF43737" FontSize="30" FontFamily="Candara Light" Margin="30,0,0,0" Grid.Column="0" FontWeight="Bold"/>
-                <ComboBox Grid.Column="1" Name="AttributeSelector" HorizontalAlignment="Stretch" SelectionChanged="AttributeSelector_SelectionChanged" />
+                <ComboBox Grid.Column="1" Name="AttributeSelector"  HorizontalAlignment="Stretch" SelectionChanged="AttributeSelector_SelectionChanged" />
             </Grid>
             <ListView Name="ProductListView"  MouseDoubleClick="ProductListView_MouseDoubleClick" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="10" Margin="0,10,0,-9" Grid.Row="1" Grid.RowSpan="1"/>
             <Button Name="AddProduct" Content="הוספת מוצר חדש" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProduct_Click"/>

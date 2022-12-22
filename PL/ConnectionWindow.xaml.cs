@@ -24,9 +24,13 @@ namespace PL
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+        //private void Connection_Click(object sender, RoutedEventArgs e) => new PL.Manager.ManagerOptionsWindow().Show();
 
+        private void Button_Click(object sender, RoutedEventArgs e) => new PL.Manager.ManagerOptionsWindow().Show();
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+               
         }
     }
 }
