@@ -125,7 +125,6 @@ internal class Cart:ICart
                 throw new BO.NoAddressException();
             if ((cart.CustomerEmail == null)||(!cart.CustomerEmail.Contains('@')))
                 throw new BO.IllegalEmailException();
-            List <BO.OrderItem> newlist = new List<BO.OrderItem>();
             if (cart.Items==null||cart.Items.Count==0)
                 throw new BO.NotItemsInCartException();
 
@@ -133,6 +132,7 @@ internal class Cart:ICart
             //בדיקת זמינות המוצרים במלאי
             //******פה במקום פוראיצ' לנסות להשתמש בפונקציות של רשימות, כמו פיינד*******
 
+            List<BO.OrderItem> newlist = new List<BO.OrderItem>();  //מה הפואנטה של הרשימה הזאת??
             foreach (BO.OrderItem item in cart.Items)
             {
                 DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
@@ -142,9 +142,9 @@ internal class Cart:ICart
                     throw new BO.NotInStockException("The product "+item.ProductID+" is not in stock");
                 if (item.Amount <= 0)
                     throw new BO.AmountNotPossitiveException();
-                newlist.Add(item);
+               // newlist.Add(item);
             }
-            if (newlist.Count < 0)
+            if (/*newlist.Count*/ cart.Items.Count < 0)
                 throw new BO.NotItemsInCartException("The cart is empty");
 
             //יצירת ההזמנה
@@ -163,8 +163,8 @@ internal class Cart:ICart
             int newId=dal.Order.Add(neworder);  //הוספת ההזמנה למאגר ההזמנות
 
 
-            var x= from item in newlist
-
+            // var x= from item in newlist
+            
 
            //עידכון מלאי המוצרים
             foreach (BO.OrderItem item in newlist)
