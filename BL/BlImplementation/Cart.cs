@@ -131,19 +131,21 @@ internal class Cart:ICart
 
 
             //בדיקת זמינות המוצרים במלאי
+            //******פה במקום פוראיצ' לנסות להשתמש בפונקציות של רשימות, כמו פיינד*******
+
             foreach (BO.OrderItem item in cart.Items)
             {
                 DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
                 if (item == null)
                     break;
                 if(product?.InStock<=item.Amount)
-                    throw new BO.NotInStockException();
+                    throw new BO.NotInStockException("The product "+item.ProductID+" is not in stock");
                 if (item.Amount <= 0)
                     throw new BO.AmountNotPossitiveException();
                 newlist.Add(item);
             }
             if (newlist.Count < 0)
-                throw new BO.NotItemsInCartException();
+                throw new BO.NotItemsInCartException("The cart is empty");
 
             //יצירת ההזמנה
             DO.Order neworder = new DO.Order
