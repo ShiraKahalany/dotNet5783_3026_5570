@@ -15,19 +15,17 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for Products_Manager.xaml
+    /// Interaction logic for Product_Manager_Window.xaml
     /// </summary>
-    public partial class Products_Manager : Window
+    public partial class Product_Manager_Window : Window
     {
-        public Products_Manager()
+        public Product_Manager_Window()
         {
             InitializeComponent();
         }
 
-        private void Button_Click_List(object sender, RoutedEventArgs e)=> Products_Manager.Content = new ProductsListManager();
+        private void Button_Click_List(object sender, RoutedEventArgs e) => Products_Manager.Content = new ProductsListManager();
         private void Button_Click_DeletedList(object sender, RoutedEventArgs e) => Products_Manager.Content = new DeletedProductsManager();
         private void Button_Click_Add(object sender, RoutedEventArgs e) => Products_Manager.Content = new AddNewProductManager();
-
-
     }
 }

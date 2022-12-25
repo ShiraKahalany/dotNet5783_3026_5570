@@ -25,7 +25,7 @@ namespace PL.Manager
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) => new ProductListWindow().Show();
+        private void Button_Click(object sender, RoutedEventArgs e) => new Product_Manager_Window().Show();
 
     }
 }
