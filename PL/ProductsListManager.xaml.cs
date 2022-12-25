@@ -1,5 +1,4 @@
-﻿using PL.Products;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,21 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PL.Manager
+namespace PL
 {
     /// <summary>
-    /// Interaction logic for ManagerOptionsWindow.xaml
+    /// Interaction logic for ProductsListManager.xaml
     /// </summary>
-    public partial class ManagerOptionsWindow : Window
+    public partial class ProductsListManager : Page
     {
-        public ManagerOptionsWindow()
+        public ProductsListManager()
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e) => new ProductListWindow().Show();
-
     }
 }
