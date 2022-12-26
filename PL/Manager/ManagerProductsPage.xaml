@@ -13,8 +13,8 @@
             <ColumnDefinition Width="9*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        <Frame Grid.Column="0" VerticalAlignment="Stretch" Name="ManagerProductsFrame" NavigationUIVisibility="Hidden" Background="PaleGoldenrod"/>
-        <StackPanel Grid.Column="1" VerticalAlignment="Stretch" Background="Azure">
+        <Frame Grid.Column="0" VerticalAlignment="Stretch" Name="ManagerProductsFrame" NavigationUIVisibility="Hidden" />
+        <StackPanel Grid.Column="1" VerticalAlignment="Stretch" Background="AliceBlue">
             <Button Name="AddProduct" Content="New" HorizontalAlignment="Left" Foreground="#FFFBFBFC" FontWeight="Bold" FontSize="18" BorderBrush="{x:Null}" Height="57" Background="#FF1B6365" Click="AddProduct_Click" Width="73"/>
             <Button Name="ShowDeletedProducts" Content="Archive" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF0B5650" BorderBrush="{x:Null}" Foreground="#FFFFFEFE" FontWeight="Bold" Height="56" Width="75" FontSize="16"/>
         </StackPanel>

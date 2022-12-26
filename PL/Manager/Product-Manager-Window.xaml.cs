@@ -26,6 +26,6 @@ namespace PL
 
         private void Button_Click_List(object sender, RoutedEventArgs e) => Products_Manager.Content = new ProductsListManager();
         private void Button_Click_DeletedList(object sender, RoutedEventArgs e) => Products_Manager.Content = new DeletedProductsManager();
-        private void Button_Click_Add(object sender, RoutedEventArgs e) => Products_Manager.Content = new AddNewProductManager();
+        //private void Button_Click_Add(object sender, RoutedEventArgs e) => Products_Manager.Content = new AddNewProductManager();
     }
 }

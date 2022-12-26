@@ -10,7 +10,7 @@
         <StackPanel Orientation = "Horizontal" Height="35" VerticalAlignment="Top">
             <Button Content = "רשימת המוצרים" MinWidth="150" Margin="10,0,0,0" Click="Button_Click_List"/>
             <Button Content = "ארכיון מוצרים" MinWidth="150" Margin="10,0,0,0" Click="Button_Click_DeletedList"/>
-            <Button Content = "הוספת מוצר חדש" MinWidth="150" Margin="10,0,0,0" Click="Button_Click_Add"/>
+            <Button Content = "הוספת מוצר חדש" MinWidth="150" Margin="10,0,0,0" />
         </StackPanel>
         <Frame x:Name="Products_Manager" Margin="0,35,0,0" NavigationUIVisibility="Hidden"/>
     </Grid>
