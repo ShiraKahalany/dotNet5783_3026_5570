@@ -25,7 +25,11 @@ namespace PL.Manager
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) => new Product_Manager_Window().Show();
+        //private void Button_Click_Products(object sender, RoutedEventArgs e) => new Product_Manager_Window().Show();
+
+        private void Button_Click_Products(object sender, RoutedEventArgs e) => MainManagerFrame.Content = new ManagerProductsPage();
+        private void Button_Click_Orders(object sender, RoutedEventArgs e) => MainManagerFrame.Content = new ManagerOrdersPage();
+
 
     }
 }
