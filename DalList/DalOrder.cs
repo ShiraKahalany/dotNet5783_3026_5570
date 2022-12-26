@@ -19,33 +19,6 @@ public class DalOrder : IOrder
         return item.ID;
     }
 
-    //public Order GetByID(int id) 
-    //    //מתודה המקבלת מספר ת"ז ומחזירה את ההזמנה המתאימה
-    //{
-    //    foreach(Order? item in dataSource.Orders)
-    //    {
-    //        if((item?.IsDeleted==false) && (item?.ID == id))
-    //            return (Order)item;
-    //    }
-    //    throw new MyExceptionNotExist("The item is not exist");
-    //}
-
-    //public Order GetDeletedById(int id)
-    //{
-    //    foreach (Order? item in dataSource.Orders)
-    //    {
-    //        //if (item == null)
-    //        //    throw new MyExceptionNotExist("The item is not exist");
-    //        if (item != null && item?.ID == id)
-    //        {
-    //            if (item?.IsDeleted == false)
-    //                throw new MyExceptionNotExist("The item is not deleted");
-    //            return (Order)item;
-    //        }
-    //    }
-    //    throw new MyExceptionNotExist("The item is not exist");
-    //}
-
     public void Update(Order item)
         //מתודה המעדכנת את הזמנה להזמנה המעודכנת שהתקבלה (שיש לה אותו ת"ז)ו
     {
@@ -91,40 +64,6 @@ public class DalOrder : IOrder
         Add((Order)order);
     }
 
-   //public IEnumerable<Order?> GetAll()
-   //     //מתודה שמחזירה את רשימת כל ההזמנות
-   // {
-   //     List<Order?> listGet = new List<Order?>();
-   //     foreach (Order? item in dataSource.Orders)
-   //     {
-   //         if(item!=null && item?.IsDeleted==false)
-   //             listGet.Add((Order)item);
-   //     }
-   //     return listGet;
-   // }
-
-   //public IEnumerable<Order?> GetAllWithDeleted()
-   //     //מתודה המחזירה את רשימת כל ההזמנות, כולל אלו שנמחקו
-   // {
-   //     List<Order?> listGet = new List<Order?>();
-   //     foreach (Order? item in dataSource.Orders)
-   //     {
-   //         if(item != null)
-   //         listGet.Add((Order)item);
-   //     }
-   //     return listGet;
-   // }
-
-
-    //public IEnumerable<Order?> GetAllDeleted()
-    //{
-    //    List<Order?> listGet = new List<Order?>();
-    //    foreach (Order? item in dataSource.Orders)
-    //    {
-    //        if (item != null && item?.IsDeleted == true)
-    //            listGet.Add((Order)item); }
-    //    return listGet;
-    //}
 
     public IEnumerable<Order?> GetAll(Func<Order?, bool>? filter = null)
     {
@@ -140,12 +79,11 @@ public class DalOrder : IOrder
 
     public Order? GetTByFilter(Func<Order?, bool> filter)
     {
-        var x = (from order in dataSource.Orders
-                where filter(order) == true
-                select order).First();
-        if (x == null)
-            throw new DO.NotExistException("Not Exist");
-      return x;
+        DO.Order? item = dataSource.Orders.Find((DO.Order? order) => filter(order));
+        if (item == null)
+            throw new DO.NotExistException("Not Exist - Order");
+        return item;
+
     }
 
 }

@@ -27,26 +27,6 @@ public class DalProduct : IProduct
         dataSource.Products.Add(item);
         return item.ID;
     }
-    //public Product GetByID(int id)
-    //    //מתודה המקבלת מספר ת"ז ומחזירה את המוצר המתאים לה
-    //{
-    //    var x = from item in dataSource.Products
-    //            where item?.IsDeleted == false && item?.ID == id
-    //            select item;
-    //    return (Product)x.FirstOrDefault();       
-    //}
-
-    //public Product GetDeletedById(int id)
-    //{
-    //    var x= from item in dataSource.Products
-    //           where item?.ID == id
-    //           select (Product)item;
-    //    if(!x.Any())
-    //        throw new MyExceptionNotExist("The item is not exist");
-    //    if (x.FirstOrDefault().IsDeleted==false)
-    //        throw new MyExceptionNotExist("The item is not deleted");
-    //    return(Product)x.FirstOrDefault();
-    //}
 
     public void Update(Product item)
         //מתודה המעדכנת את המוצר עם ה "ז שהתקבל בהתאם למוצר המעודכן שהתקבל כפרמטר
@@ -93,30 +73,7 @@ public class DalProduct : IProduct
         Add(product);
     }
 
-    //public IEnumerable<Product?> GetAll()
-    //    //מתודה המחזירה את רשימת כל המוצרים
-    //{
-    //    List<Product?> listGet = new List<Product?>();
-
-    //    foreach (Product? item in dataSource.Products)
-    //    {if(item?.IsDeleted==false) listGet.Add((Product)item); }
-    //    return listGet;
-    //}
-
-    //public IEnumerable<Product?> GetAllWithDeleted()
-    ////מתודה המחזירה את רשימת כל המוצרים, כולל אלו שנחמקו
-    //{
-    //    List<Product?> listGet = new List<Product?>();
-    //    foreach (Product? item in dataSource.Products) {listGet.Add((Product)item); }
-    //    return listGet;
-    //}
-
-    //public IEnumerable<Product?> GetAllDeleted()
-    //{
-    //    List<Product?> listGet = new List<Product?>();
-    //    foreach (Product? item in dataSource.Products) { if (item?.IsDeleted == true) listGet.Add((Product)item); }
-    //    return listGet;
-    //}
+  
 
     public IEnumerable<Product?> GetAll(Func<Product?, bool>? filter = null)
     {
@@ -125,18 +82,16 @@ public class DalProduct : IProduct
         var ieproducts = from product in dataSource.Products
                        where filter(product) == true
                        select product;
-        //if (!ieorderitems.Any())   //???
-        //    throw new DO.NotExistException("Not Exist");///??
+       
         return ieproducts;
     }
 
     public Product? GetTByFilter(Func<Product?, bool> filter)
     {
-        var x = (from product in dataSource.Products
-                 where filter(product) == true
-                 select product).First();
-        if (x == null)
-            throw new DO.NotExistException("Not Exist");
-        return x;
+        DO.Product? item = dataSource.Products.Find((DO.Product? product) => filter(product));
+        if (item == null)
+            throw new DO.NotExistException("Not Exist - Product");
+        return item;
+
     }
 }

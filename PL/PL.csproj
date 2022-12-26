@@ -15,6 +15,8 @@
   <ItemGroup>
     <None Remove="2403655.png" />
     <None Remove="Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" />
+    <None Remove="Manager\992651.png" />
+    <None Remove="Manager\pluss.png" />
     <None Remove="order.png" />
     <None Remove="Products\download.png" />
   </ItemGroup>
@@ -32,6 +34,8 @@
   <ItemGroup>
     <Resource Include="2403655.png" />
     <Resource Include="Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" />
+    <Resource Include="Manager\992651.png" />
+    <Resource Include="Manager\pluss.png" />
     <Resource Include="order.png" />
     <Resource Include="Products\download.png" />
   </ItemGroup>

@@ -7,16 +7,34 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManagerProductsPage">
+    <Page.Resources>
+        <Style x:Key="Design" TargetType="Button">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="25,25,25,25"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Page.Resources>
 
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="9*" />
+            <ColumnDefinition Width="7*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Frame Grid.Column="0" VerticalAlignment="Stretch" Name="ManagerProductsFrame" NavigationUIVisibility="Hidden" />
         <StackPanel Grid.Column="1" VerticalAlignment="Stretch" Background="AliceBlue">
-            <Button Name="AddProduct" Content="New" HorizontalAlignment="Left" Foreground="#FFFBFBFC" FontWeight="Bold" FontSize="18" BorderBrush="{x:Null}" Height="57" Background="#FF1B6365" Click="AddProduct_Click" Width="73"/>
-            <Button Name="ShowDeletedProducts" Content="Archive" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF0B5650" BorderBrush="{x:Null}" Foreground="#FFFFFEFE" FontWeight="Bold" Height="56" Width="75" FontSize="16"/>
+            <Button x:Name="AddProduct" Foreground="#FFFBFBFC"  Style="{DynamicResource Design}" FontWeight="Bold" FontSize="18" BorderBrush="{x:Null}" Height="59"  Click="AddProduct_Click" Width="62" RenderTransformOrigin="0.803,2.665"  >
+                <Image Height="85" Source="/Manager/pluss.png" Width="62"/>
+            </Button>
+            <Button x:Name="ShowDeletedProducts" Margin="0,230" Style="{DynamicResource Design}" Content="Archive" BorderBrush="{x:Null}" Foreground="Black" FontWeight="Bold" Height="57" Width="98" FontSize="16"/>
+
+
+
+
+
         </StackPanel>
+
     </Grid>
 </Page>
