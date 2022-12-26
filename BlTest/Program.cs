@@ -312,24 +312,24 @@ class Program
                 }
                 break;
             case "g":
-                foreach (var item in bProduct.Product.GetListedDeletedProducts())
-                {
-                    Console.WriteLine(item);
-                }
+                //foreach (var item in bProduct.Product.GetListedDeletedProducts())
+                //{
+                //    Console.WriteLine(item);
+                //}
                 break;
             case "h":
-                foreach (var item in bProduct.Product.GetListedProductsWithDeleted())
-                {
-                    Console.WriteLine(item);
-                }
+                //foreach (var item in bProduct.Product.GetListedProductsWithDeleted())
+                //{
+                //    Console.WriteLine(item);
+                //}
                 break;
             case "i":
                 Console.WriteLine("Enter the deleted product ID");
                 int.TryParse(Console.ReadLine(), out id);
                 int TheID = id;
-                BO.Product? tmpProduct3 = bProduct.Product.GetDeletedById(id);
+                //BO.Product? tmpProduct3 = bProduct.Product.GetDeletedById(id);
                 Console.WriteLine("The product is:");
-                Console.WriteLine(tmpProduct3);
+                //Console.WriteLine(tmpProduct3);
                 Console.WriteLine("Do you want to restore it? 1- YES, 0- NO");
                 int.TryParse(Console.ReadLine(), out id);
                 if (id == 1)

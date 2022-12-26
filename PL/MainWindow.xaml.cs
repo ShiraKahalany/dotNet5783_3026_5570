@@ -26,12 +26,27 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-
+            ListCategories.Visibility = Visibility.Collapsed;
         }
 
-        private void showProducts_Click(object sender, RoutedEventArgs e) => new ProductListWindow().Show();
+        private void showProducts_Click(object sender, RoutedEventArgs e) => new ProductListWindow().ShowDialog();
 
-        private void Connection_Click(object sender, RoutedEventArgs e)=>new ConnectionWindow().Show();
-        
+        private void Connection_Click(object sender, RoutedEventArgs e)=>new ConnectionWindow().ShowDialog();
+        private void showCategory(object sender, RoutedEventArgs e)
+        {
+            ListCategories.Visibility = Visibility.Visible;
+        }
+        private void hideCategory(object sender,RoutedEventArgs e)
+        {
+            ListCategories.Visibility = Visibility.Hidden;
+        }
+
+        private void Categories_Click(object sender, RoutedEventArgs e)
+        {
+            ListCategories.Visibility= Visibility.Visible;
+        }
+        public void ListCategories_Click(object sender, RoutedEventArgs e) => new ProductListWindow().ShowDialog();
+
+
     }
 }

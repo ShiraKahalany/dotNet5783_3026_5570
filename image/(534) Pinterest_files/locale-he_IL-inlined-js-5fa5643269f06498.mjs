@@ -1,0 +1,2 @@
+(self.__LOADABLE_LOADED_CHUNKS__=self.__LOADABLE_LOADED_CHUNKS__||[]).push([[63230],{923381:(_,r,e)=>{try{0}catch(L){}var t={locale:"he-IL",i18nStrings:void 0,plural:e(62647)};_.exports=t},62647:_=>{_.exports=function(_){return+(1==_&&_%1==0)?0:2==_&&_%1==0?1:_%10==0&&_%1==0&&_>10?2:3}}}]);
+//# sourceMappingURL=https://sm.pinimg.com/webapp/locale-he_IL-inlined-js-5fa5643269f06498.mjs.map
