@@ -25,7 +25,9 @@ namespace PL.Products
         public ProductListWindow()
         {
             InitializeComponent();
-            ProductListView.ItemsSource = bl.Product.GetListedProducts();
+            List<BO.ProductForList?> products = bl.Product.GetListedProducts().ToList();
+            ProductListView.dataContex = products;
+            //ProductListView.ItemsSource = bl.Product.GetListedProducts();
             AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Category));
             AttributeSelector.SelectedItem = BO.Category.All;
         }

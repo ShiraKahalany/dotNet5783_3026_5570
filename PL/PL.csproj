@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="Carts\" />
+    <Folder Include="PO\" />
     <Folder Include="OrderItems\" />
     <Folder Include="Orders\" />
   </ItemGroup>
