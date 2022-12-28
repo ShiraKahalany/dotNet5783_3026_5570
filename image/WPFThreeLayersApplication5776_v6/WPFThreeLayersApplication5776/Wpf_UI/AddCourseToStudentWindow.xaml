@@ -1,0 +1,65 @@
+﻿<Window x:Class="Wpf_UI.AddCourseToStudentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_UI"
+        mc:Ignorable="d"
+        Title="AddCourseToStudentWindow" Height="400" Width="400" FontSize="16">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Label FontSize="24" >Manage Student Course</Label>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5">
+            <Label Content="select Student:" />
+            <ComboBox x:Name="studentsComboBox" MinWidth="100" SelectionChanged="studentsComboBox_SelectionChanged"/>
+        </StackPanel>
+
+        <DockPanel Grid.Row="2" LastChildFill="True" Margin="5">
+            <Expander Header="Add Course for this Student" DockPanel.Dock="Top">
+                <Expander.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFEAE0E0" Offset="0.004"/>
+                        <GradientStop Color="#FFD3CCCC" Offset="1"/>
+                        <GradientStop Color="#FFA69C9C" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Expander.Background>
+                <StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Register Year:" />
+                        <ComboBox x:Name="registerYearComboBox">
+                            <ComboBoxItem  Content="5774"/>
+                            <ComboBoxItem  Content="5775" />
+                            <ComboBoxItem  Content="5776" IsSelected="True"/>
+                            <ComboBoxItem  Content="5777"/>
+                        </ComboBox>
+                        <Label Content="Register Semester:" />
+                        <ComboBox x:Name="registerSemesterComboBox"/>
+                    </StackPanel>
+
+                    <DockPanel>
+                        <Label DockPanel.Dock="Left"  Content="Select Course:" Margin="10"/>
+
+                        <Button DockPanel.Dock="Right" x:Name="addCourseToStudentButton" Margin="10" Content="Add" Click="addCourseToStudentButton_Click"/>
+                        <ComboBox x:Name="coursesComboBox" MinWidth="30" Margin="10"/>
+                    </DockPanel>
+
+                </StackPanel>
+            </Expander>
+            <StackPanel Grid.Column="1" Margin="5" DockPanel.Dock="Right" >
+                <local:NumericUpDownControl x:Name="gradeNumUpDown" />
+                <Button x:Name="updateGradeButton" Content="update Grade" Click="updateGradeButton_Click"/>
+            </StackPanel>
+            <DataGrid x:Name="StudentCoursesDataGrid"  IsReadOnly="True" SelectionChanged="StudentCoursesDataGrid_SelectionChanged"/>
+        </DockPanel>
+
+    </Grid>
+
+</Window>

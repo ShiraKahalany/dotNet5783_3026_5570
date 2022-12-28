@@ -3,7 +3,10 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:PL"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      Background="{DynamicResource MaterialDesignPaper}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManagerProductsPage">
@@ -24,12 +27,34 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Frame Grid.Column="0" VerticalAlignment="Stretch" Name="ManagerProductsFrame" NavigationUIVisibility="Hidden" />
-        <StackPanel Grid.Column="1" VerticalAlignment="Stretch" Background="AliceBlue">
-            <Button x:Name="AddProduct" Foreground="#FFFBFBFC"  Style="{DynamicResource Design}" FontWeight="Bold" FontSize="18" BorderBrush="{x:Null}" Height="59"  Click="AddProduct_Click" Width="62" RenderTransformOrigin="0.803,2.665"  >
-                <Image Height="85" Source="/Manager/pluss.png" Width="62"/>
+        <StackPanel Grid.Column="1" VerticalAlignment="Stretch" Background="white">
+            <Button x:Name="AddProduct" Grid.Row="1"
+            Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
+                BorderBrush="#007E8C7F" Width="56" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" 
+                Margin="0,0,20,20" 
+                Click="AddProduct_Click" 
+                Background="#FFB1BFAD">
+                <materialDesign:PackIcon Kind="Plus" 
+                                         Foreground="Black"
+                                         Height="30" Width="30"/>
             </Button>
-            <Button x:Name="ShowDeletedProducts" Margin="0,230" Style="{DynamicResource Design}" Content="Archive" BorderBrush="{x:Null}" Foreground="Black" FontWeight="Bold" Height="57" Width="98" FontSize="16"/>
-
+            <Button 
+                x:Name="ShowDeletedProducts" 
+                Margin="0,230" 
+                Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
+                Content="Archive" 
+                Foreground="Black"
+                FontWeight="Bold"
+                Height="57" 
+                Width="98"
+                FontSize="16"
+                BorderBrush="#007E8C7F" 
+                Background="#FFB1BFAD"
+                 />
+            
+            
 
 
 

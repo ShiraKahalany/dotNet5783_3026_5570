@@ -1,0 +1,72 @@
+﻿<Window x:Class="Wpf_UI.LinqWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_UI"
+        xmlns:linq="clr-namespace:System.Linq;assembly=System.Core"
+        xmlns:BE="clr-namespace:BE;assembly=BE"
+        mc:Ignorable="d"
+        FontSize="20"
+        Title="LINQ Window" Height="auto" Width="auto">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type BE:Student}">
+            <Border BorderThickness="1" BorderBrush="Black" Grid.RowSpan="2" >
+
+                <local:StudentTemplateUserControl>
+
+            </local:StudentTemplateUserControl>
+                </Border>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="212*"/>
+            <ColumnDefinition Width="283*"/>
+            <ColumnDefinition Width="265*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <WrapPanel Grid.ColumnSpan="3" TextElement.FontSize="16">
+            <DockPanel>
+                <Label DockPanel.Dock="Left"  Content="Select Course:" Margin="10"/>
+                <ComboBox x:Name="coursesComboBox" MinWidth="300" Margin="10"/>
+            </DockPanel>
+
+
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Label Content="Register Year:" />
+                <ComboBox x:Name="registerYearComboBox">
+                    <ComboBoxItem  Content="5774"/>
+                    <ComboBoxItem  Content="5775" />
+                    <ComboBoxItem  Content="5776" IsSelected="True"/>
+                    <ComboBoxItem  Content="5777"/>
+                </ComboBox>
+                <Label Content="Register Semester:" />
+                <ComboBox x:Name="registerSemesterComboBox"/>
+            </StackPanel>
+
+
+        </WrapPanel>
+
+
+
+
+
+        <Button x:Name="AllStudent" Content="Show All Student" Grid.Row="1" Margin="15" Padding="10" Click="AllStudent_Click"/>
+        <Button x:Name="GroupByCampusButton" Content="Group student By Campus" Grid.Row="1" Grid.Column="1"  Margin="15" Padding="10" Click="GroupByCampusButton_Click"/>
+        <Button x:Name="GroupByGradeButton" Content="Group student By Grade" Grid.Row="1" Grid.Column="2" Margin="15" Padding="10" Click="GroupByGradeButton_Click"/>
+
+        <ContentControl x:Name="page" Grid.ColumnSpan="3" Grid.Row="2" BorderBrush="Black" BorderThickness="2">
+
+        </ContentControl>
+
+
+    </Grid>
+</Window>

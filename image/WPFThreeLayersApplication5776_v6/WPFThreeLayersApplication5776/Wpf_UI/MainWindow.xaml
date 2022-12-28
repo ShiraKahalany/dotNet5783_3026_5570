@@ -1,0 +1,43 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_UI"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Wpf_UI.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="addStudentButton" Content="{DynamicResource addStudentString}" 
+			Margin="10" FontSize="30" Grid.Row="0" Click="addStudentButton_Click" />
+
+        <Button x:Name="updateStudentButton" Content="{DynamicResource updateStudentString}" 
+			Margin="10" FontSize="30" Grid.Row="0" Click="updateStudentButton_Click" Grid.Column="1"/>
+        
+        <Button x:Name="addCourseButton" Content="{DynamicResource addCourseString}" 
+			Margin="10" FontSize="30" Grid.Row="1" Click="addCourseButton_Click" Grid.ColumnSpan="2"/>
+
+        
+
+        <Button x:Name="addCourseTOstudentButton" 
+			Margin="10" FontSize="30" Grid.Row="2" Click="addCourseTOstudentButton_Click" Content="{DynamicResource addCourseToStudentString}" Grid.ColumnSpan="2" />
+
+        <Button x:Name="linqButton" 
+			Margin="10" FontSize="30" Grid.Row="3" Click="linqButton_Click" 
+                Content="LINQ" Grid.ColumnSpan="2" />
+
+    </Grid>
+</Window>

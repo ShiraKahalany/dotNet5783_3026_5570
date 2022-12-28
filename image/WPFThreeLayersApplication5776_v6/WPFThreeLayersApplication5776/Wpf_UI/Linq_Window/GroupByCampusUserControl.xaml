@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Wpf_UI.GroupByCampusUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wpf_UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Background="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="79*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="49*"/>
+        </Grid.RowDefinitions>
+
+
+
+
+        <ListView  x:Name="listView" Grid.Row="1" Grid.ColumnSpan="2" >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="2" BorderBrush="Blue" Margin="5">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Path=Key}" FontSize="16" Foreground="Red" TextAlignment="Center" />
+                            <ListView ItemsSource="{Binding}">
+                                <!--<ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <local:StudentTemplateUserControl>
+
+                                        </local:StudentTemplateUserControl>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>-->
+                            </ListView>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Label x:Name="label" Content="All Student Group by Campus" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="#FFFBF7F7" FontSize="21.333" Grid.ColumnSpan="2" />
+
+    </Grid>
+</UserControl>
+

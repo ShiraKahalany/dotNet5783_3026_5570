@@ -1,0 +1,114 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:be="clr-namespace:BE;assembly=BE"
+        xmlns:local="clr-namespace:Wpf_UI"
+        x:Class="Wpf_UI.UpdateStudentWindow"
+        mc:Ignorable="d"
+        Validation.Error="validation_Error"
+        Title="UpdateStudentWindow" Height="900" Width="800" FontSize="16" >
+    <Window.Resources>
+        <local:ImageConverter x:Key="ImageConverter"/>
+    </Window.Resources>
+
+    <Grid ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="addButton" Content="Update" 
+			FontSize="30" Grid.Row="2" Margin="40,5,40,5" Click="updateButton_Click" Grid.ColumnSpan="2" />
+        <Label x:Name="label" Content="Update Student"  
+			FontSize="30" Margin="0" Grid.ColumnSpan="2"/>
+        <StackPanel x:Name="grid1"  HorizontalAlignment="Left" Margin="24,35,0,0" Grid.Row="1" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" Height="37" Width="244">
+
+
+                <Label Content="Student Id:" HorizontalAlignment="Left" Margin="0,0,0,6" VerticalAlignment="Center"/>
+                <ComboBox x:Name="studentIdComboBox" HorizontalAlignment="Left" Height="23" Margin="0,4,0,10" 
+            SelectedValue="{Binding StudentId, Mode=TwoWay,
+    ValidatesOnDataErrors=True,
+    NotifyOnValidationError=True, 
+    ValidatesOnExceptions=true}" 
+            SelectionChanged="studentIdComboBox_SelectionChanged"
+            VerticalAlignment="Center" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="37" Width="244">
+                <Label Content="Student Name:" HorizontalAlignment="Left" Margin="0,0,0,6" VerticalAlignment="Center"/>
+                <TextBox x:Name="studentNameTextBox" HorizontalAlignment="Left" Height="23" Margin="0,4,0,10" Text="{Binding StudentName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="37" Width="248">
+                <Label Content="Student Gender:" HorizontalAlignment="Left" Margin="0,0,0,6" VerticalAlignment="Center"/>
+                <ComboBox x:Name="studentGenderComboBox" SelectedItem="{Binding StudentGender}" Margin="0,0,0,6" Width="124"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="37" Width="248">
+
+
+                <Label Content="Student Date:" HorizontalAlignment="Left" Margin="0,0,0,6" VerticalAlignment="Center"/>
+                <DatePicker x:Name="studentDateDatePicker" HorizontalAlignment="Left" Margin="0,1,0,7" SelectedDate="{Binding StudentDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Is Married:"/>
+                <CheckBox x:Name="isMarriedCheckBox" Content="" HorizontalAlignment="Left" IsChecked="{Binding IsMarried, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="0,6,0,11" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="37" Width="248">
+                <Label Content="Student Campus:" HorizontalAlignment="Left" Margin="0,0,0,6" VerticalAlignment="Center"/>
+                <ComboBox x:Name="studentCampusComboBox" SelectedItem="{Binding StudentCampus}" Margin="0,0,0,6" Width="70" />
+            </StackPanel>
+        </StackPanel>
+
+        <Border Height="400" Width="400"  Grid.Row="1" Grid.Column="1" Margin="20" BorderThickness="2" BorderBrush="Blue">
+            <StackPanel  >
+                <Button x:Name="changeImageButton" 
+                    Content="Change Image" 
+                        Margin="10"
+                Click="changeImageButton_Click"/>
+                <Image x:Name="studentImage" 
+              Source="{Binding ImageSource, Mode=TwoWay, Converter={StaticResource ImageConverter}}"
+               MinHeight="100" MinWidth="100"
+                   Height="300" Width="300"
+                       Stretch="Fill"
+                      >
+                    <!--<Image.Source>
+                <BitmapImage UriSource="{Binding Path=ImageSource}"  />
+        </Image.Source>-->
+                </Image>
+
+            </StackPanel>
+        </Border>
+        <DataGrid x:Name="StudentDataGrid" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="3" Grid.ColumnSpan="2" d:DataContext="{d:DesignInstance be:Student}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="שם הסטודנט" Binding="{Binding StudentName,Mode=OneWay,StringFormat='name {0} '}" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="מכון" Binding="{Binding StudentCampus}"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding StudentDate, StringFormat='dd/MM/yyyy (HH:mm)'}"/>
+                <DataGridTextColumn Header="TimeSpan" Binding="{Binding StudentLifeTimeSpan, StringFormat='({0:hh}:{0:mm})'}"/>
+                <DataGridTemplateColumn Header="Image">
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <Image Height="50" Width="50" Source="{Binding ImageSource, Converter={StaticResource ImageConverter}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn >
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <Button Content="Delete" Click="deleteDataGridButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+    </Grid>
+
+</Window>

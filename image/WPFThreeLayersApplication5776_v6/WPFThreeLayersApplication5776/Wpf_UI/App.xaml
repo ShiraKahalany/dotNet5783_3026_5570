@@ -1,0 +1,22 @@
+﻿<Application x:Class="Wpf_UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Wpf_UI"
+             xmlns:BE="clr-namespace:BE;assembly=BE"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+           
+            <local:ImageConverter x:Key="ImageConverter"/>
+
+            
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/res/languages/AppStrings_EN.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+        </ResourceDictionary>
+         
+    </Application.Resources>
+   
+</Application>

@@ -33,20 +33,17 @@
             <RowDefinition Height="11*"/>
 
         </Grid.RowDefinitions>
-        <Image Source="/home.jpg" RenderTransformOrigin="0.841,0.493" Height="535" VerticalAlignment="Top" Margin="-34,0,0,0" Grid.ColumnSpan="3" Grid.RowSpan="4" HorizontalAlignment="Left" Width="868"/>
-        <StackPanel Orientation="Horizontal" Background="#F0F0F0" Height="35" Grid.ColumnSpan="3" Margin="0,4,0,4">
+        <Image Source="/Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" RenderTransformOrigin="0.841,0.493" Height="539" VerticalAlignment="Top" Grid.ColumnSpan="3" Grid.RowSpan="4" HorizontalAlignment="Left" Width="888" Margin="0,-28,0,0"/>
+        <StackPanel Orientation="Horizontal" Background="#F0F0F0" Grid.ColumnSpan="3" Margin="0,0,0,4">
 
             <Button 
                 x:Name="Connection"
-                Content="התחברות"
-                Height="26" 
-                Width="81" 
+                Content="LogIn"
+                Height="28" 
+                Width="101" 
                 Click="Connection_Click"
                 Margin="10,0,0,0"
                 />
-            <Button  Height="37" Width="39" RenderTransformOrigin="0.398,0.581" >
-                <Image Source="/order.png" Height="20" Width="20" HorizontalAlignment="Left"  />
-            </Button>
             <Button x:Name="Categories"
                     Margin="600,0,0,0" 
                     Width="41" 
@@ -64,17 +61,19 @@
         <ListView Name="ListCategories"
                   HorizontalAlignment="Right"
                   MouseMove="showCategory"
-                  
-                  MouseLeave="hideCategory" Margin="0,43,0,10" Grid.RowSpan="3" Grid.Column="2">
+                  MouseLeave="hideCategory"
+                  Margin="0,43,0,10" 
+                  Grid.RowSpan="3"
+                  Grid.Column="1" Grid.ColumnSpan="2" Width="662">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="5"/>
+                    <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="5"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListViewItem>
                 <Button Name="All"
-                         Width="60"
-                         Height="30"
+                        Width="80"
+                        Height="80"
                         Padding="0"
                         Click="ListCategories_Click">
                     <StackPanel>
@@ -84,8 +83,8 @@
             </ListViewItem>
             <ListViewItem>
                 <Button Name="Bottles"
-                        Width="60"
-                            Height="30"
+                        Width="80"
+                        Height="80"
                         Padding="0"
                          Click="ListCategories_Click">
                     <StackPanel>
@@ -95,8 +94,8 @@
             </ListViewItem>
             <ListViewItem>
                 <Button Name="Diapers"
-                        Width="60"
-                            Height="30"
+                       Width="80"
+                        Height="80"
                         Padding="0"
                          Click="ListCategories_Click">
                     <StackPanel>
@@ -106,8 +105,8 @@
             </ListViewItem>
             <ListViewItem>
                 <Button Name="Clothes"
-                        Width="60"
-                            Height="30"
+                        Width="80"
+                        Height="80"
                         Padding="0"
                         Click="ListCategories_Click">
                     <StackPanel>
@@ -117,8 +116,8 @@
             </ListViewItem>
             <ListViewItem>
                 <Button Name="Carts"
-                        Width="60"
-                            Height="30"
+                        Width="80"
+                        Height="80"
                         Padding="0"
                         Click="ListCategories_Click">
                     <StackPanel>
@@ -128,8 +127,8 @@
             </ListViewItem>
             <ListViewItem>
                 <Button Name="Toys"
-                        Width="60"
-                          Height="30"
+                        Width="80"
+                        Height="80"
                         Padding="0"
                         Click="ListCategories_Click">
                     <StackPanel>
@@ -138,8 +137,7 @@
                 </Button>
             </ListViewItem>
         </ListView>
-
-
+       
 
 
     </Grid>

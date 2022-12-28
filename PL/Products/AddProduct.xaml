@@ -15,16 +15,38 @@
             <ColumnDefinition Width="359*"/>
             <ColumnDefinition Width="41*"/>
         </Grid.ColumnDefinitions>
+        
         <TextBox x:Name="InserId" HorizontalAlignment="Right" FontSize="10" Margin="0,99,376,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" TextAlignment="Right" Height="27" />
         <TextBox Name="InsertName" HorizontalAlignment="Left" Margin="203,136,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" Height="27" />
         <TextBox Name="InsertPrice" HorizontalAlignment="Left" Margin="203,177,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" Height="27"/>
         <TextBox Name="InsertAmount" HorizontalAlignment="Left" Margin="203,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" Height="27" RenderTransformOrigin="2.818,0.141"/>
         <ComboBox Name ="SelectCategory" HorizontalAlignment="Left" Margin="203,273,0,0" VerticalAlignment="Top" Width="139" Height="27" />
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="86,99,0,0" VerticalAlignment="Top" Height="26" Width="69" RenderTransformOrigin="-2.51,0.255"/>
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="91,137,0,0" VerticalAlignment="Top" Height="26" Width="59"/>
-        <Label Content="Price:" HorizontalAlignment="Left" Margin="91,178,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.114,-0.5" Height="26" Width="39"/>
+        <Label
+            Content="ID:" 
+            HorizontalAlignment="Left" 
+            Margin="86,99,0,0" 
+            VerticalAlignment="Top" 
+            Height="26" 
+            Width="69"
+            RenderTransformOrigin="-2.51,0.255"/>
+        <Label 
+            Content="Name:" 
+            HorizontalAlignment="Left"
+            Margin="91,137,0,0"
+            VerticalAlignment="Top"
+            Height="26"
+            Width="59"/>
+        <Label 
+            Content="Price:"
+               HorizontalAlignment="Left" 
+            Margin="91,178,0,0"
+            VerticalAlignment="Top" 
+            RenderTransformOrigin="-0.114,-0.5" 
+            Height="26"
+            Width="39"/>
         <Label Content="Amount In Stock:" HorizontalAlignment="Left" Margin="91,222,0,0" VerticalAlignment="Top" Height="26" Width="107" RenderTransformOrigin="-3.365,0.828"/>
         <Label Content="Category:" HorizontalAlignment="Left" Margin="91,273,0,0" VerticalAlignment="Top" Height="26" Width="64"/>
+        
         <Label Content="Add New Product"  HorizontalAlignment="Left" Margin="33,14,0,0" VerticalAlignment="Top" Height="50" Width="244" FontSize="30"/>
         <Button Content="Add"  Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}"  HorizontalAlignment="Left" Margin="377,345,0,0" VerticalAlignment="Top" Height="27" Width="63" RenderTransformOrigin="1.111,1.387" Click="Button_Click"/>
         <Image HorizontalAlignment="Left" Height="47" Margin="282,16,0,0" VerticalAlignment="Top" Width="99" Source="/Products/download.png" RenderTransformOrigin="1.231,0.428"/>

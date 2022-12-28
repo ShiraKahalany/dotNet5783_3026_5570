@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    
+                    xmlns:System="clr-namespace:System;assembly=mscorlib">
+
+    <System:String x:Key="addStudentString">הוסף סטודנט</System:String>
+    <System:String x:Key="updateStudentString">עדכן סטודנט</System:String>
+    <System:String x:Key="addCourseString">הוסף קורס</System:String>
+    <System:String x:Key="addCourseToStudentString">הוסף קורס לסטודנט</System:String>
+
+</ResourceDictionary>
