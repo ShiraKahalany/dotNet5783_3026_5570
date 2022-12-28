@@ -3,23 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         
         xmlns:local="clr-namespace:PL.Products"
         mc:Ignorable="d"
         Title="ProductUpdateAndActions" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="InserId" IsEnabled="False" HorizontalAlignment="Right" FontSize="10" Margin="0,86,159,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" TextAlignment="Right" Height="27" TextChanged="InserId_TextChanged" />
-        <TextBox Name="InsertName" HorizontalAlignment="Left" Margin="502,136,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" Height="27" />
-        <TextBox Name="InsertPrice" HorizontalAlignment="Left" Margin="601,190,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" Height="27"/>
-        <TextBox Name="InsertAmount" HorizontalAlignment="Left" Margin="601,234,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" Height="27" RenderTransformOrigin="2.818,0.141"/>
-        <ComboBox Name ="SelectCategory" HorizontalAlignment="Left" Margin="502,290,0,0" VerticalAlignment="Top" Width="139" Height="27" SelectionChanged="SelectCategory_SelectionChanged" />
-        <Label Content=":מזהה מוצר" HorizontalAlignment="Left" Margin="670,86,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="26" Width="69"/>
-        <Label Content=":שם מוצר" HorizontalAlignment="Left" Margin="670,137,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="26" Width="59"/>
-        <Label Content=":מחיר" HorizontalAlignment="Left" Margin="670,191,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.114,-0.5" Height="26" Width="39"/>
-        <Label Content=":כמות במלאי" HorizontalAlignment="Left" Margin="670,234,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="26" Width="75"/>
-        <Label Content=":קטגוריה" HorizontalAlignment="Left" Margin="670,291,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="26" Width="55"/>
-        <Label Content="עדכון ופעולות על מוצר" Background="AntiqueWhite" HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Width="800" FontSize="30" HorizontalContentAlignment="Center" FontFamily="Snap ITC" FontWeight="Bold" Foreground="#FF974E4E"/>
-        <Button Content="עדכן" HorizontalAlignment="Left" Margin="412,345,0,0" VerticalAlignment="Top" Height="23" Width="47" RenderTransformOrigin="1.111,1.387" Click="Button_Click"/>
-        <Label x:Name="UpdateProduct" Content="עדכון" HorizontalAlignment="Left" FontSize="18" Margin="720,47,0,0" VerticalAlignment="Top" Background="#FFEEBEBE"/>
-        <Button Name="DeleteProduct" Content="מחק את המוצר" HorizontalAlignment="Left" Margin="106,83,0,0" VerticalAlignment="Top" Height="31" Width="124" Click="DeleteProduct_Click"/>
+        <TextBox x:Name="InserId" HorizontalAlignment="Right" FontSize="10" Margin="0,98,458,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" TextAlignment="Right" Height="27" />
+        <TextBox Name="InsertName" HorizontalAlignment="Left" Margin="203,136,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" Height="27" />
+        <TextBox Name="InsertPrice" HorizontalAlignment="Left" Margin="203,177,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" Height="27"/>
+        <TextBox Name="InsertAmount" HorizontalAlignment="Left" Margin="203,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" Height="27" RenderTransformOrigin="2.818,0.141"/>
+        <ComboBox Name ="SelectCategory" HorizontalAlignment="Left" Margin="203,273,0,0" VerticalAlignment="Top" Width="139" Height="27" />
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="86,99,0,0" VerticalAlignment="Top" Height="26" Width="69" RenderTransformOrigin="-2.51,0.255"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="91,137,0,0" VerticalAlignment="Top" Height="26" Width="59"/>
+        <Label Content="Price:" HorizontalAlignment="Left" Margin="91,178,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.114,-0.5" Height="26" Width="39"/>
+        <Label Content="Amount In Stock:" HorizontalAlignment="Left" Margin="91,222,0,0" VerticalAlignment="Top" Height="26" Width="107" RenderTransformOrigin="-3.365,0.828"/>
+        <Label Content="Category:" HorizontalAlignment="Left" Margin="91,273,0,0" VerticalAlignment="Top" Height="26" Width="64"/>
+        <Label Content="Actions on Product" Background="AntiqueWhite" HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Width="800" FontSize="30" HorizontalContentAlignment="Center" FontFamily="Snap ITC" FontWeight="Bold" Foreground="#FF974E4E"/>
+        <Button Content="Update" HorizontalAlignment="Left" Margin="165,331,0,0" VerticalAlignment="Top" Height="30" Width="78" RenderTransformOrigin="1.111,1.387" Click="Button_Click"/>
+        <Label 
+            x:Name="UpdateProduct" 
+            Content="   Update" 
+            HorizontalAlignment="Left" 
+            FontSize="18" Margin="86,55,0,0"
+            VerticalAlignment="Top" 
+            Background="#FFEEBEBE"
+            Width="99" />
+        <Button Name="DeleteProduct" Content="Delete Product" HorizontalAlignment="Left" Margin="595,66,0,0" VerticalAlignment="Top" Height="31" Width="137" Click="DeleteProduct_Click"/>
     </Grid>
 </Window>

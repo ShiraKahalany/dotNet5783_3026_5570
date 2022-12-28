@@ -22,7 +22,8 @@
 
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="37*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="33*"/>
             <ColumnDefinition Width="63*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -32,22 +33,29 @@
             <RowDefinition Height="11*"/>
 
         </Grid.RowDefinitions>
-        <Image Source="/home.jpg" RenderTransformOrigin="0.841,0.493" Height="535" VerticalAlignment="Top" Margin="-34,0,-34,0" Grid.ColumnSpan="2" Grid.RowSpan="4"/>
-        <StackPanel Orientation="Horizontal" Background="#F0F0F0" Height="35" Grid.ColumnSpan="2">
+        <Image Source="/home.jpg" RenderTransformOrigin="0.841,0.493" Height="535" VerticalAlignment="Top" Margin="-34,0,0,0" Grid.ColumnSpan="3" Grid.RowSpan="4" HorizontalAlignment="Left" Width="868"/>
+        <StackPanel Orientation="Horizontal" Background="#F0F0F0" Height="35" Grid.ColumnSpan="3" Margin="0,4,0,4">
 
-            <Button x:Name="Connection" Content="התחברות" Height="26" Width="81" Click="Connection_Click" Margin="10,0,0,0"/>
-            <Button  Height="37" Width="39" Margin="10,0,0,0" >
-                <Image Source="/order.png" Height="32" Width="32" />
+            <Button 
+                x:Name="Connection"
+                Content="התחברות"
+                Height="26" 
+                Width="81" 
+                Click="Connection_Click"
+                Margin="10,0,0,0"
+                />
+            <Button  Height="37" Width="39" RenderTransformOrigin="0.398,0.581" >
+                <Image Source="/order.png" Height="20" Width="20" HorizontalAlignment="Left"  />
             </Button>
             <Button x:Name="Categories"
                     Margin="600,0,0,0" 
                     Width="41" 
                     VerticalAlignment="Bottom" 
-                    BorderBrush="{x:Null}" 
                     Height="35" 
                     MouseEnter="showCategory" 
                     
                     Click="Categories_Click" >
+
                 <Button.Background>
                     <ImageBrush ImageSource="/menu.png"/>
                 </Button.Background>
@@ -56,7 +64,8 @@
         <ListView Name="ListCategories"
                   HorizontalAlignment="Right"
                   MouseMove="showCategory"
-                  MouseLeave="hideCategory" Margin="0,43,0,105" Grid.RowSpan="2" Grid.Column="1">
+                  
+                  MouseLeave="hideCategory" Margin="0,43,0,10" Grid.RowSpan="3" Grid.Column="2">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="5"/>
@@ -69,10 +78,7 @@
                         Padding="0"
                         Click="ListCategories_Click">
                     <StackPanel>
-                        <Image 
-                            Source="/menu.png"
-                            Width="60"
-                            Height="30"/>
+
                     </StackPanel>
                 </Button>
             </ListViewItem>
