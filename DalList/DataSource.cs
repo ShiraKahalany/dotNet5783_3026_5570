@@ -88,7 +88,8 @@ internal class DataSource
             Name = "Kitchen rug",
             Price = 79.99,
             Category = Category.Kitchen,
-            InStock = 3
+            InStock = 3,
+            Path= "/kitchen.jpg"
         });
 
         Products.Add(
@@ -99,7 +100,8 @@ internal class DataSource
             Name = "Duck bath rug",
             Price = 39.99,
             Category = Category.Bathroom,
-            InStock = 198
+            InStock = 198,
+            Path = "/bath room.jpg"
         });
         Products.Add(
         new Product
@@ -109,7 +111,8 @@ internal class DataSource
             Name = "powerful red microwave",
             Price = 299.99,
             Category = Category.Kitchen,
-            InStock = 45
+            InStock = 45,
+            Path = "/kitchen.jpg"
         });
         Products.Add(
         new Product
@@ -119,7 +122,9 @@ internal class DataSource
             Name = "Children's bed",
             Price = 1999.99,
             Category = Category.Bedroom,
-            InStock = 8
+            InStock = 8,
+            Path = "/bed room.jpg"
+
         });
 
         Products.Add(
@@ -130,7 +135,8 @@ internal class DataSource
             Name = "Garden swing",
             Price = 859.99,
             Category = Category.Garden,
-            InStock = 12
+            InStock = 12,
+            Path = "/garden.jpg"
         });
 
         Products.Add(
@@ -141,7 +147,8 @@ internal class DataSource
             Name = "green leather sofa",
             Price = 7589.99,
             Category = Category.Living_room,
-            InStock = 15
+            InStock = 15,
+            Path = "/living room.jpg"
         });
 
         Products.Add(
@@ -152,7 +159,8 @@ internal class DataSource
             Name = "Sea view picture",
             Price = 139.99,
             Category = Category.Living_room,
-            InStock = 64
+            InStock = 64,
+            Path = "/living room.jpg"
         });
 
         Products.Add(
@@ -163,7 +171,8 @@ internal class DataSource
             Name = "Room mirror",
             Price = 279.99,
             Category = Category.Bedroom,
-            InStock = 38
+            InStock = 38,
+            Path = "/bed room.jpg"
         });
         Products.Add(
         new Product
@@ -173,7 +182,8 @@ internal class DataSource
             Name = "Colorful garden umbrella",
             Price = 499.99,
             Category = Category.Garden,
-            InStock = 2
+            InStock = 2,
+            Path = "/garden room.jpg"
         });
         Products.Add(
         new Product
@@ -183,7 +193,8 @@ internal class DataSource
             Name = "Bath curtain",
             Price = 49.99,
             Category = Category.Bathroom,
-            InStock = 82
+            InStock = 82,
+            Path = "/bath room.jpg"
         });
     }
     private void createOrderItems()  // יצירת פריטי-הזמנה

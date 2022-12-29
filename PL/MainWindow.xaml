@@ -3,13 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
+        xmlns:converter ="clr-namespace:PLConverter"
+
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
 
-
     <Window.Resources>
+        <converter:IntToStringPhoneConverter x:Key="categoryToStringConverter"/>
         <Style x:Key="Design" TargetType="Button">
             <Setter Property="BorderBrush" Value="Black"/>
             <Style.Resources>
@@ -18,36 +19,23 @@
                 </Style>
             </Style.Resources>
         </Style>
+     
     </Window.Resources>
 
     <Grid >
-        <Grid.ColumnDefinitions>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="33*"/>
             <ColumnDefinition Width="63*"/>
-        </Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="43*"/>
-            <RowDefinition Height="353*"/>
-            <RowDefinition Height="27*"/>
-            <RowDefinition Height="11*"/>
-
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
         <Image Source="/Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" RenderTransformOrigin="0.841,0.493" Height="539" VerticalAlignment="Top" Grid.ColumnSpan="3" Grid.RowSpan="4" HorizontalAlignment="Left" Width="888" Margin="0,-28,0,0"/>
-        <StackPanel Orientation="Horizontal" Background="#F0F0F0" Grid.ColumnSpan="3" Margin="0,0,0,4">
-
-            <Button 
-                x:Name="Connection"
-                Content="LogIn"
-                Height="28" 
-                Width="101" 
-                Click="Connection_Click"
-                Margin="10,0,0,0"
-                />
-            <Button x:Name="Categories"
-                    Margin="600,0,0,0" 
+        <StackPanel Orientation="Horizontal" Width="800" Background="#F0F0F0" Grid.ColumnSpan="3" Margin="0,0,0,4">
+            <Button x:Name="Categories" 
                     Width="41" 
-                    VerticalAlignment="Bottom" 
                     Height="35" 
                     MouseEnter="showCategory" 
                     
@@ -59,86 +47,115 @@
             </Button>
         </StackPanel>
         <ListView Name="ListCategories"
-                  HorizontalAlignment="Right"
+                  HorizontalAlignment="Left"
                   MouseMove="showCategory"
                   MouseLeave="hideCategory"
-                  Margin="0,43,0,10" 
-                  Grid.RowSpan="3"
-                  Grid.Column="1" Grid.ColumnSpan="2" Width="662">
+                  
+                  Margin="0,35,0,18" 
+                  Grid.RowSpan="3" Grid.ColumnSpan="3" Width="800">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="5"/>
+                    <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Left" Margin="5"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListViewItem>
-                <Button Name="All"
-                        Width="80"
-                        Height="80"
+                <Button Name="kitchen"
+                        Width="112"
+                        Height="143"
+                        Padding="0" 
+                        Content="Kitchen" 
+                        VerticalAlignment="Bottom"
+                        Click="ListCategories_Click"
+                        >
+                    <Button.Background>
+                        <ImageBrush ImageSource="/kitchen.jpg"/>
+                    </Button.Background>
+
+                </Button>
+            </ListViewItem>
+            <ListViewItem>
+                <Button Name="living_room"
+                        Width="112"
+                        Height="143"
                         Padding="0"
+                        VerticalAlignment="Bottom"
+                        Click="ListCategories_Click"
+                        Content="Living Room"
+                        >
+                    <Button.Background>
+                        <ImageBrush ImageSource="/living room.jpg"/>
+                    </Button.Background>
+
+
+                    <!--<StackPanel>
+
+                    </StackPanel>-->
+                </Button>
+            </ListViewItem>
+            <ListViewItem Selected="ListViewItem_Selected">
+                <Button Name="bed_room"
+                        Width="112"
+                        Height="143"
+                        Padding="0"
+                        Content="Bed Room"
                         Click="ListCategories_Click">
-                    <StackPanel>
+                    <Button.Background>
+                        <ImageBrush ImageSource="/bed room.jpg"/>
+                    </Button.Background>
+                    <!--<StackPanel>
 
-                    </StackPanel>
+                    </StackPanel>-->
                 </Button>
             </ListViewItem>
             <ListViewItem>
-                <Button Name="Bottles"
-                        Width="80"
-                        Height="80"
+                <Button Name="bath_room"
+                        Width="112"
+                        Height="143"
                         Padding="0"
-                         Click="ListCategories_Click">
-                    <StackPanel>
-
-                    </StackPanel>
-                </Button>
-            </ListViewItem>
-            <ListViewItem>
-                <Button Name="Diapers"
-                       Width="80"
-                        Height="80"
-                        Padding="0"
-                         Click="ListCategories_Click">
-                    <StackPanel>
-
-                    </StackPanel>
-                </Button>
-            </ListViewItem>
-            <ListViewItem>
-                <Button Name="Clothes"
-                        Width="80"
-                        Height="80"
-                        Padding="0"
+                        Content="Bath Room"
                         Click="ListCategories_Click">
-                    <StackPanel>
+                    <Button.Background>
+                        <ImageBrush ImageSource="/bath room.jpg"/>
+                    </Button.Background>
 
-                    </StackPanel>
                 </Button>
             </ListViewItem>
             <ListViewItem>
-                <Button Name="Carts"
-                        Width="80"
-                        Height="80"
+                <Button Name="garden"
+                         Width="112"
+                        Height="143"
                         Padding="0"
+                        Content="Garden"
                         Click="ListCategories_Click">
-                    <StackPanel>
+                    <Button.Background>
+                        <ImageBrush ImageSource="/garden.jpg"/>
+                    </Button.Background>
 
-                    </StackPanel>
                 </Button>
             </ListViewItem>
             <ListViewItem>
-                <Button Name="Toys"
-                        Width="80"
-                        Height="80"
+                <Button Name="all"
+                         Width="112"
+                        Height="143"
                         Padding="0"
+                        Content="All Products"
                         Click="ListCategories_Click">
-                    <StackPanel>
-
-                    </StackPanel>
+                    
                 </Button>
             </ListViewItem>
         </ListView>
-       
+        <Button 
+            x:Name="Connection"
+            Content="LogIn" 
+            Click="Connection_Click" 
 
-
+            RenderTransformOrigin="1.046,0.262"
+            Width="100"
+            Height="35"
+            Grid.Row="0"
+            
+            HorizontalAlignment="Right"
+                />
+        <Frame x:Name="Catalog" Margin="0,35,0,0" Grid.RowSpan="2"  />
     </Grid>
 </Window>

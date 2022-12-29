@@ -4,13 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BO;
-//using System.Collections.Generic;
 using System.ComponentModel;
 namespace PO;
 
 class ProductPO : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
+
+    private bool isDeleted;
+
+    public bool IsDeleted
+    {
+        get
+        { return isDeleted; }
+        set
+        {
+            isDeleted = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("IsDeleted"));
+            }
+        }
+    }
+
 
     private int id;
 
@@ -43,8 +59,8 @@ class ProductPO : INotifyPropertyChanged
         }
     }
 
-    private double price;
-    public double Price
+    private double? price;
+    public double? Price
     {
         get
         { return price; }
@@ -73,9 +89,9 @@ class ProductPO : INotifyPropertyChanged
         }
     }
 
-    private int inStock;
+    private int? inStock;
 
-    public int InStock
+    public int? InStock
     {
         get
         { return inStock; }

@@ -15,6 +15,6 @@ public class Product
     public Category Category { get; set; }  //הקטגוריה אליה שייך המוצר
     public int? InStock { get; set; }  //כמה פריטים של המוצר יש במלאי
     
-    public string? path = null;  //כתובת תמונה של המוצר
+    public string? Path { get; set; } //כתובת תמונה של המוצר
     public override string ToString() => this.ToStringProperty();  //הפיכה למחרוזת
 } 

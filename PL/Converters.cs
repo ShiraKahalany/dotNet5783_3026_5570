@@ -44,6 +44,36 @@ namespace PLConverter
             }
         }
     }
+
+    public class CategoryToStringConverter : IValueConverter
+    {
+        //convert from source property type to target property type
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch ((BO.Category)value)
+            {
+                case Category.Kitchen:
+                    return "Kitchen";
+                case Category.Garden:
+                    return "Garden";
+                case Category.Living_room:
+                    return "Living Room";
+                case Category.Bedroom:
+                    return "Bed Room";
+                case Category.Bathroom:
+                    return "Bath Room";
+                case Category.All:
+                    return "All Products";
+                default:
+                    return " ";
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return " ";
+        }
+    }
     public class BoolToVisibilityConverter : IValueConverter
     {
         //convert from source property type to target property type
@@ -140,11 +170,29 @@ namespace PLConverter
         //convert from source property type to target property type
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return "0" + value;
+            switch ((BO.Category)value)
+            {
+                case Category.Kitchen:
+                    return "Kitchen";
+                case Category.Garden:
+                    return "Garden";
+                case Category.Living_room:
+                    return "Living Room";
+                case Category.Bedroom:
+                    return "Bed Room";
+                case Category.Bathroom:
+                    return "Bath Room";
+                case Category.All:
+                    return "All Products";
+                default:
+                    return " ";
+            }
         }
 
-        //convert from target property type to source property type
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => int.Parse(value.ToString());
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return " ";
+        }
     }
 
     public class IntToStringConverter : IValueConverter

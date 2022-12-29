@@ -1,0 +1,66 @@
+﻿<Page x:Class="PL.Products.ProductDetails"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:PL.Products"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ProductDetails">
+
+    <Grid Background="White">
+        <Image HorizontalAlignment="Left" 
+               Height="268" Margin="500,58,0,0" 
+               VerticalAlignment="Top" Width="224" Source="{Binding Path}" />
+
+        <TextBlock 
+            Name="nameofproduct"
+            HorizontalAlignment="Left"
+            FontFamily="Candara" 
+            FontWeight="Bold"
+            Foreground="gray"
+            FontSize="25" 
+            Margin="44,26,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding Name}" 
+            VerticalAlignment="Top" 
+            Height="50"
+            Width="285"/>
+        <TextBlock 
+            Name="priceofproduct"
+            IsEnabled="false"
+            HorizontalAlignment="Left"
+            FontSize="25"
+            Margin="44,86,0,0"
+            TextWrapping="Wrap"
+            Text="{Binding Price}" VerticalAlignment="Top" Height="41" Width="89"/>
+        <TextBlock
+            Name="categoryofproduct"
+             IsEnabled="false"
+            HorizontalAlignment="Left"
+            FontSize="25"  TextWrapping="Wrap"
+            Text="{Binding Category}" VerticalAlignment="Top" Height="48" Width="196" Margin="44,132,0,0"/>
+        <TextBlock
+            Name="idofproduct"
+             IsEnabled="false"
+            HorizontalAlignment="Left" 
+            FontSize="25"  
+            TextWrapping="Wrap" 
+            Text="{Binding ID}" VerticalAlignment="Top" Height="42" Width="89" Margin="44,282,0,0" RenderTransformOrigin="0.505,2.133"/>
+        <TextBox Name="InsertAmount"  Margin="44,224,716,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="40" Height="28" />
+        <Button  Name="addTocart"
+                 Click="AddTocart_Click"
+                Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
+                HorizontalAlignment="Left"
+                Margin="237,254,0,0"
+                VerticalAlignment="Top" Height="49" Width="50">
+            <materialDesign:PackIcon Kind="Plus" 
+                                         Foreground="Black"
+                                         Height="30" Width="30"/>
+            
+        </Button>
+
+
+    </Grid>
+</Page>

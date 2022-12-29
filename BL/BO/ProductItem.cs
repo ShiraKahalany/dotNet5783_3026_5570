@@ -15,5 +15,6 @@ public class ProductItem
     public Category Category { get; set; }  //הקטגוריה של המוצר
     public int? Amount { get; set; }  //כמה יש מהמוצר בסל
     public bool? IsInStock { get; set; }  //האם המוצר קיים במלאי
+    public string? Path { get; set; }
     public override string ToString() => this.ToStringProperty();  //הפיכה למחרוזת
 }

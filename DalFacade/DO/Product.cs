@@ -10,7 +10,7 @@ public struct Product
     public double? Price { get; set; }  //מחיר המוצר
     public Category Category { get; set; }  //לאיזה קטגוריה המוצר משתייך
     public int? InStock { get; set; }  //כמה פריטים מהמוצר יש במלאי
-    public string? path;
+    public string? Path { get; set; }
     //תיאור מוצר כמחרוזת
     public override string ToString() =>  Tools.ToStringProperty(this);
 

@@ -109,7 +109,7 @@ internal class Product : IProduct
                     Category = (BO.Category)pro?.Category!,
                     Amount = counter,
                     IsInStock = (counter > 0)
-                    ////path???????????
+                    //path = pro.path
                 };
                 return prod;
             }
