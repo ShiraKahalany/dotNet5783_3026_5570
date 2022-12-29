@@ -19,7 +19,7 @@
                 </Style>
             </Style.Resources>
         </Style>
-     
+
     </Window.Resources>
 
     <Grid >
@@ -33,19 +33,39 @@
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
         <Image Source="/Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" RenderTransformOrigin="0.841,0.493" Height="539" VerticalAlignment="Top" Grid.ColumnSpan="3" Grid.RowSpan="4" HorizontalAlignment="Left" Width="888" Margin="0,-28,0,0"/>
-        <StackPanel Orientation="Horizontal" Width="800" Background="#F0F0F0" Grid.ColumnSpan="3" Margin="0,0,0,4">
-            <Button x:Name="Categories" 
+        <!--<StackPanel Orientation="Horizontal" Width="800" Background="#F0F0F0" Grid.ColumnSpan="3" Margin="0,0,0,4">-->
+        <Button x:Name="Categories" 
                     Width="41" 
                     Height="35" 
                     MouseEnter="showCategory" 
                     
-                    Click="Categories_Click" >
+                    Click="Categories_Click" Margin="10,4,749,4" >
 
-                <Button.Background>
-                    <ImageBrush ImageSource="/menu.png"/>
-                </Button.Background>
-            </Button>
-        </StackPanel>
+            <Button.Background>
+                <ImageBrush ImageSource="/menu.png"/>
+            </Button.Background>
+        </Button>
+        <Button  x:Name="CartButton"
+            Content="Cart" RenderTransformOrigin="1.046,0.262"
+            Width="100"
+            Height="35"
+            Grid.Row="0"
+                 
+            HorizontalAlignment="Left" Margin="572,4,0,4" Click="CartButton_Click"
+                    />
+        <Button 
+            x:Name="Connection"
+            Content="LogIn" 
+            Click="Connection_Click" 
+
+            RenderTransformOrigin="1.046,0.262"
+            Width="100"
+            Height="35"
+            Grid.Row="0"
+            
+            HorizontalAlignment="Left" Margin="690,4,0,4"
+                />
+
         <ListView Name="ListCategories"
                   HorizontalAlignment="Left"
                   MouseMove="showCategory"
@@ -140,22 +160,11 @@
                         Padding="0"
                         Content="All Products"
                         Click="ListCategories_Click">
-                    
+
                 </Button>
             </ListViewItem>
         </ListView>
-        <Button 
-            x:Name="Connection"
-            Content="LogIn" 
-            Click="Connection_Click" 
 
-            RenderTransformOrigin="1.046,0.262"
-            Width="100"
-            Height="35"
-            Grid.Row="0"
-            
-            HorizontalAlignment="Right"
-                />
         <Frame x:Name="Catalog" Margin="0,35,0,0" Grid.RowSpan="2"  />
     </Grid>
 </Window>

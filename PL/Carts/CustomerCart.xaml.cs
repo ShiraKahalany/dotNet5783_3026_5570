@@ -21,10 +21,10 @@ namespace PL.Carts;
 public partial class CustomerCart : Page
 {
     private IBL bl = BLFactory.GetBL();
-    public CustomerCart(int id,int amount)
+    public CustomerCart()
     {
         InitializeComponent();
-        BO.Cart cart =new BO.Cart();
-        bl.Cart.AddProductToCart(cart,id,amount);
+        
+        
     }
 }

@@ -9,6 +9,24 @@
       Title="CustomerCart">
 
     <Grid Background="White">
-        
+
+        <ListView x:Name="listCatalog"  Background="Azure"
+                  HorizontalAlignment="Center" Height="430" VerticalAlignment="Top"  Width="780">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="1"  MaxHeight="200" VerticalAlignment="Top"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
+                     
+                        <TextBlock Text="jzuhuz"></TextBlock>
+                       
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Page>

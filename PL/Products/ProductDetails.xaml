@@ -48,7 +48,6 @@
             FontSize="25"  
             TextWrapping="Wrap" 
             Text="{Binding ID}" VerticalAlignment="Top" Height="42" Width="89" Margin="44,282,0,0" RenderTransformOrigin="0.505,2.133"/>
-        <TextBox Name="InsertAmount"  Margin="44,224,716,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="40" Height="28" />
         <Button  Name="addTocart"
                  Click="AddTocart_Click"
                 Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
@@ -58,8 +57,9 @@
             <materialDesign:PackIcon Kind="Plus" 
                                          Foreground="Black"
                                          Height="30" Width="30"/>
-            
+
         </Button>
+        <ComboBox  Name="AmountOfProduct" HorizontalAlignment="Left" Margin="44,225,0,0" VerticalAlignment="Top" Width="84"/>
 
 
     </Grid>

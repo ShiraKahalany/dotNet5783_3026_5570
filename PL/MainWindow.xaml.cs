@@ -15,58 +15,57 @@ using System.Windows.Shapes;
 using BlApi;
 using PL.Products;
 
-namespace PL
+namespace PL;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    private IBL bl= BLFactory.GetBL();
+    public MainWindow()
     {
-        private IBL bl= BLFactory.GetBL();
-        public MainWindow()
-        {
-            InitializeComponent();
-            ListCategories.Visibility = Visibility.Collapsed;
-           // kitchen.Content = BO.Category.Kitchen;
-           // bed_room.DataContext = BO.Category.Bedroom;
-           //living_room.DataContext = BO.Category.Living_room;
-           // bath_room.DataContext = BO.Category.Bathroom;
-           // garden.DataContext = BO.Category.Garden;
-           // all.DataContext = BO.Category.All;
-        }
+        InitializeComponent();
+        ListCategories.Visibility = Visibility.Collapsed;
+        PO.CartPO pocart =new PO.CartPO();
+       // kitchen.Content = BO.Category.Kitchen;
+       // bed_room.DataContext = BO.Category.Bedroom;
+       //living_room.DataContext = BO.Category.Living_room;
+       // bath_room.DataContext = BO.Category.Bathroom;
+       // garden.DataContext = BO.Category.Garden;
+       // all.DataContext = BO.Category.All;
+    }
 
-        private void showProducts_Click(object sender, RoutedEventArgs e) => new ProductListWindow().ShowDialog();
+    private void showProducts_Click(object sender, RoutedEventArgs e) => new ProductListWindow().ShowDialog();
 
-        private void Connection_Click(object sender, RoutedEventArgs e)=>new ConnectionWindow().ShowDialog();
-        private void showCategory(object sender, RoutedEventArgs e)
-        {
-            ListCategories.Visibility = Visibility.Visible;
-        }
-        private void hideCategory(object sender,RoutedEventArgs e)
-        {
-            ListCategories.Visibility = Visibility.Hidden;
-        }
+    private void Connection_Click(object sender, RoutedEventArgs e)=>new ConnectionWindow().ShowDialog();
+    private void showCategory(object sender, RoutedEventArgs e)
+    {
+        ListCategories.Visibility = Visibility.Visible;
+    }
+    private void hideCategory(object sender,RoutedEventArgs e)
+    {
+        ListCategories.Visibility = Visibility.Hidden;
+    }
 
-        private void Categories_Click(object sender, RoutedEventArgs e)
-        {
-            ListCategories.Visibility= Visibility.Visible;
-            Catalog.Visibility = Visibility.Hidden;
-        }
-        //public void ListCategories_Click(object sender, RoutedEventArgs e) => new ProductListWindow().ShowDialog();
+    private void Categories_Click(object sender, RoutedEventArgs e)
+    {
+        ListCategories.Visibility= Visibility.Visible;
+        Catalog.Visibility = Visibility.Hidden;
+    }
+    //public void ListCategories_Click(object sender, RoutedEventArgs e) => new ProductListWindow().ShowDialog();
 
-        private void ListCategories_Click(object sender, RoutedEventArgs e)
-        {
-            Catalog.Content = new CatalogPage(((Button)sender).Name, Catalog);
-            Catalog.Visibility = Visibility.Visible;
-        }
+    private void ListCategories_Click(object sender, RoutedEventArgs e)
+    {
+        Catalog.Content = new CatalogPage(((Button)sender).Name, Catalog);
+        Catalog.Visibility = Visibility.Visible;
+    }
 
-        public void ListViewItem_Selected(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-
+    public void ListViewItem_Selected(object sender, RoutedEventArgs e)
+    {
 
     }
+
+    private void CartButton_Click(object sender, RoutedEventArgs e)=>Catalog.Content = new PL.Carts.CustomerCart();
+    
 }
