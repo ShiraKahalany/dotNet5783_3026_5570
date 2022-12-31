@@ -16,6 +16,7 @@
     <None Remove="2403655.png" />
     <None Remove="bath room.jpg" />
     <None Remove="bed room.jpg" />
+    <None Remove="Carts\delete.png" />
     <None Remove="garden.jpg" />
     <None Remove="Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" />
     <None Remove="home.jpg" />
@@ -45,6 +46,7 @@
   <ItemGroup>
     <Resource Include="bath room.jpg" />
     <Resource Include="bed room.jpg" />
+    <Resource Include="Carts\delete.png" />
     <Resource Include="garden.jpg" />
     <Resource Include="Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" />
     <Resource Include="home.jpg" />

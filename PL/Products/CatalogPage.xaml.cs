@@ -54,6 +54,6 @@ public partial class CatalogPage : Page
 
     private void ProductDetails_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
-        frame.Content = new ProductDetails((BO.ProductForList)listCatalog.SelectedItem);
+        frame.Content = new ProductDetails((BO.ProductForList)listCatalog.SelectedItem, cart);
     }
 }

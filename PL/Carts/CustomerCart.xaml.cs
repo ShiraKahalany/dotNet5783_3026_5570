@@ -25,7 +25,7 @@ public partial class CustomerCart : Page
     public CustomerCart(PO.CartPO cartPO)
     {
         InitializeComponent();
-        
-        
+        CartItems.DataContext=cartPO.Items;
+        totalPrice.DataContext=cartPO.TotalPrice;
     }
 }
