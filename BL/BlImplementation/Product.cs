@@ -195,8 +195,10 @@ internal class Product : IProduct
             _ => dal!.Product.GetAll((DO.Product? order) => order.GetValueOrDefault().IsDeleted == false),
         };
 
+        //return (from DO.Product doProduct in doProductList
+        //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
+        //       .ToList();
         return (from DO.Product doProduct in doProductList
-                select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
-               .ToList();
+                select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()));
     }
 }

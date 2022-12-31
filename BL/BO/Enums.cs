@@ -8,4 +8,4 @@ namespace BO;
 
 public enum Category { Living_room, Bathroom, Kitchen, Bedroom, Garden, All }  //אינאם עבור קטגוריות המוצרים בחנות
 public enum OrderStatus {Ordered, Shipped,Delivered, None} //אינאם עבור הסטטוסים האפשריים עבור הזמנה
-public enum Filters { filterByCategory, filterByName, None }
+public enum Filters { filterByCategory, filterByName, filterByIsNotDeleted, None }

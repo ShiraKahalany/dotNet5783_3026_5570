@@ -7,11 +7,22 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CustomerCart">
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="AntiqueWhite">
+            <Label Content="My Cart" Background="AntiqueWhite" HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Width="800" FontSize="30" HorizontalContentAlignment="Center" FontFamily="Snap ITC" FontWeight="Bold" Foreground="#FF974E4E"/>
+        </Grid>
+    <Grid Grid.Row="1" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.8*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
 
-    <Grid Background="White">
-
-        <ListView x:Name="listCatalog"  Background="Azure"
-                  HorizontalAlignment="Center" Height="430" VerticalAlignment="Top"  Width="780">
+            <ListView x:Name="listCatalog" Grid.Column="0" Background="Azure" HorizontalAlignment="Center" Height="430" VerticalAlignment="Top"  Width="780">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="1"  MaxHeight="200" VerticalAlignment="Top"/>
@@ -19,7 +30,7 @@
             </ItemsControl.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
+                    <StackPanel Background="Azure" Orientation="Vertical" VerticalAlignment="Stretch">
                      
                         <TextBlock Text="jzuhuz"></TextBlock>
                        
@@ -28,5 +39,6 @@
             </ListView.ItemTemplate>
         </ListView>
 
+    </Grid>
     </Grid>
 </Page>

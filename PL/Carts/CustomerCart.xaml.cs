@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BlApi;
+using PO;
 namespace PL.Carts;
 
 /// <summary>
@@ -21,7 +22,7 @@ namespace PL.Carts;
 public partial class CustomerCart : Page
 {
     private IBL bl = BLFactory.GetBL();
-    public CustomerCart()
+    public CustomerCart(PO.CartPO cartPO)
     {
         InitializeComponent();
         

@@ -23,6 +23,10 @@
     </Window.Resources>
 
     <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="53*"/>
+            <ColumnDefinition Width="147*"/>
+        </Grid.ColumnDefinitions>
         <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="33*"/>
@@ -32,14 +36,14 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <Image Source="/Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" RenderTransformOrigin="0.841,0.493" Height="539" VerticalAlignment="Top" Grid.ColumnSpan="3" Grid.RowSpan="4" HorizontalAlignment="Left" Width="888" Margin="0,-28,0,0"/>
+        <Image Source="/Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" RenderTransformOrigin="0.841,0.493" Height="539" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Left" Width="888" Margin="0,-28,0,0"/>
         <!--<StackPanel Orientation="Horizontal" Width="800" Background="#F0F0F0" Grid.ColumnSpan="3" Margin="0,0,0,4">-->
         <Button x:Name="Categories" 
                     Width="41" 
                     Height="35" 
                     MouseEnter="showCategory" 
                     
-                    Click="Categories_Click" Margin="10,4,749,4" >
+                    Click="Categories_Click" Margin="10,4,161,4" >
 
             <Button.Background>
                 <ImageBrush ImageSource="/menu.png"/>
@@ -51,7 +55,7 @@
             Height="35"
             Grid.Row="0"
                  
-            HorizontalAlignment="Left" Margin="572,4,0,4" Click="CartButton_Click"
+            HorizontalAlignment="Left" Margin="360,4,0,4" Click="CartButton_Click" Grid.Column="1"
                     />
         <Button 
             x:Name="Connection"
@@ -63,16 +67,16 @@
             Height="35"
             Grid.Row="0"
             
-            HorizontalAlignment="Left" Margin="690,4,0,4"
+            HorizontalAlignment="Left" Margin="478,4,0,4" Grid.Column="1"
                 />
 
         <ListView Name="ListCategories"
                   HorizontalAlignment="Left"
                   MouseMove="showCategory"
                   MouseLeave="hideCategory"
-                  
+                  Background="Gray"
                   Margin="0,35,0,18" 
-                  Grid.RowSpan="3" Grid.ColumnSpan="3" Width="800">
+                  Grid.RowSpan="2" Grid.ColumnSpan="2" Width="800">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Left" Margin="5"/>
@@ -165,6 +169,6 @@
             </ListViewItem>
         </ListView>
 
-        <Frame x:Name="Catalog" Margin="0,35,0,0" Grid.RowSpan="2"  />
+        <Frame x:Name="Catalog" Margin="0,35,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"  />
     </Grid>
 </Window>
