@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 namespace PO;
 
- class CartPO : INotifyPropertyChanged
+ public class CartPO : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
 

@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using PO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -31,6 +32,7 @@ public partial class ProductDetails : Page
         int id = product.ID;
         int amount = (int)AmountOfProduct.SelectedItem;
         bl.Cart.AddProductToCart(cart, id, amount);
+        //CartPO.
         MessageBox.Show("Add To Cart Seccessfully", "Add To Cart", MessageBoxButton.OK);
         this.NavigationService.GoBack();
     }
