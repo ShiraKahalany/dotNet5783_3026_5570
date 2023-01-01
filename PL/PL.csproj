@@ -18,8 +18,11 @@
     <None Remove="bed room.jpg" />
     <None Remove="garden.jpg" />
     <None Remove="Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" />
+    <None Remove="green-sofa-white-living-room-with-free-space.jpg" />
     <None Remove="home.jpg" />
+    <None Remove="istockphoto-1227524015-612x612.jpg" />
     <None Remove="kitchen.jpg" />
+    <None Remove="living room background.jpg" />
     <None Remove="living room.jpg" />
     <None Remove="Manager\992651.png" />
     <None Remove="Manager\pluss.png" />
@@ -47,8 +50,11 @@
     <Resource Include="bed room.jpg" />
     <Resource Include="garden.jpg" />
     <Resource Include="Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" />
+    <Resource Include="green-sofa-white-living-room-with-free-space.jpg" />
     <Resource Include="home.jpg" />
+    <Resource Include="istockphoto-1227524015-612x612.jpg" />
     <Resource Include="kitchen.jpg" />
+    <Resource Include="living room background.jpg" />
     <Resource Include="living room.jpg" />
     <Resource Include="Manager\992651.png" />
     <Resource Include="Manager\pluss.png" />

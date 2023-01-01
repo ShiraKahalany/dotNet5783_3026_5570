@@ -67,5 +67,6 @@ public partial class MainWindow : Window
     }
 
     private void CartButton_Click(object sender, RoutedEventArgs e)=>Catalog.Content = new PL.Carts.CustomerCart();
+
     
 }
