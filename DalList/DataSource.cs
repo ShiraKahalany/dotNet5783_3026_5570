@@ -89,7 +89,7 @@ internal class DataSource
             Price = 60,
             Category = Category.Kitchen,
             InStock = 3,
-            Path= "/Kitchen rug.jpg"
+            Path= "/image/Kitchen rug.jpg"
         });
 
         Products.Add(
@@ -101,7 +101,7 @@ internal class DataSource
             Price = 40,
             Category = Category.Bathroom,
             InStock = 198,
-            Path = "/Black Soft Luxury Bath Rug.jpg"
+            Path = "/image/Black Soft Luxury Bath Rug.jpg"
         });
         Products.Add(
         new Product
@@ -112,7 +112,7 @@ internal class DataSource
             Price = 29,
             Category = Category.Kitchen,
             InStock = 45,
-            Path = "/Astoria Stoneware Holder.jpg"
+            Path = "/image/Astoria Stoneware Holder.jpg"
         });
         Products.Add(
         new Product
@@ -123,7 +123,7 @@ internal class DataSource
             Price = 1999,
             Category = Category.Bedroom,
             InStock = 30,
-            Path = "/White Bunk Bed With Stairs and Slide.jpg"
+            Path = "/image/White Bunk Bed With Stairs and Slide.jpg"
 
         });
 
@@ -136,7 +136,7 @@ internal class DataSource
             Price = 99,
             Category = Category.Garden,
             InStock = 44,
-            Path = "/White Fluted Ceramic Indoor-outdoor-windowsill Planter.jpg"
+            Path = "/image/White Fluted Ceramic Indoor-outdoor-windowsill Planter.jpg"
         });
 
         Products.Add(
@@ -148,7 +148,7 @@ internal class DataSource
             Price = 3347,
             Category = Category.Living_room,
             InStock = 15,
-            Path = "/3-Pieces Green Sofa.jpg"
+            Path = "/image/3-Pieces Green Sofa.jpg"
         });
 
         Products.Add(
@@ -160,7 +160,7 @@ internal class DataSource
             Price = 539.10,
             Category = Category.Living_room,
             InStock = 64,
-            Path = "/Mid-Century Heathered Wool Rug.jpg"
+            Path = "/image/Mid-Century Heathered Wool Rug.jpg"
         });
 
         Products.Add(
@@ -168,11 +168,11 @@ internal class DataSource
         {
             IsDeleted = false,
             ID = 834675,
-            Name = "Thin-Wood-floor Mirror 30W x 72H",
+            Name = "/image/Thin-Wood-floor Mirror 30W x 72H",
             Price = 279.99,
             Category = Category.Bedroom,
             InStock = 104,
-            Path = "/Thin-Wood-floor Mirror.jpg"
+            Path = "/image/Thin-Wood-floor Mirror.jpg"
         });
         Products.Add(
         new Product
@@ -183,7 +183,7 @@ internal class DataSource
             Price = 503.10,
             Category = Category.Garden,
             InStock = 2,
-            Path = "/garden room.jpg"
+            Path = "/image/garden room.jpg"
         });
         Products.Add(
         new Product
@@ -194,7 +194,7 @@ internal class DataSource
             Price = 35,
             Category = Category.Bathroom,
             InStock = 82,
-            Path = "/Dark-Bronze Mid-Century-Contour-Bathroom Hardware.jpg"
+            Path = "/image/Dark-Bronze Mid-Century-Contour-Bathroom Hardware.jpg"
         });
         //////newwww
         Products.Add(
@@ -206,7 +206,7 @@ internal class DataSource
             Price = 2398.40,
             Category = Category.Living_room,
             InStock = 82,
-            Path = "/3-piece dark gray sofa.jpg"
+            Path = "/image/3-piece dark gray sofa.jpg"
         });
     }
     private void createOrderItems()  // יצירת פריטי-הזמנה

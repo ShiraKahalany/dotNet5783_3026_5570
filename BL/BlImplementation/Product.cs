@@ -185,7 +185,10 @@ internal class Product : IProduct
         enumFilter switch
         {
             BO.Filters.filterByCategory =>
-            dal!.Product.GetAll(dp => (dp?.Category == (filterValue != null ? (DO.Category)filterValue : DO.Category.All)) && dp?.IsDeleted == false),
+            //dal!.Product.GetAll(dp => (dp?.Category == (filterValue != null ? (DO.Category)filterValue : DO.Category.All)) && dp?.IsDeleted == false),
+            dal!.Product.GetAll(dp =>((filterValue != null ? (dp?.Category == (DO.Category)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))) ,
+
+
 
             BO.Filters.filterByName =>
              dal!.Product.GetAll(dp => (dp?.Name == (string?)(filterValue)) && dp?.IsDeleted == false),

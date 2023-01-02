@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 namespace PO;
 
-class OrderPO : INotifyPropertyChanged
+public class OrderPO : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
 

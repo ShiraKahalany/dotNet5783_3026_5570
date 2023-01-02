@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -15,11 +15,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ProductsImages\3-piece dark gray sofa.jpg" />
+    <None Remove="ProductsImages\3-Pieces Green Sofa.jpg" />
+    <None Remove="ProductsImages\Astoria Stoneware Holder.jpg" />
+    <None Remove="ProductsImages\Black Soft Luxury Bath Rug.jpg" />
+    <None Remove="ProductsImages\Dark-Bronze Mid-Century-Contour-Bathroom Hardware.jpg" />
+    <None Remove="ProductsImages\White Bunk Bed With Stairs and Slide.jpg" />
+    <None Remove="ProductsImages\White Fluted Ceramic Indoor-outdoor-windowsill Planter.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DalFacade\DalFacade.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ProductsImages\" />
+    <Resource Include="ProductsImages\3-piece dark gray sofa.jpg" />
+    <Resource Include="ProductsImages\3-Pieces Green Sofa.jpg" />
+    <Resource Include="ProductsImages\Astoria Stoneware Holder.jpg" />
+    <Resource Include="ProductsImages\Black Soft Luxury Bath Rug.jpg" />
+    <Resource Include="ProductsImages\Dark-Bronze Mid-Century-Contour-Bathroom Hardware.jpg" />
+    <Resource Include="ProductsImages\White Bunk Bed With Stairs and Slide.jpg" />
+    <Resource Include="ProductsImages\White Fluted Ceramic Indoor-outdoor-windowsill Planter.jpg" />
   </ItemGroup>
 
 </Project>

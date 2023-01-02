@@ -9,6 +9,7 @@ public struct OrderItem
     public int? ProductID { get; set; }  // המספר המזהה של סוג המוצר המוזמן
     public double? Price { get; set; }  //מחיר המוצר
     public int? Amount { get; set; }  //כמות מהמוצר בהזמנה
+    public string? Path { get; set; } //כתובת תמונה של המוצר
 
     //תאור פריט כמחרוזת
     public override string ToString() { return Tools.ToStringProperty(this); }

@@ -22,38 +22,40 @@ namespace PL.Products;
 public partial class CatalogPage : Page
 {
     private IBL bl = BLFactory.GetBL();
-    //private ObservableCollection<BO.ProductForList> products = new ObservableCollection<BO.ProductForList>();
+    private ObservableCollection<BO.ProductForList> products = new ObservableCollection<BO.ProductForList>();
     Frame frame;
-    public CatalogPage(string category, Frame mainFrame)
+    private PO.CartPO pocart;
+    public CatalogPage(string category, Frame mainFrame, PO.CartPO cart)
     {
         InitializeComponent();
+        pocart = cart;
         switch(category)
         {
             case "kitchen":
-                listCatalog.DataContext = bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Kitchen);
+                products = (bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Kitchen)).ToObservable(products);
                 break;
             case "living_room":
-                listCatalog.DataContext = bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Living_room);
+                products = (bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Living_room)).ToObservable(products);
                 break;
             case "bath_room":
-                listCatalog.DataContext = bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Bathroom);
+                products = bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Bathroom).ToObservable(products);
                 break;
             case "bed_room":
-                listCatalog.DataContext =bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Bedroom);
+                products = bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Bedroom).ToObservable(products);
                 break;
             case "garden":
-                listCatalog.DataContext = bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Garden);
+                products = bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Garden).ToObservable(products);
                 break;
             case "all":
-                listCatalog.DataContext = bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.All);
+                products = bl.Product.GetProductList().ToObservable(products);
                 break;
         }
-
+        listCatalog.DataContext = products;
         frame = mainFrame;
     }
 
     private void ProductDetails_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
-     //   frame.Content = new ProductDetails((BO.ProductForList)listCatalog.SelectedItem, cart);
+        frame.Content = new ProductDetails((BO.ProductForList)listCatalog.SelectedItem, pocart);
     }
 }

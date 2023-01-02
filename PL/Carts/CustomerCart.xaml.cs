@@ -25,7 +25,11 @@ public partial class CustomerCart : Page
     public CustomerCart(PO.CartPO cartPO)
     {
         InitializeComponent();
+        CartItems.ItemsSource = cartPO.Items;
         CartItems.DataContext=cartPO.Items;
         totalPrice.DataContext=cartPO.TotalPrice;
+        NoItems.DataContext = (cartPO.Items!.Count==0);
+        CartDetailsGrid.DataContext = (cartPO.Items!.Count != 0);
+
     }
 }

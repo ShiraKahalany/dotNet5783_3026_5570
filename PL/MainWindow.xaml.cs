@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -23,26 +25,20 @@ namespace PL;
 public partial class MainWindow : Window
 {
     private IBL bl= BLFactory.GetBL();
+    private PO.CartPO pocart;
     public MainWindow()
     {
         InitializeComponent();
         ListCategories.Visibility = Visibility.Collapsed;
-        PO.CartPO pocart =new PO.CartPO();
-       // kitchen.Content = BO.Category.Kitchen;
-       // bed_room.DataContext = BO.Category.Bedroom;
-       //living_room.DataContext = BO.Category.Living_room;
-       // bath_room.DataContext = BO.Category.Bathroom;
-       // garden.DataContext = BO.Category.Garden;
-       // all.DataContext = BO.Category.All;
+        pocart =new PO.CartPO { TotalPrice=0, Items=new ObservableCollection<PO.OrderItemPO>()};
+       
     }
 
-    private void showProducts_Click(object sender, RoutedEventArgs e) => new ProductListWindow().ShowDialog();
+   
 
     private void showCategory(object sender, RoutedEventArgs e)
     {
         ListCategories.Visibility = Visibility.Visible;
-    //    backgroundimage.Source = new BitmapImage(new Uri(@"/PL/back ground blurry.jpg", UriKind.Relative));
-        
     }
     private void hideCategory(object sender,RoutedEventArgs e)
     {
@@ -59,7 +55,7 @@ public partial class MainWindow : Window
 
     private void ListCategories_Click(object sender, RoutedEventArgs e)
     {
-        MainFrame.Content = new CatalogPage(((Button)sender).Name, MainFrame);
+        MainFrame.Content = new CatalogPage(((Button)sender).Name, MainFrame, pocart);
         MainFrame.Visibility = Visibility.Visible;    
     }
 
@@ -70,11 +66,13 @@ public partial class MainWindow : Window
 
     private void CartButton_Click(object sender, RoutedEventArgs e)
     {
-       // Catalog.Content = new PL.Carts.CustomerCart();
+       MainFrame.Content = new PL.Carts.CustomerCart(pocart);
     }
 
     private void LogIn_Click(object sender, RoutedEventArgs e) => MainFrame.Content= new Manager.LogInManagerPage(MainFrame);
 
-
-
+    private void LogoButton_Click(object sender, RoutedEventArgs e)
+    {
+        MainFrame.Content = null;
+    }
 }

@@ -14,5 +14,6 @@ public class OrderItem
     public int? ProductID { get; set; }      //המספר המזהה של המוצר 
     public double? Price { get; set; }       //מחיר המוצר
     public int? Amount { get; set; }       //כמות המוצר בהזמנה
+    public string? Path { get; set; } //כתובת תמונה של המוצר
     public override string ToString() => this.ToStringProperty();       //הפיכה למחרוזת
 }

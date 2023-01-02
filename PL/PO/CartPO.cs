@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BO;
 //using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace PO;
@@ -58,8 +59,8 @@ namespace PO;
         }
     }
 
-    private List<BO.OrderItem>? items;
-    public List<BO.OrderItem>? Items
+    private ObservableCollection<PO.OrderItemPO>? items;
+    public ObservableCollection<PO.OrderItemPO>? Items
     {
         get
         { return items; }

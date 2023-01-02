@@ -7,7 +7,7 @@ using BO;
 using System.ComponentModel;
 namespace PO;
 
-class ProductPO : INotifyPropertyChanged
+public class ProductPO : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
 

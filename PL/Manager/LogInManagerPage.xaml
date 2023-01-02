@@ -72,7 +72,6 @@
             </StackPanel>
         </materialDesign:Card>
 
-
         <Button Name="managerButton"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     Width="250" Height="70"

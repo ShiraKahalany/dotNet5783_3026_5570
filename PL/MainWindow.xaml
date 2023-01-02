@@ -9,7 +9,7 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="457" Width="834">
 
 
     <Window.Resources>
@@ -55,7 +55,7 @@
             <Button x:Name="Categories" 
                     MouseEnter="showCategory" 
                     
-                    Click="Categories_Click" Margin="26,6,720,5" Background="{x:Null}" BorderBrush="{x:Null}" >
+                    Click="Categories_Click" Margin="37,6,690,5" Background="{x:Null}" BorderBrush="{x:Null}" >
                 <materialDesign:PackIcon Kind="MenuOpen" 
                                          Foreground="Black"
                                          Height="30" Width="68" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
@@ -83,6 +83,11 @@
                     </materialDesign:PackIcon.RenderTransform>
                 </materialDesign:PackIcon>
 
+            </Button>
+            <Button  Name="LogoButton" HorizontalAlignment="Center" Margin="0,6,0,5" Width="127" BorderBrush="{x:Null}" RenderTransformOrigin="0.495,0.098" Click="LogoButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/myLogo2.jpg"/>
+                </Button.Background>
             </Button>
         </Grid>
         <ListView Name="ListCategories"
@@ -172,6 +177,6 @@
             </ListViewItem>
         </ListView>
 
-        <Frame x:Name="MainFrame" Margin="0,43,0,0" Grid.RowSpan="2" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden"  />
+        <Frame x:Name="MainFrame" Margin="-27,43,0,0" Grid.RowSpan="2" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden"  />
     </Grid>
 </Window>

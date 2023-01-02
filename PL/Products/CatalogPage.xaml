@@ -9,18 +9,18 @@
       Title="CatalogPage">
 
     <Grid Background="White">
-        <ListView x:Name="listCatalog" MouseDoubleClick="ProductDetails_MouseDoubleClick" HorizontalAlignment="Center" ItemsSource="{Binding}" Height="430" VerticalAlignment="Top"  Width="780">
+        <ListView x:Name="listCatalog" MouseDoubleClick="ProductDetails_MouseDoubleClick" HorizontalAlignment="Center" ItemsSource="{Binding}" Height="450" VerticalAlignment="Center"  Width="800">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="5" MaxHeight="200" VerticalAlignment="Top"/>
+                    <UniformGrid Columns="5" VerticalAlignment="Top"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
+                    <StackPanel Orientation="Vertical" Width="200" Height="250" >
                         <Image Source="{Binding Path}" HorizontalAlignment="Center" Width="120" Height="120" VerticalAlignment="Top" />
-                        <TextBlock Text="{Binding Name}"> </TextBlock>
-                        <TextBlock Text="{Binding Price}" FontSize="20"></TextBlock>
+                        <TextBlock TextWrapping="WrapWithOverflow"  Text="{Binding Name}" Width="120" Height="60"></TextBlock>
+                        <TextBlock Text="{Binding Price }" FontSize="30"></TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
