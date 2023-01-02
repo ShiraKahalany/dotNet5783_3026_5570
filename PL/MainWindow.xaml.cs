@@ -38,10 +38,11 @@ public partial class MainWindow : Window
 
     private void showProducts_Click(object sender, RoutedEventArgs e) => new ProductListWindow().ShowDialog();
 
-    private void Connection_Click(object sender, RoutedEventArgs e)=>new ConnectionWindow().ShowDialog();
     private void showCategory(object sender, RoutedEventArgs e)
     {
         ListCategories.Visibility = Visibility.Visible;
+    //    backgroundimage.Source = new BitmapImage(new Uri(@"/PL/back ground blurry.jpg", UriKind.Relative));
+        
     }
     private void hideCategory(object sender,RoutedEventArgs e)
     {
@@ -51,14 +52,15 @@ public partial class MainWindow : Window
     private void Categories_Click(object sender, RoutedEventArgs e)
     {
         ListCategories.Visibility= Visibility.Visible;
-        Catalog.Visibility = Visibility.Hidden;
+        MainFrame.Visibility = Visibility.Hidden;
+        
     }
     //public void ListCategories_Click(object sender, RoutedEventArgs e) => new ProductListWindow().ShowDialog();
 
     private void ListCategories_Click(object sender, RoutedEventArgs e)
     {
-        Catalog.Content = new CatalogPage(((Button)sender).Name, Catalog);
-        Catalog.Visibility = Visibility.Visible;
+        MainFrame.Content = new CatalogPage(((Button)sender).Name, MainFrame);
+        MainFrame.Visibility = Visibility.Visible;    
     }
 
     public void ListViewItem_Selected(object sender, RoutedEventArgs e)
@@ -66,7 +68,13 @@ public partial class MainWindow : Window
 
     }
 
-    private void CartButton_Click(object sender, RoutedEventArgs e)=>Catalog.Content = new PL.Carts.CustomerCart();
+    private void CartButton_Click(object sender, RoutedEventArgs e)
+    {
+       // Catalog.Content = new PL.Carts.CustomerCart();
+    }
 
-    
+    private void LogIn_Click(object sender, RoutedEventArgs e) => MainFrame.Content= new Manager.LogInManagerPage(MainFrame);
+
+
+
 }

@@ -4,6 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converter ="clr-namespace:PLConverter"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      Background="{DynamicResource MaterialDesignPaper}"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -22,10 +25,11 @@
 
     </Window.Resources>
 
-    <Grid >
+    <Grid x:Name="maingrid" >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="53*"/>
-            <ColumnDefinition Width="147*"/>
+            <ColumnDefinition Width="23*"/>
+            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="302*"/>
         </Grid.ColumnDefinitions>
         <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
@@ -36,47 +40,58 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <Image Source="/Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" RenderTransformOrigin="0.841,0.493" Height="539" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Left" Width="888" Margin="0,-28,0,0"/>
-        <!--<StackPanel Orientation="Horizontal" Width="800" Background="#F0F0F0" Grid.ColumnSpan="3" Margin="0,0,0,4">-->
-        <Button x:Name="Categories" 
-                    Width="41" 
-                    Height="35" 
-                    MouseEnter="showCategory" 
-                    
-                    Click="Categories_Click" Margin="10,4,161,4" >
-
-            <Button.Background>
-                <ImageBrush ImageSource="/menu.png"/>
-            </Button.Background>
-        </Button>
-        <Button  x:Name="CartButton"
-            Content="Cart" RenderTransformOrigin="1.046,0.262"
-            Width="100"
-            Height="35"
+        <Image x:Name="backgroundimage" Source="/Updated background.jpg"  RenderTransformOrigin="0.841,0.493" Height="472" VerticalAlignment="Top" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Left" Width="888" Margin="-27,-28,0,0"/>
+        <Grid Grid.Row="0" Background="#f5f5f0" Grid.ColumnSpan="3" VerticalAlignment="Stretch" >
+            <Button  x:Name="CartButton"
+            RenderTransformOrigin="1.046,0.262"
+            Width="54"
             Grid.Row="0"
                  
-            HorizontalAlignment="Left" Margin="360,4,0,4" Click="CartButton_Click" Grid.Column="1"
-                    />
-        <Button 
-            x:Name="Connection"
-            Content="LogIn" 
-            Click="Connection_Click" 
+            HorizontalAlignment="Left" Margin="695,6,0,5" Click="CartButton_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+                <materialDesign:PackIcon Kind="Cart" 
+                                         Foreground="Black"
+                                         Height="30" Width="22" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
+            </Button>
+            <Button x:Name="Categories" 
+                    MouseEnter="showCategory" 
+                    
+                    Click="Categories_Click" Margin="26,6,720,5" Background="{x:Null}" BorderBrush="{x:Null}" >
+                <materialDesign:PackIcon Kind="MenuOpen" 
+                                         Foreground="Black"
+                                         Height="30" Width="68" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
 
-            RenderTransformOrigin="1.046,0.262"
-            Width="100"
-            Height="35"
-            Grid.Row="0"
+            </Button>
+            <Button 
+            x:Name="LogIn"
+         
+            Click="LogIn_Click" 
             
-            HorizontalAlignment="Left" Margin="478,4,0,4" Grid.Column="1"
-                />
+            RenderTransformOrigin="1.046,0.262"
+            Width="60"
+            
+            HorizontalAlignment="Left" Margin="740,0,0,0" Height="32" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" >
+                <materialDesign:PackIcon Kind="AccountLock" 
+                                         Foreground="Black"
+                                         Height="30" Width="29" RenderTransformOrigin="1.331,0.471">
+                    <materialDesign:PackIcon.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-53.184"/>
+                        </TransformGroup>
+                    </materialDesign:PackIcon.RenderTransform>
+                </materialDesign:PackIcon>
 
+            </Button>
+        </Grid>
         <ListView Name="ListCategories"
                   HorizontalAlignment="Left"
                   MouseMove="showCategory"
                   MouseLeave="hideCategory"
                   Background="Gray"
                   Margin="0,35,0,18" 
-                  Grid.RowSpan="2" Grid.ColumnSpan="2" Width="800">
+                  Grid.RowSpan="2" Grid.ColumnSpan="3" Width="800">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Left" Margin="5"/>
@@ -91,9 +106,7 @@
                         VerticalAlignment="Bottom"
                         Click="ListCategories_Click"
                         >
-                    <Button.Background>
-                        <ImageBrush ImageSource="/kitchen.jpg"/>
-                    </Button.Background>
+
 
                 </Button>
             </ListViewItem>
@@ -106,14 +119,10 @@
                         Click="ListCategories_Click"
                         Content="Living Room"
                         >
-                    <Button.Background>
-                        <ImageBrush ImageSource="/living room.jpg"/>
-                    </Button.Background>
 
 
-                    <!--<StackPanel>
 
-                    </StackPanel>-->
+
                 </Button>
             </ListViewItem>
             <ListViewItem Selected="ListViewItem_Selected">
@@ -123,9 +132,6 @@
                         Padding="0"
                         Content="Bed Room"
                         Click="ListCategories_Click">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/bed room.jpg"/>
-                    </Button.Background>
 
                     <!--<StackPanel>
 
@@ -139,9 +145,7 @@
                         Padding="0"
                         Content="Bath Room"
                         Click="ListCategories_Click">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/bath room.jpg"/>
-                    </Button.Background>
+
 
                 </Button>
             </ListViewItem>
@@ -152,7 +156,7 @@
                         Padding="0"
                         Content="Garden"
                         Click="ListCategories_Click">
-                    
+
 
                 </Button>
             </ListViewItem>
@@ -168,6 +172,6 @@
             </ListViewItem>
         </ListView>
 
-        <Frame x:Name="Catalog" Margin="0,35,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"  />
+        <Frame x:Name="MainFrame" Margin="0,43,0,0" Grid.RowSpan="2" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden"  />
     </Grid>
 </Window>

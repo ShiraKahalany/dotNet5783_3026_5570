@@ -30,22 +30,22 @@ public partial class CatalogPage : Page
         switch(category)
         {
             case "kitchen":
-                listCatalog.DataContext = (ObservableCollection<BO.ProductForList>)bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Kitchen);
+                listCatalog.DataContext = bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Kitchen);
                 break;
             case "living_room":
-                listCatalog.DataContext = (ObservableCollection<BO.ProductForList>)bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Living_room);
+                listCatalog.DataContext = bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Living_room);
                 break;
             case "bath_room":
-                listCatalog.DataContext = (ObservableCollection<BO.ProductForList>)bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Bathroom);
+                listCatalog.DataContext = bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Bathroom);
                 break;
             case "bed_room":
-                listCatalog.DataContext = (ObservableCollection<BO.ProductForList>)bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Bedroom);
+                listCatalog.DataContext =bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Bedroom);
                 break;
             case "garden":
-                listCatalog.DataContext = (ObservableCollection<BO.ProductForList>)bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Garden);
+                listCatalog.DataContext = bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Garden);
                 break;
             case "all":
-                listCatalog.DataContext = (ObservableCollection<BO.ProductForList>)bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.All);
+                listCatalog.DataContext = bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.All);
                 break;
         }
 
@@ -54,6 +54,6 @@ public partial class CatalogPage : Page
 
     private void ProductDetails_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
-        frame.Content = new ProductDetails((BO.ProductForList)listCatalog.SelectedItem, cart);
+     //   frame.Content = new ProductDetails((BO.ProductForList)listCatalog.SelectedItem, cart);
     }
 }

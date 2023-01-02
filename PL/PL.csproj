@@ -30,6 +30,7 @@
     <None Remove="menu.png" />
     <None Remove="order.png" />
     <None Remove="Products\download.png" />
+    <None Remove="Updated background.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,6 +64,7 @@
     <Resource Include="menu.png" />
     <Resource Include="order.png" />
     <Resource Include="Products\download.png" />
+    <Resource Include="Updated background.jpg" />
   </ItemGroup>
 
 </Project>

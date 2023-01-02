@@ -86,10 +86,10 @@ internal class DataSource
             IsDeleted = false,
             ID = 175894,
             Name = "Kitchen rug",
-            Price = 79.99,
+            Price = 60,
             Category = Category.Kitchen,
             InStock = 3,
-            Path= "/kitchen.jpg"
+            Path= "/Kitchen rug.jpg"
         });
 
         Products.Add(
@@ -97,33 +97,33 @@ internal class DataSource
         {
             IsDeleted = false,
             ID = 576346,
-            Name = "Duck bath rug",
-            Price = 39.99,
+            Name = "Black Soft Luxury Bath Rug",
+            Price = 40,
             Category = Category.Bathroom,
             InStock = 198,
-            Path = "/bath room.jpg"
+            Path = "/Black Soft Luxury Bath Rug.jpg"
         });
         Products.Add(
         new Product
         {
             IsDeleted = false,
             ID = 864357,
-            Name = "powerful red microwave",
-            Price = 299.99,
+            Name = "Astoria Stoneware Holder",
+            Price = 29,
             Category = Category.Kitchen,
             InStock = 45,
-            Path = "/kitchen.jpg"
+            Path = "/Astoria Stoneware Holder.jpg"
         });
         Products.Add(
         new Product
         {
             IsDeleted = false,
             ID = 853267,
-            Name = "Children's bed",
-            Price = 1999.99,
+            Name = "White Bunk Bed With Stairs and Slide",
+            Price = 1999,
             Category = Category.Bedroom,
-            InStock = 8,
-            Path = "/bed room.jpg"
+            InStock = 30,
+            Path = "/White Bunk Bed With Stairs and Slide.jpg"
 
         });
 
@@ -132,11 +132,11 @@ internal class DataSource
         {
             IsDeleted = false,
             ID = 923654,
-            Name = "Garden swing",
-            Price = 859.99,
+            Name = "White Fluted Ceramic Indoor-outdoor-windowsill Planter",
+            Price = 99,
             Category = Category.Garden,
-            InStock = 12,
-            Path = "/garden.jpg"
+            InStock = 44,
+            Path = "/White Fluted Ceramic Indoor-outdoor-windowsill Planter.jpg"
         });
 
         Products.Add(
@@ -144,11 +144,11 @@ internal class DataSource
         {
             IsDeleted = false,
             ID = 856245,
-            Name = "green leather sofa",
-            Price = 7589.99,
+            Name = "3-Pieces Green Sofa",
+            Price = 3347,
             Category = Category.Living_room,
             InStock = 15,
-            Path = "/living room.jpg"
+            Path = "/3-Pieces Green Sofa.jpg"
         });
 
         Products.Add(
@@ -156,11 +156,11 @@ internal class DataSource
         {
             IsDeleted = false,
             ID = 235765,
-            Name = "Sea view picture",
-            Price = 139.99,
+            Name = "Mid-Century Heathered Wool Rug 8'x 10'",
+            Price = 539.10,
             Category = Category.Living_room,
             InStock = 64,
-            Path = "/living room.jpg"
+            Path = "/Mid-Century Heathered Wool Rug.jpg"
         });
 
         Products.Add(
@@ -168,11 +168,11 @@ internal class DataSource
         {
             IsDeleted = false,
             ID = 834675,
-            Name = "Room mirror",
+            Name = "Thin-Wood-floor Mirror 30W x 72H",
             Price = 279.99,
             Category = Category.Bedroom,
-            InStock = 38,
-            Path = "/bed room.jpg"
+            InStock = 104,
+            Path = "/Thin-Wood-floor Mirror.jpg"
         });
         Products.Add(
         new Product
@@ -180,7 +180,7 @@ internal class DataSource
             IsDeleted = false,
             ID = 235676,
             Name = "Colorful garden umbrella",
-            Price = 499.99,
+            Price = 503.10,
             Category = Category.Garden,
             InStock = 2,
             Path = "/garden room.jpg"
@@ -190,11 +190,23 @@ internal class DataSource
         {
             IsDeleted = false,
             ID = 153217,
-            Name = "Bath curtain",
-            Price = 49.99,
+            Name = "Dark-Bronze Mid-Century-Contour-Bathroom Towel Hook",
+            Price = 35,
             Category = Category.Bathroom,
             InStock = 82,
-            Path = "/bath room.jpg"
+            Path = "/Dark-Bronze Mid-Century-Contour-Bathroom Hardware.jpg"
+        });
+        //////newwww
+        Products.Add(
+        new Product
+        {
+            IsDeleted = false,
+            ID = 135677,
+            Name = "3-piece dark gray sofa",
+            Price = 2398.40,
+            Category = Category.Living_room,
+            InStock = 82,
+            Path = "/3-piece dark gray sofa.jpg"
         });
     }
     private void createOrderItems()  // יצירת פריטי-הזמנה
