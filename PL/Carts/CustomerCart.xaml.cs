@@ -34,5 +34,11 @@ public partial class CustomerCart : Page
         //CartDetailsGrid.Visibility= Visibility.Collapsed;
         //chooseAmount.ItemSource = numArray;
 
+
+    }
+
+    private void delete_Click(object sender, RoutedEventArgs e)
+    {
+
     }
 }

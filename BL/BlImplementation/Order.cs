@@ -163,11 +163,13 @@ internal class Order : IOrder
             dal.OrderItem.Update(new DO.OrderItem
             {
                 ID = theItem?.ID ?? 0,
+                Name = theItem?.Name ,
                 OrderID = orderId,
                 ProductID = productId,
                 Price = theItem?.Price ?? 0,
                 Amount = amount,
-                IsDeleted = false
+                IsDeleted = false,
+                Path = theItem?.Path 
             });
             return border;
         }

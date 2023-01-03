@@ -108,8 +108,8 @@ internal class Product : IProduct
                     Price = pro?.Price,
                     Category = (BO.Category)pro?.Category!,
                     Amount = counter,
-                    IsInStock = (counter > 0)
-                    //path = pro.path
+                    IsInStock = (counter > 0),
+                    Path = pro.GetValueOrDefault().Path
                 };
                 return prod;
             }

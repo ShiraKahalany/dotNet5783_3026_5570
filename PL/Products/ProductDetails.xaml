@@ -37,9 +37,11 @@
             TextWrapping="Wrap" 
             Text="{Binding Name}" 
             VerticalAlignment="Top" 
-            Height="50"
-            Width="285"/>
-        <TextBlock 
+            Height="71"
+            Width="441"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="$" FontSize="20"></TextBlock>
+            <TextBlock 
             Name="priceofproduct"
             IsEnabled="false"
             HorizontalAlignment="Left"
@@ -47,6 +49,7 @@
             Margin="44,86,0,0"
             TextWrapping="Wrap"
             Text="{Binding Price}" VerticalAlignment="Top" Height="41" Width="89"/>
+        </StackPanel>
         <TextBlock
             Name="categoryofproduct"
              IsEnabled="false"
@@ -57,22 +60,22 @@
             Name="idofproduct"
              IsEnabled="false"
             HorizontalAlignment="Left" 
-            FontSize="25"  
+            FontSize="10"  
             TextWrapping="Wrap" 
-            Text="{Binding ID}" VerticalAlignment="Top" Height="42" Width="89" Margin="44,282,0,0" RenderTransformOrigin="0.505,2.133"/>
+            Text="{Binding ID}" VerticalAlignment="Top" Height="16" Width="89" Margin="576,342,0,0" RenderTransformOrigin="0.505,2.133"/>
         <Button  Name="addTocart"
                  Click="AddTocart_Click"
                 Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
                 HorizontalAlignment="Left"
-                Margin="237,254,0,0"
+                Margin="127,213,0,0"
                 VerticalAlignment="Top" Height="49" Width="50">
-            <materialDesign:PackIcon Kind="Plus" 
+            <materialDesign:PackIcon Kind="CartAdd" 
                                          Foreground="Black"
                                          Height="30" Width="30"/>
 
         </Button>
-        <ComboBox  Name="AmountOfProduct" HorizontalAlignment="Left" Margin="44,225,0,0" VerticalAlignment="Top" Width="84"/>
-        <Button x:Name="back" HorizontalAlignment="Left" Margin="0,342,0,0" VerticalAlignment="Top" Click="back_click" Background="{x:Null}" BorderBrush="{x:Null}" Width="58">
+        <ComboBox  Name="AmountOfProduct" HorizontalAlignment="Left" MaxDropDownHeight="120" Margin="44,225,0,0" VerticalAlignment="Top" Width="44"/>
+        <Button x:Name="back" HorizontalAlignment="Left" Margin="37,367,0,0" VerticalAlignment="Top" Click="back_click" Background="{x:Null}" BorderBrush="{x:Null}" Width="58">
             <materialDesign:PackIcon Kind="ArrowBack"
                                          Foreground="Black"
                                          Height="30" Width="30" RenderTransformOrigin="0.5,0.5">

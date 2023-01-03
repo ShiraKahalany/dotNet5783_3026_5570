@@ -39,9 +39,11 @@ internal class Cart:ICart
             {
                 ID = 0,
                 ProductID = id,
+                Name = product?.Name,
                 Price = product?.Price,
                 IsDeleted = false,
-                Amount = amountToAdd
+                Amount = amountToAdd,
+                Path = product?.Path
             };
             if(cart.Items==null)
                 cart.Items=new List<BO.OrderItem?>();
@@ -72,6 +74,8 @@ internal class Cart:ICart
                         ProductID = item.ProductID,
                         IsDeleted = false,
                         Price = item.Price,
+                        Name = item.Name,
+                        Path = item.Path,
                         Amount = (item.ProductID == id) ? item.CheckAmount(amount) : item.Amount };
             cart.TotalPrice = Math.Round(x.Sum(item => (double)(item.Price*item.Amount)), 2);
             //foreach (BO.OrderItem item in cart.Items)

@@ -53,7 +53,6 @@ public partial class CatalogPage : Page
         listCatalog.DataContext = products;
         frame = mainFrame;
     }
-
     private void ProductDetails_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         frame.Content = new ProductDetails((BO.ProductForList)listCatalog.SelectedItem, pocart);

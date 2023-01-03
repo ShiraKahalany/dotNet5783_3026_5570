@@ -11,6 +11,7 @@ public class OrderItem
 {
     public bool IsDeleted { get; set; }     //האם המוצר בהזמנה מחוק
     public int ID { get; set; }     //מספר מזהה של המוצר-בהזמנה
+    public string? Name { get; set; }  //שם המוצר
     public int? ProductID { get; set; }      //המספר המזהה של המוצר 
     public double? Price { get; set; }       //מחיר המוצר
     public int? Amount { get; set; }       //כמות המוצר בהזמנה

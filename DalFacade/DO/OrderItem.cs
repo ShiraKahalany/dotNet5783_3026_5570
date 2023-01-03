@@ -5,6 +5,7 @@ public struct OrderItem
 {
     public bool IsDeleted { get; set; }  //שדה המציין האם הפריט-בהזמנה תקף או מחוק
     public int ID { get; set; }  //שדה המציין את המספר המזהה של הפריט-בהזמנה
+    public string? Name { get; set; }  //שם המוצר
     public int? OrderID { get; set; }  //המספר המזהה של ההזמנה אליה שייך הפריט
     public int? ProductID { get; set; }  // המספר המזהה של סוג המוצר המוזמן
     public double? Price { get; set; }  //מחיר המוצר

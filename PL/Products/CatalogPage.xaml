@@ -3,13 +3,16 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      Background="{DynamicResource MaterialDesignPaper}"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:PL.Products"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CatalogPage">
 
     <Grid Background="White">
-        <ListView x:Name="listCatalog" MouseDoubleClick="ProductDetails_MouseDoubleClick" HorizontalAlignment="Center" ItemsSource="{Binding}" Height="450" VerticalAlignment="Center"  Width="800">
+        <!--<ListView x:Name="listCatalog" MouseDoubleClick="ProductDetails_MouseDoubleClick" HorizontalAlignment="Center" ItemsSource="{Binding}" Height="450" VerticalAlignment="Center"  Width="800">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="5" VerticalAlignment="Top"/>
@@ -24,6 +27,35 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
+        </ListView>-->
+
+        <ListView x:Name="listCatalog" MouseDoubleClick="ProductDetails_MouseDoubleClick"
+                  ItemsSource="{Binding}" Margin="21,0,0,0">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), 
+                              RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                              ItemWidth="{Binding (ListView.View).ItemWidth,
+                              RelativeSource={RelativeSource AncestorType=ListView}}"
+                              MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+                              ItemHeight="{Binding (ListView.View).ItemHeight, 
+                              RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Height="230" Width="230">
+                        <Image Source="{Binding Path}" Width="180"  Height="180"></Image>
+                        <TextBlock Text="{Binding Name}" FontSize="20"></TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="$" FontSize="20"></TextBlock>
+                            <TextBlock Text="{Binding Price}" FontSize="20"></TextBlock>
+                        </StackPanel>
+                        
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
+
     </Grid>
 </Page>

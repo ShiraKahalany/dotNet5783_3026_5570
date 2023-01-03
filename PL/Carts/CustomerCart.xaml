@@ -5,6 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
        xmlns:converter="clr-namespace:PLConverter"
       xmlns:local="clr-namespace:PL.Carts"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      Background="{DynamicResource MaterialDesignPaper}"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CustomerCart">
@@ -34,7 +37,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="1" Grid.Column="1" x:Name="CartDetailsGrid" Visibility="{Binding Converter={StaticResource boolToVisibilityConverter}}">
-            <Label Grid.Column="1"
+                <Label Grid.Column="1"
                    Content="Total Price"
                    HorizontalAlignment="Center"
                    HorizontalContentAlignment="Center"
@@ -44,24 +47,24 @@
                     FontWeight="Bold"
                     Foreground="#FF974E4E" />
 
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
 
-                <TextBlock Name="totalPrice" Grid.Column="1" Text="{Binding}"
+                    <TextBlock Name="totalPrice" Grid.Column="1" Text="{Binding}"
                        HorizontalAlignment="Center"
                    FontSize="30"
                    Margin="0,69,0,10"
                     FontFamily="Snap ITC"
                     FontWeight="Bold"
                     Foreground="Black" />
-                <TextBlock Grid.Column="1" Text=" $"
+                    <TextBlock Grid.Column="1" Text=" $"
                        HorizontalAlignment="Center"
                    FontSize="30"
                    Margin="0,69,0,10"
                     FontFamily="Book Antiqua"
                     FontWeight="Bold"
                     Foreground="Black" />
-            </StackPanel>
-            <Button Grid.Column="1"
+                </StackPanel>
+                <Button Grid.Column="1"
                     Name="OrderConfirmation"
                     Content="CHECKOUT"
                     Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}"
@@ -76,28 +79,62 @@
                     Foreground="#FF974E4E"/>
             </Grid>
 
-            <ListView x:Name="CartItems" Grid.Column="0" Background="Azure" HorizontalAlignment="Center" Height="374" VerticalAlignment="Center"  Width="589">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="1"  MaxHeight="200" VerticalAlignment="Top"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
+            <ListView x:Name="CartItems" Margin="0,10,0,-10"  Grid.Column="0" Background="Azure" HorizontalAlignment="Center" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel x:Name="stack" Background="Aqua"  Orientation="Horizontal" VerticalAlignment="Stretch">
-                            <Button x:Name="Delete" Grid.Row="0" Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" Height="50" Width="50">
-                                <Button.Background>
-                                    <ImageBrush ImageSource="/Carts/delete.png"/>
-                                </Button.Background>
+                        <Grid Width="400">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding Path}" 
+                               Height="100" Grid.Column="1"></Image>
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center"  >
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                                <ComboBox x:Name="chooseAmount" Margin="20,0,0,0" SelectedItem="{Binding Amount}" Width="30" MaxDropDownHeight="100">
+                                    <ComboBoxItem Content="1"/>
+                                    <ComboBoxItem Content="2"/>
+                                    <ComboBoxItem Content="3"/>
+                                    <ComboBoxItem Content="4"/>
+                                    <ComboBoxItem Content="5"/>
+                                    <ComboBoxItem Content="6"/>
+                                    <ComboBoxItem Content="7"/>
+                                    <ComboBoxItem Content="8"/>
+                                    <ComboBoxItem Content="9"/>
+                                    <ComboBoxItem Content="10"/>
+                                    <ComboBoxItem Content="11"/>
+                                    <ComboBoxItem Content="12"/>
+                                    <ComboBoxItem Content="13"/>
+                                    <ComboBoxItem Content="14"/>
+                                    <ComboBoxItem Content="15"/>
+                                    <ComboBoxItem Content="16"/>
+                                    <ComboBoxItem Content="17"/>
+                                    <ComboBoxItem Content="18"/>
+                                    <ComboBoxItem Content="19"/>
+                                    <ComboBoxItem Content="20"/>
+                                </ComboBox>
+                                <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                                    <TextBlock Text="$" FontSize="20"></TextBlock>
+                                    <TextBlock Text="{Binding Price}" FontSize="20"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <Button x:Name="RemoveFromCartButton"
+                                Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
+                                Height="43" Width="42"
+                                Click="delete_Click"
+                                Grid.Column="0">
+                                <materialDesign:PackIcon Kind="TrashCanOutline" 
+                                         Foreground="Black"
+                                         Height="25" Width="25"/>
                             </Button>
-                            <Image Source="{Binding Path}" HorizontalAlignment="Center" Width="120" Height="120" VerticalAlignment="Top" />
-                            <ComboBox x:Name="chooseAmount" SelectedItem="{Binding Amount}"  />
-                            <TextBlock x:Name="a" Text="{Binding Price}" FontSize="20"></TextBlock>
-                            <TextBlock Text="{Binding Amount}"></TextBlock>
-                        </StackPanel>
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            
+            
             <StackPanel x:Name="NoItems" HorizontalAlignment="Center" Margin="250, 100, 0,0" Visibility="{Binding Converter={StaticResource boolToVisibilityConverter}}">
                 <TextBlock Grid.Row="1"  Grid.Column="0" TextWrapping="Wrap" Text=" * Your cart is empty *" FontSize="24" HorizontalAlignment="Center" FontFamily="Sitka Text" FontWeight="Bold" Foreground="#FFD2CECE"/>
                 <Image Source="/Carts/emptyCart.png" Height="150" Width="150"></Image>
