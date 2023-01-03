@@ -84,15 +84,15 @@
                 </ItemsControl.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Background="Aqua"  Orientation="Horizontal" VerticalAlignment="Stretch">
+                        <StackPanel x:Name="stack" Background="Aqua"  Orientation="Horizontal" VerticalAlignment="Stretch">
                             <Button x:Name="Delete" Grid.Row="0" Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" Height="50" Width="50">
                                 <Button.Background>
                                     <ImageBrush ImageSource="/Carts/delete.png"/>
                                 </Button.Background>
                             </Button>
                             <Image Source="{Binding Path}" HorizontalAlignment="Center" Width="120" Height="120" VerticalAlignment="Top" />
-                            
-                            <TextBlock Text="{Binding Price}" FontSize="20"></TextBlock>
+                            <ComboBox x:Name="chooseAmount" SelectedItem="{Binding Amount}"  />
+                            <TextBlock x:Name="a" Text="{Binding Price}" FontSize="20"></TextBlock>
                             <TextBlock Text="{Binding Amount}"></TextBlock>
                         </StackPanel>
                     </DataTemplate>

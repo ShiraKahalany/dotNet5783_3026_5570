@@ -153,9 +153,9 @@ public class BoolToVisibilityConverter : IValueConverter
         }
     }
 
-
-    //convert from target property type to source property type
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    
+        //convert from target property type to source property type
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         Visibility visibilityValue = (Visibility)value;
         if (visibilityValue is Visibility.Visible)

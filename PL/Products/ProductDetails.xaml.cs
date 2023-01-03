@@ -38,9 +38,13 @@ public partial class ProductDetails : Page
         pocart.TotalPrice += price * amount;
         bl.Cart.AddProductToCart(cart,id, amount);
         MessageBox.Show("Add To Cart Seccessfully", "Add To Cart", MessageBoxButton.OK);
-        this.NavigationService.GoBack();
+        //this.NavigationService.GoBack();
     }
-    
+
+    private void back_click(object sender, RoutedEventArgs e)
+    {
+        NavigationService.GoBack();
+    }
 }
 
 

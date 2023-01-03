@@ -13,7 +13,7 @@
 
 
     <Window.Resources>
-        <converter:IntToStringPhoneConverter x:Key="categoryToStringConverter"/>
+        <converter:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
         <Style x:Key="Design" TargetType="Button">
             <Setter Property="BorderBrush" Value="Black"/>
             <Style.Resources>
@@ -26,11 +26,11 @@
     </Window.Resources>
 
     <Grid x:Name="maingrid" >
-        <Grid.ColumnDefinitions>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="23*"/>
             <ColumnDefinition Width="75*"/>
             <ColumnDefinition Width="302*"/>
-        </Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>-->
         <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="33*"/>
@@ -52,23 +52,17 @@
                                          Foreground="Black"
                                          Height="30" Width="22" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
             </Button>
-            <Button x:Name="Categories" 
-                    MouseEnter="showCategory" 
-                    
+            <Button Name="Categories" MouseMove="Categories_Click"
                     Click="Categories_Click" Margin="37,6,690,5" Background="{x:Null}" BorderBrush="{x:Null}" >
                 <materialDesign:PackIcon Kind="MenuOpen" 
                                          Foreground="Black"
                                          Height="30" Width="68" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
-
             </Button>
             <Button 
             x:Name="LogIn"
-         
-            Click="LogIn_Click" 
-            
+            Click="LogIn_Click"
             RenderTransformOrigin="1.046,0.262"
             Width="60"
-            
             HorizontalAlignment="Left" Margin="740,0,0,0" Height="32" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" >
                 <materialDesign:PackIcon Kind="AccountLock" 
                                          Foreground="Black"
@@ -82,7 +76,6 @@
                         </TransformGroup>
                     </materialDesign:PackIcon.RenderTransform>
                 </materialDesign:PackIcon>
-
             </Button>
             <Button  Name="LogoButton" HorizontalAlignment="Center" Margin="0,6,0,5" Width="127" BorderBrush="{x:Null}" RenderTransformOrigin="0.495,0.098" Click="LogoButton_Click">
                 <Button.Background>
@@ -97,6 +90,7 @@
                   Background="Gray"
                   Margin="0,35,0,18" 
                   Grid.RowSpan="2" Grid.ColumnSpan="3" Width="800">
+
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Left" Margin="5"/>
@@ -109,10 +103,8 @@
                         Padding="0" 
                         Content="Kitchen" 
                         VerticalAlignment="Bottom"
-                        Click="ListCategories_Click"
+                        Click="ListCategories_Click" FontFamily="Yu Gothic UI"
                         >
-
-
                 </Button>
             </ListViewItem>
             <ListViewItem>
@@ -176,7 +168,8 @@
                 </Button>
             </ListViewItem>
         </ListView>
-
-        <Frame x:Name="MainFrame" Margin="-27,43,0,0" Grid.RowSpan="2" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden"  />
+        <Grid Name="cartDetails" Background="#f5f5f0"  Margin="0,44,10,97" Width="200" Height="300" HorizontalAlignment="Right" Grid.RowSpan="2" 
+              MouseMove="showCart" MouseLeave="hideCart" />
+        <Frame x:Name="MainFrame" Margin="-27,43,0,0" Grid.RowSpan="2" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>
