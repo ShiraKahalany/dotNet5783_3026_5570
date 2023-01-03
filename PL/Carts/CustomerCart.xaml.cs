@@ -31,7 +31,7 @@ public partial class CustomerCart : Page
         totalPrice.DataContext=cartPO.TotalPrice;
         NoItems.DataContext = (cartPO.Items!.Count==0);
         CartDetailsGrid.DataContext = (cartPO.Items!.Count != 0);
-        CartDetailsGrid.Visibility= Visibility.Collapsed;
+        //CartDetailsGrid.Visibility= Visibility.Collapsed;
         //chooseAmount.ItemSource = numArray;
 
     }
