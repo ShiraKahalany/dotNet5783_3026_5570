@@ -72,10 +72,19 @@
 
         </Button>
         <ComboBox  Name="AmountOfProduct" HorizontalAlignment="Left" Margin="44,225,0,0" VerticalAlignment="Top" Width="84"/>
-        <Button x:Name="back" HorizontalAlignment="Left" Margin="0,408,0,0" VerticalAlignment="Top" Click="back_click" Background="{x:Null}" BorderBrush="{x:Null}" Width="58">
+        <Button x:Name="back" HorizontalAlignment="Left" Margin="0,342,0,0" VerticalAlignment="Top" Click="back_click" Background="{x:Null}" BorderBrush="{x:Null}" Width="58">
             <materialDesign:PackIcon Kind="ArrowBack"
                                          Foreground="Black"
-                                         Height="30" Width="30"/>
+                                         Height="30" Width="30" RenderTransformOrigin="0.5,0.5">
+                <materialDesign:PackIcon.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </materialDesign:PackIcon.RenderTransform>
+            </materialDesign:PackIcon>
         </Button>
 
     </Grid>

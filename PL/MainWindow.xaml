@@ -47,7 +47,7 @@
             Width="54"
             Grid.Row="0"
                  
-            HorizontalAlignment="Left" Margin="695,6,0,5" Click="CartButton_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+            HorizontalAlignment="Left" Margin="695,6,0,5" Click="CartButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" MouseMove="showCart">
                 <materialDesign:PackIcon Kind="Cart" 
                                          Foreground="Black"
                                          Height="30" Width="22" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
@@ -169,7 +169,7 @@
             </ListViewItem>
         </ListView>
         <Grid Name="cartDetails" Background="#f5f5f0"  Margin="0,44,10,97" Width="200" Height="300" HorizontalAlignment="Right" Grid.RowSpan="2" 
-              MouseMove="showCart" MouseLeave="hideCart" />
-        <Frame x:Name="MainFrame" Margin="-27,43,0,0" Grid.RowSpan="2" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden" />
+              MouseMove="showCart" MouseLeave="hideCart" MouseEnter="showCart" MouseUp="showCart" />
+        <Frame x:Name="MainFrame" Margin="-27,43,0,0" Grid.RowSpan="2" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
