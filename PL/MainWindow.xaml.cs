@@ -79,6 +79,7 @@ public partial class MainWindow : Window
 
     private void CartButton_Click(object sender, RoutedEventArgs e)
     {
+        cartDetails.Visibility = Visibility.Hidden;
         MainFrame.Content = new PL.Carts.CustomerCart(pocart);
     }
 
