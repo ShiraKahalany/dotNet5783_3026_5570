@@ -12,8 +12,8 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CustomerCart">
     <Page.Resources>
-        <converter:BoolToVisibilityConverter x:Key="amountOfItemsToVisibilityConverter"/>
-        <converter:IntToStringPhoneConverter x:Key="amountOfItemsToNotVisibilityConverter"/> 
+        <converter:AmountOfItemsToNotVisibilityConverter x:Key="amountOfItemsToNotVisibilityConverter"/>
+        <converter:AmountOfItemsToVisibilityConverter x:Key="amountOfItemsToVisibilityConverter"/> 
         <Style x:Key="Design" TargetType="Button">
             <Setter Property="BorderBrush" Value="Black"/>
             <Style.Resources>
@@ -37,7 +37,7 @@
                 <ColumnDefinition Width="2.8*" />
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Row="1" Grid.Column="1" x:Name="CartDetailsGrid" Visibility="{Binding Path=Items,Mode=OneWay, Converter={StaticResource amountOfItemsToNotVisibilityConverter}}">
+            <Grid Grid.Row="1" Grid.Column="1" x:Name="CartDetailsGrid" Visibility="{Binding Path=Items,Mode=OneWay Converter={StaticResource amountOfItemsToVisibilityConverter}}">
                 <Label Grid.Column="1"
                    Content="Total Price"
                    HorizontalAlignment="Center"
@@ -137,7 +137,7 @@
             </ListView>
 
 
-            <StackPanel x:Name="NoItems" HorizontalAlignment="Center" Margin="250, 100, 0,0" Visibility="{Binding Path=Items,Mode=OneWay, Converter={StaticResource amountOfItemsToVisibilityConverter} }">
+            <StackPanel x:Name="NoItems" HorizontalAlignment="Center" Margin="250, 100, 0,0" Visibility="{Binding Path=Items,Mode=OneWay, Converter={StaticResource amountOfItemsToNotVisibilityConverter} }">
                 <TextBlock Grid.Row="1"  Grid.Column="0" TextWrapping="Wrap" Text=" * Your cart is empty *" FontSize="24" HorizontalAlignment="Center" FontFamily="Sitka Text" FontWeight="Bold" Foreground="#FFD2CECE"/>
                 <Image Source="/Carts/emptyCart.png" Height="150" Width="150"></Image>
             </StackPanel>

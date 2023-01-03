@@ -77,7 +77,7 @@ public class FalseToTrueConverter : IValueConverter
     }
 }
 
-public class BoolToVisibilityConverter : IValueConverter ///ours
+public class AmountOfItemsToNotVisibilityConverter : IValueConverter ///ours
 {
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -92,14 +92,11 @@ public class BoolToVisibilityConverter : IValueConverter ///ours
     //convert from target property type to source property type
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (((ObservableCollection<PO.OrderItemPO>)value).Count == 0)
-            return Visibility.Visible;
-        else
-            return Visibility.Hidden;
+        return null!;
     }
 }
 
-public class IntToStringPhoneConverter : IValueConverter /////ours
+public class AmountOfItemsToVisibilityConverter : IValueConverter /////ours
 {
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
