@@ -3,6 +3,7 @@ using BlImplementation;
 using PL.Products;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,10 +25,13 @@ namespace PL
     public partial class ProductsListManager : Page
     {
         private IBL bl = BLFactory.GetBL();
+       private ObservableCollection<BO.ProductForList> products = new ObservableCollection<BO.ProductForList>();
         public ProductsListManager()
         {
             InitializeComponent();
-            ProductListView.ItemsSource = bl.Product.GetListedProducts();
+            products = (bl.Product.GetListedProducts()!).ToObservable<BO.ProductForList>(products);
+            ProductListView.DataContext = products;
+            //ProductListView.ItemsSource = bl.Product.GetListedProducts();         
             AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Category));
             AttributeSelector.SelectedItem = BO.Category.All;
         }
