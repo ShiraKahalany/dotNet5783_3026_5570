@@ -34,7 +34,7 @@ public partial class ProductDetails : Page
         int amount = (int)AmountOfProduct.SelectedItem;
         double price =product.Price??0 ;
         bl.Cart.AddProductToCart(cart, id, amount);
-        pocart.Items.Add(new PO.OrderItemPO() { ProductID = id, Amount = amount, Price = price, IsDeleted=false, Path=product.Path});
+        pocart.Items.Add(new PO.OrderItemPO() { ProductID = id,Name=product.Name, Amount = amount, Price = price, IsDeleted=false, Path=product.Path});
         pocart.TotalPrice += price * amount;
         bl.Cart.AddProductToCart(cart,id, amount);
         MessageBox.Show("Add To Cart Seccessfully", "Add To Cart", MessageBoxButton.OK);

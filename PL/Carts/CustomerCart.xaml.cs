@@ -22,15 +22,18 @@ namespace PL.Carts;
 public partial class CustomerCart : Page
 {
     private IBL bl = BLFactory.GetBL();
-    int[] numArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19 };
+    PO.CartPO cartpo;
     public CustomerCart(PO.CartPO cartPO)
     {
         InitializeComponent();
+        cartpo = cartPO;
         CartItems.ItemsSource = cartPO.Items;
         CartItems.DataContext=cartPO.Items;
-        totalPrice.DataContext=cartPO.TotalPrice;
-        NoItems.DataContext = (cartPO.Items!.Count==0);
-        CartDetailsGrid.DataContext = (cartPO.Items!.Count != 0);
+        totalPrice.DataContext=cartPO;
+        NoItems.DataContext = cartPO;
+        CartDetailsGrid.DataContext = cartPO;
+        //NoItems.DataContext = (cartPO.Items!.Count==0);
+        //CartDetailsGrid.DataContext = (cartPO.Items!.Count != 0);
         //CartDetailsGrid.Visibility= Visibility.Collapsed;
         //chooseAmount.ItemSource = numArray;
 
@@ -39,6 +42,11 @@ public partial class CustomerCart : Page
 
     private void delete_Click(object sender, RoutedEventArgs e)
     {
-
+        OrderItemPO or = ((OrderItemPO)((Button)sender).DataContext);
+        int id = or?.ProductID??0;
+        BO.Cart boCart = PL.Tools.CopyPOCartToBO(cartpo);
+        bl.Cart.UpdateAmountOfProductInCart(boCart, id, 0);
+        cartpo.Items!.Remove(or);
+        cartpo.TotalPrice=Math.Round((double)(cartpo.TotalPrice-or.Price*or.Amount)!,2);
     }
 }

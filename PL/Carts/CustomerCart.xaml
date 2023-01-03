@@ -12,8 +12,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CustomerCart">
     <Page.Resources>
-        <converter:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
-            <Style x:Key="Design" TargetType="Button">
+        <converter:BoolToVisibilityConverter x:Key="amountOfItemsToVisibilityConverter"/>
+        <converter:IntToStringPhoneConverter x:Key="amountOfItemsToNotVisibilityConverter"/> 
+        <Style x:Key="Design" TargetType="Button">
             <Setter Property="BorderBrush" Value="Black"/>
             <Style.Resources>
                 <Style TargetType="Border">
@@ -36,7 +37,7 @@
                 <ColumnDefinition Width="2.8*" />
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Row="1" Grid.Column="1" x:Name="CartDetailsGrid" Visibility="{Binding Converter={StaticResource boolToVisibilityConverter}}">
+            <Grid Grid.Row="1" Grid.Column="1" x:Name="CartDetailsGrid" Visibility="{Binding Path=Items,Mode=OneWay, Converter={StaticResource amountOfItemsToNotVisibilityConverter}}">
                 <Label Grid.Column="1"
                    Content="Total Price"
                    HorizontalAlignment="Center"
@@ -48,21 +49,21 @@
                     Foreground="#FF974E4E" />
 
                 <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
-
-                    <TextBlock Name="totalPrice" Grid.Column="1" Text="{Binding}"
-                       HorizontalAlignment="Center"
-                   FontSize="30"
-                   Margin="0,69,0,10"
-                    FontFamily="Snap ITC"
-                    FontWeight="Bold"
-                    Foreground="Black" />
-                    <TextBlock Grid.Column="1" Text=" $"
+                    <TextBlock Grid.Column="1" Text="$ "
                        HorizontalAlignment="Center"
                    FontSize="30"
                    Margin="0,69,0,10"
                     FontFamily="Book Antiqua"
                     FontWeight="Bold"
                     Foreground="Black" />
+                    <TextBlock Name="totalPrice" Grid.Column="1" Text="{Binding Path=TotalPrice}"
+                       HorizontalAlignment="Center"
+                   FontSize="30"
+                   Margin="0,69,0,10"
+                    FontFamily="Snap ITC"
+                    FontWeight="Bold"
+                    Foreground="Black" />
+
                 </StackPanel>
                 <Button Grid.Column="1"
                     Name="OrderConfirmation"
@@ -70,9 +71,9 @@
                     Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}"
                     Background="AntiqueWhite"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    Height="50" Width="800"
-                    FontSize="25" Margin="0,10,0,10"
+                    VerticalAlignment="Top"
+                    Height="50" Width="210"
+                    FontSize="25" Margin="0,334,0,0"
                     HorizontalContentAlignment="Center"
                     FontFamily="Snap ITC"
                     FontWeight="Bold"
@@ -88,36 +89,37 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Image Source="{Binding Path}" 
                                Height="100" Grid.Column="1"></Image>
-                            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center"  >
-                                <TextBlock Text="{Binding Name}"></TextBlock>
-                                <ComboBox x:Name="chooseAmount" Margin="20,0,0,0" SelectedItem="{Binding Amount}" Width="30" MaxDropDownHeight="100">
-                                    <ComboBoxItem Content="1"/>
-                                    <ComboBoxItem Content="2"/>
-                                    <ComboBoxItem Content="3"/>
-                                    <ComboBoxItem Content="4"/>
-                                    <ComboBoxItem Content="5"/>
-                                    <ComboBoxItem Content="6"/>
-                                    <ComboBoxItem Content="7"/>
-                                    <ComboBoxItem Content="8"/>
-                                    <ComboBoxItem Content="9"/>
-                                    <ComboBoxItem Content="10"/>
-                                    <ComboBoxItem Content="11"/>
-                                    <ComboBoxItem Content="12"/>
-                                    <ComboBoxItem Content="13"/>
-                                    <ComboBoxItem Content="14"/>
-                                    <ComboBoxItem Content="15"/>
-                                    <ComboBoxItem Content="16"/>
-                                    <ComboBoxItem Content="17"/>
-                                    <ComboBoxItem Content="18"/>
-                                    <ComboBoxItem Content="19"/>
-                                    <ComboBoxItem Content="20"/>
-                                </ComboBox>
-                                <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                            <ComboBox x:Name="chooseAmount" HorizontalAlignment="center" VerticalAlignment="Center" Grid.Column="2" Margin="20,0,0,0" SelectedItem="{Binding Path=Amount,Mode=TwoWay}" Width="40" Height="20" MaxDropDownHeight="100">
+                                <ComboBoxItem Content="1"/>
+                                <ComboBoxItem Content="2"/>
+                                <ComboBoxItem Content="3"/>
+                                <ComboBoxItem Content="4"/>
+                                <ComboBoxItem Content="5"/>
+                                <ComboBoxItem Content="6"/>
+                                <ComboBoxItem Content="7"/>
+                                <ComboBoxItem Content="8"/>
+                                <ComboBoxItem Content="9"/>
+                                <ComboBoxItem Content="10"/>
+                                <ComboBoxItem Content="11"/>
+                                <ComboBoxItem Content="12"/>
+                                <ComboBoxItem Content="13"/>
+                                <ComboBoxItem Content="14"/>
+                                <ComboBoxItem Content="15"/>
+                                <ComboBoxItem Content="16"/>
+                                <ComboBoxItem Content="17"/>
+                                <ComboBoxItem Content="18"/>
+                                <ComboBoxItem Content="19"/>
+                                <ComboBoxItem Content="20"/>
+                            </ComboBox>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="160" Grid.Column="3">
+                                <TextBlock Name="name" Width="190" HorizontalAlignment="center" VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
+                                <StackPanel Grid.Column="3" Name="price" Orientation="Horizontal" Width="160" VerticalAlignment="Center" Margin="20,0,0,0">
                                     <TextBlock Text="$" FontSize="20"></TextBlock>
-                                    <TextBlock Text="{Binding Price}" FontSize="20"></TextBlock>
+                                    <TextBlock Text="{Binding Price}" Width="160" FontSize="20"></TextBlock>
                                 </StackPanel>
                             </StackPanel>
                             <Button x:Name="RemoveFromCartButton"
@@ -133,9 +135,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
-            
-            <StackPanel x:Name="NoItems" HorizontalAlignment="Center" Margin="250, 100, 0,0" Visibility="{Binding Converter={StaticResource boolToVisibilityConverter}}">
+
+
+            <StackPanel x:Name="NoItems" HorizontalAlignment="Center" Margin="250, 100, 0,0" Visibility="{Binding Path=Items,Mode=OneWay, Converter={StaticResource amountOfItemsToVisibilityConverter} }">
                 <TextBlock Grid.Row="1"  Grid.Column="0" TextWrapping="Wrap" Text=" * Your cart is empty *" FontSize="24" HorizontalAlignment="Center" FontFamily="Sitka Text" FontWeight="Bold" Foreground="#FFD2CECE"/>
                 <Image Source="/Carts/emptyCart.png" Height="150" Width="150"></Image>
             </StackPanel>

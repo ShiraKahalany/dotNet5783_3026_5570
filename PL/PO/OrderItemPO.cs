@@ -46,6 +46,21 @@ public class OrderItemPO : INotifyPropertyChanged
         }
     }
 
+    private string? name;
+    public string? Name
+    {
+        get
+        { return name; }
+        set
+        {
+            name = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+            }
+        }
+    }
+
     private int? productID;
     public int? ProductID
     {

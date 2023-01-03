@@ -10,9 +10,9 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using BlApi;
 using System.Windows.Media;
-
+using System.Collections.ObjectModel;
 namespace PLConverter;
-
+using PO;
 public class NotVisibilityToVisibilityConverter : IValueConverter
 {
     //convert from source property type to target property type
@@ -77,34 +77,44 @@ public class FalseToTrueConverter : IValueConverter
     }
 }
 
-public class FalseToTrueConverterDataGrid : IValueConverter
+public class BoolToVisibilityConverter : IValueConverter ///ours
 {
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        bool boolValue = (bool)value;
-        if (boolValue && parameter is DataGrid && !(parameter as DataGrid).IsGrouping)
-        {
-            return false;
-        }
+        if (((ObservableCollection<PO.OrderItemPO>)value).Any())
+            return Visibility.Hidden;
         else
-        {
-            return true;
-        }
+            return Visibility.Visible;
+
     }
 
     //convert from target property type to source property type
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        bool boolValue = (bool)value;
-        if (boolValue && parameter is DataGrid && !(parameter as DataGrid).IsGrouping)
-        {
-            return true;
-        }
+        if (((ObservableCollection<PO.OrderItemPO>)value).Count == 0)
+            return Visibility.Visible;
         else
-        {
-            return false;
-        }
+            return Visibility.Hidden;
+    }
+}
+
+public class IntToStringPhoneConverter : IValueConverter /////ours
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (((ObservableCollection<PO.OrderItemPO>)value).Any())
+            return Visibility.Visible;
+        else
+            return Visibility.Hidden;
+
+    }
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return null!;
     }
 }
 
@@ -137,67 +147,36 @@ public class CategoryToStringConverter : IValueConverter
         return " ";
     }
 }
-public class BoolToVisibilityConverter : IValueConverter
-{
-    //convert from source property type to target property type
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        bool boolValue = (bool)value;
-        if (boolValue)
-        {
-            return Visibility.Visible; //Visibility.Collapsed;
-        }
-        else
-        {
-            return Visibility.Hidden;
-        }
-    }
 
-    
-        //convert from target property type to source property type
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        Visibility visibilityValue = (Visibility)value;
-        if (visibilityValue is Visibility.Visible)
-        {
-            return true; //Visibility.Collapsed;
-        }
-        else
-        {
-            return false;
-        }
-    }
-}
+//   public class IntToStringPhoneConverter : IValueConverter
+//{
+//    //convert from source property type to target property type
+//    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        switch ((BO.Category)value)
+//        {
+//            case Category.Kitchen:
+//                return "Kitchen";
+//            case Category.Garden:
+//                return "Garden";
+//            case Category.Living_room:
+//                return "Living Room";
+//            case Category.Bedroom:
+//                return "Bed Room";
+//            case Category.Bathroom:
+//                return "Bath Room";
+//            case Category.All:
+//                return "All Products";
+//            default:
+//                return " ";
+//        }
+//    }
 
-   public class IntToStringPhoneConverter : IValueConverter
-{
-    //convert from source property type to target property type
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        switch ((BO.Category)value)
-        {
-            case Category.Kitchen:
-                return "Kitchen";
-            case Category.Garden:
-                return "Garden";
-            case Category.Living_room:
-                return "Living Room";
-            case Category.Bedroom:
-                return "Bed Room";
-            case Category.Bathroom:
-                return "Bath Room";
-            case Category.All:
-                return "All Products";
-            default:
-                return " ";
-        }
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return " ";
-    }
-}
+//    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        return " ";
+//    }
+//}
 
 public class IntToStringConverter : IValueConverter
 {
