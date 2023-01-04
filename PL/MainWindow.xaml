@@ -42,18 +42,31 @@
         </Grid.RowDefinitions>
         <Image x:Name="backgroundimage" Source="/Updated background.jpg"  RenderTransformOrigin="0.841,0.493" Height="659" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Left" Width="1114" Margin="-27,-28,0,0"/>
         <Grid Grid.Row="0" Background="#f5f5f0" Grid.ColumnSpan="3" VerticalAlignment="Stretch" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="471*"/>
+                <ColumnDefinition Width="73*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="Tracking"
+                    HorizontalAlignment="Left" 
+                    Margin="898,0,0,0" 
+                    VerticalAlignment="Center" 
+                    Width="69" Grid.ColumnSpan="2" Height="35" Background="{x:Null}" BorderBrush="{x:Null}" Click="Tracking_Click">
+                <materialDesign:PackIcon Kind="BoxVariant" 
+                                         Foreground="Black"
+                                         Height="30" Width="32" RenderTransformOrigin="1.331,0.471"/>
+            </Button>
             <Button  x:Name="CartButton"
             RenderTransformOrigin="1.046,0.262"
             Width="54"
             Grid.Row="0"
                  
-            HorizontalAlignment="Left" Margin="959,12,0,12" Click="CartButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" MouseMove="showCart">
+            HorizontalAlignment="Left" Margin="17,12,0,12" Click="CartButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" MouseMove="showCart" Grid.Column="1">
                 <materialDesign:PackIcon Kind="Cart" 
                                          Foreground="Black"
                                          Height="30" Width="22" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
             </Button>
             <Button Name="Categories" MouseMove="Categories_Click"
-                    Click="Categories_Click" Margin="29,12,990,12" Background="{x:Null}" BorderBrush="{x:Null}" >
+                    Click="Categories_Click" Margin="29,12,844,12" Background="{x:Null}" BorderBrush="{x:Null}" >
                 <materialDesign:PackIcon Kind="MenuOpen" 
                                          Foreground="Black"
                                          Height="30" Width="68" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
@@ -63,7 +76,7 @@
             Click="LogIn_Click"
             RenderTransformOrigin="1.046,0.262"
             Width="60"
-            HorizontalAlignment="Left" Margin="1013,0,0,0" Height="32" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" >
+            HorizontalAlignment="Left" Margin="71,0,0,0" Height="32" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Grid.Column="1" >
                 <materialDesign:PackIcon Kind="AccountLock" 
                                          Foreground="Black"
                                          Height="30" Width="29" RenderTransformOrigin="1.331,0.471">
@@ -77,7 +90,7 @@
                     </materialDesign:PackIcon.RenderTransform>
                 </materialDesign:PackIcon>
             </Button>
-            <Button  Name="LogoButton" HorizontalAlignment="Center" Margin="0,6,0,5" Width="127" BorderBrush="{x:Null}" RenderTransformOrigin="0.495,0.098" Click="LogoButton_Click">
+            <Button  Name="LogoButton" HorizontalAlignment="Center" Margin="0,12,0,12" Width="128" BorderBrush="{x:Null}" RenderTransformOrigin="0.495,0.098" Click="LogoButton_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="/myLogo2.jpg"/>
                 </Button.Background>
@@ -170,5 +183,6 @@
         <Grid Name="cartDetails" Background="#f5f5f0"  Margin="0,0,75,250" Width="208" HorizontalAlignment="Right" 
               MouseMove="showCart" MouseLeave="hideCart" MouseEnter="showCart" MouseUp="showCart" Grid.Row="1" />
         <Frame x:Name="MainFrame" Margin="-27,43,0,0" Grid.RowSpan="2" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden"/>
+
     </Grid>
 </Window>

@@ -52,6 +52,17 @@
                             <TextBlock Text="{Binding Price}" FontSize="20"></TextBlock>
                         </StackPanel>
                         
+                        <Button 
+                            Click="AddTocart_Click"
+                                Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
+                                Height="60" Width="60"
+                                HorizontalAlignment="Right">
+
+                            <materialDesign:PackIcon Name="pack" Tag="{Binding ID}" Kind="CartAdd" 
+                                         Foreground="Black"
+                                         Height="40" Width="45"
+                                         VerticalAlignment="Center"/>
+                        </Button>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

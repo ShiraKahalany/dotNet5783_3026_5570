@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 using BlApi;
 
 namespace PL.Products
@@ -21,6 +22,7 @@ namespace PL.Products
     public partial class AddProduct : Window
     {
         private IBL bl = BLFactory.GetBL();
+        string path;
         public AddProduct()
         {
             InitializeComponent();
@@ -41,7 +43,22 @@ namespace PL.Products
             MessageBox.Show("Seccessfully", "הוספת מוצר", MessageBoxButton.OK);
         Close();
         }
+        private void changeImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog f = new Microsoft.Win32.OpenFileDialog();
+            //f.Filter = "All Files| *.*";
+            f.Filter = "All Images Files (*.png;*.jpeg;*.gif;*.jpg;*.bmp;*.tiff;*.tif)|*.png;*.jpeg;*.gif;*.jpg;*.bmp;*.tiff;*.tif" +
+            "|PNG Portable Network Graphics (*.png)|*.png" +
+            "|JPEG File Interchange Format (*.jpg *.jpeg *jfif)|*.jpg;*.jpeg;*.jfif" +
+            "|BMP Windows Bitmap (*.bmp)|*.bmp" +
+            "|TIF Tagged Imaged File Format (*.tif *.tiff)|*.tif;*.tiff" +
+            "|GIF Graphics Interchange Format (*.gif)|*.gif";
+            if (f.ShowDialog() == true)
+            {
+                ProductImage.Source = new BitmapImage(new Uri(f.FileName));
+                path = (ProductImage.Source).ToString();
+            }
+        }
 
-       
     }
 }

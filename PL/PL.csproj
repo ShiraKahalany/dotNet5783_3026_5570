@@ -44,6 +44,10 @@
     <None Remove="menu.png" />
     <None Remove="myLogo2.jpg" />
     <None Remove="order.png" />
+    <None Remove="Orders\approved.jpeg" />
+    <None Remove="Orders\deliver.jpeg" />
+    <None Remove="Orders\track1.jpeg" />
+    <None Remove="Orders\updateDel.jpeg" />
     <None Remove="Products\download.png" />
     <None Remove="Updated background.jpg" />
   </ItemGroup>
@@ -54,7 +58,6 @@
 
   <ItemGroup>
     <Folder Include="OrderItems\" />
-    <Folder Include="Orders\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -93,6 +96,10 @@
     <Resource Include="menu.png" />
     <Resource Include="myLogo2.jpg" />
     <Resource Include="order.png" />
+    <Resource Include="Orders\approved.jpeg" />
+    <Resource Include="Orders\deliver.jpeg" />
+    <Resource Include="Orders\track1.jpeg" />
+    <Resource Include="Orders\updateDel.jpeg" />
     <Resource Include="Products\download.png" />
     <Resource Include="Updated background.jpg" />
   </ItemGroup>

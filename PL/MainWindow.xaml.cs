@@ -90,5 +90,7 @@ public partial class MainWindow : Window
         MainFrame.Content = null;
     }
 
+    private void Tracking_Click(object sender, RoutedEventArgs e) => MainFrame.Content = new Orders.OrderTrackingByID(MainFrame);
+    
 }
 

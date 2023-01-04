@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BlApi;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using BlApi;
 namespace PL.Products;
 
 /// <summary>
@@ -29,7 +18,7 @@ public partial class CatalogPage : Page
     {
         InitializeComponent();
         pocart = cart;
-        switch(category)
+        switch (category)
         {
             case "kitchen":
                 products = (bl.Product.GetProductList(BO.Filters.filterByCategory, BO.Category.Kitchen)).ToObservable(products);
@@ -57,4 +46,28 @@ public partial class CatalogPage : Page
     {
         frame.Content = new ProductDetails((BO.ProductForList)listCatalog.SelectedItem, pocart);
     }
+
+    private void AddTocart_Click(object sender, RoutedEventArgs e)
+    {
+        var b = (Button)sender;
+        BO.Cart cart = new BO.Cart();
+        int id = ((BO.ProductForList)b.DataContext).ID;
+        bl.Cart.AddProductToCart(cart, id,1);
+        MessageBox.Show("Add To Cart Seccessfully", "Add To Cart");
+
+
+
+        //BO.Cart cart = new BO.Cart();
+        //int id = product.ID;
+        //int amount = (int)AmountOfProduct.SelectedItem;
+        //double price = product.Price ?? 0;
+        //bl.Cart.AddProductToCart(cart, id, amount);
+        //pocart.Items.Add(new PO.OrderItemPO() { ProductID = id, Name = product.Name, Amount = amount, Price = price, IsDeleted = false, Path = product.Path });
+        //pocart.TotalPrice += price * amount;
+        //bl.Cart.AddProductToCart(cart, id, amount);
+        //MessageBox.Show("Add To Cart Seccessfully", "Add To Cart", MessageBoxButton.OK);
+        ////this.NavigationService.GoBack();
+
+    }
+
 }
