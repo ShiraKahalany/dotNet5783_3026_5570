@@ -249,8 +249,10 @@ internal class Order : IOrder
         DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
         if (order?.ShipDate != null && order?.ShipDate < DateTime.Now)
             throw new BO.CanNotUpdateOrderException();
-        TimeSpan twentyfourhours = new TimeSpan(24, 00, 00);
-        if ((order?.OrderDate != null) && (DateTime.Now - order?.OrderDate) < twentyfourhours)
+        // TimeSpan twentyfourhours = new TimeSpan(24, 00, 00);
+        //if ((order?.OrderDate != null) && (DateTime.Now - order?.OrderDate) < twentyfourhours)
+        //    dal.Order.Delete(id);
+        if (order?.OrderDate != null)
             dal.Order.Delete(id);
         else
             throw new BO.CantCancelOrderException();

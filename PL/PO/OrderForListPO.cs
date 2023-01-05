@@ -8,7 +8,7 @@ using BO;
 using System.ComponentModel;
 namespace PO;
 
-internal class OrderForListPO : INotifyPropertyChanged
+public class OrderForListPO : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
 

@@ -60,7 +60,7 @@ public class DalOrder : IOrder
         if (temp?.IsDeleted == true)
             throw new DO.NotExistException("The item is already deleted");
         dataSource.Orders.Remove(temp);
-        Order order = new Order { IsDeleted = true, ID = temp.GetValueOrDefault().ID, CustomerAddress = temp?.CustomerAddress, CustomerEmail = temp?.CustomerEmail, CustomerName = temp?.CustomerName, DeliveryDate = temp?.DeliveryDate, OrderDate = temp?.OrderDate, ShipDate = temp?.OrderDate };
+        Order order = new Order { IsDeleted = true, ID = temp.GetValueOrDefault().ID, CustomerAddress = temp?.CustomerAddress, CustomerEmail = temp?.CustomerEmail, CustomerName = temp?.CustomerName, DeliveryDate = temp?.DeliveryDate, OrderDate = temp?.OrderDate, ShipDate = temp?.ShipDate };
         Add((Order)order);
     }
 
