@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using BlApi;
 using System.Collections.ObjectModel;
+using System.Collections;
+using System.Reflection;
 
 
 namespace PL;
@@ -51,6 +53,70 @@ public static class Tools
             observablecollect.Add(item);
         }
         return  observablecollect;
+    }
+
+    public static ObservableCollection<U> ToObservableByConverter<T,U>(this IEnumerable<T> ienumcollect, ObservableCollection<U> observablecollect, Func<T,U> converter)
+    {
+        observablecollect.Clear();
+        foreach (T item in ienumcollect)
+        {
+            observablecollect.Add(converter(item));
+        }
+        return observablecollect;
+    }
+
+    
+        public static Target CopyProperties<Source, Target>(Source source, Target target)
+    {
+
+        if (source is not null && target is not null)
+        {
+            Dictionary<string, PropertyInfo> propertiesInfoTarget = target.GetType().GetProperties()
+                .ToDictionary(p => p.Name, p => p);
+
+            IEnumerable<PropertyInfo> propertiesInfoSource = source.GetType().GetProperties();
+
+            foreach (var propertyInfo in propertiesInfoSource)
+            {
+                if (propertiesInfoTarget.ContainsKey(propertyInfo.Name)
+                    && (propertyInfo.PropertyType == typeof(string) || !(propertyInfo.PropertyType.IsClass)))
+                {
+                    propertiesInfoTarget[propertyInfo.Name].SetValue(target, propertyInfo.GetValue(source));
+                }
+            }
+        }
+        return target;
+    }
+
+    public static Target CopyFields<Source, Target>(this Source source, Target target)
+    {
+
+        if (source is not null && target is not null)
+        {
+            Dictionary<string, PropertyInfo> propertiesInfoTarget = target.GetType().GetProperties()
+                .ToDictionary(p => p.Name, p => p);
+
+            IEnumerable<PropertyInfo> propertiesInfoSource = source.GetType().GetProperties();
+
+            foreach (var propertyInfo in propertiesInfoSource)
+            {
+                if (propertiesInfoTarget.ContainsKey(propertyInfo.Name)
+                    && (propertyInfo.PropertyType == typeof(string) || !(propertyInfo.PropertyType.IsClass)))
+                {
+                    propertiesInfoTarget[propertyInfo.Name].SetValue(target, propertyInfo.GetValue(source));
+                }
+            }
+        }
+        return target;
+    }
+
+
+    public static T CopyProp<S,T>(S from)//get the typy we want to copy to 
+    {
+        Type t = typeof(T);
+        object to = Activator.CreateInstance(t)!; // new object of the Type
+        from.CopyFields(to);//copy all value of properties with the same name to the new object
+        return (T)to;
     }
 
     public static IEnumerable<BO.OrderItem?> ObservableToIEnumerable (this ObservableCollection<PO.OrderItemPO> observablecollect )

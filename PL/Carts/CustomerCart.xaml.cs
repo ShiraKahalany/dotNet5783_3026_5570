@@ -49,4 +49,10 @@ public partial class CustomerCart : Page
         cartpo.Items!.Remove(or);
         cartpo.TotalPrice=Math.Round((double)(cartpo.TotalPrice-or.Price*or.Amount)!,2);
     }
+
+    private void chooseAmount_MouseEnter(object sender, MouseEventArgs e)
+    {
+        int[] arr = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
+       ((ComboBox)sender).ItemsSource = arr;
+    }
 }

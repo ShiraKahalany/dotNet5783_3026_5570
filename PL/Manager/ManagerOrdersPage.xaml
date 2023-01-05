@@ -4,12 +4,113 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PL"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      Background="{DynamicResource MaterialDesignPaper}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManagerOrdersPage">
 
-    <Grid Background="Beige">
-        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Orders" VerticalAlignment="Center" Height="72" Width="165" FontSize="36" FontWeight="Bold" Foreground="#FF961CCF"/>
+    <Grid Background="white">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+
+
+
+        <Button 
+                x:Name="ShowDeletedOrders" 
+                Grid.Row="0"
+                
+                 
+                Foreground="Black"
+                FontWeight="Bold"
+                FontSize="16"
+                BorderBrush="{x:Null}" 
+                Background="{x:Null}" Margin="685,16,53,8" Click="ShowDeletedOrders_Click"
+                 >
+            <materialDesign:PackIcon Kind="History" 
+                                         Foreground="Black"
+                                         Height="26" Width="30" VerticalAlignment="Center"/>
+        </Button>
+
+
+        <ComboBox x:Name="AttributeSelector" 
+                      materialDesign:HintAssist.Hint="         Status"
+                  SelectionChanged="AttributeSelector_SelectionChanged"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Left"
+                      Margin="49,0,0,0"
+                       Width="119"  />
+
+        <ListView  Name="ProductListView"
+                   MouseDoubleClick="ProductListView_MouseDoubleClick" 
+                   FontSize="13"
+                   MaxWidth="830"
+                   Background="{x:Null}"  RenderTransformOrigin="0.9,0.9" Margin="22,56,22,35" Grid.RowSpan="2">
+
+
+
+
+            <ListView.View>
+                <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Employee Information">
+                    <GridViewColumn Header="Order ID"  Width="115" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentControl Margin="20,10,0,0" Content="{Binding Path=ID}"></ContentControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Customer Name" Width="160">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentControl Margin="20,10,0,0" Content="{Binding Path=CustomerName}"></ContentControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Amount Of Items" Width="165">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentControl Margin="40,10,0,0" Content="{Binding Path=AmountOfItems}"></ContentControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Total Price"  Width="125" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentControl Margin="30,10,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text=" $ " FontSize="13" ></TextBlock>
+                                        <TextBlock FontSize="13" Text="{Binding Path=TotalPrice}"></TextBlock>
+                                    </StackPanel>
+                                </ContentControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Status" Width="110">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentControl Margin="25,10,0,0" Content="{Binding Path=Status}"></ContentControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn  Header="Cancel" Width="105">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" Margin="20,10,0,0" Height="25" Width="25" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalAlignment="Center" Click="DeleteOrder_Click">
+                                    <materialDesign:PackIcon Kind="Close" Width="20" Height="20"></materialDesign:PackIcon>
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+
+        </ListView>
+        
 
     </Grid>
 </Page>

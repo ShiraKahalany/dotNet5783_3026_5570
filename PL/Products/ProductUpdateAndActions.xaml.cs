@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using BlApi;
 namespace PL.Products
 {
@@ -20,29 +22,34 @@ namespace PL.Products
     public partial class ProductUpdateAndActions : Window
     {
         private IBL bl = BLFactory.GetBL();
-        public ProductUpdateAndActions(BO.ProductForList prol)
+        PO.ProductPO poProduct;
+        BO.Category category;
+
+        public ProductUpdateAndActions(PO.ProductPO poPro, ObservableCollection<PO.ProductPO> products)
         {
-            BO.Product pro =bl.Product.GetProduct(prol.ID)!;
             InitializeComponent();
-            InserId.Text = pro.ID.ToString();
-            InsertName.Text = pro.Name;
-            InsertPrice.Text = pro.Price.ToString();
-            InsertAmount.Text=pro.InStock.ToString();
-            //SelectCategory.Text = pro.Category.ToString();
+            poProduct = poPro;
+            DataContext = poProduct;
+            // BO.Product pro = bl.Product.GetProduct(poProduct.ID)!;
             SelectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
-            SelectCategory.SelectedItem = prol.Category;
+            //SelectCategory.SelectedItem = poProduct.Category;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Update_Click(object sender, RoutedEventArgs e)
         {
             string name = InsertName.Text;
            int id = int.Parse(InserId.Text);
             double price = double.Parse(InsertPrice.Text);
-            int amount = int.Parse(InsertAmount.Text);
+            int amount = int.Parse(InsertInStock.Text);
             BO.Category category = (BO.Category)SelectCategory.SelectedItem;
             BO.Product newproduct = new BO.Product { ID = id, Name = name, Price = price, InStock = amount, Category = category, IsDeleted = false };
             bl.Product.UpdateProduct(newproduct);
-            MessageBox.Show("Seccessfully", "עידכון מוצר", MessageBoxButton.OK);
+            poProduct.ID = id;
+            poProduct.Name = name;  
+            poProduct.Price = price;
+            poProduct.InStock = amount;
+            poProduct.Category = category;
+            MessageBox.Show("Seccessfully", "UPDATE PRODUCT", MessageBoxButton.OK);
             Close();
         }
 
@@ -50,18 +57,11 @@ namespace PL.Products
         {
 
         }
-
-        private void DeleteProduct_Click(object sender, RoutedEventArgs e)
-        {
-            int id = int.Parse(InserId.Text);
-            bl.Product.DeleteProduct(id);
-            MessageBox.Show("Seccessfully", "מחיקת מוצר", MessageBoxButton.OK);
-            Close();
-        }
-
         private void InserId_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
+
+       
     }
 }

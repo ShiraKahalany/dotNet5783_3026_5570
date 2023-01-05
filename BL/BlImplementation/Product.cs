@@ -52,25 +52,33 @@ internal class Product : IProduct
             throw new Exception(ex.Message);
         }
     }
-    public IEnumerable<BO.Product> GetProducts()
+    public IEnumerable<BO.Product> GetProducts(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
     //עבור מנהל ועבור קטלוג קונה .בקשת רשימת מוצרים
     {
-        try
-        {
-            IEnumerable<DO.Product?> listpro = dal.Product.GetAll((DO.Product? product) => product.GetValueOrDefault().IsDeleted == false);
-            if (!listpro.Any())
-                throw new BO.NoItemsException();
-            BO.Product po = new BO.Product();
-            var listproducts = from product in listpro
-                               let p = product.CopyFields(po)
-                               select p;
-            return listproducts;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
+        IEnumerable<DO.Product?> doProductList =
+               enumFilter switch
+               {
+                   BO.Filters.filterByCategory =>
+                   //dal!.Product.GetAll(dp => (dp?.Category == (filterValue != null ? (DO.Category)filterValue : DO.Category.All)) && dp?.IsDeleted == false),
+                   dal!.Product.GetAll(dp => ((filterValue != null ? (dp?.Category == (DO.Category)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))),
+                   BO.Filters.filterByIsDeleted =>
+                    dal!.Product.GetAll(dp => dp?.IsDeleted == true),
+
+                   BO.Filters.filterByName =>
+                    dal!.Product.GetAll(dp => (dp?.Name == (string?)(filterValue)) && dp?.IsDeleted == false),
+
+                   BO.Filters.None =>
+                   dal!.Product.GetAll((DO.Product? order) => order.GetValueOrDefault().IsDeleted == false),
+                   _ => dal!.Product.GetAll((DO.Product? order) => order.GetValueOrDefault().IsDeleted == false),
+               };
+
+        //return (from DO.Product doProduct in doProductList
+        //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
+        //       .ToList();
+        return (from DO.Product doProduct in doProductList
+                select BlApi.Tools.CopyFields(doProduct, new BO.Product()));
     }
+
 
     public void Restore(int id)
     {

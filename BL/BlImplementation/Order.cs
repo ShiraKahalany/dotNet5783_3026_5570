@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using BlApi;
 namespace BlImplementation;
 
@@ -37,7 +32,7 @@ internal class Order : IOrder
             throw new BO.IllegalIdException();
         try
         {
-            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false) ;
+            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
             return order?.OrderToBO();
         }
         catch (Exception ex)
@@ -120,13 +115,13 @@ internal class Order : IOrder
     {
         try
         {
-            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == orderId) && order.GetValueOrDefault().IsDeleted==false);
+            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == orderId) && order.GetValueOrDefault().IsDeleted == false);
             if (order?.ShipDate != null && order?.ShipDate < DateTime.Now)
                 throw new BO.CanNotUpdateOrderException();
             DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == productId) && product.GetValueOrDefault().IsDeleted == false);
             BO.Order border = new BO.Order();
             border = order.CopyFields(border);
-            DO.OrderItem? theItem = dal.OrderItem.GetTByFilter((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == orderId && orderItem.GetValueOrDefault().IsDeleted == false &&orderItem.GetValueOrDefault().ProductID ==productId);
+            DO.OrderItem? theItem = dal.OrderItem.GetTByFilter((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == orderId && orderItem.GetValueOrDefault().IsDeleted == false && orderItem.GetValueOrDefault().ProductID == productId);
             border.Status = BO.OrderStatus.Ordered;
             IEnumerable<DO.OrderItem?>? items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == order?.ID && orderItem.GetValueOrDefault().IsDeleted == false);
             List<BO.OrderItem?> list = new List<BO.OrderItem?>();
@@ -163,13 +158,13 @@ internal class Order : IOrder
             dal.OrderItem.Update(new DO.OrderItem
             {
                 ID = theItem?.ID ?? 0,
-                Name = theItem?.Name ,
+                Name = theItem?.Name,
                 OrderID = orderId,
                 ProductID = productId,
                 Price = theItem?.Price ?? 0,
                 Amount = amount,
                 IsDeleted = false,
-                Path = theItem?.Path 
+                Path = theItem?.Path
             });
             return border;
         }
@@ -187,7 +182,7 @@ internal class Order : IOrder
             throw new BO.IllegalIdException();
         try
         {
-            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order)=>(order.GetValueOrDefault().ID ==id) && order.GetValueOrDefault().IsDeleted);
+            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted);
             return order?.OrderToBO();
         }
         catch (Exception ex)
@@ -251,7 +246,7 @@ internal class Order : IOrder
     //מתודה לביטול הזמנה
     {
         //DO.Order order = dal.Order.GetByID(id);
-        DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false) ;
+        DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
         if (order?.ShipDate != null && order?.ShipDate < DateTime.Now)
             throw new BO.CanNotUpdateOrderException();
         TimeSpan twentyfourhours = new TimeSpan(24, 00, 00);
@@ -260,6 +255,30 @@ internal class Order : IOrder
         else
             throw new BO.CantCancelOrderException();
     }
+
+    public IEnumerable<BO.OrderForList> GetOrderList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
+    {
+
+        IEnumerable<DO.Order?> doOrderList =
+        enumFilter switch
+        {
+            BO.Filters.filterByStatus =>
+             dal!.Order.GetAll(dp => (dp?.GetStatus()) == (BO.OrderStatus)filterValue && dp?.IsDeleted == false),
+
+            BO.Filters.None =>
+            dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false),
+            _ => dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false),
+        };
+
+        //return (from DO.Product doProduct in doProductList
+        //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
+        //       .ToList();
+        return (from DO.Order doorder in doOrderList
+                select doorder.OrderToOrderForList());
+    }
+
 }
+
+
 
 

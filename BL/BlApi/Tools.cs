@@ -91,7 +91,7 @@ internal static class Tools
 
     public static object CopyPropToStruct<S>(this S from, Type type)//get the typy we want to copy to 
     {
-        object to = Activator.CreateInstance(type); // new object of the Type
+        object to = Activator.CreateInstance(type)!; // new object of the Type
         from.CopyFields(to);//copy all value of properties with the same name to the new object
         return to;
     }

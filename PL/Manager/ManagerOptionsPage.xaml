@@ -14,10 +14,10 @@
         <Button Content="Products" HorizontalAlignment="Left"  FontSize="28" Margin="479,182,0,0" VerticalAlignment="Top" Width="131" Height="46" Click="Button_Click"/>-->
         <Label Content="Welcome Manager" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" Margin="0,60,0,0" VerticalAlignment="Top" Width="420" Height="59"/>
         <StackPanel Orientation = "Horizontal" Height="35" VerticalAlignment="Top">
-            <Button Content = "Orders" Background="Beige" MinWidth="150" Margin="10,0,0,0" Click="Button_Click_Orders" BorderBrush="{x:Null}"/>
-            <Button Content = "Products" Background="AliceBlue" MinWidth="150" Margin="10,0,0,0" Click="Button_Click_Products" BorderBrush="{x:Null}"/>
+            <Button Content = "Orders" Background="white" MinWidth="150" Margin="10,0,0,0" Click="Button_Click_Orders" BorderBrush="{x:Null}" Width="129"/>
+            <Button Content = "Products" Background="white" MinWidth="150" Click="Button_Click_Products" BorderBrush="{x:Null}"/>
         </StackPanel>
-        <Frame x:Name="MainManagerFrame" Margin="0,35,0,0" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="MainManagerOptionsFrame" Margin="0,35,0,0" NavigationUIVisibility="Hidden"/>
 
     </Grid>
 </Page>

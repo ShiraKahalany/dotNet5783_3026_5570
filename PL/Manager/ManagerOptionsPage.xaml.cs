@@ -25,6 +25,6 @@ public partial class ManagerOptionsPage : Page
         InitializeComponent();
     }
 
-    private void Button_Click_Products(object sender, RoutedEventArgs e) => MainManagerFrame.Content = new ManagerProductsPage();
-    private void Button_Click_Orders(object sender, RoutedEventArgs e) => MainManagerFrame.Content = new ManagerOrdersPage();
+    private void Button_Click_Products(object sender, RoutedEventArgs e) => MainManagerOptionsFrame.Content = new ManagerProductsPage(MainManagerOptionsFrame);
+    private void Button_Click_Orders(object sender, RoutedEventArgs e) => MainManagerOptionsFrame.Content = new ManagerOrdersPage(MainManagerOptionsFrame);
 }

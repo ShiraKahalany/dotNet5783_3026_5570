@@ -24,7 +24,7 @@ public interface IProduct
     public void UpdateProduct(BO.Product? newproduct); //עידכון נתוני מוצר (עבור מנהל
     //public IEnumerable<BO.ProductForList> GetByCategory(BO.Category ct);
     public IEnumerable<BO.ProductForList> GetProductList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null);
-
+    public IEnumerable<BO.Product> GetProducts(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null);
    // public IEnumerable<BO.ProductItem> GetKatalog();  //בקשת קטלוג עבור הקונה
    //    public override string ToString() =>  Tools.ToStringProperty(this);
 
