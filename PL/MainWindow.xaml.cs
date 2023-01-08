@@ -61,7 +61,7 @@ public partial class MainWindow : Window
     private void Categories_Click(object sender, RoutedEventArgs e)
     {
         ListCategories.Visibility = Visibility.Visible;
-        MainFrame.Visibility = Visibility.Hidden;
+        //MainFrame.Visibility = Visibility.Hidden;
 
     }
     //public void ListCategories_Click(object sender, RoutedEventArgs e) => new ProductListWindow().ShowDialog();

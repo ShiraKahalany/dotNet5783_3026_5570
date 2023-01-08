@@ -147,7 +147,8 @@ public class CategoryToStringConverter : IValueConverter
 }
 
 
-public class BoolToVisibilityConverter : IValueConverter //used
+
+public class BoolToVisibilityConverter : IValueConverter
 {
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -155,11 +156,11 @@ public class BoolToVisibilityConverter : IValueConverter //used
         bool boolValue = (bool)value;
         if (boolValue)
         {
-            return Visibility.Visible; //Visibility.Collapsed;
+            return Visibility.Hidden; //Visibility.Collapsed;
         }
         else
         {
-            return Visibility.Hidden;
+            return Visibility.Visible;
         }
     }
 

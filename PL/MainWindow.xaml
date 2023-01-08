@@ -65,8 +65,13 @@
                                          Foreground="Black"
                                          Height="30" Width="22" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
             </Button>
-            <Button Name="Categories" MouseMove="Categories_Click"
-                    Click="Categories_Click" Margin="29,12,844,12" Background="{x:Null}" BorderBrush="{x:Null}" >
+            <Button Name="Categories"
+                    MouseMove="Categories_Click"
+                    Click="Categories_Click" 
+                    Margin="29,12,844,12" 
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}" 
+                    Visibility="{Binding ElementName=MainFrame, Path=HasContent, Converter={StaticResource boolToVisibilityConverter}}">
                 <materialDesign:PackIcon Kind="MenuOpen" 
                                          Foreground="Black"
                                          Height="30" Width="68" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>

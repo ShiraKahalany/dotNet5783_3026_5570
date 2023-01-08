@@ -22,40 +22,40 @@
                FontSize="16"
                Margin="39,90,0,0" 
                VerticalAlignment="Top" RenderTransformOrigin="-0.194,0.854"/>
-        <TextBlock x:Name="costumerNameTextBox"  
+        <TextBox x:Name="costumerNameTextBox"  
                    HorizontalAlignment="Left"
                    FontSize="16" 
                    Height="25" 
-                   Margin="158,78,0,0"
-                   Text="{Binding CustomerName , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                   Margin="207,98,0,0"
+                   Text="{Binding CustomerName}"
                    VerticalAlignment="Top" 
-                   Width="172" TextWrapping="Wrap" Background="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
+                   Width="172" TextWrapping="Wrap" Background="{DynamicResource PrimaryHueDarkForegroundBrush}" BorderBrush="{DynamicResource PrimaryHueDarkBrush}"/>
         <Label Content="Customer Address:" 
                HorizontalAlignment="Left"
                FontSize="16"
                Margin="39,132,0,0" 
                VerticalAlignment="Top" RenderTransformOrigin="-0.194,0.854"/>
-        <TextBlock x:Name="costumerAddressTextBox"  
+        <TextBox x:Name="costumerAddressTextBox"  
                    HorizontalAlignment="Left"
                    FontSize="16" 
                    Height="25" 
                    Margin="207,128,0,0"
                    Text="{Binding CustomerName , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                    VerticalAlignment="Top" 
-                   Width="172" TextWrapping="Wrap" Background="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
+                   Width="172" TextWrapping="Wrap" Background="{DynamicResource PrimaryHueDarkForegroundBrush}" BorderBrush="{DynamicResource PrimaryHueDarkBrush}"/>
         <Label Content="Customer Email:" 
                HorizontalAlignment="Left"
                FontSize="16"
                Margin="39,170,0,0" 
                VerticalAlignment="Top" RenderTransformOrigin="-0.194,0.854" Width="141"/>
-        <TextBlock x:Name="costumerEmailTextBox"  
+        <TextBox x:Name="costumerEmailTextBox"  
                    HorizontalAlignment="Left"
                    FontSize="16" 
                    Height="25" 
-                   Margin="185,174,0,0"
+                   Margin="207,174,0,0"
                    Text="{Binding CustomerName , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                    VerticalAlignment="Top" 
-                   Width="172" TextWrapping="Wrap" Background="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
+                   Width="172" TextWrapping="Wrap" Background="{DynamicResource PrimaryHueDarkForegroundBrush}" BorderBrush="{DynamicResource PrimaryHueDarkBrush}"/>
 
     </Grid>
 </Page>
