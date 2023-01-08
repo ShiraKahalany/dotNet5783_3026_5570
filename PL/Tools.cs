@@ -1,11 +1,8 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlApi;
 using System.Collections.ObjectModel;
-using System.Collections;
+using System.Linq;
 using System.Reflection;
 
 
@@ -52,10 +49,10 @@ public static class Tools
         {
             observablecollect.Add(item);
         }
-        return  observablecollect;
+        return observablecollect;
     }
 
-    public static ObservableCollection<U> ToObservableByConverter<T,U>(this IEnumerable<T> ienumcollect, ObservableCollection<U> observablecollect, Func<T,U> converter)
+    public static ObservableCollection<U> ToObservableByConverter<T, U>(this IEnumerable<T> ienumcollect, ObservableCollection<U> observablecollect, Func<T, U> converter)
     {
         observablecollect.Clear();
         foreach (T item in ienumcollect)
@@ -65,8 +62,8 @@ public static class Tools
         return observablecollect;
     }
 
-    
-        public static Target CopyProperties<Source, Target>(Source source, Target target)
+
+    public static Target CopyProperties<Source, Target>(Source source, Target target)
     {
 
         if (source is not null && target is not null)
@@ -111,7 +108,7 @@ public static class Tools
     }
 
 
-    public static T CopyProp<S,T>(S from)//get the typy we want to copy to 
+    public static T CopyProp<S, T>(S from)//get the typy we want to copy to 
     {
         Type t = typeof(T);
         object to = Activator.CreateInstance(t)!; // new object of the Type
@@ -119,10 +116,10 @@ public static class Tools
         return (T)to;
     }
 
-    public static IEnumerable<BO.OrderItem?> ObservableToIEnumerable (this ObservableCollection<PO.OrderItemPO> observablecollect )
+    public static IEnumerable<BO.OrderItem?> ObservableToIEnumerable(this ObservableCollection<PO.OrderItemPO> observablecollect)
     {
-        var x= from PO.OrderItemPO item in observablecollect
-        select item.CopyOrderItemToBO();    
+        var x = from PO.OrderItemPO item in observablecollect
+                select item.CopyOrderItemToBO();
         return x;
     }
 
@@ -131,11 +128,29 @@ public static class Tools
         BO.Cart copycart = new()
         {
             CustomerAddress = cartPO.CustomerAddress,
-            CustomerEmail =cartPO.CustomeEmail,
+            CustomerEmail = cartPO.CustomeEmail,
             CustomerName = cartPO.CustomerName,
             TotalPrice = cartPO.TotalPrice
         };
         copycart.Items = cartPO.Items!.ObservableToIEnumerable().ToList();
         return copycart;
     }
+
+    public static void AddToPOCart(this PO.CartPO cart, PO.OrderItemPO item, int amountToAdd = 1)
+    {
+        if (cart.Items.Contains(item))
+        {
+            cart.Items.Remove(item);
+            item.Amount += amountToAdd;
+            cart.Items.Add(item);
+        }
+        else
+        {
+            item.Amount += amountToAdd;
+            cart.Items.Add(item);
+        }
+        cart.TotalPrice+=item.Price*amountToAdd;
+        cart.TotalPrice = Math.Round(cart.TotalPrice??0, 2);
+    }
+
 }

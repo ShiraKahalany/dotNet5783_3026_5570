@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:converter ="clr-namespace:PLConverter"
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       Background="{DynamicResource MaterialDesignPaper}"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -10,7 +11,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CatalogPage">
-
+    <Page.Resources>
+        <converter:AmountToVisibilityConverter x:Key="amountToVisibilityConverter"/>
+    </Page.Resources>
     <Grid Background="White">
         <!--<ListView x:Name="listCatalog" MouseDoubleClick="ProductDetails_MouseDoubleClick" HorizontalAlignment="Center" ItemsSource="{Binding}" Height="450" VerticalAlignment="Center"  Width="800">
             <ItemsControl.ItemsPanel>
@@ -58,12 +61,12 @@
                                 Margin="100,0,0,0"
                                 
                                 >
-
-                                <materialDesign:PackIcon Name="pack" Tag="{Binding ID}" Kind="CartAdd" 
+                                <materialDesign:PackIcon Name="pack" Tag="{Binding Amount}" Kind="CartAdd" 
                                          Foreground="Black"
                                          Height="25" Width="25"
                                          VerticalAlignment="Center"/>
                             </Button>
+                            <Label Content="{Binding Amount}" Background="PaleGreen" Height="20" Width="20" FontSize="15" Visibility="{Binding Path=Amount, Converter={StaticResource amountToVisibilityConverter}}"/>
                         </StackPanel>
                         
 

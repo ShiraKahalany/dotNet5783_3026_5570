@@ -197,6 +197,34 @@ public class StringConverterTodouble : IValueConverter
 }
 
 
+public class AmountToVisibilityConverter : IValueConverter //used
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if((int)value==0)
+            return Visibility.Visible; //Visibility.Collapsed;
+        else return Visibility.Collapsed;
+    }
+
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        Visibility visibilityValue = (Visibility)value;
+        if (visibilityValue == Visibility.Hidden)
+        {
+            return Visibility.Visible; //Visibility.Collapsed;
+        }
+        else
+        {
+            return Visibility.Hidden;
+        }
+    }
+}
+
+
+
 
 
 

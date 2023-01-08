@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -68,6 +69,24 @@ public partial class CatalogPage : Page
         //MessageBox.Show("Add To Cart Seccessfully", "Add To Cart", MessageBoxButton.OK);
         ////this.NavigationService.GoBack();
 
+    }
+
+    private void AddToCartFromCatalog(object sender, RoutedEventArgs e)
+    {
+        BO.ProductForList p = ((Button)(sender)).DataContext as BO.ProductForList;
+        int id = p?.ID??0;
+        BO.Cart cart = new BO.Cart();
+        bl.Cart.AddProductToCart(cart, id);
+        double price = p?.Price ?? 0;
+        pocart.AddToPOCart(new PO.OrderItemPO() { ProductID = id, Name = p?.Name, Amount = 1, Price = price, IsDeleted = false, Path = p?.Path });
+    }
+
+    private void DeleteProduct_Click(object sender, RoutedEventArgs e)
+    {
+        PO.ProductPO po = ((Button)(sender)).DataContext as PO.ProductPO;
+        int id = po?.ID ?? 0;
+        bl.Product.DeleteProduct(id);
+        observeproducts.Remove(po);
     }
 
 }
