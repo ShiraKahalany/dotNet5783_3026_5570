@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
+﻿using System.Collections;
 using System.Reflection;
-using DalApi;
 //namespace BO;
 namespace BlApi;
 
@@ -145,6 +139,29 @@ internal static class Tools
         return or;
     }
 
+    public static BO.OrderItem? checkAmount(DO.OrderItem item, int id,int newAmount, ref int difference, DO.Product? product)
+    {
+        if (id == item.ProductID)
+        {
+            if (newAmount == 0)
+            {
+                DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
+                dal.OrderItem.Delete(item.ID);
+                return null;
+            }
+            difference = newAmount - item.Amount??0;
+            if (newAmount > item.Amount)
+                if (product?.InStock < difference)
+                    throw new BO.NotInStockException();
+            BO.OrderItem temp = new BO.OrderItem();
+            temp = item.CopyFields(temp);
+            temp.Amount = newAmount;
+            return temp;
+        }
+        else
+            return item.CopyFields(new BO.OrderItem());
+    }
+
     public static BO.OrderForList OrderToOrderForList(this DO.Order order)
     //
     {
@@ -171,7 +188,7 @@ internal static class Tools
         totalPrice = Math.Round(totalPrice, 2);
     }
 
-    public static void UpdateTotalpriceInCart (ref BO.Cart cart, BO.OrderItem item, int dif)
+    public static void UpdateTotalpriceInCart(ref BO.Cart cart, BO.OrderItem item, int dif)
     {
         cart.TotalPrice = (cart.TotalPrice ?? 0) + (item.Price * dif);
         cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
@@ -188,7 +205,7 @@ internal static class Tools
             throw new BO.NotInStockException();
         return amount;
     }
-   
+
 
 }
 

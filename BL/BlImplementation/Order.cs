@@ -1,5 +1,7 @@
 ﻿
 using BlApi;
+using System.Security.Cryptography.X509Certificates;
+
 namespace BlImplementation;
 
 
@@ -122,39 +124,46 @@ internal class Order : IOrder
             BO.Order border = new BO.Order();
             border = order.CopyFields(border);
             DO.OrderItem? theItem = dal.OrderItem.GetTByFilter((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == orderId && orderItem.GetValueOrDefault().IsDeleted == false && orderItem.GetValueOrDefault().ProductID == productId);
-            border.Status = BO.OrderStatus.Ordered;
+            border.Status = BO.OrderStatus.Ordered;     /////??????????
             IEnumerable<DO.OrderItem?>? items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == order?.ID && orderItem.GetValueOrDefault().IsDeleted == false);
-            List<BO.OrderItem?> list = new List<BO.OrderItem?>();
             if (items == null || !items.Any())
                 return border;
             int difference = 0;
-            foreach (DO.OrderItem it in items)
-            {
-                if (productId == it.ProductID)
-                {
-                    if (amount == 0)
-                        break;
-                    difference = amount - it.Amount ?? 0;
-                    if (difference > 0)
-                        if (product?.InStock < amount)
-                            throw new BO.NotInStockException();
-                    BO.OrderItem temp = new BO.OrderItem();
-                    temp = it.CopyFields(temp);
-                    temp.Amount = amount;
-                    list.Add(temp);
-                }
-                else
-                    list.Add(it.CopyFields(new BO.OrderItem()));
-            }
 
-            border.TotalPrice += product?.Price * difference;
+            var x = from DO.OrderItem it in items
+                    let temp= Tools.checkAmount(it, productId, amount, ref difference, product)
+                    where temp != null
+                    select temp;
+
+
+            //foreach (DO.OrderItem it in items)
+            //{
+            //    if (productId == it.ProductID)
+            //    {
+            //        if (amount == 0)
+            //            break;
+            //        difference = amount - it.Amount ?? 0;
+            //        if (difference > 0)
+            //            if (product?.InStock < amount)
+            //                throw new BO.NotInStockException();
+            //        BO.OrderItem temp = new BO.OrderItem();
+            //        temp = it.CopyFields(temp);
+            //        temp.Amount = amount;
+            //        list.Add(temp);
+            //    }
+            //    else
+            //        list.Add(it.CopyFields(new BO.OrderItem()));
+            //}
+
+            border.TotalPrice += product?.Price * (amount-) difference;
             border.TotalPrice = Math.Round(border.TotalPrice ?? 0, 2);
-            border.Items = list;
-            if (amount == 0)
-            {
-                dal.OrderItem.Delete(theItem?.ID ?? 0);
-                return border;
-            }
+            border.Items = x.ToList();
+
+            //if (amount == 0)
+            //{
+            //    dal.OrderItem.Delete(theItem?.ID ?? 0);
+            //    return border;
+            //}
             dal.OrderItem.Update(new DO.OrderItem
             {
                 ID = theItem?.ID ?? 0,
