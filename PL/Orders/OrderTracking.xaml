@@ -73,30 +73,31 @@
         <TextBlock HorizontalAlignment="Left" Margin="488,24,0,0" FontSize="22" TextWrapping="Wrap" VerticalAlignment="Top" Height="29" Width="86" Text="{Binding ID}"/>
 
         <TextBlock 
+            Name="ShipDate"
             HorizontalAlignment="Left"
-            Margin="269,190,0,0"
+            Margin="26,317,0,0"
             TextWrapping="Wrap" 
             Text="{Binding OrderDate}" 
             VerticalAlignment="Top"
             Height="20" Width="110" RenderTransformOrigin="0.495,0.02"/>
 
         <TextBlock 
-            x:Name="ShipDate"
+            x:Name="OrderDate"
             HorizontalAlignment="Left"
-            Margin="292,225,0,0"
+            Margin="19,222,0,0"
             TextWrapping="Wrap" 
             Text="{Binding ShipDate}" 
             VerticalAlignment="Top"
             Height="22" Width="123"/>
 
         <TextBlock 
-            x:Name="DelDate"
+            x:Name="DeliveryDate"
             HorizontalAlignment="Left"
-            Margin="147,247,0,0"
+            Margin="26,398,0,0"
             TextWrapping="Wrap" 
             Text="{Binding DeliveryDate}" 
             VerticalAlignment="Top"
-            Height="21" Width="116"/>
+            Height="22" Width="116"/>
 
         <ListView x:Name="OrderItemView" 
                   ItemsSource="{Binding}"
@@ -121,28 +122,48 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid Name="AdminButton" HorizontalAlignment="Left" Height="197" Margin="173,225,0,0" VerticalAlignment="Top" Width="119">
+        <Grid Name="AdminButton" HorizontalAlignment="Left" Height="198" Margin="199,228,0,0" VerticalAlignment="Top" Width="120">
 
-            <Button Name="UpdateShip" HorizontalAlignment="Left" Height="20" Margin="7,39,0,0" VerticalAlignment="Top" Width="93" BorderBrush="{x:Null}" Click="UpdateShip_Click" RenderTransformOrigin="0.032,0.445" >
+            <Button Name="UpdateShip" HorizontalAlignment="Left" Height="20" VerticalAlignment="Center" Width="93" BorderBrush="{x:Null}" Click="UpdateShip_Click" RenderTransformOrigin="0.032,0.445" >
                 <Button.Background>
                     <ImageBrush ImageSource="/Orders/updateDel.jpeg" Stretch="Uniform"/>
                 </Button.Background>
             </Button>
-            <Button Name="UpdateDel" HorizontalAlignment="Left" Height="20" Margin="13,83,0,0" VerticalAlignment="Top" Width="87" BorderBrush="{x:Null}" Click="UpdateDel_Click"  RenderTransformOrigin="0.474,1.548">
+            <Button Name="UpdateDel" HorizontalAlignment="Left" Height="20" Margin="0,178,0,0" VerticalAlignment="Top" Width="87" BorderBrush="{x:Null}" Click="UpdateDel_Click"  RenderTransformOrigin="0.474,1.548">
                 <Button.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="/Orders/updateDel.jpeg"/>
                 </Button.Background>
             </Button>
         </Grid>
-        <Button  HorizontalAlignment="Left" Margin="68,213,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="45">
+        <Button  HorizontalAlignment="Left" Margin="119,212,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}">
 
-            <materialDesign:PackIcon Kind="Cart" 
+            <materialDesign:PackIcon Kind="TickCircle" 
                                          Foreground="Black"
-                                         Height="40" Width="40" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
+                                         Height="36" Width="62" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Button>
-        <Button  HorizontalAlignment="Left" Margin="68,291,0,0" VerticalAlignment="Top"/>
-        <Button HorizontalAlignment="Left" Margin="52,359,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button  HorizontalAlignment="Left" Margin="66,327,0,0" VerticalAlignment="Top" Width="51" Height="27"/>
-        <Button HorizontalAlignment="Left" Margin="54,258,0,0" VerticalAlignment="Top" Width="63" Height="26"/>
+        <Button  HorizontalAlignment="Left" Margin="119,258,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="44" Background="{x:Null}" BorderBrush="{x:Null}">
+
+            <materialDesign:PackIcon Kind="ChevronTripleDown" 
+                                         Foreground="Black"
+                                         Height="40" Width="32" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
+        </Button>
+        <Button  HorizontalAlignment="Left" Margin="119,302,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}">
+
+            <materialDesign:PackIcon Kind="PackageVariant" 
+                                         Foreground="Black"
+                                         Height="40" Width="60" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
+        </Button>
+        <Button  HorizontalAlignment="Left" Margin="119,342,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="44" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+
+            <materialDesign:PackIcon Kind="ChevronTripleDown" 
+                                         Foreground="Black"
+                                         Height="40" Width="32" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
+        </Button>
+        <Button  HorizontalAlignment="Left" Margin="119,386,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}">
+
+            <materialDesign:PackIcon Kind="house" 
+                                         Foreground="Black"
+                                         Height="40" Width="60" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
+        </Button>
     </Grid>
 </Page>
