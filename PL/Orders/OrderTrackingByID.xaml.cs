@@ -70,6 +70,7 @@ public partial class OrderTrackingByID : Page
             PasswordBox.Password = "";
             myframe.Content = orderTracking;
         }
+        //should open :myframe.Content = new Orders.OrderTracking();
     }
 
 }

@@ -19,7 +19,12 @@ namespace PL.Products
     /// <summary>
     /// Interaction logic for ProductUpdateAndActions.xaml
     /// </summary>
-    public partial class ProductUpdateAndActions : Window
+    public partial class 
+        
+        
+        
+        
+        ProductUpdateAndActions : Window
     {
         private IBL bl = BLFactory.GetBL();
         PO.ProductPO poProduct;

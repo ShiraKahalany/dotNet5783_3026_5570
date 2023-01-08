@@ -80,7 +80,7 @@ public partial class MainWindow : Window
     private void CartButton_Click(object sender, RoutedEventArgs e)
     {
         cartDetails.Visibility = Visibility.Hidden;
-        MainFrame.Content = new PL.Carts.CustomerCart(pocart);
+        MainFrame.Content = new PL.Carts.CustomerCart(pocart,MainFrame);
     }
 
     private void LogIn_Click(object sender, RoutedEventArgs e) => MainFrame.Content = new Manager.LogInManagerPage(MainFrame);

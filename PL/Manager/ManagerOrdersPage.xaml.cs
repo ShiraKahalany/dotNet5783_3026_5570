@@ -33,7 +33,7 @@ public partial class ManagerOrdersPage : Page
         BOorderforlist = bl.Order.GetOrders();
         ob = BOorderforlist.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
         //ProductListView.DataContext = observeproducts;
-        ProductListView.ItemsSource = ob;
+        OrderListView.ItemsSource = ob;
         AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
 
     }
@@ -49,9 +49,9 @@ public partial class ManagerOrdersPage : Page
         // ProductListView.DataContext = observeproducts;
     }
 
-    private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    private void OrderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
-        //new ProductUpdateAndActions((PO.ProductPO)ProductListView.SelectedItem, observeproducts).ShowDialog();
+        myframe.Content = new Orders.OrderTracking();
         //if ((BO.Category)AttributeSelector.SelectedItem != BO.Category.All)
         //{
         //    BOproducts = bl.Product.GetProducts(BO.Filters.filterByCategory, (BO.Category)AttributeSelector.SelectedItem).ToList();

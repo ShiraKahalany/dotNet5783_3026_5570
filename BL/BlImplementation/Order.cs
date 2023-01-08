@@ -155,7 +155,7 @@ internal class Order : IOrder
             //        list.Add(it.CopyFields(new BO.OrderItem()));
             //}
 
-            border.TotalPrice += product?.Price * (amount-) difference;
+            //border.TotalPrice += product?.Price *  difference; //////////(amount*)
             border.TotalPrice = Math.Round(border.TotalPrice ?? 0, 2);
             border.Items = x.ToList();
 

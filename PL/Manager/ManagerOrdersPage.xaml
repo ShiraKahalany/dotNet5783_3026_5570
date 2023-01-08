@@ -45,8 +45,8 @@
                       Margin="49,0,0,0"
                        Width="119"  />
 
-        <ListView  Name="ProductListView"
-                   MouseDoubleClick="ProductListView_MouseDoubleClick" 
+        <ListView  Name="OrderListView"
+                   MouseDoubleClick="OrderListView_MouseDoubleClick" 
                    FontSize="13"
                    MaxWidth="830"
                    Background="{x:Null}"  RenderTransformOrigin="0.9,0.9" Margin="22,56,22,35" Grid.RowSpan="2">

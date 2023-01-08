@@ -23,7 +23,8 @@ public partial class CustomerCart : Page
 {
     private IBL bl = BLFactory.GetBL();
     PO.CartPO cartpo;
-    public CustomerCart(PO.CartPO cartPO)
+    Frame myframe;
+    public CustomerCart(PO.CartPO cartPO,Frame frame)
     {
         InitializeComponent();
         cartpo = cartPO;
@@ -32,6 +33,7 @@ public partial class CustomerCart : Page
         totalPrice.DataContext=cartPO;
         NoItems.DataContext = cartPO;
         CartDetailsGrid.DataContext = cartPO;
+        myframe=frame;
         //NoItems.DataContext = (cartPO.Items!.Count==0);
         //CartDetailsGrid.DataContext = (cartPO.Items!.Count != 0);
         //CartDetailsGrid.Visibility= Visibility.Collapsed;
@@ -54,5 +56,15 @@ public partial class CustomerCart : Page
     {
         int[] arr = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
        ((ComboBox)sender).ItemsSource = arr;
+    }
+
+    private void OrderConfirmation_Click(object sender, RoutedEventArgs e)
+    {
+        myframe.Content = new OrderConfirmationPage();
+    }
+
+    private void ContinueShopping_Click(object sender, RoutedEventArgs e)
+    {
+        myframe.Content = new Products.CatalogPage("all", myframe, cartpo);
     }
 }

@@ -13,7 +13,7 @@
       Title="CustomerCart">
     <Page.Resources>
         <converter:FalseToTrueUpdateConverter x:Key="amountOfItemsToNotVisibilityConverter"/>
-        <converter:IntToStringConverter x:Key="amountOfItemsToVisibilityConverter"/> 
+        <converter:IntToStringConverter x:Key="amountOfItemsToVisibilityConverter"/>
         <Style x:Key="Design" TargetType="Button">
             <Setter Property="BorderBrush" Value="Black"/>
             <Style.Resources>
@@ -29,8 +29,8 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="AntiqueWhite">
-            <Label Content="My Cart" Background="AntiqueWhite" HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Width="800" FontSize="30" HorizontalContentAlignment="Center" FontFamily="Book Antiqua"  FontWeight="Bold" Foreground="#FF974E4E"/>
+        <Grid Grid.Row="0">
+            <Label Content="My Cart"  HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Width="145" FontSize="30" HorizontalContentAlignment="Center" FontFamily="Book Antiqua"  FontWeight="Bold" Foreground="#FF974E4E"/>
         </Grid>
         <Grid Grid.Row="1" Background="White">
             <Grid.ColumnDefinitions>
@@ -44,7 +44,7 @@
                    HorizontalContentAlignment="Center"
                    FontSize="20"
                    Margin="0,30,0,10"
-                    FontFamily="Snap ITC"
+                    
                     FontWeight="Bold"
                     Foreground="#FF974E4E" />
 
@@ -53,34 +53,42 @@
                        HorizontalAlignment="Center"
                    FontSize="30"
                    Margin="0,69,0,10"
-                    FontFamily="Book Antiqua"
+                    
                     FontWeight="Bold"
                     Foreground="Black" />
                     <TextBlock Name="totalPrice" Grid.Column="1" Text="{Binding Path=TotalPrice}"
                        HorizontalAlignment="Center"
                    FontSize="30"
                    Margin="0,69,0,10"
-                    FontFamily="Snap ITC"
                     FontWeight="Bold"
                     Foreground="Black" />
 
                 </StackPanel>
-                <Button Grid.Column="1"
-                    Name="OrderConfirmation"
-                    Content="CHECKOUT"
-                    Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}"
-                    Background="AntiqueWhite"
+                <Button
+                    Name="ContinueShopping"
+                    Content="CONTINUE SHOPPING"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Height="50" Width="210"
-                    FontSize="25" Margin="0,334,0,0"
+                    Height="39" Width="174"
+                    FontSize="10" 
                     HorizontalContentAlignment="Center"
-                    FontFamily="Snap ITC"
+                   
                     FontWeight="Bold"
-                    Foreground="#FF974E4E"/>
+                    Foreground="black" Background="{x:Null}" Click="ContinueShopping_Click" Margin="0,290,0,0"/>
+                <Button
+                    Name="OrderConfirmation"
+                    Content="CHECKOUT"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Height="37" Width="174"
+                    FontSize="18" Margin="0,334,0,0"
+                    HorizontalContentAlignment="Center"
+                   
+                    FontWeight="Bold"
+                    Foreground="black" Background="{x:Null}" Click="OrderConfirmation_Click"/>
             </Grid>
 
-            <ListView x:Name="CartItems" Margin="0,10,0,-10"  Grid.Column="0" Background="Azure" HorizontalAlignment="Center" >
+            <ListView x:Name="CartItems" Margin="0,10,0,-10"  Grid.Column="0"  HorizontalAlignment="Center" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Width="400">
@@ -94,7 +102,7 @@
                             <Image Source="{Binding Path}" 
                                Height="100" Grid.Column="1"></Image>
                             <ComboBox x:Name="chooseAmount" HorizontalAlignment="center"  VerticalAlignment="Center" Grid.Column="2" Margin="20,0,0,0" SelectedItem="{Binding Amount }" Width="40" Height="40" MaxDropDownHeight="100" MouseEnter="chooseAmount_MouseEnter">
-                                
+
                             </ComboBox>
                             <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="160" Grid.Column="3">
                                 <TextBlock Name="name" Width="190" HorizontalAlignment="center" VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
