@@ -215,6 +215,7 @@ internal class Product : IProduct
 
     public IEnumerable<BO.ProductItem> GetProductItemsList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
     {
+        
         IEnumerable<DO.Product?> doProductList =
         enumFilter switch
         {

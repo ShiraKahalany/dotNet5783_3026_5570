@@ -4,137 +4,136 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BO;
+namespace PO;
 
-namespace PL.PO
+public class ProductItemPO
 {
-    internal class ProductItemPO
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    private bool isDeleted;
+
+    public bool IsDeleted
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private bool isDeleted;
-
-        public bool IsDeleted
+        get
+        { return isDeleted; }
+        set
         {
-            get
-            { return isDeleted; }
-            set
+            isDeleted = value;
+            if (PropertyChanged != null)
             {
-                isDeleted = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs("IsDeleted"));
-                }
+                PropertyChanged(this, new PropertyChangedEventArgs("IsDeleted"));
             }
         }
+    }
 
 
-        private int id;
+    private int id;
 
-        public int ID
+    public int ID
+    {
+        get
+        { return id; }
+        set
         {
-            get
-            { return id; }
-            set
+            id = value;
+            if (PropertyChanged != null)
             {
-                id = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs("ID"));
-                }
+                PropertyChanged(this, new PropertyChangedEventArgs("ID"));
             }
         }
+    }
 
-        private int amount;
+    private int amount;
 
-        public int Amount
+    public int Amount
+    {
+        get
+        { return amount; }
+        set
         {
-            get
-            { return amount; }
-            set
+            amount = value;
+            if (PropertyChanged != null)
             {
-                amount = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs("Amount"));
-                }
+                PropertyChanged(this, new PropertyChangedEventArgs("Amount"));
             }
         }
+    }
 
 
-        private string? name;
-        public string? Name
+    private string? name;
+    public string? Name
+    {
+        get
+        { return name; }
+        set
         {
-            get
-            { return name; }
-            set
+            name = value;
+            if (PropertyChanged != null)
             {
-                name = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs("Name"));
-                }
+                PropertyChanged(this, new PropertyChangedEventArgs("Name"));
             }
         }
+    }
 
-        private double? price;
-        public double? Price
+    private double? price;
+    public double? Price
+    {
+        get
+        { return price; }
+        set
         {
-            get
-            { return price; }
-            set
+            price = value;
+            if (PropertyChanged != null)
             {
-                price = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs("Price"));
-                }
+                PropertyChanged(this, new PropertyChangedEventArgs("Price"));
             }
         }
+    }
 
-        private Category category;
-        public Category Category
+    private Category category;
+    public Category Category
+    {
+        get
+        { return category; }
+        set
         {
-            get
-            { return category; }
-            set
+            category = value;
+            if (PropertyChanged != null)
             {
-                category = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs("Category"));
-                }
+                PropertyChanged(this, new PropertyChangedEventArgs("Category"));
             }
         }
+    }
 
-        private bool? isInStock;
+    private bool? isInStock;
 
-        public bool? IsInStock
+    public bool? IsInStock
+    {
+        get
+        { return isInStock; }
+        set
         {
-            get
-            { return isInStock; }
-            set
+            isInStock = value;
+            if (PropertyChanged != null)
             {
-                isInStock = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs("IsInStock"));
-                }
+                PropertyChanged(this, new PropertyChangedEventArgs("IsInStock"));
             }
         }
+    }
 
-        private string? path;
+    private string? path;
 
-        public string? Path
+    public string? Path
+    {
+        get
+        { return path; }
+        set
         {
-            get
-            { return path; }
-            set
+            path = value;
+            if (PropertyChanged != null)
             {
-                path = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs("Path"));
-                }
+                PropertyChanged(this, new PropertyChangedEventArgs("Path"));
             }
         }
     }

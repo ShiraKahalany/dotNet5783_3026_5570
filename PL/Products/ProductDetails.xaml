@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:converter ="clr-namespace:PLConverter"
+     
       xmlns:local="clr-namespace:PL.Products"
       mc:Ignorable="d" 
               TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -13,9 +14,9 @@
       Title="ProductDetails">
 
     <Page.Resources>
-        <converter:IsInStockToStringConverter x:Key="isInStockToString"/>
+        <!--<converter:IsInStockToStringConverter x:Key="isInStockToString"/>
         <converter:IsInStockToColorConverter x:Key="isInStockToColor"/>
-        <converter:BoolToIsEnabledConverter x:Key="boolToIsEnabled"/>
+        <converter:BoolToIsEnabledConverter x:Key="boolToIsEnabled"/>-->
         <Style x:Key="Design" TargetType="Button">
             <Setter Property="BorderBrush" Value="Black"/>
             <Style.Resources>
@@ -70,7 +71,6 @@
                 Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
                 HorizontalAlignment="Left"
                 Margin="162,259,0,0"
-                IsEnabled="{Binding ElementName=IsInStock, Path=Text, Converter={StaticResource boolToIsEnabled}}"
                 VerticalAlignment="Top" Height="49" Width="50">
             <materialDesign:PackIcon Kind="CartAdd" 
                                          Foreground="Black"
@@ -92,7 +92,7 @@
                 </materialDesign:PackIcon.RenderTransform>
             </materialDesign:PackIcon>
         </Button>
-        <TextBlock Name="IsInStock" HorizontalAlignment="Left" Margin="305,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="{Binding Path=IsInStock, Converter={StaticResource isInStockToColor}}" TextAlignment="Center" Height="27" Width="108" Text="{Binding Path=IsInStock, Converter={StaticResource isInStockToString}}"/>
+        <TextBlock Name="IsInStock" HorizontalAlignment="Left" Margin="305,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Height="27" Width="108"/>
 
     </Grid>
 </Page>

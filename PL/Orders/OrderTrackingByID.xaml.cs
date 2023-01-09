@@ -80,7 +80,7 @@ public partial class OrderTrackingByID : Page
         {
             MessageBox.Show("Order not found", "OrderTracking", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-        myframe.Content = new Orders.orderTracking();
+        myframe.Content = new Orders.OrderTracking();
 
         //if (PasswordBox.Password == "1234")
         //{

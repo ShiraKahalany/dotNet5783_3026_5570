@@ -252,14 +252,7 @@ public class BoolToIsEnabledConverter : IValueConverter
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if ((bool)value)
-        {
-            return (Button)
-        }
-        else
-        {
-            return Visibility.Visible;
-        }
+return (bool)value;
     }
 
 
