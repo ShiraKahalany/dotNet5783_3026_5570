@@ -25,10 +25,11 @@ public interface IProduct
     //public IEnumerable<BO.ProductForList> GetByCategory(BO.Category ct);
     public IEnumerable<BO.ProductForList> GetProductList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null);
     public IEnumerable<BO.Product> GetProducts(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null);
-   // public IEnumerable<BO.ProductItem> GetKatalog();  //בקשת קטלוג עבור הקונה
-   //    public override string ToString() =>  Tools.ToStringProperty(this);
+    // public IEnumerable<BO.ProductItem> GetKatalog();  //בקשת קטלוג עבור הקונה
+    //    public override string ToString() =>  Tools.ToStringProperty(this);
 
     // public IEnumerable<ProductItem> GetProducts(int id); //בקשת פרטי מוצר עבור מנהל
     //public IEnumerable<ProductItem> GetProducts(); // בקשת פרטי מוצר עבור הקונה
+    public IEnumerable<BO.ProductItem> GetProductItemsList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null);
 
 }

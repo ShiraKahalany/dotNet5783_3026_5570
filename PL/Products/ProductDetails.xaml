@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converter ="clr-namespace:PLConverter"
       xmlns:local="clr-namespace:PL.Products"
       mc:Ignorable="d" 
               TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -12,6 +13,9 @@
       Title="ProductDetails">
 
     <Page.Resources>
+        <converter:IsInStockToStringConverter x:Key="isInStockToString"/>
+        <converter:IsInStockToColorConverter x:Key="isInStockToColor"/>
+        <converter:BoolToIsEnabledConverter x:Key="boolToIsEnabled"/>
         <Style x:Key="Design" TargetType="Button">
             <Setter Property="BorderBrush" Value="Black"/>
             <Style.Resources>
@@ -23,58 +27,57 @@
     </Page.Resources>
     <Grid Background="White">
         <Image HorizontalAlignment="Left" 
-               Height="268" Margin="500,58,0,0" 
-               VerticalAlignment="Top" Width="224" Source="{Binding Path}" />
+               Height="281" Margin="490,97,0,0" 
+               VerticalAlignment="Top" Width="257" Source="{Binding Path}" />
 
         <TextBlock 
             Name="nameofproduct"
             HorizontalAlignment="Left"
             FontFamily="Candara" 
             FontWeight="Bold"
-            Foreground="gray"
+            Foreground="#FF160202"
             FontSize="25" 
             Margin="44,26,0,0" 
             TextWrapping="Wrap" 
             Text="{Binding Name}" 
             VerticalAlignment="Top" 
             Height="71"
-            Width="441"/>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="$" FontSize="20"></TextBlock>
+            Width="522"/>
+        <StackPanel Orientation="Horizontal" Width="200" Height="35" Margin="42,180,558,235">
+            <TextBlock Text="$" Width="10" FontSize="20"></TextBlock>
             <TextBlock 
-            Name="priceofproduct"
+            x:Name="priceofproduct"
             IsEnabled="false"
-            HorizontalAlignment="Left"
             FontSize="25"
-            Margin="44,86,0,0"
-            TextWrapping="Wrap"
-            Text="{Binding Price}" VerticalAlignment="Top" Height="41" Width="89"/>
+            
+            Text="{Binding Price}" Height="35" Width="123"/>
         </StackPanel>
         <TextBlock
             Name="categoryofproduct"
              IsEnabled="false"
             HorizontalAlignment="Left"
             FontSize="25"  TextWrapping="Wrap"
-            Text="{Binding Category}" VerticalAlignment="Top" Height="48" Width="196" Margin="44,132,0,0"/>
+            Text="{Binding Category}" VerticalAlignment="Top" Height="48" Width="196" Margin="37,97,0,0" Foreground="Gray"/>
         <TextBlock
             Name="idofproduct"
              IsEnabled="false"
             HorizontalAlignment="Left" 
             FontSize="10"  
             TextWrapping="Wrap" 
-            Text="{Binding ID}" VerticalAlignment="Top" Height="16" Width="89" Margin="576,342,0,0" RenderTransformOrigin="0.505,2.133"/>
+            Text="{Binding ID}" VerticalAlignment="Top" Height="16" Width="89" Margin="559,383,0,0" RenderTransformOrigin="0.505,2.133"/>
         <Button  Name="addTocart"
                  Click="AddTocart_Click"
                 Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
                 HorizontalAlignment="Left"
-                Margin="127,213,0,0"
+                Margin="162,259,0,0"
+                IsEnabled="{Binding ElementName=IsInStock, Path=Text, Converter={StaticResource boolToIsEnabled}}"
                 VerticalAlignment="Top" Height="49" Width="50">
             <materialDesign:PackIcon Kind="CartAdd" 
                                          Foreground="Black"
                                          Height="30" Width="30"/>
 
         </Button>
-        <ComboBox  Name="AmountOfProduct" HorizontalAlignment="Left" MaxDropDownHeight="120" Margin="44,225,0,0" VerticalAlignment="Top" Width="44"/>
+        <ComboBox  Name="AmountOfProduct" HorizontalAlignment="Left" MaxDropDownHeight="120" Margin="98,271,0,0" VerticalAlignment="Top" Width="44"/>
         <Button x:Name="back" HorizontalAlignment="Left" Margin="37,367,0,0" VerticalAlignment="Top" Click="back_click" Background="{x:Null}" BorderBrush="{x:Null}" Width="58">
             <materialDesign:PackIcon Kind="ArrowBack"
                                          Foreground="Black"
@@ -89,6 +92,7 @@
                 </materialDesign:PackIcon.RenderTransform>
             </materialDesign:PackIcon>
         </Button>
+        <TextBlock Name="IsInStock" HorizontalAlignment="Left" Margin="305,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="{Binding Path=IsInStock, Converter={StaticResource isInStockToColor}}" TextAlignment="Center" Height="27" Width="108" Text="{Binding Path=IsInStock, Converter={StaticResource isInStockToString}}"/>
 
     </Grid>
 </Page>
