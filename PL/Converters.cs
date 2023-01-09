@@ -1,19 +1,11 @@
 ﻿using BO;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using BlApi;
-using System.Windows.Media;
-using System.Collections.ObjectModel;
 namespace PLConverter;
-using PO;
-
 public class NotVisibilityToVisibilityConverter : IValueConverter //used
 {
     //convert from source property type to target property type
@@ -153,14 +145,30 @@ public class BoolToVisibilityConverter : IValueConverter
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (bool)value;
+        bool boolValue = (bool)value;
+        if (boolValue)
+        {
+            return Visibility.Hidden; //Visibility.Collapsed;
+        }
+        else
+        {
+            return Visibility.Visible;
+        }
     }
 
 
     //convert from target property type to source property type
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return false;
+        Visibility visibilityValue = (Visibility)value;
+        if (visibilityValue is Visibility.Visible)
+        {
+            return true; //Visibility.Collapsed;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
 
@@ -186,7 +194,7 @@ public class AmountToVisibilityConverter : IValueConverter //used
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if((int)value==0)
+        if ((int)value == 0)
             return Visibility.Visible; //Visibility.Collapsed;
         else return Visibility.Collapsed;
     }
@@ -252,29 +260,14 @@ public class BoolToIsEnabledConverter : IValueConverter
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if ((bool)value)
-        {
-            return (Button)
-        }
-        else
-        {
-            return Visibility.Visible;
-        }
+        return (bool)value;
     }
 
 
     //convert from target property type to source property type
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        Visibility visibilityValue = (Visibility)value;
-        if (visibilityValue is Visibility.Visible)
-        {
-            return true; //Visibility.Collapsed;
-        }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 }
 
