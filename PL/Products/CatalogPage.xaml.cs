@@ -86,7 +86,7 @@ public partial class CatalogPage : Page
         PO.ProductPO po = ((Button)(sender)).DataContext as PO.ProductPO;
         int id = po?.ID ?? 0;
         bl.Product.DeleteProduct(id);
-        observeproducts.Remove(po);
+        //observeproducts.Remove(po);
     }
 
 }

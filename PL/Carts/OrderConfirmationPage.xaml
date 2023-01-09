@@ -4,6 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PL.Carts"
+       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      Background="{DynamicResource MaterialDesignPaper}"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OrderConfirmationPage">
@@ -13,10 +16,15 @@
                HorizontalAlignment="Left" 
                Margin="39,29,0,0"
                VerticalAlignment="Top" 
-               Width="239"
+               Width="203"
                Height="40"
                FontWeight="Bold"
                FontSize="20"/>
+        <Button  HorizontalAlignment="Left" Margin="214,28,0,0" VerticalAlignment="Top" Width="84" Height="41" Background="{x:Null}" BorderBrush="{x:Null}">
+            <materialDesign:PackIcon Kind="Person" 
+                                         Foreground="Black"
+                                         Height="31" Width="64" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
+        </Button>
         <Label Content="Name:" 
                HorizontalAlignment="Left"
                FontSize="16"
@@ -56,6 +64,16 @@
                    Text="{Binding CustomerName , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                    VerticalAlignment="Top" 
                    Width="172" TextWrapping="Wrap" Background="{DynamicResource PrimaryHueDarkForegroundBrush}" BorderBrush="{DynamicResource PrimaryHueDarkBrush}"/>
-
+        <Button
+                    Name="PlaceOrder"
+                    Content="PLACE ORDER"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Height="29" Width="148"
+                    FontSize="13" 
+                    HorizontalContentAlignment="Center"
+                   
+                    FontWeight="Bold"
+                    Foreground="black" Background="{x:Null}"  Margin="559,367,0,0" Click="PlaceOrder_Click"/>
     </Grid>
 </Page>

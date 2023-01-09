@@ -24,4 +24,9 @@ public partial class OrderConfirmationPage : Page
     {
         InitializeComponent();
     }
+
+    private void PlaceOrder_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show("Purchase Seccessfully :)", "THANK YOU", MessageBoxButton.OK);
+    }
 }
