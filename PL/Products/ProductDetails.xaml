@@ -17,6 +17,8 @@
         <converter:IsInStockToStringConverter x:Key="isInStockToString"/>
         <converter:IsInStockToColorConverter x:Key="isInStockToColor"/>
         <converter:BoolToIsEnabledConverter x:Key="boolToIsEnabled"/>
+        <converter:IntToStringConverter x:Key="intToStringConverter"/>
+        <converter:BoolToVisibility2Converter x:Key="boolToVisibility2Converter"/>
         <Style x:Key="Design" TargetType="Button">
             <Setter Property="BorderBrush" Value="Black"/>
             <Style.Resources>
@@ -37,14 +39,14 @@
             FontFamily="Candara" 
             FontWeight="Bold"
             Foreground="#FF160202"
-            FontSize="25" 
+            FontSize="30" 
             Margin="44,26,0,0" 
             TextWrapping="Wrap" 
             Text="{Binding Name}" 
             VerticalAlignment="Top" 
             Height="71"
             Width="522"/>
-        <StackPanel Orientation="Horizontal" Width="200" Height="35" Margin="42,180,558,235">
+        <StackPanel Orientation="Horizontal" Width="100" Height="35" Margin="79,190,621,225">
             <TextBlock Text="$" Width="10" FontSize="20"></TextBlock>
             <TextBlock 
             x:Name="priceofproduct"
@@ -57,8 +59,8 @@
             Name="categoryofproduct"
              IsEnabled="false"
             HorizontalAlignment="Left"
-            FontSize="25"  TextWrapping="Wrap"
-            Text="{Binding Category}" VerticalAlignment="Top" Height="48" Width="196" Margin="37,97,0,0" Foreground="Gray"/>
+            FontSize="20"  TextWrapping="Wrap"
+            Text="{Binding Category}" VerticalAlignment="Top" Height="48" Width="196" Margin="37,84,0,0" Foreground="Gray"/>
         <TextBlock
             Name="idofproduct"
              IsEnabled="false"
@@ -78,6 +80,7 @@
 
         </Button>
         <ComboBox  Name="AmountOfProduct" HorizontalAlignment="Left" MaxDropDownHeight="120" Margin="98,271,0,0" VerticalAlignment="Top" Width="44"/>
+        
         <Button x:Name="back" HorizontalAlignment="Left" Margin="37,367,0,0" VerticalAlignment="Top" Click="back_click" Background="{x:Null}" BorderBrush="{x:Null}" Width="58">
             <materialDesign:PackIcon Kind="ArrowBack"
                                          Foreground="Black"
@@ -92,7 +95,18 @@
                 </materialDesign:PackIcon.RenderTransform>
             </materialDesign:PackIcon>
         </Button>
-        <TextBlock Name="IsInStock" HorizontalAlignment="Left" Margin="305,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Height="27" Text="{Binding Path=IsInStock ,Converter={StaticResource isInStockToColor}}" Width="108"/>
+        <TextBlock Name="IsInStock" 
+                   HorizontalAlignment="Left"
+                   Margin="37,132,0,0" 
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Top" 
+                   TextAlignment="Center"
+                   Height="32" 
+                   Text="{Binding Path=IsInStock ,Converter={StaticResource isInStockToString}}" 
+                   Width="129" 
+                   Foreground="{Binding Path=IsInStock, Converter={StaticResource isInStockToColor}}"/>
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="234,259,0,0" TextWrapping="Wrap" FontSize="20" FontWeight="Bold" Text="{Binding Path=Amount, Converter={StaticResource intToStringConverter}}" VerticalAlignment="Top" Height="40" Width="39" Background="#FFC4EE89" TextAlignment="Center" Visibility="{Binding Path=Amount, Converter={StaticResource boolToVisibility2Converter}}"/>
 
     </Grid>
 </Page>

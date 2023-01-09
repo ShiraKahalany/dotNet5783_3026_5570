@@ -78,7 +78,7 @@ public class FalseToTrueConverter : IValueConverter //used
     }
 }
 
-public class FalseToTrueUpdateConverter : IValueConverter ///ours ,picture
+public class IsEmptyToNotVisibilityConverter : IValueConverter ///ours ,picture
 {
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -97,7 +97,7 @@ public class FalseToTrueUpdateConverter : IValueConverter ///ours ,picture
     }
 }
 
-public class IntToStringConverter : IValueConverter /////ours,
+public class IsEmptyToVisibleConverter : IValueConverter 
 {
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -237,9 +237,11 @@ public class IsInStockToColorConverter : IValueConverter
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
+        
         if ((bool)value)
-            return System.ConsoleColor.Green;
-        else return System.ConsoleColor.Red;
+            return Brushes.Green;
+        else
+            return Brushes.Red;
     }
 
     //convert from target property type to source property type
@@ -275,9 +277,41 @@ return (bool)value;
     }
 }
 
+public class IntToStringConverter : IValueConverter //used
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return ((int)value).ToString();
+    }
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return 0;
+    }
+}
 
 
 
+public class BoolToVisibility2Converter : IValueConverter
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((int)value>0)
+            return Visibility.Visible;
+        else
+            return Visibility.Hidden;
+    }
+
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return false;
+    }
+}
 
 
 

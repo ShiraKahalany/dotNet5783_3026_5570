@@ -6,9 +6,9 @@
          
         xmlns:local="clr-namespace:PL.Products"
         mc:Ignorable="d"
-        Title="ProductUpdateAndActions" Height="460" Width="450">
-    <Grid Margin="0,0,-328,0">
-        <TextBox x:Name="InserId" IsEnabled="False" HorizontalAlignment="Right" Text="{Binding Path=ID}"  FontSize="10"  TextWrapping="Wrap" VerticalAlignment="Top" Width="139"  Height="27" Margin="0,104,435,0" />
+        Title="ProductUpdateAndActions" Height="480" Width="650">
+    <Grid Margin="0,0,0,0">
+        <TextBox x:Name="InserId" IsEnabled="False" HorizontalAlignment="Right" Text="{Binding Path=ID}"  FontSize="10"  TextWrapping="Wrap" VerticalAlignment="Top" Width="139"  Height="27" Margin="0,104,308,0" />
         <TextBox Name="InsertName" HorizontalAlignment="Left"  Margin="203,136,0,0" TextWrapping="Wrap" Text="{Binding Path=Name}" VerticalAlignment="Top" Width="139" Height="27" />
         <TextBox Name="InsertPrice" HorizontalAlignment="Left" Margin="203,177,0,0" TextWrapping="Wrap" Text="{Binding Path=Price}" VerticalAlignment="Top" Width="40" Height="27"/>
         <TextBox Name="InsertInStock" HorizontalAlignment="Left" Margin="203,217,0,0" TextWrapping="Wrap" Text="{Binding Path=InStock}" VerticalAlignment="Top" Width="40" Height="27" RenderTransformOrigin="2.818,0.141"/>
@@ -18,7 +18,13 @@
         <Label Content="Price:" HorizontalAlignment="Left" Margin="91,178,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.114,-0.5" Height="26" Width="39"/>
         <Label Content="Amount In Stock:" HorizontalAlignment="Left" Margin="91,222,0,0" VerticalAlignment="Top" Height="26" Width="107" RenderTransformOrigin="-3.365,0.828"/>
         <Label Content="Category:" HorizontalAlignment="Left" Margin="91,273,0,0" VerticalAlignment="Top" Height="26" Width="64"/>
-        <Label Content="Update Product" Background="{x:Null}" HorizontalAlignment="Left" Width="193" FontSize="20" HorizontalContentAlignment="Center" FontWeight="Bold" Foreground="#FF974E4E" Margin="70,43,0,353"/>
+        <Label Content="Update Product" Background="{x:Null}" HorizontalAlignment="Left" Width="193" FontSize="20" HorizontalContentAlignment="Center" FontWeight="Bold" Foreground="#FF974E4E" Margin="50,60,0,350"/>
         <Button Content="Update" HorizontalAlignment="Left" Margin="165,331,0,0" VerticalAlignment="Top" Height="30" Width="78" RenderTransformOrigin="1.111,1.387" Click="Update_Click"/>
+        <StackPanel Margin="373,68,0,103" HorizontalAlignment="Left" Width="234">
+            <Button x:Name="changeImageButton" 
+                    Content="update picture"
+                Click="changeImageButton_Click" Background="{x:Null}"/>
+            <Image Name="ProductImage" Source="{Binding Path=Path}" MaxHeight="300"/>
+        </StackPanel>
     </Grid>
 </Window>

@@ -47,7 +47,7 @@ public partial class ManagerProductsPage : Page
     private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         new ProductUpdateAndActions((PO.ProductPO)ProductListView.SelectedItem, observeproducts).ShowDialog();
-        if ((BO.Category)AttributeSelector.SelectedItem != BO.Category.All)
+        if ((AttributeSelector.SelectedItem!=null) && (BO.Category)AttributeSelector.SelectedItem != BO.Category.All)
         {
             BOproducts = bl.Product.GetProducts(BO.Filters.filterByCategory, (BO.Category)AttributeSelector.SelectedItem).ToList();
             observeproducts.Clear();

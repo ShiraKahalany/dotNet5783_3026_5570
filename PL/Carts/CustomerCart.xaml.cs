@@ -22,12 +22,13 @@ namespace PL.Carts;
 public partial class CustomerCart : Page
 {
     private IBL bl = BLFactory.GetBL();
-    PO.CartPO cartpo;
+    PO.CartPO pocart;
     Frame myframe;
+    BO.Cart cartBo = new();
     public CustomerCart(PO.CartPO cartPO,Frame frame)
     {
         InitializeComponent();
-        cartpo = cartPO;
+        pocart = cartPO;
         CartItems.ItemsSource = cartPO.Items;
         CartItems.DataContext=cartPO.Items;
         totalPrice.DataContext=cartPO;
@@ -46,10 +47,10 @@ public partial class CustomerCart : Page
     {
         OrderItemPO or = ((OrderItemPO)((Button)sender).DataContext);
         int id = or?.ProductID??0;
-        BO.Cart boCart = PL.Tools.CopyPOCartToBO(cartpo);
+        BO.Cart boCart = PL.Tools.CopyPOCartToBO(pocart);
         bl.Cart.UpdateAmountOfProductInCart(boCart, id, 0);
-        cartpo.Items!.Remove(or);
-        cartpo.TotalPrice=Math.Round((double)(cartpo.TotalPrice-or.Price*or.Amount)!,2);
+        pocart.Items!.Remove(or);
+        pocart.TotalPrice=Math.Round((double)(pocart.TotalPrice-or.Price*or.Amount)!,2);
     }
 
     private void chooseAmount_MouseEnter(object sender, MouseEventArgs e)
@@ -65,6 +66,72 @@ public partial class CustomerCart : Page
 
     private void ContinueShopping_Click(object sender, RoutedEventArgs e)
     {
-        myframe.Content = new Products.CatalogPage("all", myframe, cartpo);
+        myframe.Content = new Products.CatalogPage("all", myframe, pocart);
+    }
+
+    private void back_click(object sender, RoutedEventArgs e)
+    {
+        NavigationService.GoBack();
+    }
+
+    private void UpdateAmount(object sender, int amount, bool isTextBox = false)
+    {
+        try
+        {
+            PO.OrderItemPO item = new();
+            TextBox t;
+            Button b;
+            if (isTextBox)
+            {
+                t = (TextBox)sender;
+                item = (PO.OrderItemPO)t.DataContext;
+            }
+            else
+            {
+                b = (Button)sender;
+                item = (PO.OrderItemPO)b.DataContext;
+            }
+            bl.Cart.UpdateAmountOfProductInCart(cartBo, item?.ProductID ?? 0, amount);
+            item = pocart.Items.FirstOrDefault(x => x.ID == item.ID);
+            pocart.TotalPrice = cartBo.TotalPrice;
+            if (amount == 0)
+            {
+                pocart.Items.Remove(item);
+                pocart.TotalPrice = cartBo.TotalPrice;
+                return;
+            }
+            item.Amount = amount;
+        }
+        catch (BO.NotInStockException ex)
+        {
+            MessageBox.Show("אין עוד מהמוצר הזה במלאי" +
+               "", "Error", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+            return;
+        }
+    }
+
+    private void cmdDown_Click(object sender, RoutedEventArgs e)
+    {
+        var b = (Button)sender;
+        int amount = ((PO.OrderItemPO)b.DataContext)?.Amount ?? 0;
+        if (amount == 1)
+            return;
+        UpdateAmount(sender, amount - 1);
+    }
+
+    private void txtNum_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var t = (TextBox)sender;
+        int amount = int.Parse(t.Text);
+        if (amount == 0)
+            return;
+        UpdateAmount(sender, amount, true);
+    }
+
+    private void cmdUp_Click(object sender, RoutedEventArgs e)
+    {
+        var b = (Button)sender;
+        int amount = ((PO.OrderItemPO)b.DataContext)?.Amount ?? 0;
+        UpdateAmount(sender, amount + 1);
     }
 }

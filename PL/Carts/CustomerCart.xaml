@@ -12,8 +12,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CustomerCart">
     <Page.Resources>
-        <converter:FalseToTrueUpdateConverter x:Key="amountOfItemsToNotVisibilityConverter"/>
-        <converter:IntToStringConverter x:Key="amountOfItemsToVisibilityConverter"/>
+        <converter:IsEmptyToNotVisibilityConverter x:Key="isEmptyToNotVisibilityConverter"/>
+        <converter:IsEmptyToVisibleConverter x:Key="isEmptyToVisibleConverter"/>
+        <converter:IntToStringConverter x:Key="intToStringConverter "/>
+
         <Style x:Key="Design" TargetType="Button">
             <Setter Property="BorderBrush" Value="Black"/>
             <Style.Resources>
@@ -32,12 +34,12 @@
         <Grid Grid.Row="0">
             <Label Content="My Cart"  HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Width="145" FontSize="30" HorizontalContentAlignment="Center" FontFamily="Book Antiqua"  FontWeight="Bold" Foreground="#FF974E4E"/>
         </Grid>
-        <Grid Grid.Row="1" Background="White">
+        <Grid Background="White" Margin="0,56,0,0" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2.8*" />
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Row="1" Grid.Column="1" x:Name="CartDetailsGrid" Visibility="{Binding Path=Items,Mode=OneWay, Converter={StaticResource amountOfItemsToVisibilityConverter}}">
+            <Grid Grid.Row="1" Grid.Column="1" x:Name="CartDetailsGrid" Visibility="{Binding Path=Items,Mode=OneWay, Converter={StaticResource isEmptyToVisibleConverter}}">
                 <Label Grid.Column="1"
                    Content="Total Price"
                    HorizontalAlignment="Center"
@@ -101,9 +103,31 @@
                             </Grid.ColumnDefinitions>
                             <Image Source="{Binding Path}" 
                                Height="100" Grid.Column="1"></Image>
-                            <ComboBox x:Name="chooseAmount" HorizontalAlignment="center"  VerticalAlignment="Center" Grid.Column="2" Margin="20,0,0,0" SelectedItem="{Binding Amount }" Width="40" Height="40" MaxDropDownHeight="100" MouseEnter="chooseAmount_MouseEnter">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,0,0" Grid.Column="2">
+                                <Button x:Name="cmdUp" Background="{x:Null}" 
+                                    Click="cmdUp_Click" Padding="0" Width="15" Height="15">
+                                    <materialDesign:PackIcon Kind="Plus"
+                                    Height="10" Width="10" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Button>
 
-                            </ComboBox>
+                                <TextBox x:Name="textNumber" 
+                                     
+                                     Width="15" 
+                                     TextAlignment="Center"
+                                     FontSize="10"
+                                     Text="{Binding Amount}"
+                                     TextChanged="txtNum_TextChanged"
+                                     Height="20" />
+
+                                <Button x:Name="cmdDown"  Background="{x:Null}" 
+                                    Padding="0" 
+                                    Click="cmdDown_Click"
+                                    Width="15" Height="15" >
+                                    <materialDesign:PackIcon Kind="Minus"
+                                 Height="10" Width="10" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Button>
+
+                            </StackPanel>
                             <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="160" Grid.Column="3">
                                 <TextBlock Name="name" Width="190" HorizontalAlignment="center" VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
                                 <StackPanel Grid.Column="3" Name="price" Orientation="Horizontal" Width="160" VerticalAlignment="Center" Margin="20,0,0,0">
@@ -126,7 +150,7 @@
             </ListView>
 
 
-            <StackPanel x:Name="NoItems" HorizontalAlignment="Center" Margin="250, 100, 0,0" Visibility="{Binding Path=Items,Mode=OneWay, Converter={StaticResource amountOfItemsToNotVisibilityConverter} }">
+            <StackPanel x:Name="NoItems" HorizontalAlignment="Center" Margin="250, 100, 0,0" Visibility="{Binding Path=Items,Mode=OneWay, Converter={StaticResource isEmptyToNotVisibilityConverter} }">
                 <TextBlock Grid.Row="1"  Grid.Column="0" TextWrapping="Wrap" Text=" * Your cart is empty *" FontSize="24" HorizontalAlignment="Center" FontFamily="Sitka Text" FontWeight="Bold" Foreground="#FFD2CECE"/>
                 <Image Source="/Carts/emptyCart.png" Height="150" Width="150"></Image>
             </StackPanel>

@@ -2,6 +2,7 @@
 using PO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.ObjectModel;
 
 namespace PL.Products;
 
@@ -11,11 +12,12 @@ namespace PL.Products;
 public partial class ProductDetails : Page
 {
     private IBL bl = BLFactory.GetBL();
-   // private BO.ProductItem BoProduct;
+   private BO.ProductItem BoProduct=new BO.ProductItem();
     private PO.ProductItemPO PoProduct;
     private PO.CartPO pocart;
+    private ObservableCollection<PO.ProductItemPO> products;
 
-    public ProductDetails(PO.ProductItemPO pro, PO.CartPO cart)
+    public ProductDetails(PO.ProductItemPO pro, PO.CartPO cart, ObservableCollection<PO.ProductItemPO> prod)
     {
         InitializeComponent();
         pocart= cart;
@@ -26,6 +28,7 @@ public partial class ProductDetails : Page
             numArray[i] = i+1;
         AmountOfProduct.ItemsSource = numArray;
         AmountOfProduct.SelectedItem = 1;
+        products = prod;
       //  BoProduct = PL.Tools.CopyProp<PO.ProductItemPO, BO.ProductItem>(PoProduct);
     }
 
@@ -40,13 +43,20 @@ public partial class ProductDetails : Page
         pocart.TotalPrice += price * amount;
         bl.Cart.AddProductToCart(cart,id, amount);
         MessageBox.Show("Add To Cart Seccessfully", "Add To Cart", MessageBoxButton.OK);
+        products.Remove(PoProduct);
+        PoProduct.Amount+=amount;
+        products.Add(PoProduct);
+        BoProduct = PoProduct.CopyFields(BoProduct);
+        BoProduct.Amount+=amount;
+
         //this.NavigationService.GoBack();
     }
-
     private void back_click(object sender, RoutedEventArgs e)
     {
         NavigationService.GoBack();
     }
+
+
 }
 
 

@@ -13,7 +13,7 @@
 
     <Grid Background="White">
         <Grid Name="OrderItems" Background="AliceBlue" Margin="437,74,10,10">
-            
+
         </Grid>
 
 
@@ -50,14 +50,14 @@
                FontSize="16"
                Margin="39,74,0,0" 
                VerticalAlignment="Top" RenderTransformOrigin="-0.194,0.854"/>
-        <TextBlock x:Name="costumerNameTextBox"  
+        <TextBox x:Name="costumerNameTextBox"  
                    HorizontalAlignment="Left"
                    FontSize="16" 
                    Height="NaN" 
                    Margin="157,82,0,0"
                    Text="{Binding CustomerName , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                    VerticalAlignment="Top" 
-                   Width="172"/>
+                   Width="172" BorderBrush="{DynamicResource PrimaryHueDarkBrush}"/>
 
 
         <TextBlock HorizontalAlignment="Left"
