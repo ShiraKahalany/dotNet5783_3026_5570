@@ -153,7 +153,11 @@ public class BoolToVisibilityConverter : IValueConverter
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (bool)value;
+        bool boolvalue =(bool)value;
+        if (boolvalue)
+            return Visibility.Hidden;
+        else
+            return Visibility.Visible;
     }
 
 

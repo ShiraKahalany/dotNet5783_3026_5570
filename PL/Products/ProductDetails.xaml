@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:converter ="clr-namespace:PLConverter"
+       xmlns:converter ="clr-namespace:PLConverter"
      
       xmlns:local="clr-namespace:PL.Products"
       mc:Ignorable="d" 
@@ -14,9 +14,9 @@
       Title="ProductDetails">
 
     <Page.Resources>
-        <!--<converter:IsInStockToStringConverter x:Key="isInStockToString"/>
+        <converter:IsInStockToStringConverter x:Key="isInStockToString"/>
         <converter:IsInStockToColorConverter x:Key="isInStockToColor"/>
-        <converter:BoolToIsEnabledConverter x:Key="boolToIsEnabled"/>-->
+        <converter:BoolToIsEnabledConverter x:Key="boolToIsEnabled"/>
         <Style x:Key="Design" TargetType="Button">
             <Setter Property="BorderBrush" Value="Black"/>
             <Style.Resources>
@@ -92,7 +92,7 @@
                 </materialDesign:PackIcon.RenderTransform>
             </materialDesign:PackIcon>
         </Button>
-        <TextBlock Name="IsInStock" HorizontalAlignment="Left" Margin="305,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Height="27" Width="108"/>
+        <TextBlock Name="IsInStock" HorizontalAlignment="Left" Margin="305,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Height="27" Text="{Binding Path=IsInStock ,Converter={StaticResource isInStockToColor}}" Width="108"/>
 
     </Grid>
 </Page>

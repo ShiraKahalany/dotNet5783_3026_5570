@@ -24,11 +24,12 @@ public partial class OrderTrackingByID : Page
 {
     Frame myframe;
     private IBL bl = BLFactory.GetBL();
-
+    BO.Order order;
     public OrderTrackingByID(Frame frame)
     {
         InitializeComponent();
         myframe = frame;
+
     }
 
     private void CloseManagerLogIn_Click(object sender, RoutedEventArgs e)
@@ -70,17 +71,17 @@ public partial class OrderTrackingByID : Page
         int orderID = int.Parse(PasswordBox.Password);
         try
         {
-            BO.Order order= bl.Order.GetOrderById(orderID);
+            order= bl.Order.GetOrderById(orderID);
         }
         catch (BO.IllegalIdException)
         {
-            MessageBox.Show("The ID number is not standard. Enter 5 digits", "OrderTracking", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("The ID number is not standard. Enter 4 digits", "OrderTracking", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         catch (BO.OrderNotExistException)
         {
             MessageBox.Show("Order not found", "OrderTracking", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-        myframe.Content = new Orders.OrderTracking();
+        myframe.Content = new Orders.OrderTracking(order);
 
         //if (PasswordBox.Password == "1234")
         //{

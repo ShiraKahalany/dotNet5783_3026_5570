@@ -21,12 +21,13 @@ namespace PL.Orders;
 public partial class OrderTracking : Page
 {
     BO.Order boOrder;
-    
-    public OrderTracking()
+    public OrderTracking(BO.Order order)
     {
         InitializeComponent();
-        
-
+        boOrder = order;
+        PO.OrderPO poorder=new();
+        poorder=order.CopyFields<BO.Order,PO.OrderPO>(poorder);
+        DataContext = poorder; 
     }
 
    
