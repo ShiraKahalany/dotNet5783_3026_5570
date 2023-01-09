@@ -53,20 +53,6 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="$" FontSize="20"></TextBlock>
                             <TextBlock Text="{Binding Price}" FontSize="20"></TextBlock>
-                            <Button 
-                            Click="AddTocart_Click" 
-                                Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
-                                Height="30" Width="30"
-                                HorizontalAlignment="Right"
-                                Margin="100,0,0,0"
-                                Background="{x:Null}"
-                                >
-                                <materialDesign:PackIcon Name="pack" Tag="{Binding Amount}" Kind="Plus" 
-                                         Foreground="Black"
-                                         Height="25" Width="25"
-                                         VerticalAlignment="Center"/>
-                            </Button>
-                            <Label Content="{Binding Amount}" Background="PaleGreen" Height="20" Width="20" FontSize="15" Visibility="{Binding Path=Amount, Converter={StaticResource amountToVisibilityConverter}}"/>
                         </StackPanel>
                         
 
