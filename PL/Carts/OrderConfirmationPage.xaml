@@ -12,15 +12,16 @@
       Title="OrderConfirmationPage">
 
     <Grid Background="white">
-        <Label Content="Sign In To Checkout" 
+        <Label Content="Sign Up To Checkout" 
                HorizontalAlignment="Left" 
-               Margin="39,29,0,0"
+               
+               Margin="265,29,0,0"
                VerticalAlignment="Top" 
                Width="203"
                Height="40"
                FontWeight="Bold"
                FontSize="20"/>
-        <Button  HorizontalAlignment="Left" Margin="214,28,0,0" VerticalAlignment="Top" Width="84" Height="41" Background="{x:Null}" BorderBrush="{x:Null}">
+        <Button  HorizontalAlignment="Left" Margin="440,28,0,0" VerticalAlignment="Top" Width="84" Height="41" Background="{x:Null}" BorderBrush="{x:Null}">
             <materialDesign:PackIcon Kind="Person" 
                                          Foreground="Black"
                                          Height="31" Width="64" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
@@ -28,39 +29,41 @@
         <Label Content="Name:" 
                HorizontalAlignment="Left"
                FontSize="16"
-               Margin="39,90,0,0" 
-               VerticalAlignment="Top" RenderTransformOrigin="-0.194,0.854"/>
+               Margin="191,96,0,0" 
+               VerticalAlignment="Top" RenderTransformOrigin="-0.194,0.854" FontFamily="Bahnschrift SemiLight"/>
         <TextBox x:Name="costumerNameTextBox"  
                    HorizontalAlignment="Left"
                    FontSize="16" 
                    Height="25" 
-                   Margin="207,98,0,0"
+                   Margin="366,98,0,0"
                    Text="{Binding CustomerName}"
                    VerticalAlignment="Top" 
                    Width="172" TextWrapping="Wrap" Background="{DynamicResource PrimaryHueDarkForegroundBrush}" BorderBrush="{DynamicResource PrimaryHueDarkBrush}"/>
         <Label Content="Customer Address:" 
                HorizontalAlignment="Left"
+               FontFamily="Bahnschrift SemiLight"
                FontSize="16"
-               Margin="39,132,0,0" 
+               Margin="185,142,0,0" 
                VerticalAlignment="Top" RenderTransformOrigin="-0.194,0.854"/>
         <TextBox x:Name="costumerAddressTextBox"  
                    HorizontalAlignment="Left"
                    FontSize="16" 
                    Height="25" 
-                   Margin="207,128,0,0"
+                   Margin="366,144,0,0"
                    Text="{Binding CustomerName , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                    VerticalAlignment="Top" 
                    Width="172" TextWrapping="Wrap" Background="{DynamicResource PrimaryHueDarkForegroundBrush}" BorderBrush="{DynamicResource PrimaryHueDarkBrush}"/>
         <Label Content="Customer Email:" 
                HorizontalAlignment="Left"
+               FontFamily="Bahnschrift SemiLight"
                FontSize="16"
-               Margin="39,170,0,0" 
+               Margin="191,196,0,0" 
                VerticalAlignment="Top" RenderTransformOrigin="-0.194,0.854" Width="141"/>
         <TextBox x:Name="costumerEmailTextBox"  
                    HorizontalAlignment="Left"
                    FontSize="16" 
                    Height="25" 
-                   Margin="207,174,0,0"
+                   Margin="366,200,0,0"
                    Text="{Binding CustomerName , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                    VerticalAlignment="Top" 
                    Width="172" TextWrapping="Wrap" Background="{DynamicResource PrimaryHueDarkForegroundBrush}" BorderBrush="{DynamicResource PrimaryHueDarkBrush}"/>
@@ -74,6 +77,8 @@
                     HorizontalContentAlignment="Center"
                    
                     FontWeight="Bold"
-                    Foreground="black" Background="{x:Null}"  Margin="559,367,0,0" Click="PlaceOrder_Click"/>
+                    Foreground="black" Background="{x:Null}"  Margin="292,319,0,0" Click="PlaceOrder_Click"/>
+        <Grid Background="AliceBlue" Margin="582,63,35,141"/>
+       
     </Grid>
 </Page>

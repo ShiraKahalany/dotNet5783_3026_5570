@@ -30,6 +30,7 @@
     <None Remove="image\Kitchen rug.jpg" />
     <None Remove="image\logo.png" />
     <None Remove="image\Mid-Century Heathered Wool Rug.jpg" />
+    <None Remove="image\Round Outdoor Market Umbrella.jpg" />
     <None Remove="image\Thin-Wood-floor Mirror.jpg" />
     <None Remove="image\White Bunk Bed With Stairs and Slide.jpg" />
     <None Remove="image\White Fluted Ceramic Indoor-outdoor-windowsill Planter.jpg" />
@@ -82,6 +83,7 @@
     <Resource Include="image\Kitchen rug.jpg" />
     <Resource Include="image\logo.png" />
     <Resource Include="image\Mid-Century Heathered Wool Rug.jpg" />
+    <Resource Include="image\Round Outdoor Market Umbrella.jpg" />
     <Resource Include="image\Thin-Wood-floor Mirror.jpg" />
     <Resource Include="image\White Bunk Bed With Stairs and Slide.jpg" />
     <Resource Include="image\White Fluted Ceramic Indoor-outdoor-windowsill Planter.jpg" />

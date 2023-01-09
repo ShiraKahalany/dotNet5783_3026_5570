@@ -168,7 +168,7 @@ internal class DataSource
         {
             IsDeleted = false,
             ID = 834675,
-            Name = "/image/Thin-Wood-floor Mirror 30W x 72H",
+            Name = "Thin-Wood-floor Mirror 30W x 72H",
             Price = 279.99,
             Category = Category.Bedroom,
             InStock = 104,
@@ -179,11 +179,11 @@ internal class DataSource
         {
             IsDeleted = false,
             ID = 235676,
-            Name = "Colorful garden umbrella",
+            Name = "Round Outdoor Market Umbrella",
             Price = 503.10,
             Category = Category.Garden,
             InStock = 2,
-            Path = "/image/garden room.jpg"
+            Path = "/image/Round Outdoor Market Umbrella.jpg"
         });
         Products.Add(
         new Product
