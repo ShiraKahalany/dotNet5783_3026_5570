@@ -153,30 +153,14 @@ public class BoolToVisibilityConverter : IValueConverter
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        bool boolValue = (bool)value;
-        if (boolValue)
-        {
-            return Visibility.Hidden; //Visibility.Collapsed;
-        }
-        else
-        {
-            return Visibility.Visible;
-        }
+        return (bool)value;
     }
 
 
     //convert from target property type to source property type
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        Visibility visibilityValue = (Visibility)value;
-        if (visibilityValue is Visibility.Visible)
-        {
-            return true; //Visibility.Collapsed;
-        }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 }
 
@@ -222,6 +206,80 @@ public class AmountToVisibilityConverter : IValueConverter //used
         }
     }
 }
+
+
+
+public class IsInStockToStringConverter : IValueConverter
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((bool)value)
+            return "In stock";
+        else return "NotInStock";
+    }
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        //try { int.Parse(value.ToString()); }
+        return false;
+    }
+}
+
+
+public class IsInStockToColorConverter : IValueConverter
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((bool)value)
+            return System.ConsoleColor.Green;
+        else return System.ConsoleColor.Red;
+    }
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        //try { int.Parse(value.ToString()); }
+        return false;
+    }
+}
+
+
+public class BoolToIsEnabledConverter : IValueConverter
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((bool)value)
+        {
+            return (Button)
+        }
+        else
+        {
+            return Visibility.Visible;
+        }
+    }
+
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        Visibility visibilityValue = (Visibility)value;
+        if (visibilityValue is Visibility.Visible)
+        {
+            return true; //Visibility.Collapsed;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+
+
+
 
 
 

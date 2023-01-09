@@ -212,4 +212,31 @@ internal class Product : IProduct
         return (from DO.Product doProduct in doProductList
                 select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()));
     }
+
+    public IEnumerable<BO.ProductItem> GetProductItemsList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
+    {
+        IEnumerable<DO.Product?> doProductList =
+        enumFilter switch
+        {
+            BO.Filters.filterByCategory =>
+            //dal!.Product.GetAll(dp => (dp?.Category == (filterValue != null ? (DO.Category)filterValue : DO.Category.All)) && dp?.IsDeleted == false),
+            dal!.Product.GetAll(dp => ((filterValue != null ? (dp?.Category == (DO.Category)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))),
+
+
+
+            BO.Filters.filterByName =>
+             dal!.Product.GetAll(dp => (dp?.Name == (string?)(filterValue)) && dp?.IsDeleted == false),
+
+            BO.Filters.None =>
+            dal!.Product.GetAll((DO.Product? order) => order.GetValueOrDefault().IsDeleted == false),
+            _ => dal!.Product.GetAll((DO.Product? order) => order.GetValueOrDefault().IsDeleted == false),
+        };
+
+        //return (from DO.Product doProduct in doProductList
+        //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
+        //       .ToList();
+        return (from DO.Product doProduct in doProductList
+                select BlApi.Tools.CopyFields(doProduct, new BO.ProductItem { IsInStock=(doProduct.InStock>0), Amount=0}));
+    }
+
 }
