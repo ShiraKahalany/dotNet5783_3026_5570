@@ -37,6 +37,10 @@ internal class Order : IOrder
             DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
             return order?.OrderToBO();
         }
+        catch (DO.NotExistException ex)
+        {
+            throw new BO.OrderNotExistException(ex.Message);
+        }
         catch (Exception ex)
         {
             throw new Exception(ex.Message);

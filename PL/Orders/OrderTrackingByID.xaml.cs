@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BlApi;
+using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +23,8 @@ namespace PL.Orders;
 public partial class OrderTrackingByID : Page
 {
     Frame myframe;
+    private IBL bl = BLFactory.GetBL();
+
     public OrderTrackingByID(Frame frame)
     {
         InitializeComponent();
@@ -54,7 +58,6 @@ public partial class OrderTrackingByID : Page
     private void ManagerlogInWithPassword_Click(object sender, RoutedEventArgs e)
     {
         EnterPassword();
-
     }
 
     private void EnterPressed_KeyDown(object sender, KeyEventArgs e)
@@ -64,12 +67,27 @@ public partial class OrderTrackingByID : Page
 
     private void EnterPassword()
     {
-        if (PasswordBox.Password == "1234")
+        int orderID = int.Parse(PasswordBox.Password);
+        try
         {
-            OrderTracking orderTracking = new();
-            PasswordBox.Password = "";
-            myframe.Content = orderTracking;
+            BO.Order order= bl.Order.GetOrderById(orderID);
         }
+        catch (BO.IllegalIdException)
+        {
+            MessageBox.Show("The ID number is not standard. Enter 5 digits", "OrderTracking", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        catch (BO.OrderNotExistException)
+        {
+            MessageBox.Show("Order not found", "OrderTracking", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        myframe.Content = new Orders.orderTracking();
+
+        //if (PasswordBox.Password == "1234")
+        //{
+        //    OrderTracking orderTracking = new();
+        //    PasswordBox.Password = "";
+        //    myframe.Content = orderTracking;
+        //}
         //should open :myframe.Content = new Orders.OrderTracking();
     }
 
