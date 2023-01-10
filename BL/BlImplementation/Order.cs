@@ -13,7 +13,7 @@ internal class Order : IOrder
     public List<BO.OrderForList?>? GetOrders()
     //מתודה לקבלת רשימת כל ההזמנות התקפות
     {
-        IEnumerable<DO.Order?> listor = new();
+        IEnumerable<DO.Order?> listor;
         try
         {
             listor = dal.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false);

@@ -81,7 +81,7 @@
                                          Height="30" Width="30"/>
         </Button>
         <ComboBox  Name="AmountOfProduct" HorizontalAlignment="Left" MaxDropDownHeight="120" Margin="98,271,0,0" VerticalAlignment="Top" Width="44"/>
-        
+
         <Button x:Name="back" HorizontalAlignment="Left" Margin="37,367,0,0" VerticalAlignment="Top" Click="back_click" Background="{x:Null}" BorderBrush="{x:Null}" Width="58">
             <materialDesign:PackIcon Kind="ArrowBack"
                                          Foreground="Black"
@@ -106,8 +106,19 @@
                    Text="{Binding Path=IsInStock ,Converter={StaticResource isInStockToString}}" 
                    Width="129" 
                    Foreground="{Binding Path=IsInStock, Converter={StaticResource isInStockToColor}}"/>
-        <TextBlock HorizontalAlignment="Left"
-                   Margin="234,259,0,0" TextWrapping="Wrap" FontSize="20" FontWeight="Bold" Text="{Binding Path=Amount, Converter={StaticResource intToStringConverter}}" VerticalAlignment="Top" Height="40" Width="39" Background="#FFC4EE89" TextAlignment="Center" Visibility="{Binding Path=Amount, Converter={StaticResource boolToVisibility2Converter}}"/>
+
+        <!--<TextBlock HorizontalAlignment="Left"
+                   Margin="234,259,0,0" TextWrapping="Wrap" FontSize="20" FontWeight="Bold" Text="{Binding Path=Amount, Converter={StaticResource intToStringConverter}}" VerticalAlignment="Top" Height="40" Width="39" Background="#FFC4EE89" TextAlignment="Center" Visibility="{Binding Path=Amount, Converter={StaticResource boolToVisibility2Converter}}"/>-->
+        <Button Content="{Binding Path=Amount, Converter={StaticResource intToStringConverter}}"
+                Margin="212,259,0,0"
+                Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}"
+                HorizontalAlignment="Left"
+                Background="LightGreen"
+                Height="49" Width="49"
+                IsEnabled="False"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                VerticalAlignment="Top"/>
 
     </Grid>
 </Page>
