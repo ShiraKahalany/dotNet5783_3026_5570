@@ -1,6 +1,5 @@
 ﻿
 using BlApi;
-using System.Security.Cryptography.X509Certificates;
 
 namespace BlImplementation;
 
@@ -9,24 +8,27 @@ namespace BlImplementation;
 internal class Order : IOrder
 {
     DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
-    
+
 
     public List<BO.OrderForList?>? GetOrders()
     //מתודה לקבלת רשימת כל ההזמנות התקפות
     {
-        IEnumerable<DO.Order?> listor = dal.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false);
-        if (!listor.Any())
-            throw new BO.NoItemsException();
+        IEnumerable<DO.Order?> listor = new();
         try
         {
-            var x = from DO.Order order in listor
-                    select order.OrderToOrderForList();
-            return x.ToList();
+            listor = dal.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false);
         }
-        catch (Exception ex)
+        catch (DO.NotExistException ex)
         {
-            throw new Exception(ex.Message);
+            throw new BO.NoItemsException();
         }
+        if (!listor.Any())
+            throw new BO.NoItemsException();
+
+        var x = from DO.Order order in listor
+                select order.OrderToOrderForList();
+        return x.ToList();
+
     }
 
     public BO.Order GetOrderById(int id)
@@ -43,10 +45,6 @@ internal class Order : IOrder
         {
             throw new BO.OrderNotExistException(ex.Message);
         }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
     }
 
     public BO.Order UpdateStatusToShipped(int id)
@@ -55,18 +53,16 @@ internal class Order : IOrder
         try
         {
             DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
-            if (order.ShipDate != null )
+            if (order.ShipDate != null)
                 throw new BO.OrderHasShippedException("The Order Has Already Been Shipped");
             order.ShipDate = DateTime.Now;
             dal.Order.Update((DO.Order)order);
-
             return order.OrderToBO();
         }
         catch (DO.NotExistException ex)
         {
             throw new BO.NotExistException(ex.Message);
         }
-        
     }
     public BO.Order UpdateStatusToProvided(int id)
     //עידכון הזמנה שסופקה
@@ -74,7 +70,7 @@ internal class Order : IOrder
         try
         {
             DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
-            if (order.DeliveryDate != null )
+            if (order.DeliveryDate != null)
                 throw new BO.OrderHasDeliveredException();
             if (order.ShipDate == null)
                 throw new BO.OrderHasNotShippedException();
@@ -86,7 +82,7 @@ internal class Order : IOrder
         {
             throw new BO.NotExistException(ex.Message);
         }
-        
+
     }
     public BO.OrderTracking FollowOrder(int id)
     //מעקב הזמנה - הצגת האירועים של ההזמנה והתאריכים שלהם
@@ -115,10 +111,11 @@ internal class Order : IOrder
             orderTracking.Tracking = tuples;
             return orderTracking;
         }
-        catch (Exception ex)
+        catch (DO.NotExistException ex)
         {
-            throw new Exception(ex.Message);
+            throw new BO.NotExistException(ex.Message);
         }
+
     }
 
     public static BO.OrderItem? checkAmount(DO.OrderItem item, int id, int newAmount, ref int difference, DO.Product? product)
@@ -169,7 +166,7 @@ internal class Order : IOrder
             int difference = 0;
 
             var x = from DO.OrderItem it in items
-                    let temp= checkAmount(it, productId, amount, ref difference, product)
+                    let temp = checkAmount(it, productId, amount, ref difference, product)
                     where temp != null
                     select temp;
 
@@ -219,7 +216,7 @@ internal class Order : IOrder
         {
             throw new BO.NotExistException(ex.Message);
         }
-        
+
     }
 
     public BO.Order GetDeletedOrderById(int id)
@@ -233,45 +230,47 @@ internal class Order : IOrder
             DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted);
             return order?.OrderToBO();
         }
-        catch (Exception ex)
+        catch (DO.NotExistException ex)
         {
-            throw new Exception(ex.Message);
+            throw new BO.NotExistException(ex.Message);
         }
     }
     public List<BO.OrderForList?>? GetDeletedOrders()
     //קבלת רשימת כל ההזמנות המחוקות
     {
-        IEnumerable<DO.Order?> listor = dal.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted);
-        if (!listor.Any())
-            throw new BO.NoItemsException();
+        IEnumerable<DO.Order?> listor = new List<DO.Order?>();
         try
         {
-            var x = from DO.Order order in listor
-                    select order.OrderToOrderForList();
-            return x.ToList();
+            listor = dal.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted);
         }
-        catch (Exception ex)
+        catch (DO.NotExistException ex)
         {
-            throw new Exception(ex.Message);
+            throw new BO.NotExistException(ex.Message);
         }
+        if (!listor.Any())
+            throw new BO.NoItemsException();
+        var x = from DO.Order order in listor
+                select order.OrderToOrderForList();
+        return x.ToList();
     }
 
     public List<BO.OrderForList?> GetOrdersWithDeleted()
     //קבלת רשימת כל ההזמנות - כולל אלו שנמחקו
     {
-        IEnumerable<DO.Order?> listor = dal.Order.GetAll(null);
-        if (!listor.Any())
-            throw new BO.NoItemsException();
+        IEnumerable<DO.Order?> listor = new List<DO.Order?>();
         try
         {
-            var x = from DO.Order order in listor
-                    select order.OrderToOrderForList();
-            return x.ToList();
+            listor = dal.Order.GetAll(null);
         }
-        catch (Exception ex)
+        catch (DO.NotExistException ex)
         {
-            throw new Exception(ex.Message);
+            throw new BO.NotExistException(ex.Message);
         }
+        if (!listor.Any())
+            throw new BO.NoItemsException();
+        var x = from DO.Order order in listor
+                select order.OrderToOrderForList();
+        return x.ToList();
     }
 
     public void Restore(int id)
@@ -293,15 +292,11 @@ internal class Order : IOrder
     public void CancelOrder(int id)
     //מתודה לביטול הזמנה
     {
-        //DO.Order order = dal.Order.GetByID(id);
-        DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
-        if (order?.ShipDate != null && order?.ShipDate < DateTime.Now)
-            throw new BO.CanNotUpdateOrderException();
-        // TimeSpan twentyfourhours = new TimeSpan(24, 00, 00);
-        //if ((order?.OrderDate != null) && (DateTime.Now - order?.OrderDate) < twentyfourhours)
-        //    dal.Order.Delete(id);
         try
         {
+            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
+            if (order?.ShipDate != null && order?.ShipDate < DateTime.Now)
+                throw new BO.CanNotUpdateOrderException();
             if (order?.OrderDate != null)
                 dal.Order.Delete(id);
             else
@@ -316,23 +311,29 @@ internal class Order : IOrder
 
     public IEnumerable<BO.OrderForList> GetOrderList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
     {
-
-        IEnumerable<DO.Order?> doOrderList =
-        enumFilter switch
+        try
         {
-            BO.Filters.filterByStatus =>
-             dal!.Order.GetAll(dp => (dp?.GetStatus()) == (BO.OrderStatus)filterValue && dp?.IsDeleted == false),
+            IEnumerable<DO.Order?> doOrderList =
+            enumFilter switch
+            {
+                BO.Filters.filterByStatus =>
+                 dal!.Order.GetAll(dp => (dp?.GetStatus()) == (BO.OrderStatus)filterValue && dp?.IsDeleted == false),
 
-            BO.Filters.None =>
-            dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false),
-            _ => dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false),
-        };
+                BO.Filters.None =>
+                dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false),
+                _ => dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false),
+            };
 
-        //return (from DO.Product doProduct in doProductList
-        //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
-        //       .ToList();
-        return (from DO.Order doorder in doOrderList
-                select doorder.OrderToOrderForList());
+            //return (from DO.Product doProduct in doProductList
+            //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
+            //       .ToList();
+            return (from DO.Order doorder in doOrderList
+                    select doorder.OrderToOrderForList());
+        }
+        catch (DO.NotExistException ex)
+        {
+            throw new BO.NotExistException(ex.Message);
+        }
     }
 
 }

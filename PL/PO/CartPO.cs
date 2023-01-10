@@ -16,7 +16,7 @@ namespace PO;
 
     private string? customerName;
     public string? CustomerName
-    {
+    { 
         get
         { return customerName; }
         set
