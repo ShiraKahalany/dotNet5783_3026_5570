@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PO;
+using BlApi;
 namespace PL.Orders;
 
 /// <summary>
@@ -20,30 +21,50 @@ namespace PL.Orders;
 /// </summary>
 public partial class OrderTracking : Page
 {
+    private IBL bl = BLFactory.GetBL();
     BO.Order boOrder;
+    PO.OrderPO poorder = new();
     public OrderTracking(BO.Order order)
     {
         InitializeComponent();
         boOrder = order;
-        PO.OrderPO poorder=new();
         poorder=order.CopyFields<BO.Order,PO.OrderPO>(poorder);
-        DataContext = poorder; 
+        DataContext = poorder;
     }
 
    
 
     private void UpdateDel_Click(object sender, RoutedEventArgs e)
     {
-
+        try
+        {
+            if (poorder.Status == BO.OrderStatus.Shipped)
+            {
+                bl.Order.UpdateStatusToProvided(boOrder.ID);
+                poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
+            }
+        }
+        catch(BO.OrderHasDeliveredException ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+        catch (BO.OrderHasNotShippedException ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
     }
 
     private void UpdateShip_Click(object sender, RoutedEventArgs e)
     {
-
+        try
+        {
+            bl.Order.UpdateStatusToShipped(boOrder.ID);
+            poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
+        }
+        catch(BO.OrderHasShippedException)
+        {
+            MessageBox.Show("The Order Has Already Been Shipped", "Has Already Shipped", MessageBoxButton.OK);
+        }
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
-    {
-
-    }
 }

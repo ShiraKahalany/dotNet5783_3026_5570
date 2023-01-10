@@ -139,29 +139,6 @@ internal static class Tools
         return or;
     }
 
-    public static BO.OrderItem? checkAmount(DO.OrderItem item, int id,int newAmount, ref int difference, DO.Product? product)
-    {
-        if (id == item.ProductID)
-        {
-            if (newAmount == 0)
-            {
-                DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
-                dal.OrderItem.Delete(item.ID);
-                return null;
-            }
-            difference = newAmount - item.Amount??0;
-            if (newAmount > item.Amount)
-                if (product?.InStock < difference)
-                    throw new BO.NotInStockException();
-            BO.OrderItem temp = new BO.OrderItem();
-            temp = item.CopyFields(temp);
-            temp.Amount = newAmount;
-            return temp;
-        }
-        else
-            return item.CopyFields(new BO.OrderItem());
-    }
-
     public static BO.OrderForList OrderToOrderForList(this DO.Order order)
     //
     {

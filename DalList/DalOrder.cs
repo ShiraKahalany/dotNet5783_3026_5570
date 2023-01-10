@@ -43,12 +43,10 @@ public class DalOrder : IOrder
         item.IsDeleted = false;
         Add(item);
     }
-
-   public void DeletePermanently(int id)
+  
+public void DeletePermanently(int id)
     {
         Order? temp = dataSource.Orders.Find(x => x?.ID == id); //check if the element exist in the orders list
-        if (temp == null) //if it is not exist throw exception
-            throw new DO.NotExistException("The item is not exist");
         dataSource.Orders.Remove(temp);
     }
     public void Delete(int id)
@@ -73,7 +71,7 @@ public class DalOrder : IOrder
                     where filter(order) ==true 
                     select order;
         if (!ieorders.Any())
-            throw new DO.NotExistException("No Orders");
+            throw new DO.NotExistException("Not Orders");
         return ieorders;
     }
 

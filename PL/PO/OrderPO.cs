@@ -95,10 +95,10 @@ public class OrderPO : INotifyPropertyChanged
     public DateTime? OrderDate
     {
         get
-        { return OrderDate; }
+        { return orderDate; }
         set
         {
-            OrderDate = value;
+            orderDate = value;
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(" OrderDate"));

@@ -52,12 +52,13 @@
                                Foreground="#FF2B331F"
                                FontSize="30" 
                                Margin="0,0,0,30"/>
-                <PasswordBox  x:Name="PasswordBox"
-                                  materialDesign:HintAssist.Hint="Password"
+                <TextBox  x:Name="PasswordBox"
+                                  materialDesign:HintAssist.Hint="Enter order ID"
                                   Width="300" Height="70"
                                   materialDesign:HintAssist.Foreground="Black"
                                   materialDesign:TextFieldAssist.UnderlineBrush="Black"
-                                  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontSize="20" KeyDown="EnterPressed_KeyDown" />
+                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                  FontSize="20" KeyDown="EnterPressed_KeyDown" />
 
                 <Button Grid.Column="1"
                             Style="{StaticResource MaterialDesignRaisedDarkButton}"

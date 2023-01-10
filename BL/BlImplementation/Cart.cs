@@ -184,6 +184,14 @@ internal class Cart:ICart
             }
             return newId;
         }
+        catch (DO.AlreadyExistException ex)
+        {
+            throw new BO.AlreadyExistException(ex.Message);
+        }
+        catch (DO.NotExistException ex)
+        {
+            throw new BO.NotExistException(ex.Message);
+        }
         catch (Exception ex)
         {
             throw new Exception(ex.Message);

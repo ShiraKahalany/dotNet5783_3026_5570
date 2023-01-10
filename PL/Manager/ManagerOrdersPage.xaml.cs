@@ -51,8 +51,12 @@ public partial class ManagerOrdersPage : Page
 
     private void OrderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
-        BO.Order order = bl.Order.GetOrderById(((BO.OrderForList)(sender)).ID)!;
-        myframe.Content = new Orders.OrderTracking(order);
+        PO.OrderForListPO po=(PO.OrderForListPO)((ListView)sender).SelectedItem;
+        //BO.OrderForList boorder = new();
+        //boorder = po.CopyFields<PO.OrderForListPO,BO.OrderForList>(boorder);
+        int id = po.ID;
+        BO.Order boorder = bl.Order.GetOrderById(id)!;
+        myframe.Content = new Orders.OrderTracking(boorder);
         //if ((BO.Category)AttributeSelector.SelectedItem != BO.Category.All)
         //{
         //    BOproducts = bl.Product.GetProducts(BO.Filters.filterByCategory, (BO.Category)AttributeSelector.SelectedItem).ToList();

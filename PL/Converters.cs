@@ -11,6 +11,8 @@ using System.Windows.Data;
 using BlApi;
 using System.Windows.Media;
 using System.Collections.ObjectModel;
+
+
 namespace PLConverter;
 using PO;
 
@@ -300,6 +302,47 @@ public class BoolToVisibility2Converter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if ((int)value>0)
+            return Visibility.Visible;
+        else
+            return Visibility.Hidden;
+    }
+
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return false;
+    }
+}
+
+
+public class ShippedToVisibilityConverter : IValueConverter
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (((BO.OrderStatus)value == BO.OrderStatus.Shipped)||((BO.OrderStatus)value == BO.OrderStatus.Delivered))
+            return Visibility.Visible;
+        else
+            return Visibility.Hidden;
+        
+    }
+
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return false;
+    }
+}
+
+
+public class DeliveredToVisibilityConverter : IValueConverter
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((BO.OrderStatus)value == BO.OrderStatus.Delivered)
             return Visibility.Visible;
         else
             return Visibility.Hidden;

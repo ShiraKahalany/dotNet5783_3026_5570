@@ -83,8 +83,6 @@ public class DalOrderItem : IOrderItem
         var ieorderitems = from orderitem in dataSource.OrderItems
                            where filter(orderitem) == true
                            select orderitem;
-        //if (!ieorderitems.Any())   //???
-        //    throw new DO.NotExistException("Not Exist");///??
         return ieorderitems;
     }
 

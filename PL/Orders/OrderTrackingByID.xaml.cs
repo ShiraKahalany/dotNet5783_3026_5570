@@ -36,7 +36,7 @@ public partial class OrderTrackingByID : Page
     {
         managerButton.Visibility = Visibility.Visible;
         managerButton.IsEnabled = true;
-        PasswordBox.Password = "";
+        PasswordBox.Text = "";
     }
 
     private void ManagerLogIn_Click(object sender, RoutedEventArgs e)
@@ -68,7 +68,7 @@ public partial class OrderTrackingByID : Page
 
     private void EnterPassword()
     {
-        int orderID = int.Parse(PasswordBox.Password);
+        int orderID = int.Parse(PasswordBox.Text);
         try
         {
             order= bl.Order.GetOrderById(orderID);
@@ -81,7 +81,7 @@ public partial class OrderTrackingByID : Page
         {
             MessageBox.Show("Order not found", "OrderTracking", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-        myframe.Content = new Orders.OrderTracking(order);
+        myframe.Content = new Orders.OrderTrackingCustomer(order);
 
         //if (PasswordBox.Password == "1234")
         //{
