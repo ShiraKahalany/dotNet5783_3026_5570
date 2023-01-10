@@ -40,7 +40,7 @@ public partial class OrderTracking : Page
         {
             if (poorder.Status == BO.OrderStatus.Shipped)
             {
-                bl.Order.UpdateStatusToProvided(boOrder.ID);
+                boOrder=bl.Order.UpdateStatusToProvided(boOrder.ID);
                 poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
             }
         }
@@ -58,7 +58,7 @@ public partial class OrderTracking : Page
     {
         try
         {
-            bl.Order.UpdateStatusToShipped(boOrder.ID);
+            boOrder=bl.Order.UpdateStatusToShipped(boOrder.ID);
             poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
         }
         catch(BO.OrderHasShippedException)

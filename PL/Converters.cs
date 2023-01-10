@@ -336,6 +336,26 @@ public class ShippedToVisibilityConverter : IValueConverter
     }
 }
 
+public class ShippedToNotVisibilityConverter : IValueConverter
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (((BO.OrderStatus)value == BO.OrderStatus.Shipped) || ((BO.OrderStatus)value == BO.OrderStatus.Delivered))
+            return Visibility.Hidden;
+        else
+            return Visibility.Visible;
+
+    }
+
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return false;
+    }
+}
+
 
 public class DeliveredToVisibilityConverter : IValueConverter
 {
@@ -357,10 +377,44 @@ public class DeliveredToVisibilityConverter : IValueConverter
 }
 
 
+public class DeliveredToNotVisibilityConverter : IValueConverter
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((BO.OrderStatus)value == BO.OrderStatus.Delivered)
+            return Visibility.Hidden;
+        else
+            return Visibility.Visible;
+    }
 
 
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return false;
+    }
+}
 
 
+public class AmountToColorConverter : IValueConverter
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
 
+        if ((int)value==0)
+            return Brushes.LightGray;
+        else
+            return Brushes.LightGreen;
+    }
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        //try { int.Parse(value.ToString()); }
+        return 1;
+    }
+}
 
 

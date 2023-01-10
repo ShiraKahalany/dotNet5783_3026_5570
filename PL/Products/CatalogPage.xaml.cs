@@ -48,6 +48,7 @@ public partial class CatalogPage : Page
     private void ProductDetails_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         frame.Content = new ProductDetails((PO.ProductItemPO)listCatalog.SelectedItem, pocart, products);
+
     }
 
     //private void AddTocart_Click(object sender, RoutedEventArgs e)

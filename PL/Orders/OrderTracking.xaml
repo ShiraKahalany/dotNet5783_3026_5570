@@ -14,6 +14,8 @@
     <Page.Resources>
         <converter:ShippedToVisibilityConverter  x:Key="ShippedToVisibilityConverter"/>
         <converter:DeliveredToVisibilityConverter  x:Key="DeliveredToVisibilityConverter"/>
+        <converter:ShippedToNotVisibilityConverter  x:Key="ShippedToNotVisibilityConverter"/>
+        <converter:DeliveredToNotVisibilityConverter  x:Key="DeliveredToNotVisibilityConverter"/>
     </Page.Resources>
     <Grid Background="White">
         <Grid Name="OrderItems" Background="AliceBlue" Margin="437,117,10,10">
@@ -83,7 +85,7 @@
             HorizontalAlignment="Left"
             Margin="29,300,0,0"
             TextWrapping="Wrap" 
-            Text="{Binding ShipDate}" 
+            Text="{Binding Path=ShipDate}" 
             VerticalAlignment="Top"
             Height="42" Width="110" RenderTransformOrigin="0.495,0.02"/>
 
@@ -130,10 +132,10 @@
 
         <Grid Name="AdminButton" HorizontalAlignment="Left" Height="198" Margin="209,222,0,0" VerticalAlignment="Top" Width="120">
 
-            <Button Name="UpdateShip" Content="Update Shipped" FontWeight="Bold" FontSize="10" HorizontalAlignment="Center" Height="24" VerticalAlignment="Center" Width="120"  Click="UpdateShip_Click" RenderTransformOrigin="0.032,0.445" Background="{x:Null}" Foreground="#DD5F2C46" >
+            <Button Name="UpdateShip" Visibility="{Binding Path=Status, Converter={StaticResource ShippedToNotVisibilityConverter }}" Content="Update Shipped" FontWeight="Bold" FontSize="10" HorizontalAlignment="Center" Height="24" VerticalAlignment="Center" Width="120"  Click="UpdateShip_Click" RenderTransformOrigin="0.032,0.445" Background="{x:Null}" Foreground="#DD5F2C46"  >
 
             </Button>
-            <Button Name="UpdateDel" Content="Update Delivered" FontSize="10" FontWeight="Bold" Foreground="#DD5F2C46" HorizontalAlignment="Center" Height="24" Margin="0,174,0,0" VerticalAlignment="Top" Width="120"  Click="UpdateDel_Click"  RenderTransformOrigin="0.474,1.548" Background="{x:Null}">
+            <Button Name="UpdateDel" Visibility="{Binding Path=Status, Converter={StaticResource DeliveredToNotVisibilityConverter }}" Content="Update Delivered" FontSize="10" FontWeight="Bold" Foreground="#DD5F2C46" HorizontalAlignment="Center" Height="24" Margin="0,174,0,0" VerticalAlignment="Top" Width="120"  Click="UpdateDel_Click"  RenderTransformOrigin="0.474,1.548" Background="{x:Null}">
 
             </Button>
         </Grid>

@@ -19,6 +19,7 @@
         <converter:BoolToIsEnabledConverter x:Key="boolToIsEnabled"/>
         <converter:IntToStringConverter x:Key="intToStringConverter"/>
         <converter:BoolToVisibility2Converter x:Key="boolToVisibility2Converter"/>
+        <converter:AmountToColorConverter x:Key="AmountToColorConverter"/>
         <Style x:Key="Design" TargetType="Button">
             <Setter Property="BorderBrush" Value="Black"/>
             <Style.Resources>
@@ -70,14 +71,14 @@
             Text="{Binding ID}" VerticalAlignment="Top" Height="16" Width="89" Margin="559,383,0,0" RenderTransformOrigin="0.505,2.133"/>
         <Button  Name="addTocart"
                  Click="AddTocart_Click"
-                Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
+                Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}"
                 HorizontalAlignment="Left"
+                 Background="{Binding Path=Amount, Converter={StaticResource AmountToColorConverter}}"
                 Margin="162,259,0,0"
                 VerticalAlignment="Top" Height="49" Width="50">
             <materialDesign:PackIcon Kind="CartAdd" 
                                          Foreground="Black"
                                          Height="30" Width="30"/>
-
         </Button>
         <ComboBox  Name="AmountOfProduct" HorizontalAlignment="Left" MaxDropDownHeight="120" Margin="98,271,0,0" VerticalAlignment="Top" Width="44"/>
         
