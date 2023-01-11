@@ -26,13 +26,15 @@ public partial class MainWindow : Window
 {
     private IBL bl = BLFactory.GetBL();
     private PO.CartPO pocart;
+    private BO.Cart BOcart;
     public MainWindow()
     {
         InitializeComponent();
         ListCategories.Visibility = Visibility.Collapsed;
         cartDetails.Visibility = Visibility.Collapsed;
         pocart = new PO.CartPO { TotalPrice = 0, Items = new ObservableCollection<PO.OrderItemPO>() };
-        cartDetails.DataContext = pocart;
+    BO.Cart BOcart = new BO.Cart { TotalPrice = 0, Items = new List<BO.OrderItem?>() };
+    cartDetails.DataContext = pocart;
     }
 
 
@@ -68,7 +70,7 @@ public partial class MainWindow : Window
 
     private void ListCategories_Click(object sender, RoutedEventArgs e)
     {
-        MainFrame.Content = new CatalogPage(((Button)sender).Name, MainFrame, pocart);
+        MainFrame.Content = new CatalogPage(((Button)sender).Name, MainFrame, pocart, BOcart);
         MainFrame.Visibility = Visibility.Visible;
     }
 

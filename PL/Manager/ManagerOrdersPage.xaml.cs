@@ -56,7 +56,17 @@ public partial class ManagerOrdersPage : Page
         //boorder = po.CopyFields<PO.OrderForListPO,BO.OrderForList>(boorder);
         int id = po.ID;
         BO.Order boorder = bl.Order.GetOrderById(id)!;
-        myframe.Content = new Orders.OrderTracking(boorder);
+        myframe.Content = new Orders.OrderTracking(boorder, po);
+
+        if ((AttributeSelector.SelectedItem != null) && (BO.OrderStatus)AttributeSelector.SelectedItem != BO.OrderStatus.None)
+        {
+            BOorderforlist = bl.Order.GetOrderList(BO.Filters.filterByStatus, (BO.OrderStatus)AttributeSelector.SelectedItem).ToList();
+            ob.Clear();
+            //ob = BOorderforlist.ToObservableByConverter<BO.>;
+
+            ob = BOorderforlist.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
+        }
+
         //if ((BO.Category)AttributeSelector.SelectedItem != BO.Category.All)
         //{
         //    BOproducts = bl.Product.GetProducts(BO.Filters.filterByCategory, (BO.Category)AttributeSelector.SelectedItem).ToList();

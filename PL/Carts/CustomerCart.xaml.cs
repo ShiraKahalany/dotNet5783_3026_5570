@@ -66,7 +66,7 @@ public partial class CustomerCart : Page
 
     private void ContinueShopping_Click(object sender, RoutedEventArgs e)
     {
-        myframe.Content = new Products.CatalogPage("all", myframe, pocart);
+        myframe.Content = new Products.CatalogPage("all", myframe, pocart, cartBo);
     }
 
     private void back_click(object sender, RoutedEventArgs e)

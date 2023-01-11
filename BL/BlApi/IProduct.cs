@@ -18,7 +18,7 @@ public interface IProduct
     //public BO.Product? GetDeletedById(int id); //בקשת פרטי מוצר מחוק (עבור מנהל
     public void Restore(int id); //שיחזור מוצר מחוק (מנהל בלבד
     //public BO.Product GetProduct(int id);
-   // public BO.ProductItem? GetProduct(int id, BO.Cart? cart); // בקשת פרטי מוצר (עבור הקונה
+   public BO.ProductItem? GetProductItem(int id, BO.Cart? cart); // בקשת פרטי מוצר (עבור הקונה
     public void AddProduct(BO.Product? product); //הוספת מוצר (עבור מנהל
     public void DeleteProduct(int id); //מחיקת מוצר (עבור מנהל
     public void UpdateProduct(BO.Product? newproduct); //עידכון נתוני מוצר (עבור מנהל

@@ -16,6 +16,7 @@
         <converter:DeliveredToVisibilityConverter  x:Key="DeliveredToVisibilityConverter"/>
         <converter:ShippedToNotVisibilityConverter  x:Key="ShippedToNotVisibilityConverter"/>
         <converter:DeliveredToNotVisibilityConverter  x:Key="DeliveredToNotVisibilityConverter"/>
+        <converter:TimeToColorConverter x:Key="TimeToColorConverter"/>
     </Page.Resources>
     <Grid Background="White">
         <Grid Name="OrderItems" Background="AliceBlue" Margin="437,117,10,10">
@@ -85,7 +86,7 @@
             HorizontalAlignment="Left"
             Margin="29,300,0,0"
             TextWrapping="Wrap" 
-            Text="{Binding Path=ShipDate}" 
+            Text="{Binding Path=ShipDate, Converter={StaticResource TimeToColorConverter}, Mode=TwoWay}" 
             VerticalAlignment="Top"
             Height="42" Width="110" RenderTransformOrigin="0.495,0.02"/>
 
@@ -199,6 +200,19 @@
                                          Height="40" Width="73" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Button>
         <Label Content="Products:" HorizontalAlignment="Left" FontSize="16" Margin="437,77,0,0" VerticalAlignment="Top" Width="117"/>
-
+        <Button x:Name="back" HorizontalAlignment="Left" Margin="8,418,0,0" VerticalAlignment="Top" Click="back_click" Background="{x:Null}" BorderBrush="{x:Null}" Width="58">
+            <materialDesign:PackIcon Kind="ArrowBack"
+                                         Foreground="Black"
+                                         Height="30" Width="30" RenderTransformOrigin="0.5,0.5">
+                <materialDesign:PackIcon.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </materialDesign:PackIcon.RenderTransform>
+            </materialDesign:PackIcon>
+        </Button>
     </Grid>
 </Page>
