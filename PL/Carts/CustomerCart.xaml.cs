@@ -48,7 +48,18 @@ public partial class CustomerCart : Page
         OrderItemPO or = ((OrderItemPO)((Button)sender).DataContext);
         int id = or?.ProductID??0;
         BO.Cart boCart = PL.Tools.CopyPOCartToBO(pocart);
-        bl.Cart.UpdateAmountOfProductInCart(boCart, id, 0);
+        try
+        {
+            bl.Cart.UpdateAmountOfProductInCart(boCart, id, 0);
+        }
+        catch (BO.NotExistException)
+        {
+            MessageBox.Show("The Product Does Not Exist", "Not Exist", MessageBoxButton.OK);
+        }
+        catch (BO.NotInStockException)
+        {
+            MessageBox.Show("Sorry!It Is Out Of Stock", "ERROR", MessageBoxButton.OK);
+        }
         pocart.Items!.Remove(or);
         pocart.TotalPrice=Math.Round((double)(pocart.TotalPrice-or.Price*or.Amount)!,2);
     }
@@ -91,8 +102,19 @@ public partial class CustomerCart : Page
                 b = (Button)sender;
                 item = (PO.OrderItemPO)b.DataContext;
             }
-            bl.Cart.UpdateAmountOfProductInCart(cartBo, item?.ProductID ?? 0, amount);
-            item = pocart.Items.FirstOrDefault(x => x.ID == item.ID);
+            try
+            {
+                bl.Cart.UpdateAmountOfProductInCart(cartBo, item?.ProductID ?? 0, amount);
+            }
+            catch (BO.NotExistException)
+            {
+                MessageBox.Show("The Product Does Not Exist", "Not Exist", MessageBoxButton.OK);
+            }
+            catch (BO.NotInStockException)
+            {
+                MessageBox.Show("Sorry!It Is Out Of Stock", "ERROR", MessageBoxButton.OK);
+            }
+        item = pocart.Items.FirstOrDefault(x => x.ID == item.ID);
             pocart.TotalPrice = cartBo.TotalPrice;
             if (amount == 0)
             {

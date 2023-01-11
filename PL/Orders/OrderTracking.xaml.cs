@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BlApi;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using PO;
-using BlApi;
 namespace PL.Orders;
 
 /// <summary>
@@ -28,42 +15,51 @@ public partial class OrderTracking : Page
     {
         InitializeComponent();
         boOrder = order;
-        poorder=order.CopyFields<BO.Order,PO.OrderPO>(poorder);
+        poorder = order.CopyFields<BO.Order, PO.OrderPO>(poorder);
         DataContext = poorder;
     }
 
-   
+
 
     private void UpdateDel_Click(object sender, RoutedEventArgs e)
     {
+
+        //if (poorder.Status == BO.OrderStatus.Shipped)
+        // {
         try
         {
-            if (poorder.Status == BO.OrderStatus.Shipped)
-            {
-                boOrder=bl.Order.UpdateStatusToProvided(boOrder.ID);
-                poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
-            }
+            boOrder = bl.Order.UpdateStatusToProvided(boOrder.ID);
         }
-        catch(BO.OrderHasDeliveredException ex)
+        catch (BO.OrderHasDeliveredException)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show("The Order Has Already Delivered", "Has Already Delivered", MessageBoxButton.OK);
         }
-        catch (BO.OrderHasNotShippedException ex)
+        catch (BO.OrderHasNotShippedException)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show("The Order Has Not Yet Shipped", "Not Shipped Yet", MessageBoxButton.OK);
         }
+        catch(BO.NotExistException)
+        {
+            MessageBox.Show("The Order Not Exist", "Not Exist", MessageBoxButton.OK);
+        }
+        poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
+           // }
     }
 
     private void UpdateShip_Click(object sender, RoutedEventArgs e)
     {
         try
         {
-            boOrder=bl.Order.UpdateStatusToShipped(boOrder.ID);
+            boOrder = bl.Order.UpdateStatusToShipped(boOrder.ID);
             poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
         }
-        catch(BO.OrderHasShippedException)
+        catch (BO.OrderHasShippedException)
         {
-            MessageBox.Show("The Order Has Already Been Shipped", "Has Already Shipped", MessageBoxButton.OK);
+            MessageBox.Show("The Order Has Already Been Shipped", "Has Already Shipped");
+        }
+        catch (BO.NotExistException)
+        {
+            MessageBox.Show("The Order Not Exit", "Not Exist");
         }
     }
 

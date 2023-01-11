@@ -42,7 +42,18 @@ public partial class ProductDetails : Page
         int id = PoProduct.ID;
         int amount = (int)AmountOfProduct.SelectedItem;
         double price = PoProduct.Price??0 ;
-        bl.Cart.AddProductToCart(cart, id, amount);
+        try
+        {
+            bl.Cart.AddProductToCart(cart, id, amount);
+        }
+        catch(BO.NotExistException)
+        {
+            MessageBox.Show("The Product Does Not Exist", "Not Exist", MessageBoxButton.OK);
+        }
+        catch(BO.NotInStockException)
+        {
+            MessageBox.Show("Sorry!It Is Out Of Stock", "ERROR", MessageBoxButton.OK);
+        }
         pocart.Items.Add(new PO.OrderItemPO() { ProductID = id,Name= PoProduct.Name, Amount = amount, Price = price, IsDeleted=false, Path= PoProduct.Path});
         pocart.TotalPrice += price * amount;
         //bl.Cart.AddProductToCart(cart,id, amount);

@@ -99,7 +99,18 @@ public partial class CatalogPage : Page
     {
         PO.ProductPO po = ((Button)(sender)).DataContext as PO.ProductPO;
         int id = po?.ID ?? 0;
-        bl.Product.DeleteProduct(id);
+        try
+        {
+            bl.Product.DeleteProduct(id);
+        }
+        catch (BO.NotExistException)
+        {
+            MessageBox.Show("The Product Does Not Exist", "Delete Product", MessageBoxButton.OK);
+        }
+        catch (BO.InAnOrderException)
+        {
+            MessageBox.Show("The Product Is In An Order", "Can Not Delete Product", MessageBoxButton.OK);
+        }
         //observeproducts.Remove(po);
     }
 

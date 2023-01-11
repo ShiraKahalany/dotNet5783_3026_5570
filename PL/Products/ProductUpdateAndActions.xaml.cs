@@ -48,8 +48,15 @@ namespace PL.Products
             int amount = int.Parse(InsertInStock.Text);
             BO.Category category = (BO.Category)SelectCategory.SelectedItem;
             BO.Product newproduct = new BO.Product { ID = id, Name = name, Price = price, InStock = amount, Category = category, IsDeleted = false,Path=path };
-            bl.Product.UpdateProduct(newproduct);
-            poProduct.ID = id;
+            try
+            {
+                bl.Product.UpdateProduct(newproduct);
+            }
+            catch(BO.NotExistException)
+            {
+                MessageBox.Show("The Product Does Not Exist", "ERROR", MessageBoxButton.OK);
+            }
+                poProduct.ID = id;
             poProduct.Name = name;  
             poProduct.Price = price;
             poProduct.InStock = amount;

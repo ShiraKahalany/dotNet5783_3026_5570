@@ -32,7 +32,18 @@ namespace PL.Manager
         {
             InitializeComponent();
             observeproductsToSave = observeproducts;
-            BOorders = bl.Order.GetDeletedOrders();
+            try
+            {
+                BOorders = bl.Order.GetDeletedOrders();
+            }
+            catch(BO.NotExistException)
+            {
+                MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
+            }
+            catch(BO.NoItemsException)
+            {
+                MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
+            }
             ob = BOorders.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
             ProductListView.ItemsSource = ob;
         }
@@ -41,7 +52,14 @@ namespace PL.Manager
         private void RestoreOrder_Click(object sender, RoutedEventArgs e)
         {
             PO.OrderForListPO POor = ((Button)(sender)).DataContext as PO.OrderForListPO;
-            bl.Order.Restore(POor.ID);
+            try
+            {
+                bl.Order.Restore(POor.ID);
+            }
+            catch(BO.NotExistException)
+            {
+                MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
+            }
             ob.Remove(POor);
             MessageBox.Show("Seccessfully Restored", "Restore Order", MessageBoxButton.OK);
             observeproductsToSave.Add(POor);

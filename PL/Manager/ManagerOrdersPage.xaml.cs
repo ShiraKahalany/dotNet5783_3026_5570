@@ -30,7 +30,15 @@ public partial class ManagerOrdersPage : Page
     {
         InitializeComponent();
         myframe = MainManagerOptionsFrame;
-        BOorderforlist = bl.Order.GetOrders();
+        try
+        {
+            BOorderforlist = bl.Order.GetOrders();
+        }
+        catch (BO.NoItemsException)
+        {
+            MessageBox.Show("There Are NO Items", "ERROR", MessageBoxButton.OK);
+        }
+        
         ob = BOorderforlist.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
         //ProductListView.DataContext = observeproducts;
         OrderListView.ItemsSource = ob;
@@ -41,9 +49,27 @@ public partial class ManagerOrdersPage : Page
     private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if ((BO.OrderStatus)AttributeSelector.SelectedItem == BO.OrderStatus.None)
-            BOorderforlist = bl.Order.GetOrders();
+        {
+            try
+            {
+                BOorderforlist = bl.Order.GetOrders();
+            }
+            catch (BO.NoItemsException)
+            {
+                MessageBox.Show("There Are NO Items", "ERROR", MessageBoxButton.OK);
+            }
+        }
         else
-            BOorderforlist = bl.Order.GetOrderList(BO.Filters.filterByStatus, (BO.OrderStatus)AttributeSelector.SelectedItem);
+        {
+            try
+            {
+                BOorderforlist = bl.Order.GetOrderList(BO.Filters.filterByStatus, (BO.OrderStatus)AttributeSelector.SelectedItem);
+            }
+            catch (BO.NotExistException)
+            {
+                MessageBox.Show("There Are No Orders", "No Orders", MessageBoxButton.OK);
+            }
+        }
         ob.Clear();
         ob = BOorderforlist.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
         // ProductListView.DataContext = observeproducts;
@@ -55,18 +81,20 @@ public partial class ManagerOrdersPage : Page
         //BO.OrderForList boorder = new();
         //boorder = po.CopyFields<PO.OrderForListPO,BO.OrderForList>(boorder);
         int id = po.ID;
-        BO.Order boorder = bl.Order.GetOrderById(id)!;
-        myframe.Content = new Orders.OrderTracking(boorder, po);
-
-        if ((AttributeSelector.SelectedItem != null) && (BO.OrderStatus)AttributeSelector.SelectedItem != BO.OrderStatus.None)
+        BO.Order boorder = new();
+        try
         {
-            BOorderforlist = bl.Order.GetOrderList(BO.Filters.filterByStatus, (BO.OrderStatus)AttributeSelector.SelectedItem).ToList();
-            ob.Clear();
-            //ob = BOorderforlist.ToObservableByConverter<BO.>;
-
-            ob = BOorderforlist.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
+           boorder = bl.Order.GetOrderById(id)!;
         }
-
+        catch (BO.IllegalIdException)
+        {
+            MessageBox.Show("Illegal Order ID", "ERROR");
+        }
+        catch(BO.OrderNotExistException)
+        {
+            MessageBox.Show("Order Not Exist", "ERROR");
+        }
+        myframe.Content = new Orders.OrderTracking(boorder);
         //if ((BO.Category)AttributeSelector.SelectedItem != BO.Category.All)
         //{
         //    BOproducts = bl.Product.GetProducts(BO.Filters.filterByCategory, (BO.Category)AttributeSelector.SelectedItem).ToList();
@@ -79,7 +107,23 @@ public partial class ManagerOrdersPage : Page
     {
         PO.OrderForListPO po = ((Button)(sender)).DataContext as PO.OrderForListPO;
         int id = po?.ID ?? 0;
-        bl.Order.CancelOrder(id);
+        try
+        {
+            bl.Order.CancelOrder(id);
+        }
+        catch(BO.CanNotUpdateOrderException)
+        {
+            MessageBox.Show("The Order Has Already Been Shipped", "Can Not Cancal Order");
+
+        }
+        catch(BO.CantCancelOrderException)
+        {
+            MessageBox.Show("Can Not Cancal Order", "ERROR");
+        }
+        catch(BO.NotExistException)
+        {
+            MessageBox.Show("The Order Does Not Exist", "ERROR");
+        }
         ob.Remove(po);
     }
 

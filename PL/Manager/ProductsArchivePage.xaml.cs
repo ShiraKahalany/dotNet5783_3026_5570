@@ -1,20 +1,9 @@
-﻿using System;
+﻿using BlApi;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using BlApi;
-using System.Collections.ObjectModel;
-using PL.Products;
 
 namespace PL.Manager;
 
@@ -39,8 +28,16 @@ public partial class ProductsArchivePage : Page
 
     private void Restore_Click(object sender, RoutedEventArgs e)
     {
-       PO.ProductPO restorepro = ((Button)(sender)).DataContext as PO.ProductPO;
-        bl.Product.Restore(restorepro.ID);
+        PO.ProductPO restorepro = ((Button)(sender)).DataContext as PO.ProductPO;
+        try
+        {
+            bl.Product.Restore(restorepro.ID);
+        }
+        catch (BO.NotExistException)
+        {
+            MessageBox.Show("Product Not Exist", "Not Exist Product", MessageBoxButton.OK);
+
+        }
         observeproducts.Remove(restorepro);
         MessageBox.Show("Seccessfully Restored", "Restore Product", MessageBoxButton.OK);
         observeproductsToSave.Add(restorepro);
