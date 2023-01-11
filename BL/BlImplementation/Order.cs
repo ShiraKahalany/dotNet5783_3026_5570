@@ -54,7 +54,7 @@ internal class Order : IOrder
         {
             DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
             if (order.ShipDate != null)
-                throw new BO.OrderHasShippedException("The Order Has Already Been Shipped");
+                throw new BO.OrderHasShippedException();
             order.ShipDate = DateTime.Now;
             dal.Order.Update((DO.Order)order);
             return order.OrderToBO();
@@ -295,7 +295,7 @@ internal class Order : IOrder
         try
         {
             DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
-            if (order?.ShipDate != null && order?.ShipDate < DateTime.Now)
+            if (order?.ShipDate != null)
                 throw new BO.CanNotUpdateOrderException();
             if (order?.OrderDate != null)
                 dal.Order.Delete(id);

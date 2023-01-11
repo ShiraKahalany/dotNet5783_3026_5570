@@ -33,7 +33,18 @@ namespace PL.Products
             int amount = int.Parse(InsertAmount.Text);
             BO.Category category = (BO.Category)SelectCategory.SelectedItem;
             BO.Product newproduct = new BO.Product { ID = id, Name = name, Price = price, InStock = amount, Category = category, IsDeleted = false };
-            bl.Product.AddProduct(newproduct);
+            try
+            {
+                bl.Product.AddProduct(newproduct);
+            }
+            catch(BO.WrongDetailsException)
+            {
+                MessageBox.Show("Your Details Are Wrong.Try Again", "Add Product", MessageBoxButton.OK);
+            }
+            catch(BO.AlreadyExistException)
+            {
+                MessageBox.Show("The Product Is Already Exist", "Can Not Add Product", MessageBoxButton.OK);
+            }
             MessageBox.Show("Seccessfully", "Add Product", MessageBoxButton.OK);
             observeproducts.Add(PL.Tools.CopyProp<BO.Product, PO.ProductPO>(newproduct));
             Close();
