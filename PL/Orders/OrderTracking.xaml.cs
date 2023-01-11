@@ -63,4 +63,8 @@ public partial class OrderTracking : Page
         }
     }
 
+    private void back_click(object sender, RoutedEventArgs e)
+    {
+        NavigationService.GoBack();
+    }
 }

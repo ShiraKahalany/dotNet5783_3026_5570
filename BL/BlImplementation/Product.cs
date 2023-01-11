@@ -85,38 +85,38 @@ internal class Product : IProduct
 
     }
 
-    //public BO.ProductItem GetProduct(int id, BO.Cart cart)
-    //// בקשת פרטי מוצר עבור הקונה
-    //{
-    //    try
-    //    {
-    //        if (id > 0)
-    //        {
-    //            DO.Product? pro = dal.Product.GetTByFilter((DO.Product? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().ID == id));
-    //            if (cart.Items == null)
-    //                throw new BO.NotExistException("There Are No Items In The Cart");
-    //            var LIST = (IEnumerable<BO.OrderItem>)cart.Items;
-    //            int counter = LIST.Sum((BO.OrderItem item) => item.Amount ?? 0);
-    //            BO.ProductItem prod = new BO.ProductItem
-    //            {
-    //                IsDeleted = pro.GetValueOrDefault().IsDeleted,
-    //                ID = pro.GetValueOrDefault().ID,
-    //                Name = pro.GetValueOrDefault().Name,
-    //                Price = pro?.Price,
-    //                Category = (BO.Category)pro?.Category!,
-    //                Amount = counter,
-    //                IsInStock = (counter > 0),
-    //                Path = pro.GetValueOrDefault().Path
-    //            };
-    //            return prod;
-    //        }
-    //        throw new BO.NotExistException();
-    //    }
-    //    catch (DO.NotExistException ex)
-    //    {
-    //        throw new BO.NotExistException(ex.Message);
-    //    }
-    //}
+    public BO.ProductItem GetProductItem(int id, BO.Cart cart)
+    // בקשת פרטי מוצר עבור הקונה
+    {
+        try
+        {
+            if (id > 0)
+            {
+                DO.Product? pro = dal.Product.GetTByFilter((DO.Product? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().ID == id));
+                if (cart.Items == null)
+                    throw new BO.NotExistException("There Are No Items In The Cart");
+                var LIST = (IEnumerable<BO.OrderItem>)cart.Items;
+                int counter = LIST.Sum((BO.OrderItem item) => item.Amount ?? 0);
+                BO.ProductItem prod = new BO.ProductItem
+                {
+                    IsDeleted = pro.GetValueOrDefault().IsDeleted,
+                    ID = pro.GetValueOrDefault().ID,
+                    Name = pro.GetValueOrDefault().Name,
+                    Price = pro?.Price,
+                    Category = (BO.Category)pro?.Category!,
+                    Amount = counter,
+                    IsInStock = (counter > 0),
+                    Path = pro.GetValueOrDefault().Path
+                };
+                return prod;
+            }
+            throw new BO.NotExistException();
+        }
+        catch (DO.NotExistException ex)
+        {
+            throw new BO.NotExistException(ex.Message);
+        }
+    }
     public void AddProduct(BO.Product product)
     //הוספת מוצר עבור מנהל
     {

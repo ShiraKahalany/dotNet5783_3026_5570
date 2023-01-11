@@ -3,6 +3,7 @@ using PO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace PL.Products;
 
@@ -13,16 +14,19 @@ public partial class ProductDetails : Page
 {
     private IBL bl = BLFactory.GetBL();
    private BO.ProductItem BoProduct=new BO.ProductItem();
+    private IEnumerable<BO.ProductItem> BOproducts;
     private PO.ProductItemPO PoProduct;
     private PO.CartPO pocart;
     private ObservableCollection<PO.ProductItemPO> products;
 
-    public ProductDetails(PO.ProductItemPO pro, PO.CartPO cart, ObservableCollection<PO.ProductItemPO> prod)
+    public ProductDetails(PO.ProductItemPO pro, PO.CartPO cart, ObservableCollection<PO.ProductItemPO> prod, IEnumerable<BO.ProductItem> BOprod)
     {
         InitializeComponent();
+        BOproducts = BOprod;
         pocart= cart;
         PoProduct = pro;
         DataContext = PoProduct;
+        //PoProduct.Amount=bl.Order
         int[] numArray = new int[20];
         for (int i = 0; i < 20; i++)
             numArray[i] = i+1;
