@@ -113,7 +113,7 @@ internal class Cart : ICart
                 DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
                 if (item == null)
                     break;
-                if (product?.InStock <= item.Amount)
+                if (product?.InStock < item.Amount)
                     throw new BO.NotInStockException("The product " + item.ProductID + " is not in stock");
                 if (item.Amount <= 0)
                     throw new BO.AmountNotPossitiveException();

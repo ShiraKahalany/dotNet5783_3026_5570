@@ -8,6 +8,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using PO;
+using BlImplementation;
+using BO;
+
 namespace PL;
 
 /// <summary>
@@ -79,3 +82,4 @@ public partial class ManagerProductsPage : Page
         myframe.Content = new Manager.ProductsArchivePage(observeproducts);
     }
 }
+

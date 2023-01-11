@@ -24,11 +24,12 @@ public partial class CustomerCart : Page
     private IBL bl = BLFactory.GetBL();
     PO.CartPO pocart;
     Frame myframe;
-    BO.Cart cartBo = new();
+    BO.Cart cartBo = new BO.Cart();
     public CustomerCart(PO.CartPO cartPO,Frame frame)
     {
         InitializeComponent();
         pocart = cartPO;
+        cartBo=cartPO.CopyPOCartToBO();
         CartItems.ItemsSource = cartPO.Items;
         CartItems.DataContext=cartPO.Items;
         totalPrice.DataContext=cartPO;
@@ -72,7 +73,7 @@ public partial class CustomerCart : Page
 
     private void OrderConfirmation_Click(object sender, RoutedEventArgs e)
     {
-        myframe.Content = new OrderConfirmationPage();
+        myframe.Content = new OrderConfirmationPage(cartBo);
     }
 
     private void ContinueShopping_Click(object sender, RoutedEventArgs e)

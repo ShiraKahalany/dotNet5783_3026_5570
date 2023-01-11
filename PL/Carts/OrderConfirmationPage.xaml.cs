@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,13 +21,19 @@ namespace PL.Carts;
 /// </summary>
 public partial class OrderConfirmationPage : Page
 {
-    public OrderConfirmationPage()
+    private BO.Cart BOcart;
+    private IBL bl = BLFactory.GetBL();
+
+    public OrderConfirmationPage(BO.Cart cart)
     {
         InitializeComponent();
+        BOcart= cart;
+        DataContext= BOcart;
     }
 
     private void PlaceOrder_Click(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show("Purchase Seccessfully :)", "THANK YOU", MessageBoxButton.OK);
+        int id = bl.Cart.MakeAnOrder(BOcart);
+        MessageBox.Show("Purchase Seccessfully! the order number is: "+id, "THANK YOU", MessageBoxButton.OK);
     }
 }

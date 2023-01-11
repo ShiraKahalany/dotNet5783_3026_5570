@@ -51,7 +51,6 @@ public partial class OrderTracking : Page
         try
         {
             boOrder = bl.Order.UpdateStatusToShipped(boOrder.ID);
-            poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
         }
         catch (BO.OrderHasShippedException)
         {
@@ -61,6 +60,9 @@ public partial class OrderTracking : Page
         {
             MessageBox.Show("The Order Not Exit", "Not Exist");
         }
+
+        poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
+
     }
 
     private void back_click(object sender, RoutedEventArgs e)

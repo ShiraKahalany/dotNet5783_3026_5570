@@ -36,7 +36,7 @@
                    FontSize="16" 
                    Height="25" 
                    Margin="366,98,0,0"
-                   Text="{Binding CustomerName}"
+                   Text="{Binding CustomerName, Mode=OneWayToSource}"
                    VerticalAlignment="Top" 
                    Width="172" TextWrapping="Wrap" Background="{DynamicResource PrimaryHueDarkForegroundBrush}" BorderBrush="{DynamicResource PrimaryHueDarkBrush}"/>
         <Label Content="Customer Address:" 
@@ -50,7 +50,7 @@
                    FontSize="16" 
                    Height="25" 
                    Margin="366,144,0,0"
-                   Text="{Binding CustomerName , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                   Text="{Binding CustomerAddress , Mode=OneWayToSource, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                    VerticalAlignment="Top" 
                    Width="172" TextWrapping="Wrap" Background="{DynamicResource PrimaryHueDarkForegroundBrush}" BorderBrush="{DynamicResource PrimaryHueDarkBrush}"/>
         <Label Content="Customer Email:" 
@@ -64,7 +64,7 @@
                    FontSize="16" 
                    Height="25" 
                    Margin="366,200,0,0"
-                   Text="{Binding CustomerName , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                   Text="{Binding CustomerEmail , Mode=OneWayToSource, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                    VerticalAlignment="Top" 
                    Width="172" TextWrapping="Wrap" Background="{DynamicResource PrimaryHueDarkForegroundBrush}" BorderBrush="{DynamicResource PrimaryHueDarkBrush}"/>
         <Button
