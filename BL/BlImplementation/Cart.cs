@@ -119,7 +119,7 @@ internal class Cart : ICart
                     throw new BO.AmountNotPossitiveException();
                 // newlist.Add(item);
             }
-            if (/*newlist.Count*/ cart.Items.Count < 0)
+            if (cart.Items.Count < 0)
                 throw new BO.NotItemsInCartException("The cart is empty");
 
             //יצירת ההזמנה

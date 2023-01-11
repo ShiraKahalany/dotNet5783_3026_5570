@@ -26,6 +26,7 @@ public partial class MainWindow : Window
 {
     private IBL bl = BLFactory.GetBL();
     private PO.CartPO pocart;
+
     public MainWindow()
     {
         InitializeComponent();
