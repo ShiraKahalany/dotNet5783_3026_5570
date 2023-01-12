@@ -55,6 +55,8 @@ public static class Tools
     public static ObservableCollection<U> ToObservableByConverter<T, U>(this IEnumerable<T> ienumcollect, ObservableCollection<U> observablecollect, Func<T, U> converter)
     {
         observablecollect.Clear();
+        if (ienumcollect == null)
+            return new ObservableCollection<U>();
         foreach (T item in ienumcollect)
         {
             observablecollect.Add(converter(item));
@@ -125,14 +127,28 @@ public static class Tools
 
     public static BO.Cart CopyPOCartToBO(this PO.CartPO cartPO)
     {
-        BO.Cart copycart = new()
+        BO.Cart copycart = new BO.Cart
         {
             CustomerAddress = cartPO.CustomerAddress,
-            CustomerEmail = cartPO.CustomeEmail,
+            CustomerEmail = cartPO.CustomerEmail,
             CustomerName = cartPO.CustomerName,
             TotalPrice = cartPO.TotalPrice
         };
         copycart.Items = cartPO.Items!.ObservableToIEnumerable().ToList();
+        return copycart;
+    }
+
+    public static PO.CartPO CopyBOCartToPO(this BO.Cart cartBO)
+    {
+        PO.CartPO copycart = new PO.CartPO
+        {
+            CustomerAddress = cartBO.CustomerAddress,
+            CustomerEmail = cartBO.CustomerEmail,
+            CustomerName = cartBO.CustomerName,
+            TotalPrice = cartBO.TotalPrice
+        };
+        copycart.Items = cartBO.Items.ToObservableByConverter<BO.OrderItem, PO.OrderItemPO>(copycart.Items, CopyProp<BO.OrderItem, PO.OrderItemPO>);
+        //copycart.Items = cartPO.Items!.ObservableToIEnumerable().ToList();
         return copycart;
     }
 

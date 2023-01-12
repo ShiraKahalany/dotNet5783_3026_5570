@@ -209,7 +209,7 @@ internal class Product : IProduct
                 select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()));
     }
 
-    public IEnumerable<BO.ProductItem> GetProductItemsList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
+    public IEnumerable<BO.ProductItem> GetProductItemsList(BO.Cart cart, BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
     {
 
         IEnumerable<DO.Product?> doProductList =
@@ -233,7 +233,8 @@ internal class Product : IProduct
         //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
         //       .ToList();
         return (from DO.Product doProduct in doProductList
-                select BlApi.Tools.CopyFields(doProduct, new BO.ProductItem { IsInStock = (doProduct.InStock > 0), Amount = 0 }));
+                select GetProductItem(doProduct.ID, cart));
+               // select BlApi.Tools.CopyFields(doProduct, new BO.ProductItem { IsInStock = (doProduct.InStock > 0), Amount = 0 }));
     }
 
 }

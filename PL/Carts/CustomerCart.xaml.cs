@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BlApi;
+using BO;
 using PO;
 namespace PL.Carts;
 
@@ -25,11 +26,12 @@ public partial class CustomerCart : Page
     PO.CartPO pocart;
     Frame myframe;
     BO.Cart cartBo = new BO.Cart();
-    public CustomerCart(PO.CartPO cartPO,Frame frame)
+    public CustomerCart(BO.Cart cart,Frame frame)
     {
         InitializeComponent();
-        pocart = cartPO;
-        cartBo=cartPO.CopyPOCartToBO();
+        cartBo = cart;
+        pocart = PL.Tools.CopyBOCartToPO(cartBo);
+        //cartBo=cartPO.CopyPOCartToBO();
         CartItems.ItemsSource = cartPO.Items;
         CartItems.DataContext=cartPO.Items;
         totalPrice.DataContext=cartPO;
@@ -78,7 +80,7 @@ public partial class CustomerCart : Page
 
     private void ContinueShopping_Click(object sender, RoutedEventArgs e)
     {
-        myframe.Content = new Products.CatalogPage("all", myframe, pocart, cartBo);
+        myframe.Content = new Products.CatalogPage("all", myframe, cartBo);
     }
 
     private void back_click(object sender, RoutedEventArgs e)

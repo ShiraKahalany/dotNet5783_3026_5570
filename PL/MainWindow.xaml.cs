@@ -33,7 +33,7 @@ public partial class MainWindow : Window
         ListCategories.Visibility = Visibility.Collapsed;
         cartDetails.Visibility = Visibility.Collapsed;
         pocart = new PO.CartPO { TotalPrice = 0, Items = new ObservableCollection<PO.OrderItemPO>() };
-    BO.Cart BOcart = new BO.Cart { TotalPrice = 0, Items = new List<BO.OrderItem?>() };
+    BOcart = new BO.Cart { TotalPrice = 0, Items = new List<BO.OrderItem?>() };
     cartDetails.DataContext = pocart;
     }
 
@@ -70,7 +70,7 @@ public partial class MainWindow : Window
 
     private void ListCategories_Click(object sender, RoutedEventArgs e)
     {
-        MainFrame.Content = new CatalogPage(((Button)sender).Name, MainFrame, pocart, BOcart);
+        MainFrame.Content = new CatalogPage(((Button)sender).Name, MainFrame, BOcart);
         MainFrame.Visibility = Visibility.Visible;
     }
 
@@ -82,7 +82,7 @@ public partial class MainWindow : Window
     private void CartButton_Click(object sender, RoutedEventArgs e)
     {
         cartDetails.Visibility = Visibility.Hidden;
-        MainFrame.Content = new PL.Carts.CustomerCart(pocart,MainFrame);
+        MainFrame.Content = new PL.Carts.CustomerCart(BOcart,MainFrame);
     }
 
     private void LogIn_Click(object sender, RoutedEventArgs e) => MainFrame.Content = new Manager.LogInManagerPage(MainFrame);

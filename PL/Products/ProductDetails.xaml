@@ -20,6 +20,7 @@
         <converter:IntToStringConverter x:Key="intToStringConverter"/>
         <converter:BoolToVisibility2Converter x:Key="boolToVisibility2Converter"/>
         <converter:AmountToColorConverter x:Key="AmountToColorConverter"/>
+        <converter:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
         <Style x:Key="Design" TargetType="Button">
             <Setter Property="BorderBrush" Value="Black"/>
             <Style.Resources>
@@ -29,6 +30,7 @@
             </Style.Resources>
         </Style>
     </Page.Resources>
+
     <Grid Background="White">
         <Image HorizontalAlignment="Left" 
                Height="281" Margin="490,97,0,0" 
@@ -47,7 +49,7 @@
             VerticalAlignment="Top" 
             Height="71"
             Width="522"/>
-        <StackPanel Orientation="Horizontal" Width="100" Height="35" Margin="79,190,621,225">
+        <StackPanel Orientation="Horizontal" Width="150" Height="40" Margin="44,185,606,225">
             <TextBlock Text="$" Width="10" FontSize="20"></TextBlock>
             <TextBlock 
             x:Name="priceofproduct"
@@ -69,18 +71,25 @@
             FontSize="10"  
             TextWrapping="Wrap" 
             Text="{Binding ID}" VerticalAlignment="Top" Height="16" Width="89" Margin="559,383,0,0" RenderTransformOrigin="0.505,2.133"/>
-        <Button  Name="addTocart"
+        <StackPanel Orientation="Horizontal" Height="50" Margin="72,252,588,148">
+            <ComboBox  Name="AmountOfProduct" Margin="0,0,20,0" MaxDropDownHeight="120" VerticalAlignment="Center" Width="44"/>
+            <Button  Name="addTocart"
                  Click="AddTocart_Click"
                 Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}"
                 HorizontalAlignment="Left"
-                 Background="{Binding Path=Amount, Converter={StaticResource AmountToColorConverter}}"
-                Margin="162,259,0,0"
+                 Background="LightGray"
                 VerticalAlignment="Top" Height="49" Width="50">
-            <materialDesign:PackIcon Kind="CartAdd" 
+                <materialDesign:PackIcon Kind="CartAdd" 
                                          Foreground="Black"
                                          Height="30" Width="30"/>
-        </Button>
-        <ComboBox  Name="AmountOfProduct" HorizontalAlignment="Left" MaxDropDownHeight="120" Margin="98,271,0,0" VerticalAlignment="Top" Width="44"/>
+            </Button>
+            <Label Content="{Binding Path=Amount, Converter={StaticResource intToStringConverter}}"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+                   VerticalAlignment="Top"
+               Visibility="{Binding Path=Amount, Converter={StaticResource IntToVisibilityConverter}}"
+               Width="25" Height="25" Background="#FFFC9564" Foreground="#DD110101" BorderBrush="#FF958C8C" BorderThickness="1,1,1,1" FontSize="11"/>
+        </StackPanel>
 
         <Button x:Name="back" HorizontalAlignment="Left" Margin="37,367,0,0" VerticalAlignment="Top" Click="back_click" Background="{x:Null}" BorderBrush="{x:Null}" Width="58">
             <materialDesign:PackIcon Kind="ArrowBack"
@@ -98,27 +107,28 @@
         </Button>
         <TextBlock Name="IsInStock" 
                    HorizontalAlignment="Left"
-                   Margin="37,132,0,0" 
+                   Margin="44,122,0,297" 
                    TextWrapping="Wrap"
-                   VerticalAlignment="Top" 
-                   TextAlignment="Center"
-                   Height="32" 
+                   TextAlignment="Center" 
                    Text="{Binding Path=IsInStock ,Converter={StaticResource isInStockToString}}" 
-                   Width="129" 
-                   Foreground="{Binding Path=IsInStock, Converter={StaticResource isInStockToColor}}"/>
+                   Width="80" 
+                   Height="20"
+                   Background="{Binding Path=IsInStock, Converter={StaticResource isInStockToColor}}"
+                   Foreground="White" FontWeight="Bold" FontFamily="Tw Cen MT"/>
+
 
         <!--<TextBlock HorizontalAlignment="Left"
                    Margin="234,259,0,0" TextWrapping="Wrap" FontSize="20" FontWeight="Bold" Text="{Binding Path=Amount, Converter={StaticResource intToStringConverter}}" VerticalAlignment="Top" Height="40" Width="39" Background="#FFC4EE89" TextAlignment="Center" Visibility="{Binding Path=Amount, Converter={StaticResource boolToVisibility2Converter}}"/>-->
-        <Button Content="{Binding Path=Amount, Converter={StaticResource intToStringConverter}}"
-                Margin="212,259,0,0"
+        <!--<Button Content="{Binding Path=Amount, Converter={StaticResource intToStringConverter}}"
+                Margin="199,252,0,0"
                 Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}"
                 HorizontalAlignment="Left"
                 Background="LightGreen"
-                Height="49" Width="49"
+                Height="25" Width="27"
                 IsEnabled="False"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                VerticalAlignment="Top"/>
+                VerticalAlignment="Top"/>-->
 
     </Grid>
 </Page>

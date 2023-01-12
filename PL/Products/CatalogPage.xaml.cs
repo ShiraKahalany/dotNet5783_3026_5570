@@ -18,36 +18,36 @@ public partial class CatalogPage : Page
     private ObservableCollection<PO.ProductItemPO> products = new ObservableCollection<PO.ProductItemPO>();
     private IEnumerable<BO.ProductItem> BOproducts;
     Frame frame;
-    private PO.CartPO pocart;
+    //private PO.CartPO pocart;
     private BO.Cart bocart;
-    public CatalogPage(string category, Frame mainFrame, PO.CartPO cart, BO.Cart bcart)
+    public CatalogPage(string category, Frame mainFrame, BO.Cart bcart)
     {
         InitializeComponent();
-        pocart = cart;
+        //pocart = cart;
         bocart = bcart;
         switch (category)
         {
             case "kitchen":
-                BOproducts = bl.Product.GetProductItemsList(BO.Filters.filterByCategory, BO.Category.Kitchen);
+                BOproducts = bl.Product.GetProductItemsList(bocart, BO.Filters.filterByCategory, BO.Category.Kitchen);
                 break;
             case "living_room":
-                BOproducts = bl.Product.GetProductItemsList(BO.Filters.filterByCategory, BO.Category.Living_room);
+                BOproducts = bl.Product.GetProductItemsList(bocart, BO.Filters.filterByCategory, BO.Category.Living_room);
                 //products = (bl.Product.GetProductItemsList(BO.Filters.filterByCategory, BO.Category.Living_room)).ToObservableByConverter(products, PL.Tools.CopyProp<BO.ProductItem, PO.ProductItemPO>);
                 break;
             case "bath_room":
-                BOproducts = bl.Product.GetProductItemsList(BO.Filters.filterByCategory, BO.Category.Bathroom);
+                BOproducts = bl.Product.GetProductItemsList(bocart, BO.Filters.filterByCategory, BO.Category.Bathroom);
                 //products = bl.Product.GetProductItemsList(BO.Filters.filterByCategory, BO.Category.Bathroom).ToObservableByConverter(products, PL.Tools.CopyProp<BO.ProductItem, PO.ProductItemPO>);
                 break;
             case "bed_room":
-                BOproducts = bl.Product.GetProductItemsList(BO.Filters.filterByCategory, BO.Category.Bedroom);
+                BOproducts = bl.Product.GetProductItemsList(bocart, BO.Filters.filterByCategory, BO.Category.Bedroom);
                 //products = bl.Product.GetProductItemsList(BO.Filters.filterByCategory, BO.Category.Bedroom).ToObservableByConverter(products, PL.Tools.CopyProp<BO.ProductItem, PO.ProductItemPO>);
                 break;
             case "garden":
-                BOproducts = bl.Product.GetProductItemsList(BO.Filters.filterByCategory, BO.Category.Garden);
+                BOproducts = bl.Product.GetProductItemsList(bocart, BO.Filters.filterByCategory, BO.Category.Garden);
                // products = bl.Product.GetProductItemsList(BO.Filters.filterByCategory, BO.Category.Garden).ToObservableByConverter(products, PL.Tools.CopyProp<BO.ProductItem, PO.ProductItemPO>);
                 break;
             case "all":
-                BOproducts = bl.Product.GetProductItemsList();
+                BOproducts = bl.Product.GetProductItemsList(bocart);
                // products = bl.Product.GetProductItemsList().ToObservableByConverter(products, PL.Tools.CopyProp<BO.ProductItem, PO.ProductItemPO>);
                 break;
         }
@@ -57,8 +57,8 @@ public partial class CatalogPage : Page
     }
     private void ProductDetails_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
-        BO.ProductItem p = bl.Product.GetProductItem(((PO.ProductItemPO)listCatalog.SelectedItem).ID, bocart);
-        frame.Content = new ProductDetails(((PO.ProductItemPO)listCatalog.SelectedItem), pocart, products, BOproducts);
+        //BO.ProductItem p = bl.Product.GetProductItem(((PO.ProductItemPO)listCatalog.SelectedItem).ID, bocart);
+        frame.Content = new ProductDetails(((PO.ProductItemPO)listCatalog.SelectedItem), bocart, products, BOproducts);
 
     }
 

@@ -29,17 +29,17 @@ namespace PO;
         }
     }
 
-    private string? customeEmail;
-    public string? CustomeEmail
+    private string? customerEmail;
+    public string? CustomerEmail
     {
         get
-        { return customeEmail; }
+        { return customerEmail; }
         set
         {
-            customeEmail = value;
+            customerEmail = value;
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(" CustomeEmail"));
+                PropertyChanged(this, new PropertyChangedEventArgs(" CustomerEmail"));
             }
         }
     }
