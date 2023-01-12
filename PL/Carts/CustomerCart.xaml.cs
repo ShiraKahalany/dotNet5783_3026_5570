@@ -84,11 +84,6 @@ public partial class CustomerCart : Page
         myframe.Content = new Products.CatalogPage("all", myframe, cartBo);
     }
 
-    private void back_click(object sender, RoutedEventArgs e)
-    {
-        NavigationService.GoBack();
-    }
-
     private void UpdateAmount(object sender, int amount, bool isTextBox = false)
     {
         try
@@ -172,5 +167,10 @@ public partial class CustomerCart : Page
         Empty(cartBo);
         
         cartPO= cartBo.CopyBOCartToPO();
+    }
+
+    private void back_click(object sender, RoutedEventArgs e)
+    {
+        NavigationService.GoBack();
     }
 }

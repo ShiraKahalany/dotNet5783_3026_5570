@@ -173,15 +173,16 @@ internal static class Tools
     }
 
     public static int CheckAmount(this BO.OrderItem item, int amount)
-    //בדיקה האם ניתן להוסיף את הכמות המבוקשת לפי הזמינות במלאי. אם ניתן - החזרת הכמות
+    //בדיקה האם ניתן לשנות את הכמות המבוקשת לפי הזמינות במלאי. אם ניתן - החזרת הכמות
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
         DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
-        int? difference = amount - item.Amount;
-        if (product?.InStock < difference)  //אם אין מספיק במלאי מהמוצר
+        //int? difference = amount - item.Amount;
+        if (product?.InStock < amount)  //אם אין מספיק במלאי מהמוצר
             throw new BO.NotInStockException();
         return amount;
     }
+
 
 
 }
