@@ -51,10 +51,10 @@ public partial class CustomerCart : Page
     {
         OrderItemPO or = ((OrderItemPO)((Button)sender).DataContext);
         int id = or?.ProductID??0;
-        BO.Cart boCart = PL.Tools.CopyPOCartToBO(cartPO);
+        //BO.Cart boCart = PL.Tools.CopyPOCartToBO(cartPO);
         try
         {
-            bl.Cart.UpdateAmountOfProductInCart(boCart, id, 0);
+            bl.Cart.UpdateAmountOfProductInCart(cartBo, id, 0);
         }
         catch (BO.NotExistException)
         {
