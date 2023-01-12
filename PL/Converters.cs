@@ -437,3 +437,21 @@ public class TimeToColorConverter : IValueConverter
     }
 }
 
+public class IntToVisibilityConverter : IValueConverter
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+
+        if ((int)value<=0)
+            return Visibility.Hidden;
+        else
+            return Visibility.Visible;
+    }
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return 0;
+    }
+}

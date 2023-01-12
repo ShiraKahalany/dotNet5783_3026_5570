@@ -30,6 +30,6 @@ public interface IProduct
 
     // public IEnumerable<ProductItem> GetProducts(int id); //בקשת פרטי מוצר עבור מנהל
     //public IEnumerable<ProductItem> GetProducts(); // בקשת פרטי מוצר עבור הקונה
-    public IEnumerable<BO.ProductItem> GetProductItemsList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null);
+    public IEnumerable<BO.ProductItem> GetProductItemsList(BO.Cart cart, BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null ) ;
 
 }

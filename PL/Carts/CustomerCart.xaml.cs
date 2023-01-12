@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BlApi;
+using BO;
 using PO;
 namespace PL.Carts;
 
@@ -22,14 +23,15 @@ namespace PL.Carts;
 public partial class CustomerCart : Page
 {
     private IBL bl = BLFactory.GetBL();
-    PO.CartPO pocart;
+    PO.CartPO cartPO;
     Frame myframe;
     BO.Cart cartBo = new BO.Cart();
-    public CustomerCart(PO.CartPO cartPO,Frame frame)
+    public CustomerCart(BO.Cart cart,Frame frame)
     {
         InitializeComponent();
-        pocart = cartPO;
-        cartBo=cartPO.CopyPOCartToBO();
+        cartBo = cart;
+        cartPO = PL.Tools.CopyBOCartToPO(cartBo);
+        //cartBo=cartPO.CopyPOCartToBO();
         CartItems.ItemsSource = cartPO.Items;
         CartItems.DataContext=cartPO.Items;
         totalPrice.DataContext=cartPO;
@@ -49,7 +51,7 @@ public partial class CustomerCart : Page
     {
         OrderItemPO or = ((OrderItemPO)((Button)sender).DataContext);
         int id = or?.ProductID??0;
-        BO.Cart boCart = PL.Tools.CopyPOCartToBO(pocart);
+        BO.Cart boCart = PL.Tools.CopyPOCartToBO(cartPO);
         try
         {
             bl.Cart.UpdateAmountOfProductInCart(boCart, id, 0);
@@ -62,8 +64,8 @@ public partial class CustomerCart : Page
         {
             MessageBox.Show("Sorry!It Is Out Of Stock", "ERROR", MessageBoxButton.OK);
         }
-        pocart.Items!.Remove(or);
-        pocart.TotalPrice=Math.Round((double)(pocart.TotalPrice-or.Price*or.Amount)!,2);
+        cartPO.Items!.Remove(or);
+        cartPO.TotalPrice=Math.Round((double)(cartPO.TotalPrice-or.Price*or.Amount)!,2);
     }
 
     private void chooseAmount_MouseEnter(object sender, MouseEventArgs e)
@@ -79,7 +81,7 @@ public partial class CustomerCart : Page
 
     private void ContinueShopping_Click(object sender, RoutedEventArgs e)
     {
-        myframe.Content = new Products.CatalogPage("all", myframe, pocart, cartBo);
+        myframe.Content = new Products.CatalogPage("all", myframe, cartBo);
     }
 
     private void back_click(object sender, RoutedEventArgs e)
@@ -116,15 +118,17 @@ public partial class CustomerCart : Page
             {
                 MessageBox.Show("Sorry!It Is Out Of Stock", "ERROR", MessageBoxButton.OK);
             }
-        item = pocart.Items.FirstOrDefault(x => x.ID == item.ID);
-            pocart.TotalPrice = cartBo.TotalPrice;
+        item = cartPO.Items.FirstOrDefault(x => x.ID == item.ID);
+            cartPO.TotalPrice = cartBo.TotalPrice;
+
             if (amount == 0)
             {
-                pocart.Items.Remove(item);
-                pocart.TotalPrice = cartBo.TotalPrice;
+                cartPO.Items.Remove(item);
+                cartPO.TotalPrice = cartBo.TotalPrice;
                 return;
             }
             item.Amount = amount;
+            item.TotalItem = amount * item.Price;
         }
         catch (BO.NotInStockException ex)
         {

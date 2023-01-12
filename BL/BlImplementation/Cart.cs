@@ -94,7 +94,6 @@ internal class Cart : ICart
     {
         if (cart == null)
             throw new BO.NotExistException();
-
         if (cart.CustomerName == null)
             throw new BO.NoNameException();
         if (cart.CustomerAddress == null)
@@ -108,22 +107,23 @@ internal class Cart : ICart
         //בדיקת זמינות המוצרים במלאי
         //******פה במקום פוראיצ' לנסות להשתמש בפונקציות של רשימות, כמו פיינד*******
 
-        List<BO.OrderItem> newlist = new List<BO.OrderItem>();  //מה הפואנטה של הרשימה הזאת??
+        //List<BO.OrderItem> newlist = new List<BO.OrderItem>();  //מה הפואנטה של הרשימה הזאת??
         try
         {
+            if (cart.Items.Count < 0)
+                throw new BO.NotItemsInCartException("The cart is empty");
             foreach (BO.OrderItem item in cart.Items)
             {
                 DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
                 if (item == null)
                     break;
                 if (product?.InStock < item.Amount)
-                    throw new BO.NotInStockException("The product " + item.ProductID + " is not in stock");
+                    throw new BO.NotInStockException("The product " + product?.Name + " is not in stock");
                 if (item.Amount <= 0)
                     throw new BO.AmountNotPossitiveException();
                 // newlist.Add(item);
             }
-            if (cart.Items.Count < 0)
-                throw new BO.NotItemsInCartException("The cart is empty");
+
 
             //יצירת ההזמנה
             DO.Order neworder = new DO.Order
@@ -136,6 +136,7 @@ internal class Cart : ICart
                 OrderDate = DateTime.Now,
                 ShipDate = null,
                 DeliveryDate = null
+
             };
 
             int newId = dal.Order.Add(neworder);  //הוספת ההזמנה למאגר ההזמנות
@@ -144,8 +145,9 @@ internal class Cart : ICart
             // var x= from item in newlist
 
 
+
             //עידכון מלאי המוצרים
-            foreach (BO.OrderItem item in newlist)
+            foreach (BO.OrderItem item in cart.Items)
             {
                 DO.Product product = (DO.Product)dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
                 DO.OrderItem temp = new DO.OrderItem();
