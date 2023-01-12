@@ -64,6 +64,17 @@
 
                 </StackPanel>
                 <Button
+                    Name="EmptyCart"
+                    Content="EMPTY CART"
+                    HorizontalAlignment="center"
+                    VerticalAlignment="Top"
+                    Height="39" Width="106"
+                    FontSize="10" 
+                    HorizontalContentAlignment="Center"
+                   
+                    FontWeight="Bold"
+                    Foreground="black" Background="{x:Null}"  Margin="43,246,0,0" Click="EmptyCart_Click"/>
+                <Button
                     Name="ContinueShopping"
                     Content="CONTINUE SHOPPING"
                     HorizontalAlignment="Center"
@@ -136,9 +147,9 @@
                             <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="300" Grid.Column="4">
                                 <TextBlock Text="Item Total" FontSize="10" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                                 <StackPanel Grid.Column="4" Name="totalprice" Orientation="Horizontal" Width="160" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
-                                <TextBlock Text="$" FontSize="20"></TextBlock>
-                                <TextBlock Name="TotalItem" Text="{Binding TotalItem}" Width="250" FontSize="20"></TextBlock>
-                            </StackPanel>
+                                    <TextBlock Text="$" FontSize="20"></TextBlock>
+                                    <TextBlock Name="TotalItem" Text="{Binding TotalItem}" Width="250" FontSize="20"></TextBlock>
+                                </StackPanel>
                             </StackPanel>
                             <Button x:Name="RemoveFromCartButton"
                                 Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
