@@ -36,6 +36,7 @@ public partial class ProductDetails : Page
         BoProduct = PL.Tools.CopyProp<PO.ProductItemPO, BO.ProductItem>(PoProduct);
     }
 
+
     private void AddTocart_Click(object sender, RoutedEventArgs e)
     {
         //BO.Cart cart = new BO.Cart();

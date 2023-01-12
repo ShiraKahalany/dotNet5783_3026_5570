@@ -84,7 +84,6 @@ internal class Cart : ICart
                     Amount = (item.ProductID == id) ? item.CheckAmount(amount) : item.Amount,
                     TotalItem = ((item.ProductID == id) ? item.CheckAmount(amount) : item.Amount) * item.Price
                 };
-        cart.Items = x.ToList();
         cart.TotalPrice = Math.Round(x.Sum(item => (double)(item.Price * item.Amount)!), 2);
         return cart;
     }

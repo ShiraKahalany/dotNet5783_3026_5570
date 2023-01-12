@@ -29,7 +29,7 @@ public partial class CustomerCart : Page
     public CustomerCart(BO.Cart cart,Frame frame)
     {
         InitializeComponent();
-        cartBo= cart;
+        cartBo = cart;
         cartPO = PL.Tools.CopyBOCartToPO(cartBo);
         //cartBo=cartPO.CopyPOCartToBO();
         CartItems.ItemsSource = cartPO.Items;
@@ -164,9 +164,10 @@ public partial class CustomerCart : Page
     }
     private void EmptyCart_Click(object sender, RoutedEventArgs e)
     {
-        Empty(cartBo);
-        
-        cartPO= cartBo.CopyBOCartToPO();
+        cartPO.Items.Clear();   
+        cartBo.Items.Clear();
+        cartBo.TotalPrice = 0;
+        cartPO.TotalPrice = 0;
     }
 
     private void back_click(object sender, RoutedEventArgs e)
