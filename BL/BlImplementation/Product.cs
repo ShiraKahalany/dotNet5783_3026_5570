@@ -103,7 +103,9 @@ internal class Product : IProduct
                 }
                 // new BO.NotExistException("There Are No Items In The Cart");
                 var LIST = (IEnumerable<BO.OrderItem>)cart.Items;
-                int counter = LIST.Sum((BO.OrderItem item) => item.Amount ?? 0);
+                BO.OrderItem? oi = cart.Items.Find((BO.OrderItem? item) => item?.ProductID == id);
+                int amt = (oi == null)? 0: oi.Amount??0;
+                //int counter = LIST.Sum((BO.OrderItem item) => item.Amount ?? 0);
                 BO.ProductItem prod = new BO.ProductItem
                 {
                     IsDeleted = pro.GetValueOrDefault().IsDeleted,
@@ -111,7 +113,7 @@ internal class Product : IProduct
                     Name = pro.GetValueOrDefault().Name,
                     Price = pro?.Price,
                     Category = (BO.Category)pro?.Category!,
-                    Amount = counter,
+                    Amount = amt,
                     IsInStock = (pro?.InStock > 0),
                     Path = pro.GetValueOrDefault().Path
                 };

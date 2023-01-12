@@ -31,10 +31,10 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         ListCategories.Visibility = Visibility.Collapsed;
-        cartDetails.Visibility = Visibility.Collapsed;
+        //cartDetails.Visibility = Visibility.Collapsed;
         pocart = new PO.CartPO { TotalPrice = 0, Items = new ObservableCollection<PO.OrderItemPO>() };
     BOcart = new BO.Cart { TotalPrice = 0, Items = new List<BO.OrderItem?>() };
-    cartDetails.DataContext = pocart;
+   // cartDetails.DataContext = pocart;
     }
 
 
@@ -49,14 +49,14 @@ public partial class MainWindow : Window
         ListCategories.Visibility = Visibility.Hidden;
     }
 
-    private void showCart(object sender, RoutedEventArgs e)
-    {
-        cartDetails.Visibility = Visibility.Visible;
-    }
+    //private void showCart(object sender, RoutedEventArgs e)
+    //{
+    //    cartDetails.Visibility = Visibility.Visible;
+    //}
 
     private void hideCart(object sender, RoutedEventArgs e)
     {
-        cartDetails.Visibility = Visibility.Hidden;
+        //cartDetails.Visibility = Visibility.Hidden;
     }
 
 
@@ -81,7 +81,7 @@ public partial class MainWindow : Window
 
     private void CartButton_Click(object sender, RoutedEventArgs e)
     {
-        cartDetails.Visibility = Visibility.Hidden;
+        //cartDetails.Visibility = Visibility.Hidden;
         MainFrame.Content = new PL.Carts.CustomerCart(BOcart,MainFrame);
     }
 
@@ -93,6 +93,10 @@ public partial class MainWindow : Window
     }
 
     private void Tracking_Click(object sender, RoutedEventArgs e) => MainFrame.Content = new Orders.OrderTrackingByID(MainFrame);
-    
+
+    private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+    {
+
+    }
 }
 

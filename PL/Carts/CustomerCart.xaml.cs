@@ -36,7 +36,7 @@ public partial class CustomerCart : Page
         CartItems.DataContext=cartPO.Items;
         totalPrice.DataContext=cartPO;
         NoItems.DataContext = cartPO;
-        CartDetailsGrid.DataContext = cartPO;
+        //CartDetailsGrid.DataContext = cartPO;
         myframe=frame;
         //NoItems.DataContext = (cartPO.Items!.Count==0);
         //CartDetailsGrid.DataContext = (cartPO.Items!.Count != 0);
