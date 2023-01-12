@@ -49,7 +49,7 @@
             VerticalAlignment="Top" 
             Height="71"
             Width="522"/>
-        <StackPanel Orientation="Horizontal" Width="150" Height="40" Margin="44,185,606,225">
+        <StackPanel Orientation="Horizontal" Width="150" Height="40" Margin="16,185,634,225">
             <TextBlock Text="$" Width="10" FontSize="20"></TextBlock>
             <TextBlock 
             x:Name="priceofproduct"
@@ -71,8 +71,11 @@
             FontSize="10"  
             TextWrapping="Wrap" 
             Text="{Binding ID}" VerticalAlignment="Top" Height="16" Width="89" Margin="559,383,0,0" RenderTransformOrigin="0.505,2.133"/>
-        <StackPanel Orientation="Horizontal" Height="50" Margin="72,252,588,148">
-            <ComboBox  Name="AmountOfProduct" Margin="0,0,20,0" MaxDropDownHeight="120" VerticalAlignment="Center" Width="44"/>
+        <StackPanel Orientation="Horizontal" Height="50" Width="150" Margin="37,245,613,155">
+            <StackPanel Orientation="Vertical">
+                <TextBlock VerticalAlignment="Top" Text="Update your amount" FontSize="8" Visibility="{Binding Path=Amount, Converter={StaticResource IntToVisibilityConverter}}"/>
+                <ComboBox  Name="AmountOfProduct" Margin="0,0,20,0" MaxDropDownHeight="120" VerticalAlignment="Center" Width="44"/>
+            </StackPanel>
             <Button  Name="addTocart"
                  Click="AddTocart_Click"
                 Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}"
@@ -88,7 +91,7 @@
                VerticalContentAlignment="Center"
                    VerticalAlignment="Top"
                Visibility="{Binding Path=Amount, Converter={StaticResource IntToVisibilityConverter}}"
-               Width="25" Height="25" Background="#FFFC9564" Foreground="#DD110101" BorderBrush="#FF958C8C" BorderThickness="1,1,1,1" FontSize="11"/>
+               Width="26" Height="25" Background="#FFFC9564" Foreground="#DD110101" BorderBrush="#FF958C8C" BorderThickness="1,1,1,1" FontSize="11" RenderTransformOrigin="0.798,0.539"/>
         </StackPanel>
 
         <Button x:Name="back" HorizontalAlignment="Left" Margin="37,367,0,0" VerticalAlignment="Top" Click="back_click" Background="{x:Null}" BorderBrush="{x:Null}" Width="58">

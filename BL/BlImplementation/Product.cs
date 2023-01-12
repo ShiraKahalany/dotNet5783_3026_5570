@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using System.Net.Http.Headers;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BlImplementation;
 
@@ -111,7 +112,7 @@ internal class Product : IProduct
                     Price = pro?.Price,
                     Category = (BO.Category)pro?.Category!,
                     Amount = counter,
-                    IsInStock = (counter > 0),
+                    IsInStock = (pro?.InStock > 0),
                     Path = pro.GetValueOrDefault().Path
                 };
                 return prod;
@@ -232,8 +233,9 @@ internal class Product : IProduct
         //return (from DO.Product doProduct in doProductList
         //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
         //       .ToList();
-        return (from DO.Product doProduct in doProductList
-                select GetProductItem(doProduct.ID, cart));
+         var x= from DO.Product doProduct in doProductList
+                select GetProductItem(doProduct.ID, cart);
+        return x;
                // select BlApi.Tools.CopyFields(doProduct, new BO.ProductItem { IsInStock = (doProduct.InStock > 0), Amount = 0 }));
     }
 

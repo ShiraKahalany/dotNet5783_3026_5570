@@ -68,8 +68,8 @@ internal class Cart : ICart
         {
             throw new BO.NotExistException(ex.Message);
         }
-        if (cart.Items == null)
-            throw new BO.NotExistException();
+        //if (cart.Items == null)
+        //    throw new BO.NotExistException();
         var x = from item in cart.Items
                 where item != null
                 where !(item.ProductID == id && amount == 0)

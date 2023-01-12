@@ -34,7 +34,7 @@ public partial class ProductDetails : Page
         AmountOfProduct.ItemsSource = numArray;
         AmountOfProduct.SelectedItem = 1;
         products = prod;
-      //  BoProduct = PL.Tools.CopyProp<PO.ProductItemPO, BO.ProductItem>(PoProduct);
+       BoProduct = PL.Tools.CopyProp<PO.ProductItemPO, BO.ProductItem>(PoProduct);
     }
 
     private void AddTocart_Click(object sender, RoutedEventArgs e)
@@ -45,7 +45,9 @@ public partial class ProductDetails : Page
         double price = PoProduct.Price??0 ;
         try
         {
-            bl.Cart.AddProductToCart(bocart, id, amount);
+            if (PoProduct.Amount > 0)
+                bl.Cart.UpdateAmountOfProductInCart(bocart, id, amount);
+            else bl.Cart.AddProductToCart(bocart, id, amount);
         }
         catch(BO.NotExistException)
         {
