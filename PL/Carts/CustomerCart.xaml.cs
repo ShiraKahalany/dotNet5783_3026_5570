@@ -29,7 +29,7 @@ public partial class CustomerCart : Page
     public CustomerCart(BO.Cart cart,Frame frame)
     {
         InitializeComponent();
-        cartBo = cart;
+        cartBo= cart;
         cartPO = PL.Tools.CopyBOCartToPO(cartBo);
         //cartBo=cartPO.CopyPOCartToBO();
         CartItems.ItemsSource = cartPO.Items;
