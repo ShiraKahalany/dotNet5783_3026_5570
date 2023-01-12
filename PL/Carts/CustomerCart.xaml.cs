@@ -169,8 +169,9 @@ public partial class CustomerCart : Page
     }
     private void EmptyCart_Click(object sender, RoutedEventArgs e)
     {
-        Empty(cartBo);
-        
-        cartPO= cartBo.CopyBOCartToPO();
+        cartPO.Items.Clear();   
+        cartBo.Items.Clear();
+        cartBo.TotalPrice = 0;
+        cartPO.TotalPrice = 0;
     }
 }

@@ -33,6 +33,52 @@ public partial class OrderConfirmationPage : Page
 
     private void PlaceOrder_Click(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show("Purchase Seccessfully :)", "THANK YOU", MessageBoxButton.OK);
+        try
+        {
+            int id = bl.Cart.MakeAnOrder(BOcart);
+            MessageBox.Show("Purchase Seccessfully :) Your Order ID Is " + id, "THANK YOU", MessageBoxButton.OK);
+            BOcart.Items.Clear();
+            BOcart.TotalPrice = 0;
+            BOcart.CustomerName = null;
+            BOcart.CustomerAddress = null;
+            BOcart.CustomerEmail = null;
+        }
+        catch (BO.NotExistException)
+        {
+            MessageBox.Show("The Order Not Exist", "Not Exist");
+        }
+        catch (BO.NoNameException)
+        {
+            MessageBox.Show("Name Is Missing. Please Try Again", "No Name");
+        }
+        catch (BO.NoAddressException)
+        {
+            MessageBox.Show("Address Is Missing. Please Try Again", "No Name");
+        }
+        catch (BO.IllegalEmailException)
+        {
+            MessageBox.Show("Illegal Email Address. Please Try Again", "ERROR");
+        }
+        catch (BO.NotItemsInCartException)
+        {
+            MessageBox.Show("There Are No Items In The Cart. Please Start Shopping", "No Items");
+        }
+        catch (BO.NotInStockException ex)
+        {
+            MessageBox.Show(ex.Message, "Not In Stock");
+        }
+        catch (BO.AmountNotPossitiveException)
+        {
+            MessageBox.Show("Amount Not Positive. Please Try Again", "Illegal Amount");
+        }
+        catch (BO.AlreadyExistException)
+        {
+            MessageBox.Show("Already Exist!", "ERROR", MessageBoxButton.OK);
+        }
+
+        
+
+        //int id = bl.Cart.MakeAnOrder(BOcart);
+        //MessageBox.Show("Purchase Seccessfully :)", "THANK YOU", MessageBoxButton.OK);
     }
 }

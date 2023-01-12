@@ -39,15 +39,19 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="1" Grid.Column="1" x:Name="CartDetailsGrid" Visibility="{Binding Path=Items,Mode=OneWay, Converter={StaticResource isEmptyToVisibleConverter}}">
-                <Label Grid.Column="1"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="128*"/>
+                    <RowDefinition Height="69*"/>
+                </Grid.RowDefinitions>
+                <Label
                    Content="Total Price"
                    HorizontalAlignment="Center"
                    HorizontalContentAlignment="Center"
                    FontSize="20"
                    Margin="0,30,0,10"
-                    Foreground="Black" FontFamily="Segoe UI" />
+                    Foreground="Black" FontFamily="Segoe UI" Grid.RowSpan="2" />
 
-                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.RowSpan="2">
                     <TextBlock Grid.Column="1" Text="$ "
                        HorizontalAlignment="Center"
                    FontSize="30"
@@ -66,14 +70,14 @@
                 <Button
                     Name="EmptyCart"
                     Content="EMPTY CART"
-                    HorizontalAlignment="center"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Height="39" Width="106"
                     FontSize="10" 
                     HorizontalContentAlignment="Center"
                    
                     FontWeight="Bold"
-                    Foreground="black" Background="{x:Null}"  Margin="43,246,0,0" Click="EmptyCart_Click"/>
+                    Foreground="black" Background="{x:Null}"  Margin="68,246,0,0" Click="EmptyCart_Click" Grid.RowSpan="2"/>
                 <Button
                     Name="ContinueShopping"
                     Content="CONTINUE SHOPPING"
@@ -84,18 +88,18 @@
                     HorizontalContentAlignment="Center"
                    
                     FontWeight="Bold"
-                    Foreground="black" Background="{x:Null}" Click="ContinueShopping_Click" Margin="0,290,0,0"/>
+                    Foreground="black" Background="{x:Null}" Click="ContinueShopping_Click" Margin="0,34,0,0" Grid.Row="1"/>
                 <Button
                     Name="OrderConfirmation"
                     Content="CHECKOUT"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Height="37" Width="174"
-                    FontSize="18" Margin="0,334,0,0"
+                    FontSize="18" Margin="0,78,0,0"
                     HorizontalContentAlignment="Center"
                    
                     FontWeight="Bold"
-                    Foreground="black" Background="{x:Null}" Click="OrderConfirmation_Click"/>
+                    Foreground="black" Background="{x:Null}" Click="OrderConfirmation_Click" BorderBrush="#FF5EBE4A" Grid.Row="1"/>
             </Grid>
 
             <ListView x:Name="CartItems" Margin="0,10,0,-10"  Grid.Column="0"  HorizontalAlignment="Center" >
