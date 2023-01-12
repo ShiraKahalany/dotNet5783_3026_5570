@@ -118,7 +118,6 @@ public partial class CustomerCart : Page
             {
                 MessageBox.Show("Sorry!It Is Out Of Stock", "ERROR", MessageBoxButton.OK);
             }
-        item = cartPO.Items.FirstOrDefault(x => x.ID == item.ID);
             cartPO.TotalPrice = cartBo.TotalPrice;
 
             if (amount == 0)
@@ -161,5 +160,17 @@ public partial class CustomerCart : Page
         var b = (Button)sender;
         int amount = ((PO.OrderItemPO)b.DataContext)?.Amount ?? 0;
         UpdateAmount(sender, amount + 1);
+    }
+
+    private void Empty(BO.Cart cart)
+    {
+        cart.Items.Clear();
+        cart.TotalPrice = 0;
+    }
+    private void EmptyCart_Click(object sender, RoutedEventArgs e)
+    {
+        Empty(cartBo);
+        
+        cartPO= cartBo.CopyBOCartToPO();
     }
 }
