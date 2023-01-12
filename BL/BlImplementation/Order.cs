@@ -208,7 +208,8 @@ internal class Order : IOrder
                 Price = theItem?.Price ?? 0,
                 Amount = amount,
                 IsDeleted = false,
-                Path = theItem?.Path
+                Path = theItem?.Path,
+                TotalItem = (theItem?.Price ?? 0)*amount
             });
             return border;
         }

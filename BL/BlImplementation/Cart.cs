@@ -29,6 +29,7 @@ internal class Cart : ICart
             {
                 cart.Items.Remove(orderitem);
                 orderitem.Amount += amountToAdd;
+                orderitem.TotalItem = orderitem.Amount * orderitem.Price;
                 cart.TotalPrice = (cart.TotalPrice ?? 0) + (product?.Price * amountToAdd);
                 cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
                 cart.Items.Add(orderitem);
@@ -44,6 +45,7 @@ internal class Cart : ICart
             Price = product?.Price,
             IsDeleted = false,
             Amount = amountToAdd,
+            TotalItem =amountToAdd*product?.Price,
             Path = product?.Path
         };
         if (cart.Items == null)
@@ -79,9 +81,10 @@ internal class Cart : ICart
                     Price = item.Price,
                     Name = item.Name,
                     Path = item.Path,
-                    Amount = (item.ProductID == id) ? item.CheckAmount(amount) : item.Amount
+                    Amount = (item.ProductID == id) ? item.CheckAmount(amount) : item.Amount,
+                    TotalItem = ((item.ProductID == id) ? item.CheckAmount(amount) : item.Amount) * item.Price
                 };
-        cart.TotalPrice = Math.Round(x.Sum(item => (double)(item.Price * item.Amount)), 2);
+        cart.TotalPrice = Math.Round(x.Sum(item => (double)(item.Price * item.Amount)!), 2);
         return cart;
     }
 
@@ -113,7 +116,7 @@ internal class Cart : ICart
                 DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
                 if (item == null)
                     break;
-                if (product?.InStock <= item.Amount)
+                if (product?.InStock < item.Amount)
                     throw new BO.NotInStockException("The product " + item.ProductID + " is not in stock");
                 if (item.Amount <= 0)
                     throw new BO.AmountNotPossitiveException();

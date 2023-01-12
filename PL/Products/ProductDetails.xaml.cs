@@ -54,7 +54,7 @@ public partial class ProductDetails : Page
         {
             MessageBox.Show("Sorry!It Is Out Of Stock", "ERROR", MessageBoxButton.OK);
         }
-        pocart.Items.Add(new PO.OrderItemPO() { ProductID = id,Name= PoProduct.Name, Amount = amount, Price = price, IsDeleted=false, Path= PoProduct.Path});
+        pocart.Items.Add(new PO.OrderItemPO() { ProductID = id,Name= PoProduct.Name, Amount = amount, Price = price, IsDeleted=false, Path= PoProduct.Path,TotalItem=amount*price});
         pocart.TotalPrice += price * amount;
         //bl.Cart.AddProductToCart(cart,id, amount);
         MessageBox.Show("Add To Cart Seccessfully", "Add To Cart", MessageBoxButton.OK);

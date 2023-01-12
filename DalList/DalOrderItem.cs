@@ -69,7 +69,8 @@ public class DalOrderItem : IOrderItem
             Amount = temp?.Amount,
             OrderID = temp?.OrderID,
             Price = temp?.Price,
-            ProductID = temp?.ProductID
+            ProductID = temp?.ProductID,
+            TotalItem =(temp?.Price)*(temp?.Amount)
         };
         Add(orderItem);
     }

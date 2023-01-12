@@ -11,6 +11,7 @@ public struct OrderItem
     public double? Price { get; set; }  //מחיר המוצר
     public int? Amount { get; set; }  //כמות מהמוצר בהזמנה
     public string? Path { get; set; } //כתובת תמונה של המוצר
+    public double? TotalItem { get; set; }       //מחיר כולל של מוצר בהזמנה
 
     //תאור פריט כמחרוזת
     public override string ToString() { return Tools.ToStringProperty(this); }

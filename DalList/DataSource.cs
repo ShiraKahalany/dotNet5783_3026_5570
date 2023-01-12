@@ -218,6 +218,7 @@ internal class DataSource
             Order? order = Orders[j];
             for (int k=0; k < NumOfItemsToThisOrder; k++)
             {
+                int amount = rnd.Next(1, 5);
             OrderItems.Add(
                 new OrderItem
                 {
@@ -226,8 +227,10 @@ internal class DataSource
                     ProductID = product?.ID ?? 0,
                     OrderID = order?.ID ?? 0,
                     Price = product?.Price ?? 0,
-                    Amount = rnd.Next(1,5)
+                    Amount = amount,
+                    TotalItem =amount*(product?.Price ?? 0)
                 });
+
                 product = Products[rnd.Next(10)];
             }           
         }

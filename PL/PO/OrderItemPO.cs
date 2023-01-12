@@ -123,6 +123,23 @@ public class OrderItemPO : INotifyPropertyChanged
             }
         }
     }
+   
+
+    private double? totalItem;
+
+    public double? TotalItem
+    {
+        get
+        { return totalItem; }
+        set
+        {
+            totalItem = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("TotalItem"));
+            }
+        }
+    }
 
 
 }

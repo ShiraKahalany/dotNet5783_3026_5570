@@ -24,11 +24,12 @@ public partial class CustomerCart : Page
     private IBL bl = BLFactory.GetBL();
     PO.CartPO pocart;
     Frame myframe;
-    BO.Cart cartBo = new();
+    BO.Cart cartBo = new BO.Cart();
     public CustomerCart(PO.CartPO cartPO,Frame frame)
     {
         InitializeComponent();
         pocart = cartPO;
+        cartBo=cartPO.CopyPOCartToBO();
         CartItems.ItemsSource = cartPO.Items;
         CartItems.DataContext=cartPO.Items;
         totalPrice.DataContext=cartPO;
@@ -42,6 +43,7 @@ public partial class CustomerCart : Page
 
 
     }
+    
 
     private void delete_Click(object sender, RoutedEventArgs e)
     {
@@ -72,7 +74,7 @@ public partial class CustomerCart : Page
 
     private void OrderConfirmation_Click(object sender, RoutedEventArgs e)
     {
-        myframe.Content = new OrderConfirmationPage();
+        myframe.Content = new OrderConfirmationPage(cartBo);
     }
 
     private void ContinueShopping_Click(object sender, RoutedEventArgs e)
@@ -132,7 +134,7 @@ public partial class CustomerCart : Page
         }
     }
 
-    private void cmdDown_Click(object sender, RoutedEventArgs e)
+    private void CountDown_Click(object sender, RoutedEventArgs e)
     {
         var b = (Button)sender;
         int amount = ((PO.OrderItemPO)b.DataContext)?.Amount ?? 0;
@@ -150,7 +152,7 @@ public partial class CustomerCart : Page
         UpdateAmount(sender, amount, true);
     }
 
-    private void cmdUp_Click(object sender, RoutedEventArgs e)
+    private void CountUp_Click(object sender, RoutedEventArgs e)
     {
         var b = (Button)sender;
         int amount = ((PO.OrderItemPO)b.DataContext)?.Amount ?? 0;

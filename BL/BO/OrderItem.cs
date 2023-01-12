@@ -16,5 +16,6 @@ public class OrderItem
     public double? Price { get; set; }       //מחיר המוצר
     public int? Amount { get; set; }       //כמות המוצר בהזמנה
     public string? Path { get; set; } //כתובת תמונה של המוצר
+    public double? TotalItem { get; set; }       //מחיר כולל של מוצר בהזמנה
     public override string ToString() => this.ToStringProperty();       //הפיכה למחרוזת
 }

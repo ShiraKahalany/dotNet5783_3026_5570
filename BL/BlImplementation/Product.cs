@@ -1,4 +1,6 @@
 ﻿using BlApi;
+using System.Net.Http.Headers;
+
 namespace BlImplementation;
 
 
@@ -93,8 +95,12 @@ internal class Product : IProduct
             if (id > 0)
             {
                 DO.Product? pro = dal.Product.GetTByFilter((DO.Product? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().ID == id));
-                if (cart.Items == null)
-                    throw new BO.NotExistException("There Are No Items In The Cart");
+                if (cart==null || cart.Items == null)
+                {
+                    BO.ProductItem p =new BO.ProductItem { Amount = 0, IsInStock = (pro?.InStock > 0) };
+                    return pro.CopyFields(p);
+                }
+                // new BO.NotExistException("There Are No Items In The Cart");
                 var LIST = (IEnumerable<BO.OrderItem>)cart.Items;
                 int counter = LIST.Sum((BO.OrderItem item) => item.Amount ?? 0);
                 BO.ProductItem prod = new BO.ProductItem

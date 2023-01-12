@@ -436,3 +436,4 @@ public class TimeToColorConverter : IValueConverter
         return DateTime.Now;
     }
 }
+
