@@ -73,7 +73,7 @@
                     HorizontalContentAlignment="Center"
                    
                     FontWeight="Bold"
-                    Foreground="black" Background="{x:Null}"  Margin="43,246,0,0" Click="EmptyCart_Click"/>
+                    Foreground="Black" Background="{x:Null}"  Margin="43,246,0,0" Click="EmptyCart_Click" BorderBrush="#FFBC1C1C"/>
                 <Button
                     Name="ContinueShopping"
                     Content="CONTINUE SHOPPING"
