@@ -84,6 +84,7 @@ public partial class CustomerCart : Page
         myframe.Content = new Products.CatalogPage("all", myframe, cartBo);
     }
 
+
     private void UpdateAmount(object sender, int amount, bool isTextBox = false)
     {
         try
