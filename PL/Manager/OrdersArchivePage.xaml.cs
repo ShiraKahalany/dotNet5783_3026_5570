@@ -73,8 +73,16 @@ namespace PL.Manager
 
         private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
+            //new Orders.DeletedOrder((PO.ProductPO)ProductListView.SelectedItem, observeproducts).ShowDialog();
+            //BOproducts = bl.Product.GetProducts(BO.Filters.filterByIsDeleted);
+            //observeproducts.Clear();
+            //observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
+
         }
 
+        private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

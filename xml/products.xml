@@ -25,7 +25,7 @@
     <Price>55</Price>
     <InStock>100</InStock>
     <IsDeleted>true</IsDeleted>
-    <Path>file:///C:/Users/danie/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/green-sofa-white-living-room-with-free-space.jpg</Path>
+    <Path>/green-sofa-white-living-room-with-free-space.jpg</Path>
   </Product>
   <Product>
     <ID>100004</ID>
@@ -34,7 +34,7 @@
     <Price>5</Price>
     <InStock>90</InStock>
     <IsDeleted>true</IsDeleted>
-    <Path>file:///C:/Users/danie/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/kitchen.jpg</Path>
+    <Path>/kitchen.jpg</Path>
   </Product>
   <Product>
     <ID>100005</ID>
@@ -43,7 +43,7 @@
     <Price>40</Price>
     <InStock>2</InStock>
     <IsDeleted>true</IsDeleted>
-    <Path>file:///C:/Users/danie/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/living room.jpg</Path>
+    <Path>/living room.jpg</Path>
   </Product>
   <Product>
     <ID>100006</ID>
@@ -61,7 +61,7 @@
     <Price>20000</Price>
     <InStock>20</InStock>
     <IsDeleted>true</IsDeleted>
-    <Path>file:///C:/Users/danie/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/Updated background.jpg</Path>
+    <Path>/background.jpg</Path>
   </Product>
   <Product>
     <ID>134689</ID>
