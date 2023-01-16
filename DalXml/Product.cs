@@ -67,7 +67,7 @@ internal class Product : IProduct
     {
         XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
         (productsRootElem.Elements()
-            .FirstOrDefault(st => (int?)st.Element("ID") == doProduct.ID && st.ToBoolNullable("IsDeleted") == true)
+            .FirstOrDefault(st => (int?)st.Element("ID") == doProduct.ID && st.ToBoolNullable("IsDeleted") == false)
             ?? throw new DO.NotExistException()).Remove();
         Add(doProduct);
     }
