@@ -36,7 +36,8 @@ namespace PL.Products
             
             try
             {
-                bl.Product.AddProduct(newproduct);
+                int id = bl.Product.AddProduct(newproduct);
+                newproduct.ID = id; 
                 MessageBox.Show("Seccessfully", "Add Product", MessageBoxButton.OK);
 
                 observeproducts.Add(PL.Tools.CopyProp<BO.Product, PO.ProductPO>(newproduct));
