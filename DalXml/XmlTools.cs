@@ -28,8 +28,6 @@ static class XMLTools
 
     public static int? ToIntNullable(this XElement element, string name) =>
         int.TryParse((string)element.Element(name), out var result) ? (int)result : default;
-    public static bool? ToBoolNullable(this XElement element, string name) =>
-       bool.TryParse((string)element.Element(name), out var result) ? (bool)result : default;
     #endregion
 
     #region SaveLoadWithXElement

@@ -55,7 +55,7 @@ internal class Product : IProduct
     {
         XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
         XElement product = productsRootElem.Elements().FirstOrDefault(st => (int?)st.Element("ID") == id) ??throw new DO.NotExistException();
-       if(product.ToBoolNullable("IsDeleted") ==true)
+       if((bool)product.Element("IsDeleted")! ==true)
             throw new DO.NotExistException();
         //product.Remove();
         product.SetElementValue("IsDeleted", true);
@@ -67,15 +67,17 @@ internal class Product : IProduct
     {
         XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
         (productsRootElem.Elements()
-            .FirstOrDefault(st => (int?)st.Element("ID") == doProduct.ID && st.ToBoolNullable("IsDeleted") == false)
+            .FirstOrDefault(st => (int?)st.Element("ID") == doProduct.ID && (bool)st.Element("IsDeleted")! == false)
             ?? throw new DO.NotExistException()).Remove();
-        Add(doProduct);
-    }
+        productsRootElem.Add(new XElement("Product", createStudentElement(doProduct)));
+        XMLTools.SaveListToXMLElement(productsRootElem, s_products);
+    } 
 
     public void DeletePermanently(int id)
     {
         XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
         (productsRootElem.Elements().FirstOrDefault(st => (int?)st.Element("ID") == id) ?? throw new DO.NotExistException()).Remove();
+        XMLTools.SaveListToXMLElement(productsRootElem, s_products);
     }
 
     public void Restore(DO.Product item)

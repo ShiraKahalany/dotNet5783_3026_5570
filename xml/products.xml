@@ -1,24 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <products>
   <Product>
-    <ID>123456</ID>
-    <Name>sofa</Name>
-    <Category>Living_Room</Category>
-    <Price>89</Price>
-    <InStock>7</InStock>
-    <IsDeleted>false</IsDeleted>
-    <Path>/bed room.jpg</Path>
-  </Product>
-  <Product>
-    <ID>134689</ID>
-    <Name>halel</Name>
-    <Category>Kitchen</Category>
-    <Price>100000000000</Price>
-    <InStock>23</InStock>
-    <IsDeleted>true</IsDeleted>
-    <Path>/Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg</Path>
-  </Product>
-  <Product>
     <ID>100001</ID>
     <Name>bed</Name>
     <Category>Bedroom</Category>
@@ -82,47 +64,20 @@
     <Path>file:///C:/Users/danie/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/Updated background.jpg</Path>
   </Product>
   <Product>
-    <ID>100008</ID>
-    <Name>danuel</Name>
-    <Category>Garden</Category>
-    <Price>4000</Price>
-    <InStock>33</InStock>
-    <IsDeleted>true</IsDeleted>
-    <Path>file:///C:/Users/danie/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/green-sofa-white-living-room-with-free-space.jpg</Path>
-  </Product>
-  <Product>
-    <ID>100009</ID>
-    <Name>shira</Name>
-    <Category>Kitchen</Category>
-    <Price>60</Price>
-    <InStock>55</InStock>
+    <ID>134689</ID>
+    <Name>halel</Name>
+    <Category>Living_room</Category>
+    <Price>100000000000</Price>
+    <InStock>23</InStock>
     <IsDeleted>false</IsDeleted>
     <Path />
   </Product>
   <Product>
-    <ID>100012</ID>
-    <Name>yishay</Name>
-    <Category>Living_room</Category>
+    <ID>123456</ID>
+    <Name>sofa</Name>
+    <Category>Garden</Category>
     <Price>89</Price>
     <InStock>7</InStock>
-    <IsDeleted>false</IsDeleted>
-    <Path />
-  </Product>
-  <Product>
-    <ID>100013</ID>
-    <Name>daniel</Name>
-    <Category>Kitchen</Category>
-    <Price>44</Price>
-    <InStock>66</InStock>
-    <IsDeleted>false</IsDeleted>
-    <Path />
-  </Product>
-  <Product>
-    <ID>100014</ID>
-    <Name>daniel</Name>
-    <Category>Kitchen</Category>
-    <Price>440</Price>
-    <InStock>66</InStock>
     <IsDeleted>false</IsDeleted>
     <Path />
   </Product>
