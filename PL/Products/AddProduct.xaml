@@ -52,7 +52,7 @@
                VerticalAlignment="Top" 
                Height="50" Width="244" 
                FontSize="30" FontFamily="Baskerville Old Face"/>
-        <Button Content="Add"   HorizontalAlignment="Left" Margin="377,345,0,0" VerticalAlignment="Top" Height="27" Width="63" RenderTransformOrigin="1.111,1.387" Click="Button_Click" Background="{x:Null}" BorderBrush="#FFD18888"/>
+        <Button Content="Add"   HorizontalAlignment="Left" Margin="160,345,0,0" VerticalAlignment="Top" Height="27" Width="63" RenderTransformOrigin="1.111,1.387" Click="Button_Click" Background="{x:Null}" BorderBrush="#FFD18888"/>
         <Image HorizontalAlignment="Left" Height="47" Margin="282,16,0,0" VerticalAlignment="Top" Width="99" Source="/Products/download.png" RenderTransformOrigin="1.231,0.428"/>
 
     </Grid>

@@ -55,14 +55,15 @@ namespace PL.Manager
             try
             {
                 bl.Order.Restore(POor.ID);
+                ob.Remove(POor);
+                MessageBox.Show("Seccessfully Restored", "Restore Order", MessageBoxButton.OK);
+                observeproductsToSave.Add(POor);
             }
             catch(BO.NotExistException)
             {
                 MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
             }
-            ob.Remove(POor);
-            MessageBox.Show("Seccessfully Restored", "Restore Order", MessageBoxButton.OK);
-            observeproductsToSave.Add(POor);
+           
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)

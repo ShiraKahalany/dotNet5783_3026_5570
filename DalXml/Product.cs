@@ -86,13 +86,14 @@ internal class Product : IProduct
     public void Restore(DO.Product item)
     {
         XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
-        XElement product = productsRootElem.Elements().FirstOrDefault(st => (int?)st.Element("ID") == item.ID && (bool)st.Element("IsDeleted") == false)
-            ?? throw new DO.NotExistException();
+        if(productsRootElem.Elements().FirstOrDefault(st => (int?)st.Element("ID") == item.ID && (bool)st.Element("IsDeleted") == false) != null)
+            throw new DO.NotExistException();
+        XElement product = productsRootElem.Elements().FirstOrDefault(st => (int?)st.Element("ID") == item.ID && (bool)st.Element("IsDeleted") == true);
         //if (product.ToBoolNullable("IsDeleted") == false)
         //    throw new DO.NotExistException();
         //DeletePermanently(item.ID);
         product.SetElementValue("IsDeleted", false);
-        //Add(item);
+        XMLTools.SaveListToXMLElement(productsRootElem, s_products);
     }
 
     public DO.Product? GetTByFilter(Func<DO.Product?, bool> filter)

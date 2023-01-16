@@ -50,15 +50,16 @@ namespace PL.Products
             try
             {
                 bl.Product.Restore(restorepro.ID);
+                observeproducts.Remove(restorepro);
+                MessageBox.Show("Seccessfully Restored", "Restore Product", MessageBoxButton.OK);
+                //observeproductsToSave.Add(restorepro);
             }
             catch (BO.NotExistException)
             {
                 MessageBox.Show("Product Not Exist", "Not Exist Product", MessageBoxButton.OK);
 
             }
-            observeproducts.Remove(restorepro);
-            MessageBox.Show("Seccessfully Restored", "Restore Product", MessageBoxButton.OK);
-            //observeproductsToSave.Add(restorepro);
+            
         }
     }
 }

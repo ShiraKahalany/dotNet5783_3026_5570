@@ -51,25 +51,22 @@ namespace PL.Products
             try
             {
                 bl.Product.UpdateProduct(newproduct);
+                poProduct.ID = id;
+                poProduct.Name = name;
+                poProduct.Price = price;
+                poProduct.InStock = amount;
+                poProduct.Category = category;
+                MessageBox.Show("Seccessfully", "UPDATE PRODUCT", MessageBoxButton.OK);
+                Close();
             }
             catch(BO.NotExistException)
             {
                 MessageBox.Show("The Product Does Not Exist", "ERROR", MessageBoxButton.OK);
             }
-                poProduct.ID = id;
-            poProduct.Name = name;  
-            poProduct.Price = price;
-            poProduct.InStock = amount;
-            poProduct.Category = category;
-            MessageBox.Show("Seccessfully", "UPDATE PRODUCT", MessageBoxButton.OK);
-            Close();
+
         }
 
         private void SelectCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-        private void InserId_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

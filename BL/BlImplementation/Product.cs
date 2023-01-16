@@ -126,14 +126,14 @@ internal class Product : IProduct
             throw new BO.NotExistException(ex.Message);
         }
     }
-    public void AddProduct(BO.Product product)
+    public int AddProduct(BO.Product product)
     //הוספת מוצר עבור מנהל
     {
         try
         {
             if ((product.Name != null) && (product.Price > 0) && (product.InStock >= 0))
             {
-                dal.Product.Add((DO.Product)Tools.CopyPropToStruct(product, typeof(DO.Product)));
+                return dal.Product.Add((DO.Product)Tools.CopyPropToStruct(product, typeof(DO.Product)));
             }
             else
                 throw new BO.WrongDetailsException();
