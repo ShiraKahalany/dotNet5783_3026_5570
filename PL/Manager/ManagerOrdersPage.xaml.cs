@@ -121,6 +121,7 @@ public partial class ManagerOrdersPage : Page
         try
         {
             bl.Order.CancelOrder(id);
+            ob.Remove(po);
         }
         catch(BO.CanNotUpdateOrderException)
         {
@@ -135,7 +136,7 @@ public partial class ManagerOrdersPage : Page
         {
             MessageBox.Show("The Order Does Not Exist", "ERROR");
         }
-        ob.Remove(po);
+        
     }
 
     private void ShowDeletedOrders_Click(object sender, RoutedEventArgs e)

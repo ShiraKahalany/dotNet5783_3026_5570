@@ -6,7 +6,7 @@
     <Category>Living_Room</Category>
     <Price>89</Price>
     <InStock>7</InStock>
-    <IsDeleted>true</IsDeleted>
+    <IsDeleted>false</IsDeleted>
     <Path>/bed room.jpg</Path>
   </Product>
   <Product>
@@ -84,10 +84,46 @@
   <Product>
     <ID>100008</ID>
     <Name>danuel</Name>
-    <Category>Garden</Category>   
+    <Category>Garden</Category>
     <Price>4000</Price>
     <InStock>33</InStock>
     <IsDeleted>true</IsDeleted>
     <Path>file:///C:/Users/danie/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/green-sofa-white-living-room-with-free-space.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100009</ID>
+    <Name>shira</Name>
+    <Category>Kitchen</Category>
+    <Price>60</Price>
+    <InStock>55</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path />
+  </Product>
+  <Product>
+    <ID>100012</ID>
+    <Name>yishay</Name>
+    <Category>Living_room</Category>
+    <Price>89</Price>
+    <InStock>7</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path />
+  </Product>
+  <Product>
+    <ID>100013</ID>
+    <Name>daniel</Name>
+    <Category>Kitchen</Category>
+    <Price>44</Price>
+    <InStock>66</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path />
+  </Product>
+  <Product>
+    <ID>100014</ID>
+    <Name>daniel</Name>
+    <Category>Kitchen</Category>
+    <Price>440</Price>
+    <InStock>66</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path />
   </Product>
 </products>

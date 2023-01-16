@@ -47,6 +47,20 @@ public partial class ProductDetails : Page
             if (PoProduct.Amount > 0)
                 bl.Cart.UpdateAmountOfProductInCart(bocart, id, amount);
             else bl.Cart.AddProductToCart(bocart, id, amount);
+
+            //bocart.Items.Add(new PO.OrderItemPO() { ProductID = id,Name= PoProduct.Name, Amount = amount, Price = price, IsDeleted=false, Path= PoProduct.Path});
+            //pocart.TotalPrice += price * amount;
+            //bl.Cart.AddProductToCart(cart,id, amount);
+            MessageBox.Show("Add To Cart Seccessfully", "Add To Cart", MessageBoxButton.OK);
+            products.Remove(PoProduct);
+            PoProduct.Amount = amount;
+            products.Add(PoProduct);
+            BOproducts.ToList().Remove(BoProduct);
+            BoProduct = PoProduct.CopyFields(BoProduct);
+            BoProduct.Amount = amount;
+            BOproducts.ToList().Add(BoProduct);
+            //DataContext = PoProduct;
+            //this.NavigationService.GoBack();
         }
         catch (BO.NotExistException)
         {
@@ -56,19 +70,7 @@ public partial class ProductDetails : Page
         {
             MessageBox.Show("Sorry! It Is Out Of Stock", "ERROR", MessageBoxButton.OK);
         }
-        //bocart.Items.Add(new PO.OrderItemPO() { ProductID = id,Name= PoProduct.Name, Amount = amount, Price = price, IsDeleted=false, Path= PoProduct.Path});
-        //pocart.TotalPrice += price * amount;
-        //bl.Cart.AddProductToCart(cart,id, amount);
-        MessageBox.Show("Add To Cart Seccessfully", "Add To Cart", MessageBoxButton.OK);
-        products.Remove(PoProduct);
-        PoProduct.Amount = amount;
-        products.Add(PoProduct);
-        BOproducts.ToList().Remove(BoProduct);
-        BoProduct = PoProduct.CopyFields(BoProduct);
-        BoProduct.Amount = amount;
-        BOproducts.ToList().Add(BoProduct);
-        //DataContext = PoProduct;
-        //this.NavigationService.GoBack();
+        
     }
     private void back_click(object sender, RoutedEventArgs e)
     {
