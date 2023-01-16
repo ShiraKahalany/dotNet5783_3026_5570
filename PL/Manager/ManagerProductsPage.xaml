@@ -35,13 +35,11 @@
         <Button 
                 x:Name="ShowDeletedProducts" 
                 Grid.Row="0"
-                
-                 
                 Foreground="Black"
                 FontWeight="Bold"
                 FontSize="16"
                 BorderBrush="{x:Null}" 
-                Background="{x:Null}" Margin="685,16,53,8"
+                Background="{x:Null}" Margin="685,16,53,8" Click="ShowDeletedProducts_Click"
                  >
             <materialDesign:PackIcon Kind="History" 
                                          Foreground="Black"

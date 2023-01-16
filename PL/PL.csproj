@@ -18,6 +18,9 @@
     <None Remove="bed room.jpg" />
     <None Remove="Carts\delete.png" />
     <None Remove="Carts\emptyCart.png" />
+    <None Remove="Carts\orderSuccess.jpg" />
+    <None Remove="Carts\vi.jpg" />
+    <None Remove="Carts\vii.png" />
     <None Remove="garden.jpg" />
     <None Remove="Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" />
     <None Remove="green-sofa-white-living-room-with-free-space.jpg" />
@@ -67,6 +70,9 @@
     <Resource Include="bed room.jpg" />
     <Resource Include="Carts\delete.png" />
     <Resource Include="Carts\emptyCart.png" />
+    <Resource Include="Carts\orderSuccess.jpg" />
+    <Resource Include="Carts\vi.jpg" />
+    <Resource Include="Carts\vii.png" />
     <Resource Include="garden.jpg" />
     <Resource Include="Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" />
     <Resource Include="green-sofa-white-living-room-with-free-space.jpg" />

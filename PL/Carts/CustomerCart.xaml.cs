@@ -76,7 +76,7 @@ public partial class CustomerCart : Page
 
     private void OrderConfirmation_Click(object sender, RoutedEventArgs e)
     {
-        myframe.Content = new OrderConfirmationPage(cartBo);
+        myframe.Content = new OrderConfirmationPage(cartBo, myframe);
     }
 
     private void ContinueShopping_Click(object sender, RoutedEventArgs e)

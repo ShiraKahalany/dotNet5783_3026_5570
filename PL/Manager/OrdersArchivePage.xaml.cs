@@ -72,7 +72,8 @@ namespace PL.Manager
 
         private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            
         }
+
     }
 }

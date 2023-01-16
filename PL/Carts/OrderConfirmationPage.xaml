@@ -32,6 +32,9 @@
                Margin="191,96,0,0" 
                VerticalAlignment="Top" RenderTransformOrigin="-0.194,0.854" FontFamily="Bahnschrift SemiLight"/>
         <TextBox x:Name="costumerNameTextBox"  
+                                                   materialDesign:HintAssist.Foreground="Black"
+                                  materialDesign:TextFieldAssist.UnderlineBrush="Black"
+                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                    HorizontalAlignment="Left"
                    FontSize="16" 
                    Height="25" 
@@ -46,6 +49,9 @@
                Margin="185,142,0,0" 
                VerticalAlignment="Top" RenderTransformOrigin="-0.194,0.854"/>
         <TextBox x:Name="costumerAddressTextBox"  
+                                                   materialDesign:HintAssist.Foreground="Black"
+                                  materialDesign:TextFieldAssist.UnderlineBrush="Black"
+                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                    HorizontalAlignment="Left"
                    FontSize="16" 
                    Height="25" 
@@ -79,6 +85,27 @@
                     FontWeight="Bold"
                     Foreground="black" Background="{x:Null}"  Margin="292,319,0,0" Click="PlaceOrder_Click"/>
         <Grid Background="AliceBlue" Margin="582,63,35,141"/>
-       
+        <Grid Background="White" Name="OrderSuccessGrid"  Margin="49,28,35,23">
+            <StackPanel Orientation="Vertical" Width="450" Margin="133,206,133,85">
+                <StackPanel Orientation="Horizontal" Width="250" Height="30" HorizontalAlignment="Center">
+                    <TextBlock Height="30" VerticalAlignment="Top" Text="Your order ID is:  " FontSize="18" FontFamily="Segoe UI Light"/>
+                    <TextBlock Name="OrderId" Text="{Binding}" Width="100" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Light"/>
+                </StackPanel>
+                <TextBlock Text="Save it for tracking" Height="30" TextAlignment="Center" FontSize="18" FontFamily="Yu Gothic UI Light"/>
+                <TextBlock Text="Thank you for buying!" Margin="0,10,0,0" TextAlignment="Center" FontWeight="Bold" FontSize="29" FontFamily="Bradley Hand ITC" Foreground="#FF4A6843"/>
+            </StackPanel>
+            <Button Name="ContinueShopping"
+                    Content="CONTINUE SHOPPING"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,10,10"
+                    Height="39" Width="174"
+                    FontSize="10" 
+                    HorizontalContentAlignment="Center"
+                    FontWeight="Bold"
+                    Foreground="black" Background="{x:Null}" Click="ContinueShopping_Click"/>
+            <Image HorizontalAlignment="Center" Height="131" Margin="0,55,0,0" VerticalAlignment="Top" Width="134" Source="/Carts/vii.png"/>
+        </Grid>
+
     </Grid>
 </Page>

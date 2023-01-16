@@ -27,6 +27,10 @@ internal class DataSource
         private static int s_nextOrderItemNumber = s_startOrderItemNumber;
         internal static int NextOrderItemNumber { get => ++s_nextOrderItemNumber; }
 
+        internal const int s_startProductNumber = 100000;
+        private static int s_nextProductNumber = s_startProductNumber;
+        internal static int NextProductNumber { get => ++s_nextProductNumber; }
+
     }
     private void s_Initialize()
         // יצירת מופע נתונים
@@ -84,7 +88,7 @@ internal class DataSource
         new Product
         {
             IsDeleted = false,
-            ID = 175894,
+            ID = Config.NextProductNumber,
             Name = "Kitchen rug",
             Price = 60,
             Category = Category.Kitchen,
@@ -96,7 +100,7 @@ internal class DataSource
         new Product
         {
             IsDeleted = false,
-            ID = 576346,
+            ID = Config.NextProductNumber,
             Name = "Black Soft Luxury Bath Rug",
             Price = 40,
             Category = Category.Bathroom,
@@ -107,7 +111,7 @@ internal class DataSource
         new Product
         {
             IsDeleted = false,
-            ID = 864357,
+            ID = Config.NextProductNumber,
             Name = "Astoria Stoneware Holder",
             Price = 29,
             Category = Category.Kitchen,
@@ -118,7 +122,7 @@ internal class DataSource
         new Product
         {
             IsDeleted = false,
-            ID = 853267,
+            ID = Config.NextProductNumber,
             Name = "White Bunk Bed With Stairs and Slide",
             Price = 1999,
             Category = Category.Bedroom,
@@ -131,7 +135,7 @@ internal class DataSource
         new Product
         {
             IsDeleted = false,
-            ID = 923654,
+            ID = Config.NextProductNumber,
             Name = "White Fluted Ceramic Indoor-outdoor-windowsill Planter",
             Price = 99,
             Category = Category.Garden,
@@ -143,7 +147,7 @@ internal class DataSource
         new Product
         {
             IsDeleted = false,
-            ID = 856245,
+            ID = Config.NextProductNumber,
             Name = "3-Pieces Green Sofa",
             Price = 3347,
             Category = Category.Living_room,
@@ -155,7 +159,7 @@ internal class DataSource
         new Product
         {
             IsDeleted = false,
-            ID = 235765,
+            ID = Config.NextProductNumber,
             Name = "Mid-Century Heathered Wool Rug 8'x 10'",
             Price = 539.10,
             Category = Category.Living_room,
@@ -167,7 +171,7 @@ internal class DataSource
         new Product
         {
             IsDeleted = false,
-            ID = 834675,
+            ID = Config.NextProductNumber,
             Name = "Thin-Wood-floor Mirror 30W x 72H",
             Price = 279.99,
             Category = Category.Bedroom,
@@ -178,7 +182,7 @@ internal class DataSource
         new Product
         {
             IsDeleted = false,
-            ID = 235676,
+            ID = Config.NextProductNumber,
             Name = "Round Outdoor Market Umbrella",
             Price = 503.10,
             Category = Category.Garden,
@@ -189,7 +193,7 @@ internal class DataSource
         new Product
         {
             IsDeleted = false,
-            ID = 153217,
+            ID = Config.NextProductNumber,
             Name = "Dark-Bronze Mid-Century-Contour-Bathroom Towel Hook",
             Price = 35,
             Category = Category.Bathroom,
@@ -201,7 +205,7 @@ internal class DataSource
         new Product
         {
             IsDeleted = false,
-            ID = 135677,
+            ID = Config.NextProductNumber,
             Name = "3-piece dark gray sofa",
             Price = 2398.40,
             Category = Category.Living_room,
