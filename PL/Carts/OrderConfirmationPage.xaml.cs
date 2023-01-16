@@ -23,12 +23,15 @@ public partial class OrderConfirmationPage : Page
 {
     private BO.Cart BOcart;
     private IBL bl = BLFactory.GetBL();
+    Frame myframe;
 
-    public OrderConfirmationPage(BO.Cart cart)
+    public OrderConfirmationPage(BO.Cart cart, Frame frame)
     {
         InitializeComponent();
-        BOcart= cart;
-        DataContext= BOcart;
+        OrderSuccessGrid.Visibility = Visibility.Hidden;
+        BOcart = cart;
+        DataContext = BOcart;
+        myframe = frame;
     }
 
     private void PlaceOrder_Click(object sender, RoutedEventArgs e)
@@ -36,12 +39,14 @@ public partial class OrderConfirmationPage : Page
         try
         {
             int id = bl.Cart.MakeAnOrder(BOcart);
-            MessageBox.Show("Purchase Seccessfully :) Your Order ID Is " + id, "THANK YOU", MessageBoxButton.OK);
+            OrderId.DataContext = id;
+            //MessageBox.Show("Purchase Seccessfully :) Your Order ID Is " + id, "THANK YOU", MessageBoxButton.OK);
             BOcart.Items.Clear();
             BOcart.TotalPrice = 0;
             BOcart.CustomerName = null;
             BOcart.CustomerAddress = null;
             BOcart.CustomerEmail = null;
+            OrderSuccessGrid.Visibility = Visibility.Visible;
         }
         catch (BO.NotExistException)
         {
@@ -80,5 +85,10 @@ public partial class OrderConfirmationPage : Page
 
         //int id = bl.Cart.MakeAnOrder(BOcart);
         //MessageBox.Show("Purchase Seccessfully :)", "THANK YOU", MessageBoxButton.OK);
+    }
+
+    private void ContinueShopping_Click(object sender, RoutedEventArgs e)
+    {
+        myframe.Content = new Products.CatalogPage("all", myframe, BOcart);
     }
 }

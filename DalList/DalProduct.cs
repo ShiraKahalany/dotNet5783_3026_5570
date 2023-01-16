@@ -11,19 +11,13 @@ public class DalProduct : IProduct
   public int Add(Product item)
         //מתחודה שמקבלת מוצר ומוסיפה אותו אל רשימת כל המוצרים
     {
-        if (dataSource.Products.Find(x => x?.ID == item.ID) != null)
-            throw new DO.AlreadyExistException("This number is in use");
-        if(item.ID >= 100000) // בדיקת תקינות המספר המזהה
+
+        if (item.ID >= 100000 && dataSource.Orders.Find(x => x?.ID == item.ID) == null)
         {
             dataSource.Products.Add(item);
             return item.ID;
         }
-
-        Random rand = new Random();
-        int newID = 0;
-        do newID = rand.Next(100000, 999999);
-        while (dataSource.Products.Find(x => x?.ID == newID)!=null);
-        item.ID=newID;
+        item.ID = DataSource.Config.NextProductNumber;
         dataSource.Products.Add(item);
         return item.ID;
     }

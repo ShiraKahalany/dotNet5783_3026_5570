@@ -50,7 +50,7 @@ public partial class ManagerProductsPage : Page
     private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         new ProductUpdateAndActions((PO.ProductPO)ProductListView.SelectedItem, observeproducts).ShowDialog();
-        if ((AttributeSelector.SelectedItem!=null) && (BO.Category)AttributeSelector.SelectedItem != BO.Category.All)
+        if ((AttributeSelector.SelectedItem != null) && (BO.Category)AttributeSelector.SelectedItem != BO.Category.All)
         {
             BOproducts = bl.Product.GetProducts(BO.Filters.filterByCategory, (BO.Category)AttributeSelector.SelectedItem).ToList();
             observeproducts.Clear();
@@ -62,24 +62,29 @@ public partial class ManagerProductsPage : Page
     {
         PO.ProductPO po = ((Button)(sender)).DataContext as PO.ProductPO;
         int id = po?.ID ?? 0;
+        bool isDelete = true;
         try
         {
             bl.Product.DeleteProduct(id);
         }
         catch(BO.NotExistException)
         {
+            isDelete = false;
             MessageBox.Show("The Product Does Not Exist", "Delete Product", MessageBoxButton.OK);
         }
         catch(BO.InAnOrderException)
         {
+            isDelete=false;
             MessageBox.Show("The Product Is In An Order", "Can Not Delete Product", MessageBoxButton.OK);
         }
-        observeproducts.Remove(po);
+        if(isDelete)
+            observeproducts.Remove(po);
     }
 
     private void ShowDeletedProducts_Click(object sender, RoutedEventArgs e)
     {
         myframe.Content = new Manager.ProductsArchivePage(observeproducts);
     }
+
 }
 

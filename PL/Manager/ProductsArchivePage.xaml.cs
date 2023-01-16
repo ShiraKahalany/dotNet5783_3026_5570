@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using PL.Products;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -46,5 +47,13 @@ public partial class ProductsArchivePage : Page
     private void GoBack_Click(object sender, RoutedEventArgs e)
     {
         NavigationService.GoBack();
+    }
+
+    private void ShowDeletedProduct(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        new Products.DeletedProduct((PO.ProductPO)ProductListView.SelectedItem, observeproducts).ShowDialog();
+            BOproducts = bl.Product.GetProducts(BO.Filters.filterByIsDeleted);
+            observeproducts.Clear();
+            observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
     }
 }
