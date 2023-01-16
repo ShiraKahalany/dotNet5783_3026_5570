@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 namespace PL.Products
 {
@@ -28,6 +29,8 @@ namespace PL.Products
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string name = InsertName.Text;
+            //if(name==null|| name.Length==0)
+            //    throw 
            // int id = int.Parse(InserId.Text);
             double price = double.Parse(InsertPrice.Text);
             int amount = int.Parse(InsertAmount.Text);
@@ -68,6 +71,9 @@ namespace PL.Products
                 path = (ProductImage.Source).ToString();
             }
         }
+
+        private void OnlyNumbers(object sender, KeyEventArgs e) => Tools.EnterNumbersOnly(sender, e);
+
 
     }
 }

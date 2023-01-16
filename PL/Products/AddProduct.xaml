@@ -24,8 +24,8 @@
         </StackPanel>
 
         <TextBox Name="InsertName" HorizontalAlignment="Left" Margin="203,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" Height="27" />
-        <TextBox Name="InsertPrice" HorizontalAlignment="Left" Margin="203,146,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" Height="27"/>
-        <TextBox Name="InsertAmount" HorizontalAlignment="Left" Margin="203,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="40" Height="27" RenderTransformOrigin="2.818,0.141"/>
+        <TextBox KeyDown="OnlyNumbers" Name="InsertPrice" HorizontalAlignment="Left" Margin="203,146,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" Height="27"/>
+        <TextBox KeyDown="OnlyNumbers" Name="InsertAmount" HorizontalAlignment="Left" Margin="203,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="40" Height="27" RenderTransformOrigin="2.818,0.141"/>
         <ComboBox Name ="SelectCategory" HorizontalAlignment="Left" Margin="203,259,0,0" VerticalAlignment="Top" Width="139" Height="27" />
 
         <Label 
