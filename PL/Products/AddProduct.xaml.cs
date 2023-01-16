@@ -28,11 +28,11 @@ namespace PL.Products
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string name = InsertName.Text;
-            int id = int.Parse(InserId.Text);
+            //int id = int.Parse(InserId.Text);
             double price = double.Parse(InsertPrice.Text);
             int amount = int.Parse(InsertAmount.Text);
             BO.Category category = (BO.Category)SelectCategory.SelectedItem;
-            BO.Product newproduct = new BO.Product { ID = id, Name = name, Price = price, InStock = amount, Category = category, IsDeleted = false, Path = path };
+            BO.Product newproduct = new BO.Product { ID = 0, Name = name, Price = price, InStock = amount, Category = category, IsDeleted = false, Path = path };
             try
             {
                 bl.Product.AddProduct(newproduct);
