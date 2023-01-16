@@ -57,6 +57,7 @@
                                   Width="300" Height="70"
                                   materialDesign:HintAssist.Foreground="Black"
                                   materialDesign:TextFieldAssist.UnderlineBrush="Black"
+                          
                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                   FontSize="20" KeyDown="EnterPressed_KeyDown" />
 

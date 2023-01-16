@@ -66,8 +66,13 @@ internal class Product : IProduct
     public void Update(DO.Product doProduct)
     {
         XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
+        //XElement x = productsRootElem.Elements().FirstOrDefault(p => (int?)p.Element("ID") == doProduct.ID);
+        //if (x == null || (bool)x.Element("IsDeleted"))
+        //    throw new DO.NotExistException();
+        //x.Remove();
+
         (productsRootElem.Elements()
-            .FirstOrDefault(st => (int?)st.Element("ID") == doProduct.ID && st.ToBoolNullable("IsDeleted") == false)
+            .FirstOrDefault(st => (int?)st.Element("ID") == doProduct.ID /*&& st.ToBoolNullable("IsDeleted") == false*/)
             ?? throw new DO.NotExistException()).Remove();
         Add(doProduct);
     }
@@ -87,7 +92,7 @@ internal class Product : IProduct
         //    throw new DO.NotExistException();
         //DeletePermanently(item.ID);
         product.SetElementValue("IsDeleted", false);
-        Add(item);
+        //Add(item);
     }
 
     public DO.Product? GetTByFilter(Func<DO.Product?, bool> filter)
