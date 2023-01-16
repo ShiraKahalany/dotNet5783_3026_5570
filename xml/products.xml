@@ -16,7 +16,7 @@
     <Price>100000000000</Price>
     <InStock>23</InStock>
     <IsDeleted>false</IsDeleted>
-    <Path>file:///C:/Users/danie/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg</Path>
+    <Path>/Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg</Path>
   </Product>
   <Product>
     <ID>100001</ID>
