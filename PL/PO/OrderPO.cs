@@ -131,7 +131,7 @@ public class OrderPO : INotifyPropertyChanged
             shipDate = value;
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(" ShipDate"));
+                PropertyChanged(this, new PropertyChangedEventArgs("ShipDate"));
             }
         }
     }
@@ -146,7 +146,7 @@ public class OrderPO : INotifyPropertyChanged
             deliveryDate = value;
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(" DeliveryDate"));
+                PropertyChanged(this, new PropertyChangedEventArgs("DeliveryDate"));
             }
         }
     }

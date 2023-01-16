@@ -59,7 +59,7 @@ public partial class ProductDetails : Page
             BoProduct = PoProduct.CopyFields(BoProduct);
             BoProduct.Amount = amount;
             BOproducts.ToList().Add(BoProduct);
-            //DataContext = PoProduct;
+            DataContext = PoProduct;
             //this.NavigationService.GoBack();
         }
         catch (BO.NotExistException)

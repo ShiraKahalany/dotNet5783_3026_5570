@@ -154,7 +154,7 @@
             HorizontalAlignment="Left"
             Margin="29,300,0,0"
             TextWrapping="Wrap" 
-            Text="{Binding Path=ShipDate, Converter={StaticResource TimeToColorConverter}, Mode=TwoWay}" 
+            Text="{Binding ShipDate}"
             VerticalAlignment="Top"
             Height="42" Width="110" RenderTransformOrigin="0.495,0.02"/>
 

@@ -31,6 +31,7 @@ internal class OrderItem : IOrderItem
             return OrderItem.ID;
         }
         OrderItem.ID = XMLTools.RunningOrderItemID();
+        listOrderItems.Add(OrderItem);
         XMLTools.SaveListToXMLSerializer(listOrderItems, s_OrderItems);
         return OrderItem.ID;
     }
