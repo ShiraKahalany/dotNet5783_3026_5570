@@ -131,7 +131,7 @@ internal class Product : IProduct
     {
         try
         {
-            if ((product.ID > 0) && (product.Name != null) && (product.Price > 0) && (product.InStock >= 0))
+            if ((product.Name != null) && (product.Price > 0) && (product.InStock >= 0))
             {
                 dal.Product.Add((DO.Product)Tools.CopyPropToStruct(product, typeof(DO.Product)));
             }

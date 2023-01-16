@@ -36,4 +36,31 @@
     <IsDeleted>true</IsDeleted>
     <Path />
   </Product>
+  <Product>
+    <ID>100003</ID>
+    <Name>bamba</Name>
+    <Category>Kitchen</Category>
+    <Price>55</Price>
+    <InStock>100</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>file:///C:/Users/danie/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/green-sofa-white-living-room-with-free-space.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100004</ID>
+    <Name>bissliii</Name>
+    <Category>Bedroom</Category>
+    <Price>5</Price>
+    <InStock>90</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>file:///C:/Users/danie/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/kitchen.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100005</ID>
+    <Name>apropo</Name>
+    <Category>Kitchen</Category>
+    <Price>40</Price>
+    <InStock>2</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>file:///C:/Users/danie/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/living room.jpg</Path>
+  </Product>
 </products>
