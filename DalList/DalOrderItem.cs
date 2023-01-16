@@ -42,6 +42,7 @@ public class DalOrderItem : IOrderItem
         if (temp?.IsDeleted == false)
             throw new DO.NotExistException("The item is not deleted");
         DeletePermanently(item.ID);
+        item.IsDeleted = false;
         Add(item);
     }
 

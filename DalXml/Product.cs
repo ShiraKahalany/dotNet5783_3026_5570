@@ -9,17 +9,7 @@ internal class Product : IProduct
 {
     const string s_products = "products"; //Linq to XML
 
-    static DO.Product? getProduct(XElement p) =>
-        p.ToIntNullable("ID") is null ? null : new DO.Product()
-        {
-            ID = (int)p.Element("ID")!,
-            Name = (string)p.Element("Name"),
-            Category = p.ToEnumNullable<DO.Category>("Category") ?? Category.All,
-            Price = p.ToDoubleNullable("Price") ?? 0,
-            InStock = p.ToIntNullable("InStock") ?? 0,
-            IsDeleted = (bool)p.Element("IsDeleted"),
-            Path = p.Element("Path").ToString(),
-        };
+    
 
     static IEnumerable<XElement> createStudentElement(DO.Product product)
     {
@@ -30,6 +20,7 @@ internal class Product : IProduct
         yield return new XElement("Price", product.Price);
         yield return new XElement("InStock", product.InStock);
         yield return new XElement("IsDeleted", product.IsDeleted);
+        yield return new XElement("Path", product.Path);
     }
 
     public IEnumerable<DO.Product?> GetAll(Func<DO.Product?, bool>? filter = null) =>
@@ -37,43 +28,85 @@ internal class Product : IProduct
         ? XMLTools.LoadListFromXMLElement(s_products).Elements().Select(s => getProduct(s))
         : XMLTools.LoadListFromXMLElement(s_products).Elements().Select(s => getProduct(s)).Where(filter);
 
-    public DO.Product GetById(int id) =>
-        (DO.Product)getProduct(XMLTools.LoadListFromXMLElement(s_products)?.Elements()
-        .FirstOrDefault(st => st.ToIntNullable("ID") == id)
-        // fix to: throw new DalMissingIdException(id);
-        ?? throw new Exception("missing id"))!;
+    //public DO.Product GetById(int id) =>
+    //    (DO.Product)getProduct(XMLTools.LoadListFromXMLElement(s_products)?.Elements()
+    //    .FirstOrDefault(st => st.ToIntNullable("ID") == id)
+    //    // fix to: throw new DalMissingIdException(id);
+    //    ?? throw new Exception("missing id"))!;
 
     public int Add(DO.Product product)
     {
-        XElement studentsRootElem = XMLTools.LoadListFromXMLElement(s_products);
+        XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
 
-        if (XMLTools.LoadListFromXMLElement(s_products)?.Elements()
-            .FirstOrDefault(st => st.ToIntNullable("ID") == product.ID) is not null)
-            // fix to: throw new DalMissingIdException(id);;
-            throw new Exception("id already exist");
-
-        studentsRootElem.Add(new XElement("Product", createStudentElement(product)));
-        XMLTools.SaveListToXMLElement(studentsRootElem, s_products);
-
+        if (product.ID>=100000 && XMLTools.LoadListFromXMLElement(s_products)?.Elements()
+            .FirstOrDefault(st => st.ToIntNullable("ID") == product.ID) is null)
+        {
+            productsRootElem.Add(new XElement("Product", createStudentElement(product)));
+            XMLTools.SaveListToXMLElement(productsRootElem, s_products);
+            return product.ID;
+        }
+        product.ID = XMLTools.RunningProductID();
+        productsRootElem.Add(new XElement("Product", createStudentElement(product)));
+        XMLTools.SaveListToXMLElement(productsRootElem, s_products);
         return product.ID;
     }
 
     public void Delete(int id)
     {
-        XElement studentsRootElem = XMLTools.LoadListFromXMLElement(s_products);
-
-        (studentsRootElem.Elements()
-            // fix to: throw new DalMissingIdException(id);
-            .FirstOrDefault(st => (int?)st.Element("ID") == id) ?? throw new Exception("missing id"))
-            .Remove();
-
-        XMLTools.SaveListToXMLElement(studentsRootElem, s_products);
+        XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
+        XElement product = productsRootElem.Elements().FirstOrDefault(st => (int?)st.Element("ID") == id) ??throw new DO.NotExistException();
+       if(product.ToBoolNullable("IsDeleted") ==true)
+            throw new DO.NotExistException();
+        //product.Remove();
+        product.SetElementValue("IsDeleted", true);
+        //productsRootElem.Add(product);
+        XMLTools.SaveListToXMLElement(productsRootElem, s_products);
     }
 
     public void Update(DO.Product doProduct)
     {
-        Delete(doProduct.ID);
+        XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
+        (productsRootElem.Elements()
+            .FirstOrDefault(st => (int?)st.Element("ID") == doProduct.ID && st.ToBoolNullable("IsDeleted") == true)
+            ?? throw new DO.NotExistException()).Remove();
         Add(doProduct);
     }
 
+    public void DeletePermanently(int id)
+    {
+        XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
+        (productsRootElem.Elements().FirstOrDefault(st => (int?)st.Element("ID") == id) ?? throw new DO.NotExistException()).Remove();
+    }
+
+    public void Restore(DO.Product item)
+    {
+        XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
+        XElement product = productsRootElem.Elements().FirstOrDefault(st => (int?)st.Element("ID") == item.ID && (bool)st.Element("IsDeleted") == false)
+            ?? throw new DO.NotExistException();
+        //if (product.ToBoolNullable("IsDeleted") == false)
+        //    throw new DO.NotExistException();
+        //DeletePermanently(item.ID);
+        product.SetElementValue("IsDeleted", false);
+        Add(item);
+    }
+
+    public DO.Product? GetTByFilter(Func<DO.Product?, bool> filter)
+    {
+        DO.Product? pro = XMLTools.LoadListFromXMLElement(s_products).Elements().Select(s => getProduct(s)).Where(filter).FirstOrDefault();
+        if(pro == null) 
+            throw new DO.NotExistException();
+        return pro;
+    }
+
+    static DO.Product? getProduct(XElement p) =>
+        p.ToIntNullable("ID") is null ? null : new DO.Product()
+        {
+            ID = (int)p.Element("ID")!,
+            Name = (string)p.Element("Name")!,
+            Category = p.ToEnumNullable<DO.Category>("Category") ?? Category.All,
+            Price = p.ToDoubleNullable("Price") ?? 0,
+            InStock = p.ToIntNullable("InStock") ?? 0,
+            IsDeleted = (bool)(p.Element("IsDeleted"))!,
+            Path = (string)p.Element("Path")!
+        };
 }

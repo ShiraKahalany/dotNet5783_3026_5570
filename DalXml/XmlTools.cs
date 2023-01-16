@@ -28,6 +28,8 @@ static class XMLTools
 
     public static int? ToIntNullable(this XElement element, string name) =>
         int.TryParse((string)element.Element(name), out var result) ? (int)result : default;
+    public static bool? ToBoolNullable(this XElement element, string name) =>
+       bool.TryParse((string)element.Element(name), out var result) ? (bool)result : default;
     #endregion
 
     #region SaveLoadWithXElement
@@ -104,4 +106,47 @@ static class XMLTools
         }
     }
     #endregion
+    
+    public static int RunningOrderID()
+    {
+        string configPath = "config";
+        var runningList = LoadListFromXMLSerializer<ImportentNumbers>(configPath);
+        ImportentNumbers runningNum = runningList.FirstOrDefault(num => num?.typeOfnumber == "Order Running ID")
+            ?? throw new Exception();
+        int id = (int)runningNum.numberSaved!;
+        runningList.Remove(runningNum);
+        runningNum.numberSaved++;
+        runningList.Add(runningNum);
+        SaveListToXMLSerializer(runningList, configPath);
+        return id;
+    }
+
+    public static int RunningOrderItemID()
+    {
+        string configPath = "config";
+        var runningList = LoadListFromXMLSerializer<ImportentNumbers>(configPath);
+        ImportentNumbers runningNum = runningList.FirstOrDefault(num => num?.typeOfnumber == "OrderItem Running ID")
+            ?? throw new Exception();
+        int id = (int)runningNum.numberSaved!;
+        runningList.Remove(runningNum);
+        runningNum.numberSaved++;
+        runningList.Add(runningNum);
+        SaveListToXMLSerializer(runningList, configPath);
+        return id;
+    }
+
+    public static int RunningProductID()
+    {
+        string configPath = "config";
+        var runningList = LoadListFromXMLSerializer<ImportentNumbers>(configPath);
+        ImportentNumbers runningNum = runningList.FirstOrDefault(num => num?.typeOfnumber == "Product Running ID")
+            ?? throw new Exception();
+        int id = (int)runningNum.numberSaved!;
+        runningList.Remove(runningNum);
+        runningNum.numberSaved++;
+        runningList.Add(runningNum);
+        SaveListToXMLSerializer(runningList, configPath);
+        return id;
+    }
+
 }

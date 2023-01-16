@@ -16,7 +16,7 @@
         <converter:DeliveredToVisibilityConverter  x:Key="DeliveredToVisibilityConverter"/>
     </Page.Resources>
     <Grid Background="White">
-        <Grid Name="OrderItems" Background="AliceBlue" Margin="437,74,10,10">
+        <Grid Name="OrderItems" Background="AliceBlue" Margin="437,74,59,30">
 
         </Grid>
 

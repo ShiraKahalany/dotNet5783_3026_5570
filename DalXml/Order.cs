@@ -11,8 +11,10 @@ internal class Order : IOrder
     public IEnumerable<DO.Order?> GetAll(Func<DO.Order?, bool>? filter = null)
     {
         var listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders)!;
-        IEnumerable<DO.Order?> x= (filter == null) ? listOrders.OrderBy(lec => ((DO.Order)lec!).ID)
-                              : listOrders.Where(filter).OrderBy(lec => ((DO.Order)lec!).ID);
+        if(filter == null)
+            return listOrders;
+        IEnumerable<DO.Order?> x= (filter == null) ? listOrders.OrderBy(or => ((DO.Order)or!).ID)
+                              : listOrders.Where(filter).OrderBy(or => ((DO.Order)or!).ID);
         if(!x.Any())
             throw new DO.NotExistException();
         return x;
@@ -33,61 +35,68 @@ internal class Order : IOrder
             XMLTools.SaveListToXMLSerializer(listOrders, s_Orders);
             return Order.ID;
         }
-        Order.ID =
+        Order.ID = XMLTools.RunningOrderID();
         listOrders.Add(Order);
-        XMLTools.SaveListToXMLSerializer(listOrders, s_Orders);
+       XMLTools.SaveListToXMLSerializer(listOrders, s_Orders);
         return Order.ID;
     }
 
     public void Delete(int id)
     {
-        ////var listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders);
-
-        ////if (listOrders.RemoveAll(p => p?.ID == id) == 0)
-        ////    throw new Exception("missing id"); //new DalMissingIdException(id, "Order");
-
-        ////XMLTools.SaveListToXMLSerializer(listOrders, s_Orders);
-
         var listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders);
+        
+        DO.Order or = listOrders.Find(p => p?.ID == id) ?? throw new DO.NotExistException("missing id");
 
-        var o = listOrders.FirstOrDefault(p => p?.ID == id) ?? throw new Exception("missing id");
-
-        if (o.IsDeleted)
-            throw new Exception("missing id"); //new DalMissingIdException(id, "Order");
-
-        DO.Order order = new()
-        {
-            ID = id,
-            CustomerName = o.CustomerName,
-            CustomerEmail = o.CustomerEmail,
-            CustomerAddress = o.CustomerAddress,
-            OrderDate = o.OrderDate,
-            DeliveryDate = o.DeliveryDate,
-            ShipDate = o.ShipDate,
-            IsDeleted = true
-        };
-
-        Update(order);
+        if (or.IsDeleted == true)
+            throw new DO.NotExistException();
+        listOrders.Remove(or);
+        DO.Order order =new DO.Order { IsDeleted = true,ID=or.ID, CustomerAddress=or.CustomerAddress, CustomerEmail=or.CustomerEmail, CustomerName=or.CustomerName, DeliveryDate=or.DeliveryDate, OrderDate=or.OrderDate, ShipDate=or.ShipDate };
+        listOrders.Add(order);
+        XMLTools.SaveListToXMLSerializer(listOrders, s_Orders);
     }
 
     public void Update(DO.Order Order)
     {
-        Delete(Order.ID);
+        var listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders);
+
+        DO.Order or = listOrders.Find(p => p?.ID == Order.ID) ?? throw new DO.NotExistException("missing id");
+
+        if (or.IsDeleted == true)
+            throw new DO.NotExistException();
+        DeletePermanently(Order.ID);
         Add(Order);
     }
 
     public void DeletePermanently(int id)
     {
+        var listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders);
 
+        DO.Order or = listOrders.Find(p => p?.ID == id) ?? throw new DO.NotExistException("missing id");
+        listOrders.Remove(or);
+        XMLTools.SaveListToXMLSerializer(listOrders, s_Orders);
     }
 
-    public void Restore(Order item)
+    public void Restore(DO.Order item)
     {
+        var listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders);
 
+        DO.Order or = listOrders.Find(p => p?.ID == item.ID) ?? throw new DO.NotExistException("missing id");
+        if (or.IsDeleted == false)
+            throw new DO.NotExistException();
+        DeletePermanently(item.ID);
+        item.IsDeleted = false;
+        Add(item);
     }
 
-    public Order? GetTByFilter(Func<Order?, bool> filter)
+    
+
+    public DO.Order? GetTByFilter(Func<DO.Order?, bool> filter)
     {
-        return new Order();
+        var listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders);
+
+        DO.Order or = listOrders.Find((DO.Order? p) => filter(p)) ?? throw new DO.NotExistException("missing id");
+        return or;
     }
+
+   
 }
