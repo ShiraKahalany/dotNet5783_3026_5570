@@ -1,4 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <products>
-
+  <Product>
+    <ID>123456</ID>
+    <Name>sofa</Name>
+    <Category>Living_Room</Category>
+    <Price>89</Price>
+    <InStock>7</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/bed room.jpg</Path>
+  </Product>
+  <Product>
+    <ID>134689</ID>
+    <Name>halel</Name>
+    <Category>Kitchen</Category>
+    <Price>100000000000</Price>
+    <InStock>23</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100001</ID>
+    <Name>bed</Name>
+    <Category>Bedroom</Category>
+    <Price>89</Price>
+    <InStock>7</InStock>
+    <IsDeleted>true</IsDeleted>
+    <Path />
+  </Product>
+  <Product>
+    <ID>100002</ID>
+    <Name>king size bed</Name>
+    <Category>Bedroom</Category>
+    <Price>89</Price>
+    <InStock>9</InStock>
+    <IsDeleted>true</IsDeleted>
+    <Path />
+  </Product>
+  <Product>
+    <ID>100003</ID>
+    <Name>bamba</Name>
+    <Category>Kitchen</Category>
+    <Price>55</Price>
+    <InStock>100</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>file:///C:/Users/danie/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/green-sofa-white-living-room-with-free-space.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100004</ID>
+    <Name>bissliii</Name>
+    <Category>Bedroom</Category>
+    <Price>5</Price>
+    <InStock>90</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>file:///C:/Users/danie/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/kitchen.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100005</ID>
+    <Name>apropo</Name>
+    <Category>Kitchen</Category>
+    <Price>40</Price>
+    <InStock>2</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>file:///C:/Users/danie/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/living room.jpg</Path>
+  </Product>
 </products>
