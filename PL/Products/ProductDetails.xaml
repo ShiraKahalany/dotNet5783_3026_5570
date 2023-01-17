@@ -86,7 +86,7 @@
                                          Foreground="Black"
                                          Height="30" Width="30"/>
             </Button>
-            <Label Content="{Binding Path=Amount, Converter={StaticResource intToStringConverter}}"
+            <Label Name="AmountLabel" Content="{Binding Path=Amount , Converter={StaticResource intToStringConverter}}"
                HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center"
                    VerticalAlignment="Top"

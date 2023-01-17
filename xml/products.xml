@@ -68,9 +68,9 @@
     <Name>sofa</Name>
     <Category>Garden</Category>
     <Price>89</Price>
-    <InStock>7</InStock>
+    <InStock>1</InStock>
     <IsDeleted>false</IsDeleted>
-    <Path />
+    <Path></Path>
   </Product>
   <Product>
     <ID>134689</ID>
