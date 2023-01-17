@@ -15,11 +15,11 @@ public partial class ProductDetails : Page
     private IBL bl = BLFactory.GetBL();
     private BO.ProductItem BoProduct = new BO.ProductItem();
     private IEnumerable<BO.ProductItem> BOproducts;
+    private List<PO.ProductItemPO> itemsList;
     private PO.ProductItemPO PoProduct;
     private BO.Cart bocart;
-    private ObservableCollection<PO.ProductItemPO> products;
 
-    public ProductDetails(PO.ProductItemPO pro, BO.Cart cart, ObservableCollection<PO.ProductItemPO> prod, IEnumerable<BO.ProductItem> BOprod)
+    public ProductDetails(PO.ProductItemPO pro, BO.Cart cart, List<PO.ProductItemPO> items, IEnumerable<BO.ProductItem> BOprod)
     {
         InitializeComponent();
         BOproducts = BOprod;
@@ -32,7 +32,8 @@ public partial class ProductDetails : Page
             numArray[i] = i + 1;
         AmountOfProduct.ItemsSource = numArray;
         AmountOfProduct.SelectedItem = 1;
-        products = prod;
+        itemsList = items;
+       // products = prod;
         BoProduct = PL.Tools.CopyProp<PO.ProductItemPO, BO.ProductItem>(PoProduct);
     }
 
@@ -52,9 +53,9 @@ public partial class ProductDetails : Page
             //pocart.TotalPrice += price * amount;
             //bl.Cart.AddProductToCart(cart,id, amount);
             MessageBox.Show("Add To Cart Seccessfully", "Add To Cart", MessageBoxButton.OK);
-            products.Remove(PoProduct);
+            itemsList.Remove(PoProduct);
             PoProduct.Amount = amount;
-            products.Add(PoProduct);
+            itemsList.Add(PoProduct);
             BOproducts.ToList().Remove(BoProduct);
             BoProduct = PoProduct.CopyFields(BoProduct);
             BoProduct.Amount = amount;
