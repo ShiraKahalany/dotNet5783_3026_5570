@@ -94,16 +94,19 @@ public partial class ManagerOrdersPage : Page
         //{
         //    MessageBox.Show("Order Not Exist", "ERROR");
         //}
-        myframe.Content = new Orders.OrderTracking(po);
+        myframe.Content = new Orders.OrderTracking(po, ob);
       //myframe.Content = new Orders.OrderTracking(boorder, po);
 
         //if ((AttributeSelector.SelectedItem != null) && (BO.OrderStatus)AttributeSelector.SelectedItem != BO.OrderStatus.None)
         //{
-            BOorderforlist = bl.Order.GetOrderList(BO.Filters.filterByStatus, (BO.OrderStatus)AttributeSelector.SelectedItem).ToList();
-            ob.Clear();
-            //ob = BOorderforlist.ToObservableByConverter<BO.>;
-            ob = BOorderforlist.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
-        //}
+          
+        
+        //******BOorderforlist = bl.Order.GetOrderList(BO.Filters.filterByStatus, (BO.OrderStatus)AttributeSelector.SelectedItem).ToList();
+           
+        //****ob.Clear();
+        //    //ob = BOorderforlist.ToObservableByConverter<BO.>;
+        //****    ob = BOorderforlist.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
+        ////}
 
 
         //if ((BO.Category)AttributeSelector.SelectedItem != BO.Category.All)

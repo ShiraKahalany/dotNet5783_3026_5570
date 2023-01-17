@@ -81,4 +81,13 @@
     <IsDeleted>false</IsDeleted>
     <Path></Path>
   </Product>
+  <Product>
+    <ID>100016</ID>
+    <Name>table</Name>
+    <Category>Kitchen</Category>
+    <Price>250</Price>
+    <InStock>20</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>file:///C:/Users/halel/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/kitchen.jpg</Path>
+  </Product>
 </products>

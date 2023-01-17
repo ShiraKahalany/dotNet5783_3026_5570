@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 namespace PL.Orders;
@@ -9,14 +10,16 @@ namespace PL.Orders;
 public partial class OrderTracking : Page
 {
     private IBL bl = BLFactory.GetBL();
-    BO.Order boOrder;
+    BO.Order boOrder= new BO.Order();
     PO.OrderForListPO poorder = new();
-    public OrderTracking(PO.OrderForListPO POorder)
+    private ObservableCollection<PO.OrderForListPO> ob = new ObservableCollection<PO.OrderForListPO>();
+    public OrderTracking(PO.OrderForListPO POorder, ObservableCollection<PO.OrderForListPO> obse)
     {
         InitializeComponent();
+        ob = obse;
         poorder = POorder;
         int id = poorder.ID;
-        BO.Order boOrder = new BO.Order();
+       // BO.Order boOrder = new BO.Order();
         try
         {
             boOrder = bl.Order.GetOrderById(id)!;
@@ -38,9 +41,7 @@ public partial class OrderTracking : Page
 
     private void UpdateDel_Click(object sender, RoutedEventArgs e)
     {
-
-        //if (poorder.Status == BO.OrderStatus.Shipped)
-        // {
+        bool isStatusChanged = true;
         try
         {
             boOrder = bl.Order.UpdateStatusToProvided(boOrder.ID);
@@ -63,24 +64,27 @@ public partial class OrderTracking : Page
 
     private void UpdateShip_Click(object sender, RoutedEventArgs e)
     {
+        bool isStatusChanged = true;
         try
         {
             boOrder = bl.Order.UpdateStatusToShipped(boOrder.ID);
            // poorder.ShipDate = boOrder.ShipDate;
-            poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
+            poorder = boOrder.CopyFields<BO.Order, PO.OrderForListPO>(poorder);
            // DataContext=poorder;
         }
         catch (BO.OrderHasShippedException)
         {
             MessageBox.Show("The Order Has Already Been Shipped", "Has Already Shipped");
+            isStatusChanged = false;
         }
         catch (BO.NotExistException)
         {
             MessageBox.Show("The Order Not Exit", "Not Exist");
+            isStatusChanged = false;
         }
 
-        
-
+        if(isStatusChanged)
+            ob.Remove(poorder);
     }
 
     private void back_click(object sender, RoutedEventArgs e)
