@@ -1,13 +1,9 @@
 ﻿using BlApi;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.ComponentModel;
 using System.Collections.Generic;
-using PO;
 using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Input;
 
 namespace PL.Products;
 
@@ -45,12 +41,19 @@ public partial class CatalogPage : Page
                 break;
             case "all":
                 BOproducts = bl.Product.GetProductItemsList(bocart);
+                itemsList = (from BO.ProductItem p in BOproducts select Tools.CopyProp<BO.ProductItem, PO.ProductItemPO>(p)).ToList();
+                listCatalog.ItemsSource = itemsList;
+                ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(listCatalog.ItemsSource);
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
+                view.GroupDescriptions.Add(groupDescription);
                 break;
         }
-        itemsList = (from BO.ProductItem p in BOproducts select Tools.CopyProp<BO.ProductItem, PO.ProductItemPO>(p)).ToList();
+
+        if (category != "all")
+            itemsList = (from BO.ProductItem p in BOproducts select Tools.CopyProp<BO.ProductItem, PO.ProductItemPO>(p)).ToList();
         listCatalog.DataContext = itemsList;
         frame = mainFrame;
     }
-    private void ProductDetails_MouseDoubleClick(object sender, MouseButtonEventArgs e)=> frame.Content = new ProductDetails(((PO.ProductItemPO)listCatalog.SelectedItem), bocart, itemsList, BOproducts);
+    private void ProductDetails_MouseDoubleClick(object sender, MouseButtonEventArgs e) => frame.Content = new ProductDetails(((PO.ProductItemPO)listCatalog.SelectedItem), bocart, itemsList, BOproducts);
 
 }
