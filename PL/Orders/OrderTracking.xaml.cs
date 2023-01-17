@@ -67,7 +67,7 @@ public partial class OrderTracking : Page
         {
             boOrder = bl.Order.UpdateStatusToShipped(boOrder.ID);
            // poorder.ShipDate = boOrder.ShipDate;
-            poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
+            poorder = boOrder.CopyFields<BO.Order, PO.OrderForListPO>(poorder);
            // DataContext=poorder;
         }
         catch (BO.OrderHasShippedException)

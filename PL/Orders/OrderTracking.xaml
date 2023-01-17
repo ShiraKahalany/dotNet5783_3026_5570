@@ -154,7 +154,7 @@
             HorizontalAlignment="Left"
             Margin="19,304,0,0"
             TextWrapping="Wrap" 
-            Text="{Binding Path=ShipDate,Converter={StaticResource ShippedToVisibilityConverter}}" 
+            Text="{Binding ShipDate}" 
             VerticalAlignment="Top"
             Height="35" Width="123" RenderTransformOrigin="0.495,0.02"/>
 
