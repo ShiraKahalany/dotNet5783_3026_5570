@@ -53,6 +53,9 @@ public partial class OrderTracking : Page
         try
         {
             boOrder = bl.Order.UpdateStatusToShipped(boOrder.ID);
+           // poorder.ShipDate = boOrder.ShipDate;
+            poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
+           // DataContext=poorder;
         }
         catch (BO.OrderHasShippedException)
         {
@@ -63,7 +66,7 @@ public partial class OrderTracking : Page
             MessageBox.Show("The Order Not Exit", "Not Exist");
         }
 
-        poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
+        
 
     }
 
