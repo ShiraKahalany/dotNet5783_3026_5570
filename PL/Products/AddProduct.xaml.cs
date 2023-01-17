@@ -16,6 +16,7 @@ namespace PL.Products
         string path;
         private ObservableCollection<PO.ProductPO> observeproducts = new ObservableCollection<PO.ProductPO>();
         private IEnumerable<BO.Product> BOproducts;
+
         public AddProduct(ObservableCollection<PO.ProductPO> ob)
         {
             InitializeComponent();
@@ -34,6 +35,7 @@ namespace PL.Products
            // int id = int.Parse(InserId.Text);
             double price = double.Parse(InsertPrice.Text);
             int amount = int.Parse(InsertAmount.Text);
+
             BO.Category category = (BO.Category)SelectCategory.SelectedItem;
             BO.Product newproduct = new BO.Product { Name = name, Price = price, InStock = amount, Category = category, IsDeleted = false, Path = path };
             try
@@ -68,7 +70,8 @@ namespace PL.Products
             if (f.ShowDialog() == true)
             {
                 ProductImage.Source = new BitmapImage(new Uri(f.FileName));
-                path = (ProductImage.Source).ToString();
+                string[] str = (ProductImage.Source).ToString().Split("PL",2,StringSplitOptions.RemoveEmptyEntries);
+                path = str[1];
             }
         }
 

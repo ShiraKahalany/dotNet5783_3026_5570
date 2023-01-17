@@ -99,7 +99,7 @@ public class IsEmptyToNotVisibilityConverter : IValueConverter ///ours ,picture
     }
 }
 
-public class IsEmptyToVisibleConverter : IValueConverter 
+public class IsEmptyToVisibleConverter : IValueConverter
 {
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
