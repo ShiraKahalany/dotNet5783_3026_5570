@@ -80,30 +80,30 @@ public partial class ManagerOrdersPage : Page
         PO.OrderForListPO po=(PO.OrderForListPO)((ListView)sender).SelectedItem;
         //BO.OrderForList boorder = new();
         //boorder = po.CopyFields<PO.OrderForListPO,BO.OrderForList>(boorder);
-        int id = po.ID;
-        BO.Order boorder = new BO.Order();
-        try
-        {
-           boorder = bl.Order.GetOrderById(id)!;
-        }
-        catch (BO.IllegalIdException)
-        {
-            MessageBox.Show("Illegal Order ID", "ERROR");
-        }
-        catch(BO.OrderNotExistException)
-        {
-            MessageBox.Show("Order Not Exist", "ERROR");
-        }
-        myframe.Content = new Orders.OrderTracking(boorder);
+        //int id = po.ID;
+        //BO.Order boorder = new BO.Order();
+        //try
+        //{
+        //   boorder = bl.Order.GetOrderById(id)!;
+        //}
+        //catch (BO.IllegalIdException)
+        //{
+        //    MessageBox.Show("Illegal Order ID", "ERROR");
+        //}
+        //catch(BO.OrderNotExistException)
+        //{
+        //    MessageBox.Show("Order Not Exist", "ERROR");
+        //}
+        myframe.Content = new Orders.OrderTracking(po);
       //myframe.Content = new Orders.OrderTracking(boorder, po);
 
-        if ((AttributeSelector.SelectedItem != null) && (BO.OrderStatus)AttributeSelector.SelectedItem != BO.OrderStatus.None)
-        {
+        //if ((AttributeSelector.SelectedItem != null) && (BO.OrderStatus)AttributeSelector.SelectedItem != BO.OrderStatus.None)
+        //{
             BOorderforlist = bl.Order.GetOrderList(BO.Filters.filterByStatus, (BO.OrderStatus)AttributeSelector.SelectedItem).ToList();
             ob.Clear();
             //ob = BOorderforlist.ToObservableByConverter<BO.>;
             ob = BOorderforlist.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
-        }
+        //}
 
 
         //if ((BO.Category)AttributeSelector.SelectedItem != BO.Category.All)

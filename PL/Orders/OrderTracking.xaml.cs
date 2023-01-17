@@ -10,17 +10,30 @@ public partial class OrderTracking : Page
 {
     private IBL bl = BLFactory.GetBL();
     BO.Order boOrder;
-    PO.OrderPO poorder = new();
-    public OrderTracking(BO.Order order)
+    PO.OrderForListPO poorder = new();
+    public OrderTracking(PO.OrderForListPO POorder)
     {
         InitializeComponent();
-        boOrder = order;
-        poorder = order.CopyFields<BO.Order, PO.OrderPO>(poorder);
+        poorder = POorder;
+        int id = poorder.ID;
+        BO.Order boOrder = new BO.Order();
+        try
+        {
+            boOrder = bl.Order.GetOrderById(id)!;
+        }
+        catch (BO.IllegalIdException)
+        {
+            MessageBox.Show("Illegal Order ID", "ERROR");
+        }
+        catch (BO.OrderNotExistException)
+        {
+            MessageBox.Show("Order Not Exist", "ERROR");
+        }
+        //poorder = order.CopyFields<BO.Order, PO.OrderPO>(poorder);
         DataContext = poorder;
         //CartItems.ItemsSource = boOrder.Items;
         //CartItems.DataContext = boOrder.Items;
     }
-
 
 
     private void UpdateDel_Click(object sender, RoutedEventArgs e)
@@ -44,7 +57,7 @@ public partial class OrderTracking : Page
         {
             MessageBox.Show("The Order Not Exist", "Not Exist", MessageBoxButton.OK);
         }
-        poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
+        poorder = boOrder.CopyFields<BO.Order, PO.OrderForListPO>(poorder);
            // }
     }
 
@@ -63,7 +76,7 @@ public partial class OrderTracking : Page
             MessageBox.Show("The Order Not Exit", "Not Exist");
         }
 
-        poorder = boOrder.CopyFields<BO.Order, PO.OrderPO>(poorder);
+        poorder = boOrder.CopyFields<BO.Order, PO.OrderForListPO>(poorder);
 
     }
 

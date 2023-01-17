@@ -318,7 +318,7 @@ internal class Order : IOrder
             enumFilter switch
             {
                 BO.Filters.filterByStatus =>
-                 dal!.Order.GetAll(dp => (dp?.GetStatus()) == (BO.OrderStatus)filterValue && dp?.IsDeleted == false),
+                 dal!.Order.GetAll(dp => ((filterValue != null ? (dp?.GetStatus() == (BO.OrderStatus)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))),
 
                 BO.Filters.None =>
                 dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false),
