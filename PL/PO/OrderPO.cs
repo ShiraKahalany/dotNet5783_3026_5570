@@ -71,7 +71,7 @@ public class OrderPO : INotifyPropertyChanged
             customerEmail = value;
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(" CustomerEmail"));
+                PropertyChanged(this, new PropertyChangedEventArgs("CustomerEmail"));
             }
         }
     }
@@ -101,7 +101,7 @@ public class OrderPO : INotifyPropertyChanged
             orderDate = value;
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(" OrderDate"));
+                PropertyChanged(this, new PropertyChangedEventArgs("OrderDate"));
             }
         }
     }
@@ -161,7 +161,7 @@ public class OrderPO : INotifyPropertyChanged
             items = value;
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs("items"));
+                PropertyChanged(this, new PropertyChangedEventArgs("Items"));
             }
         }
     }

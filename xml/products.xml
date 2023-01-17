@@ -86,7 +86,7 @@
     <Name>table</Name>
     <Category>Kitchen</Category>
     <Price>250</Price>
-    <InStock>20</InStock>
+    <InStock>18</InStock>
     <IsDeleted>false</IsDeleted>
     <Path>file:///C:/Users/halel/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/kitchen.jpg</Path>
   </Product>
