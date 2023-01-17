@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using BO;
 namespace PO;
 
-public class ProductItemPO
+public class ProductItemPO: INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
 

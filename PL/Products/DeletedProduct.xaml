@@ -13,13 +13,13 @@
             <TextBox Name="InsertPrice" IsEnabled="False" HorizontalAlignment="Left" Margin="203,177,0,0" TextWrapping="Wrap" Text="{Binding Path=Price}" VerticalAlignment="Top" Width="40" Height="27"/>
             <TextBox Name="InsertInStock" IsEnabled="False" HorizontalAlignment="Left" Margin="203,217,0,0" TextWrapping="Wrap" Text="{Binding Path=InStock}" VerticalAlignment="Top" Width="40" Height="27" RenderTransformOrigin="2.818,0.141"/>
             <ComboBox Name ="SelectCategory" IsEnabled="False" HorizontalAlignment="Left" Margin="203,273,0,0" SelectedItem="{Binding Path=Category}" VerticalAlignment="Top" Width="139" Height="27" />
-            <Label Content="ID:" HorizontalAlignment="Left" Margin="86,99,0,0" VerticalAlignment="Top" Height="26" Width="69" RenderTransformOrigin="-2.51,0.255"/>
+            <Label Content="ID:" HorizontalAlignment="Left" Margin="86,99,0,0" VerticalAlignment="Top" Height="26" Width="58" RenderTransformOrigin="-2.51,0.255"/>
             <Label Content="Name:" HorizontalAlignment="Left" Margin="91,137,0,0" VerticalAlignment="Top" Height="26" Width="59"/>
             <Label Content="Price:" HorizontalAlignment="Left" Margin="91,178,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.114,-0.5" Height="26" Width="39"/>
             <Label Content="Amount In Stock:" HorizontalAlignment="Left" Margin="91,222,0,0" VerticalAlignment="Top" Height="26" Width="107" RenderTransformOrigin="-3.365,0.828"/>
             <Label Content="Category:" HorizontalAlignment="Left" Margin="91,273,0,0" VerticalAlignment="Top" Height="26" Width="64"/>
             <Label Content="Deleted Product Details" Background="{x:Null}" HorizontalAlignment="Left" Width="286" FontSize="20" HorizontalContentAlignment="Center" FontWeight="Bold" Foreground="#FF974E4E" Margin="56,30,0,335"/>
-            <Button Content="Restore" HorizontalAlignment="Left" Margin="165,331,0,0" VerticalAlignment="Top" Height="30" Width="94" RenderTransformOrigin="1.111,1.387" Click="Restore"/>
+            <Button Content="Restore" HorizontalAlignment="Left" Margin="160,358,0,0" VerticalAlignment="Top" Height="30" Width="94" RenderTransformOrigin="1.111,1.387" Click="Restore" Background="{x:Null}" BorderBrush="#FF7D0E0E"/>
             <StackPanel Margin="441,65,0,106" HorizontalAlignment="Left" Width="234">
                 <Button x:Name="changeImageButton" 
                     Content="update picture"

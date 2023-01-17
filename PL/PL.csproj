@@ -27,6 +27,7 @@
     <None Remove="home.jpg" />
     <None Remove="image\3-piece dark gray sofa.jpg" />
     <None Remove="image\3-Pieces Green Sofa.jpg" />
+    <None Remove="image\approved.jpeg" />
     <None Remove="image\Astoria Stoneware Holder.jpg" />
     <None Remove="image\Black Soft Luxury Bath Rug.jpg" />
     <None Remove="image\Dark-Bronze Mid-Century-Contour-Bathroom Hardware.jpg" />
@@ -54,6 +55,12 @@
     <None Remove="Orders\updateDel.jpeg" />
     <None Remove="Products\download.png" />
     <None Remove="Updated background.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="image\approved.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

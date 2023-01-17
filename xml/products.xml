@@ -64,11 +64,20 @@
     <Path>/background.jpg</Path>
   </Product>
   <Product>
+    <ID>100016</ID>
+    <Name>table</Name>
+    <Category>Kitchen</Category>
+    <Price>250</Price>
+    <InStock>12</InStock>
+    <IsDeleted>true</IsDeleted>
+    <Path>file:///C:/Users/halel/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/kitchen.jpg</Path>
+  </Product>
+  <Product>
     <ID>123456</ID>
     <Name>sofa</Name>
     <Category>Garden</Category>
     <Price>89</Price>
-    <InStock>1</InStock>
+    <InStock>0</InStock>
     <IsDeleted>false</IsDeleted>
     <Path></Path>
   </Product>
@@ -79,15 +88,33 @@
     <Price>100000000000</Price>
     <InStock>21</InStock>
     <IsDeleted>false</IsDeleted>
-    <Path></Path>
+    <Path />
   </Product>
   <Product>
-    <ID>100016</ID>
-    <Name>table</Name>
-    <Category>Kitchen</Category>
-    <Price>250</Price>
-    <InStock>16</InStock>
+    <ID>100017</ID>
+    <Name>bisly</Name>
+    <Category>Living_room</Category>
+    <Price>20</Price>
+    <InStock>6</InStock>
     <IsDeleted>false</IsDeleted>
-    <Path>file:///C:/Users/halel/source/repos/ShiraKahalany/dotNet5783_3026_5570/PL/PLimages/kitchen.jpg</Path>
+    <Path>/no_image.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100018</ID>
+    <Name>eee</Name>
+    <Category>Bathroom</Category>
+    <Price>90</Price>
+    <InStock>8</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/no_image.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100019</ID>
+    <Name>qqq</Name>
+    <Category>Bathroom</Category>
+    <Price>89</Price>
+    <InStock>9</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/image/approved.jpeg</Path>
   </Product>
 </products>
