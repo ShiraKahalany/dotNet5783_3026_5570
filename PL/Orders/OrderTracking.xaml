@@ -152,11 +152,11 @@
         <TextBlock 
             Name="ShipDate"
             HorizontalAlignment="Left"
-            Margin="29,300,0,0"
+            Margin="19,304,0,0"
             TextWrapping="Wrap" 
-            Text="{Binding ShipDate}"
+            Text="{Binding Path=ShipDate,Converter={StaticResource ShippedToVisibilityConverter}}" 
             VerticalAlignment="Top"
-            Height="42" Width="110" RenderTransformOrigin="0.495,0.02"/>
+            Height="35" Width="123" RenderTransformOrigin="0.495,0.02"/>
 
         <TextBlock 
             x:Name="OrderDate"
@@ -165,16 +165,16 @@
             TextWrapping="Wrap" 
             Text="{Binding OrderDate}" 
             VerticalAlignment="Top"
-            Height="35" Width="123"/>
+           Height="35" Width="123"/>
 
         <TextBlock 
             x:Name="DeliveryDate"
             HorizontalAlignment="Left"
-            Margin="26,381,0,0"
+            Margin="19,385,0,0"
             TextWrapping="Wrap" 
             Text="{Binding DeliveryDate}" 
             VerticalAlignment="Top"
-            Height="39" Width="116"/>
+            Height="35" Width="123"/>
 
         <ListView x:Name="OrderItemView" 
                   ItemsSource="{Binding}"
