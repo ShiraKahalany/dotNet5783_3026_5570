@@ -337,6 +337,37 @@ internal class Order : IOrder
         }
     }
 
+
+
+
+
+    public IEnumerable<BO.Order> GetOrdersByFilter(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
+    {
+        try
+        {
+            IEnumerable<DO.Order?> doOrderList =
+            enumFilter switch
+            {
+                BO.Filters.filterByStatus =>
+                 dal!.Order.GetAll(dp => ((filterValue != null ? (dp?.GetStatus() == (BO.OrderStatus)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))),
+
+                BO.Filters.None =>
+                dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false),
+                _ => dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false),
+            };
+
+            //return (from DO.Product doProduct in doProductList
+            //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
+            //       .ToList();
+            return (from DO.Order doorder in doOrderList
+                    select BlApi.Tools.CopyFields(doorder, new BO.Order()));
+        }
+        catch (DO.NotExistException ex)
+        {
+            throw new BO.NotExistException(ex.Message);
+        }
+    }
+
 }
 
 
