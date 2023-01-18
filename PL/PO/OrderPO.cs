@@ -151,8 +151,8 @@ public class OrderPO : INotifyPropertyChanged
         }
     }
 
-    private List<OrderItem>? items;
-    public List<OrderItem>? Items
+    private List<OrderItemPO>? items;
+    public List<OrderItemPO>? Items
     {
         get
         { return items; }

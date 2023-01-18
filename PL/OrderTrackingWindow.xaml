@@ -39,7 +39,7 @@
                     <GridViewColumn Header="Amount" Width="113">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ContentControl Margin="5,5,0,0" Content="{Binding Path=Items.Count ,Converter={StaticResource IntToStringConverter}}"> </ContentControl>
+                                <ContentControl Margin="5,5,0,0" Content="{Binding Items ,Converter={StaticResource IntToStringConverter}}"> </ContentControl>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

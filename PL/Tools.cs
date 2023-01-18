@@ -142,6 +142,14 @@ public static class Tools
         return target;
     }
 
+    public static PO.OrderPO BoToPoOrder(this BO.Order source)
+    {
+        PO.OrderPO po = new PO.OrderPO();
+        po=source.CopyFields<BO.Order,PO.OrderPO>(po);
+        po.Items = (from item in source.Items
+                   select CopyProp<BO.OrderItem,PO.OrderItemPO>(item)).ToList();
+        return po;
+    }
 
     public static T CopyProp<S, T>(S from)//get the typy we want to copy to 
     {
