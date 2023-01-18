@@ -1,19 +1,9 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using BlApi;
+using System.Windows;
 
 namespace PL
 {
@@ -23,20 +13,24 @@ namespace PL
     public partial class OrderTrackingWindow : Window
     {
         private IBL bl = BLFactory.GetBL();
-        private IEnumerable<BO.OrderForList> orders;
+        private ObservableCollection<PO.OrderPO> ob = new ObservableCollection<PO.OrderPO>();
+        private IEnumerable<BO.Order> orders;
         BackgroundWorker worker;
+        TimeSpan daytime =new TimeSpan(24,0,0);
+        
         public OrderTrackingWindow()
         {
             InitializeComponent();
             try
             {
-                orders = bl.Order.GetOrders();
+                orders = bl.Order.GetOrdersByFilter();
             }
             catch (BO.NoItemsException)
             {
                 MessageBox.Show("There Are NO Items", "ERROR", MessageBoxButton.OK);
             }
-
+            ob = orders.ToObservableByConverter<BO.Order, PO.OrderPO>(ob, PL.Tools.CopyProp<BO.Order, PO.OrderPO>);
+            OrderListView.ItemsSource = ob;
             worker=new BackgroundWorker();
             worker.DoWork += Worker_DoWork;
             worker.ProgressChanged += Worker_ProgressChanged;
@@ -52,7 +46,9 @@ namespace PL
 
         private void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
+            //מביא את כל ההזמנות שעבר X זמן מאז שנשלחו
             
+
         }
 
         private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
@@ -62,8 +58,10 @@ namespace PL
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            worker.RunWorkerAsync();
-           
+            if (!worker.IsBusy)
+                worker.RunWorkerAsync();
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

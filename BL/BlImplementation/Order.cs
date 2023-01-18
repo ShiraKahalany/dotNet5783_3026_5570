@@ -360,7 +360,7 @@ internal class Order : IOrder
             //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
             //       .ToList();
             return (from DO.Order doorder in doOrderList
-                    select BlApi.Tools.CopyFields(doorder, new BO.Order()));
+                    select doorder.OrderToBO());
         }
         catch (DO.NotExistException ex)
         {
