@@ -1,19 +1,9 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using BlApi;
+using System.Windows;
 
 namespace PL
 {
@@ -26,6 +16,8 @@ namespace PL
         private ObservableCollection<PO.OrderForListPO> ob = new ObservableCollection<PO.OrderForListPO>();
         private IEnumerable<BO.OrderForList> BOorderforlist;
         BackgroundWorker worker;
+        TimeSpan time;
+        
         public OrderTrackingWindow()
         {
             InitializeComponent();
@@ -42,7 +34,7 @@ namespace PL
             //ProductListView.DataContext = observeproducts;
             OrderListView.ItemsSource = ob;
 
-            worker=new BackgroundWorker();
+            worker = new BackgroundWorker();
             worker.DoWork += Worker_DoWork;
             worker.ProgressChanged += Worker_ProgressChanged;
             worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
@@ -57,7 +49,8 @@ namespace PL
 
         private void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
-            
+            //מביא את כל ההזמנות שעבר X זמן מאז שנשלחו
+
         }
 
         private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
@@ -67,8 +60,10 @@ namespace PL
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            worker.RunWorkerAsync();
-           
+            if (!worker.IsBusy)
+                worker.RunWorkerAsync();
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
