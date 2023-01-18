@@ -23,24 +23,19 @@ namespace PL
     public partial class OrderTrackingWindow : Window
     {
         private IBL bl = BLFactory.GetBL();
-        private ObservableCollection<PO.OrderForListPO> ob = new ObservableCollection<PO.OrderForListPO>();
-        private IEnumerable<BO.OrderForList> BOorderforlist;
+        private IEnumerable<BO.OrderForList> orders;
         BackgroundWorker worker;
         public OrderTrackingWindow()
         {
             InitializeComponent();
             try
             {
-                BOorderforlist = bl.Order.GetOrders();
+                orders = bl.Order.GetOrders();
             }
             catch (BO.NoItemsException)
             {
                 MessageBox.Show("There Are NO Items", "ERROR", MessageBoxButton.OK);
             }
-
-            ob = BOorderforlist.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
-            //ProductListView.DataContext = observeproducts;
-            OrderListView.ItemsSource = ob;
 
             worker=new BackgroundWorker();
             worker.DoWork += Worker_DoWork;
