@@ -31,11 +31,15 @@
     <None Remove="image\Astoria Stoneware Holder.jpg" />
     <None Remove="image\Black Soft Luxury Bath Rug.jpg" />
     <None Remove="image\Dark-Bronze Mid-Century-Contour-Bathroom Hardware.jpg" />
+    <None Remove="image\Fluted Glass Indoor or Outdoor Sconce.jpg" />
     <None Remove="image\Kitchen rug.jpg" />
     <None Remove="image\logo.png" />
+    <None Remove="image\Mid-Century Bath Ladder Storage.jpg" />
     <None Remove="image\Mid-Century Heathered Wool Rug.jpg" />
+    <None Remove="image\Mid-Century Single Bathroom Vanity.jpg" />
     <None Remove="image\Round Outdoor Market Umbrella.jpg" />
     <None Remove="image\Thin-Wood-floor Mirror.jpg" />
+    <None Remove="image\Utility Stoneware Kitchen Canisters.jpg" />
     <None Remove="image\White Bunk Bed With Stairs and Slide.jpg" />
     <None Remove="image\White Fluted Ceramic Indoor-outdoor-windowsill Planter.jpg" />
     <None Remove="istockphoto-1227524015-612x612.jpg" />
@@ -59,6 +63,18 @@
 
   <ItemGroup>
     <Content Include="image\approved.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\Fluted Glass Indoor or Outdoor Sconce.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\Mid-Century Bath Ladder Storage.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\Mid-Century Single Bathroom Vanity.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\Utility Stoneware Kitchen Canisters.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

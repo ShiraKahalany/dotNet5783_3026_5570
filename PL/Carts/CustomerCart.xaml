@@ -31,14 +31,34 @@
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="White">
-            <Label Content="Shopping Cart"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="238" FontSize="30" HorizontalContentAlignment="Center" FontFamily="Book Antiqua"  Foreground="Black" Margin="56,6,0,0"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="37*"/>
+                <RowDefinition Height="19*"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Shopping Cart"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="238" FontSize="30" HorizontalContentAlignment="Center" FontFamily="Book Antiqua"  Foreground="Black" Margin="86,6,0,0" Grid.RowSpan="2"/>
+            <Button x:Name="back" HorizontalAlignment="Left" VerticalAlignment="Top" Click="back_click" Background="{x:Null}" BorderBrush="{x:Null}" Width="58" Margin="23,12,0,0" Grid.RowSpan="2">
+                <materialDesign:PackIcon Kind="ArrowBack"
+                                         Foreground="Black"
+                                         Height="30" Width="30" RenderTransformOrigin="0.5,0.5">
+                    <materialDesign:PackIcon.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </materialDesign:PackIcon.RenderTransform>
+                </materialDesign:PackIcon>
+            </Button>
         </Grid>
         <Grid Background="White" Margin="0,56,0,0" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Row="1" Grid.Column="1" x:Name="CartDetailsGrid" Visibility="{Binding Path=Items, Converter={StaticResource isEmptyToVisibleConverter}}">
+
+            <Grid Grid.Row="1" Grid.Column="1" x:Name="CartDetailsGrid" Visibility="{Binding Path=Items,Mode=OneWay, Converter={StaticResource isEmptyToVisibleConverter}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="128*"/>
                     <RowDefinition Height="69*"/>

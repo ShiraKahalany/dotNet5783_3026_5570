@@ -212,6 +212,56 @@ internal class DataSource
             InStock = 82,
             Path = "/image/3-piece dark gray sofa.jpg"
         });
+
+        Products.Add(
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Mid-Century Single Bathroom Vanity",
+            Price = 800,
+            Category = Category.Bathroom,
+            InStock = 102,
+            Path = "/image/Mid-Century Single Bathroom Vanity.jpg"
+        });
+
+        Products.Add(
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Fluted Glass Indoor or Outdoor Sconce",
+            Price = 179,
+            Category = Category.Bathroom,
+            InStock = 102,
+            Path = "/image/Fluted Glass Indoor or Outdoor Sconce.jpg"
+        });
+
+        Products.Add(
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Mid-Century Bath Ladder Storage",
+            Price = 359.10,
+            Category = Category.Bathroom,
+            InStock = 102,
+            Path = "/image/Mid-Century Bath Ladder Storage.jpg"
+        });
+
+        Products.Add(
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Utility Stoneware Kitchen Canisters",
+            Price = 69.90,
+            Category = Category.Kitchen,
+            InStock = 102,
+            Path = "/image/Utility Stoneware Kitchen Canisters.jpg"
+        });
+
+
     }
     private void createOrderItems()  // יצירת פריטי-הזמנה
     {

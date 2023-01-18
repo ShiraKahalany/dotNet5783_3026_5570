@@ -14,8 +14,9 @@
         <Button Content="Products" HorizontalAlignment="Left"  FontSize="28" Margin="479,182,0,0" VerticalAlignment="Top" Width="131" Height="46" Click="Button_Click"/>-->
         <Label Content="Welcome Manager " HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" Margin="0,60,0,0" VerticalAlignment="Top" Width="420" Height="76"/>
         <StackPanel Orientation = "Horizontal" Height="35" VerticalAlignment="Top">
-            <Button Content = "Orders" Background="white" MinWidth="150" Margin="10,0,0,0" Click="Button_Click_Orders" BorderBrush="{x:Null}" Width="129"/>
-            <Button Content = "Products" Background="white" MinWidth="150" Click="Button_Click_Products" BorderBrush="{x:Null}"/>
+            <Button Content = "Orders" Background="white" MinWidth="150" Margin="10,0,0,0" Click="Button_Click_Orders" BorderBrush="{x:Null}" Width="129" FontWeight="Bold"/>
+            <Button Content = "Products" Background="white" MinWidth="150" Click="Button_Click_Products" BorderBrush="{x:Null}" FontWeight="Bold"/>
+            <Button Content = "Track Orders" Background="white" MinWidth="150" Click="TrackOrders_Button_Click" BorderBrush="{x:Null}" Foreground="#DD2D621B" FontWeight="Bold" Width="85"/>
         </StackPanel>
         <Frame x:Name="MainManagerOptionsFrame" Margin="0,35,0,0" NavigationUIVisibility="Hidden"/>
 
