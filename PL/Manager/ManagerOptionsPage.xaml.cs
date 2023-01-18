@@ -27,4 +27,8 @@ public partial class ManagerOptionsPage : Page
 
     private void Button_Click_Products(object sender, RoutedEventArgs e) => MainManagerOptionsFrame.Content = new ManagerProductsPage(MainManagerOptionsFrame);
     private void Button_Click_Orders(object sender, RoutedEventArgs e) => MainManagerOptionsFrame.Content = new ManagerOrdersPage(MainManagerOptionsFrame);
+
+    private void TrackOrders_Button_Click(object sender, RoutedEventArgs e)=> new OrderTrackingWindow().Show();
+
+
 }
