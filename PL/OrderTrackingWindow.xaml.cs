@@ -13,6 +13,7 @@ namespace PL
     public partial class OrderTrackingWindow : Window
     {
         private IBL bl = BLFactory.GetBL();
+        private ObservableCollection<PO.OrderPO> ob = new ObservableCollection<PO.OrderPO>();
         private IEnumerable<BO.Order> orders;
         BackgroundWorker worker;
         TimeSpan daytime =new TimeSpan(24,0,0);
@@ -22,13 +23,14 @@ namespace PL
             InitializeComponent();
             try
             {
-                orders = bl.Order.get;
+                orders = bl.Order.GetOrdersByFilter();
             }
             catch (BO.NoItemsException)
             {
                 MessageBox.Show("There Are NO Items", "ERROR", MessageBoxButton.OK);
             }
-
+            ob = orders.ToObservableByConverter<BO.Order, PO.OrderPO>(ob, PL.Tools.CopyProp<BO.Order, PO.OrderPO>);
+            OrderListView.ItemsSource = ob;
             worker=new BackgroundWorker();
             worker.DoWork += Worker_DoWork;
             worker.ProgressChanged += Worker_ProgressChanged;
@@ -45,7 +47,7 @@ namespace PL
         private void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
             //מביא את כל ההזמנות שעבר X זמן מאז שנשלחו
-            orders = bl.Order.
+            
 
         }
 
