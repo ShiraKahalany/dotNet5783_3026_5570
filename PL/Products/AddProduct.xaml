@@ -8,7 +8,9 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:PL.Products"
         mc:Ignorable="d"
-        Title="AddProduct" Height="450" Width="800">
+        Title="AddProduct" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+
     <Window.Resources>
         <converter:AllTextBoxesFilled7Converter x:Key="AllTextBoxesFilled7Converter"/>
     </Window.Resources>

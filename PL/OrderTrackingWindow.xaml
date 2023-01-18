@@ -9,7 +9,8 @@
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       Background="{DynamicResource MaterialDesignPaper}"
         mc:Ignorable="d"
-        Title="OrderTrackingWindow" Height="572" Width="1000">
+        Title="OrderTrackingWindow" Height="572" Width="1000"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converter:StatusToColorConverter x:Key="StatusToColorConverter"/>
 
@@ -58,7 +59,7 @@
                     <GridViewColumn Header="Status" Width="110">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ContentControl Margin="25,10,0,0" Content="{Binding Path=Status}" FontWeight="Bold" Foreground="{Binding Status, Converter={StaticResource StatusToColorConverter}}" >
+                                <ContentControl Margin="25,5,0,0" Content="{Binding Path=Status}" FontWeight="Bold" Foreground="{Binding Status, Converter={StaticResource StatusToColorConverter}}" >
                                 </ContentControl>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -66,7 +67,7 @@
                     <GridViewColumn  Header="Watch" Width="105">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" Margin="20,10,0,0" Height="25" Width="25" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalAlignment="Center">
+                                <Button Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" Margin="20,10,0,0" Height="25" Width="25" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalAlignment="Center" Click="Button_Click_1">
                                     <materialDesign:PackIcon Kind="LorryDelivery" Width="20" Height="20"></materialDesign:PackIcon>
                                 </Button>
                             </DataTemplate>

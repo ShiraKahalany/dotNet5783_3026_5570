@@ -51,7 +51,7 @@ internal class DataSource
         string? myCustomerName, myCustomerEmail, myCustomerAdress, myCusFirstName, myCusLastName;
         DateTime? myOrderDate, myShipDate, myDeliveryDate;
 
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 40; i++)
         {
             myID = Config.NextOrderNumber;
             myCusFirstName = namesArr[rnd.Next(namesArr.Length)];
@@ -61,10 +61,10 @@ internal class DataSource
             myCustomerAdress = (streetArr[rnd.Next(streetArr.Length)]) + " " + rnd.Next(200) + ", " + citiesArr[rnd.Next(citiesArr.Length)];
             myOrderDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 100L));
             myShipDate = null;
-            if (i < 16)
+            if (i >25)
                 myShipDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 50L));
             myDeliveryDate = null;
-            if (i < 12)
+            if (i > 31)
                 myDeliveryDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 20L));
            
             Orders.Add(

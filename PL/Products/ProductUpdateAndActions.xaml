@@ -8,7 +8,9 @@
          
         xmlns:local="clr-namespace:PL.Products"
         mc:Ignorable="d"
-        Title="ProductUpdateAndActions" Height="480" Width="650">
+        Title="ProductUpdateAndActions" Height="480" Width="650"
+        WindowStartupLocation="CenterScreen">
+
     <Window.Resources>
         <converter:AllTextBoxesFilled7Converter x:Key="AllTextBoxesFilled7Converter"/>
     </Window.Resources>

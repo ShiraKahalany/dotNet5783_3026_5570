@@ -56,6 +56,9 @@
     <None Remove="Orders\approved.jpeg" />
     <None Remove="Orders\deliver.jpeg" />
     <None Remove="Orders\track1.jpeg" />
+    <None Remove="Orders\truck.png" />
+    <None Remove="Orders\truck2.png" />
+    <None Remove="Orders\truck3.png" />
     <None Remove="Orders\updateDel.jpeg" />
     <None Remove="Products\download.png" />
     <None Remove="Updated background.jpg" />
@@ -126,6 +129,9 @@
     <Resource Include="Orders\approved.jpeg" />
     <Resource Include="Orders\deliver.jpeg" />
     <Resource Include="Orders\track1.jpeg" />
+    <Resource Include="Orders\truck.png" />
+    <Resource Include="Orders\truck2.png" />
+    <Resource Include="Orders\truck3.png" />
     <Resource Include="Orders\updateDel.jpeg" />
     <Resource Include="Products\download.png" />
     <Resource Include="Updated background.jpg" />

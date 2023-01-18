@@ -424,11 +424,11 @@ public class StatusToColorConverter : IValueConverter
     {
 
         if ((BO.OrderStatus)value == BO.OrderStatus.Ordered)
-            return Brushes.YellowGreen;
+            return Brushes.Fuchsia;
         if ((BO.OrderStatus)value == BO.OrderStatus.Shipped)
-            return Brushes.SeaGreen;
+            return Brushes.DarkViolet;
         if ((BO.OrderStatus)value == BO.OrderStatus.Delivered)
-            return Brushes.Green;
+            return Brushes.Blue;
         return Brushes.Black;
     }
 
