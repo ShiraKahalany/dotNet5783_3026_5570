@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Threading;
 using System.Windows;
 
 namespace PL
@@ -14,10 +16,11 @@ namespace PL
     {
         private IBL bl = BLFactory.GetBL();
         private ObservableCollection<PO.OrderPO> ob = new ObservableCollection<PO.OrderPO>();
-        private IEnumerable<BO.Order> orders;
-        BackgroundWorker worker;
-        TimeSpan daytime =new TimeSpan(24,0,0);
-        
+        IEnumerable<BO.Order> orders;
+        private BackgroundWorker worker;
+        TimeSpan day = new TimeSpan(24, 0, 0);
+        DateTime now = DateTime.Now;
+
         public OrderTrackingWindow()
         {
             InitializeComponent();
@@ -29,9 +32,9 @@ namespace PL
             {
                 MessageBox.Show("There Are NO Items", "ERROR", MessageBoxButton.OK);
             }
-            ob = orders.ToObservableByConverter<BO.Order, PO.OrderPO>(ob, PL.Tools.CopyProp<BO.Order, PO.OrderPO>);
+            ob = orders.ToObservableByConverter<BO.Order, PO.OrderPO>(ob, PL.Tools.BoToPoOrder);
             OrderListView.ItemsSource = ob;
-            worker=new BackgroundWorker();
+            worker = new BackgroundWorker();
             worker.DoWork += Worker_DoWork;
             worker.ProgressChanged += Worker_ProgressChanged;
             worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
@@ -41,19 +44,27 @@ namespace PL
 
         private void Worker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
-            throw new NotImplementedException();
+            MessageBox.Show("yesssss it does!!!");
         }
 
         private void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
-            //מביא את כל ההזמנות שעבר X זמן מאז שנשלחו
-            
-
+            now += day * 0.3;
+            if (worker.WorkerReportsProgress)
+                worker.ReportProgress(1);
+            Thread.Sleep(2000);
         }
 
         private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            var ToShipped = from BO.Order order in orders
+                            where order.OrderDate + day * 4 <= now && order.Status == BO.OrderStatus.Ordered
+                            select bl.Order.UpdateStatusToShipped(order.ID);
+            var ToDelivered = from BO.Order order in orders
+                              where order.ShipDate + day * 4 <= now && order.Status == BO.OrderStatus.Shipped
+                              select bl.Order.UpdateStatusToProvided(order.ID);
+            ob = orders.ToObservableByConverter<BO.Order, PO.OrderPO>(ob, PL.Tools.BoToPoOrder);
+
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
@@ -61,12 +72,12 @@ namespace PL
             if (!worker.IsBusy)
                 worker.RunWorkerAsync();
 
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             worker.CancelAsync();
         }
+
     }
 }

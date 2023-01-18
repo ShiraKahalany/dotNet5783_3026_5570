@@ -142,7 +142,7 @@ public static class Tools
         return target;
     }
 
-    public static PO.OrderPO BoToPoOrder(this BO.Order source)
+    public static PO.OrderPO BoToPoOrder(BO.Order source)
     {
         PO.OrderPO po = new PO.OrderPO();
         po=source.CopyFields<BO.Order,PO.OrderPO>(po);

@@ -42,7 +42,6 @@ public partial class ManagerOrdersPage : Page
         ob = BOorderforlist.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
         //ProductListView.DataContext = observeproducts;
         OrderListView.ItemsSource = ob;
-        ob.Count
         AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
 
     }

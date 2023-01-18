@@ -424,12 +424,12 @@ public class StatusToColorConverter : IValueConverter
     {
 
         if ((BO.OrderStatus)value == BO.OrderStatus.Ordered)
-            return Brushes.LightGreen;
-        if ((BO.OrderStatus)value == BO.OrderStatus.Ordered)
+            return Brushes.YellowGreen;
+        if ((BO.OrderStatus)value == BO.OrderStatus.Shipped)
+            return Brushes.SeaGreen;
+        if ((BO.OrderStatus)value == BO.OrderStatus.Delivered)
             return Brushes.Green;
-        if ((BO.OrderStatus)value == BO.OrderStatus.Ordered)
-            return Brushes.DarkGreen;
-        return Brushes.YellowGreen;
+        return Brushes.Black;
     }
 
     //convert from target property type to source property type

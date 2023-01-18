@@ -11,7 +11,7 @@
         mc:Ignorable="d"
         Title="OrderTrackingWindow" Height="572" Width="1000">
     <Window.Resources>
-        <converter:IntToStringConverter x:Key="IntToStringConverter"/>
+        <converter:StatusToColorConverter x:Key="StatusToColorConverter"/>
 
     </Window.Resources>
     <Grid>
@@ -39,7 +39,7 @@
                     <GridViewColumn Header="Amount" Width="113">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ContentControl Margin="5,5,0,0" Content="{Binding Items ,Converter={StaticResource IntToStringConverter}}"> </ContentControl>
+                                <ContentControl Margin="5,5,0,0" Content="{Binding Items.Count}"> </ContentControl>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -58,7 +58,8 @@
                     <GridViewColumn Header="Status" Width="110">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ContentControl Margin="25,10,0,0" Content="{Binding Path=Status}"></ContentControl>
+                                <ContentControl Margin="25,10,0,0" Content="{Binding Path=Status}" FontWeight="Bold" Foreground="{Binding Status, Converter={StaticResource StatusToColorConverter}}" >
+                                </ContentControl>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -74,7 +75,7 @@
                     <GridViewColumn  Header="Process" Width="125">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ProgressBar Name="progressBar" Minimum="0" Maximum="100" Background="AntiqueWhite" >
+                                <ProgressBar Name="progressBar" Minimum="0" Maximum="100" Width="110" Height="15" Value="70" BorderBrush="Gray" Foreground="{Binding Status, Converter={StaticResource StatusToColorConverter}}" >
                                     
                                 </ProgressBar>
                             </DataTemplate>
