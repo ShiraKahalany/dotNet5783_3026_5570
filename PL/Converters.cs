@@ -417,6 +417,29 @@ public class AmountToColorConverter : IValueConverter
     }
 }
 
+public class StatusToColorConverter : IValueConverter
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+
+        if ((BO.OrderStatus)value == BO.OrderStatus.Ordered)
+            return Brushes.LightGreen;
+        if ((BO.OrderStatus)value == BO.OrderStatus.Ordered)
+            return Brushes.Green;
+        if ((BO.OrderStatus)value == BO.OrderStatus.Ordered)
+            return Brushes.DarkGreen;
+        return Brushes.YellowGreen;
+    }
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        //try { int.Parse(value.ToString()); }
+        return 1;
+    }
+}
+
 public class TimeToColorConverter : IValueConverter
 {
     //convert from source property type to target property type
@@ -436,6 +459,8 @@ public class TimeToColorConverter : IValueConverter
         return DateTime.Now;
     }
 }
+
+
 
 public class IntToVisibilityConverter : IValueConverter
 {
