@@ -455,3 +455,68 @@ public class IntToVisibilityConverter : IValueConverter
         return 0;
     }
 }
+
+
+class TextBoxesFilledConverter : IMultiValueConverter
+{
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    {
+        return values.All(x => !string.IsNullOrWhiteSpace(x as string));
+    }
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+
+class AllTextBoxesFilledConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        var textboxes = parameter as TextBox[];
+        if (textboxes == null) return true;
+        return textboxes.All(x => !string.IsNullOrWhiteSpace(x.Text)) && !string.IsNullOrWhiteSpace((string)value);
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+
+public class AllTextBoxesFilled7Converter : IMultiValueConverter
+{
+    //public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    //{
+    //    foreach (var value in values)
+    //    {
+    //        if (string.IsNullOrWhiteSpace((string)value))
+    //        {
+    //            return false;
+    //        }
+    //    }
+    //    return true;
+    //}
+
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    {
+        foreach (var value in values)
+        {
+            if (value != values.Last()&& string.IsNullOrWhiteSpace((string)value))
+            {
+                return false;
+            }
+            if (value == null && value == values.Last())
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

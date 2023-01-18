@@ -32,7 +32,7 @@ public partial class CustomerCart : Page
         cartBo = cart;
         cartPO = PL.Tools.CopyBOCartToPO(cartBo);
         //cartBo=cartPO.CopyPOCartToBO();
-        CartItems.ItemsSource = cartPO.Items;
+        CartItems.ItemsSource= cartPO.Items;
         CartItems.DataContext=cartPO.Items;
         totalPrice.DataContext=cartPO;
         NoItems.DataContext = cartPO;
