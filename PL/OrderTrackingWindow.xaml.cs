@@ -13,16 +13,16 @@ namespace PL
     public partial class OrderTrackingWindow : Window
     {
         private IBL bl = BLFactory.GetBL();
-        private IEnumerable<BO.OrderForList> orders;
+        private IEnumerable<BO.Order> orders;
         BackgroundWorker worker;
-        TimeSpan time;
+        TimeSpan daytime =new TimeSpan(24,0,0);
         
         public OrderTrackingWindow()
         {
             InitializeComponent();
             try
             {
-                orders = bl.Order.GetOrders();
+                orders = bl.Order.get;
             }
             catch (BO.NoItemsException)
             {
@@ -45,6 +45,7 @@ namespace PL
         private void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
             //מביא את כל ההזמנות שעבר X זמן מאז שנשלחו
+            orders = bl.Order.
 
         }
 
