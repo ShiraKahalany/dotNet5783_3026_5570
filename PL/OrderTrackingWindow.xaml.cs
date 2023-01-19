@@ -46,7 +46,11 @@ namespace PL
 
         private void Worker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
+            if(!toContinue)
             MessageBox.Show("yesssss it does!!!");
+            else
+            {
+                MessageBox.Show("In Middle!!!");
         }
 
         private void Worker_DoWork(object? sender, DoWorkEventArgs e)

@@ -60,18 +60,20 @@ internal class DataSource
             myCustomerEmail = myCusFirstName + myCusLastName + "@gmail.com";
             myCustomerAdress = (streetArr[rnd.Next(streetArr.Length)]) + " " + rnd.Next(200) + ", " + citiesArr[rnd.Next(citiesArr.Length)];
             myOrderDate = DateTime.Now.AddDays(-(rnd.Next(14,31)));
+            myShipDate = null;
             if (i > 25)
-                myShipDate = DateTime.Now.AddDays(-(rnd.Next(7, 14)));
+                myShipDate = DateTime.Now.AddDays(-(rnd.Next(7, 14)))- new TimeSpan(rnd.NextInt64(40000000000000));
+            myDeliveryDate = null;
             if (i > 31)
-                myDeliveryDate = DateTime.Now.AddDays(-(rnd.Next(1, 7)));
-            //myOrderDate = DateTime.Now - new TimeSpan(rnd.n(10L * 1000L * 3600L * 24L * 100L));
+                myDeliveryDate = DateTime.Now.AddDays(-(rnd.Next(1, 7))) - new TimeSpan(rnd.NextInt64(6000000000));
+            //myOrderDate = DateTime.Now - new TimeSpan(rnd.n());
             //myShipDate = null;
             //if (i >25)
             //    myShipDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 50L));
             //myDeliveryDate = null;
             //if (i > 31)
             //    myDeliveryDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 20L));
-           
+
             Orders.Add(
             new Order
             {
