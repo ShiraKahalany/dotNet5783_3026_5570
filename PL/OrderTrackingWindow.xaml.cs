@@ -22,6 +22,7 @@ public partial class OrderTrackingWindow : Window
     TimeSpan day = new TimeSpan(24, 0, 0);
     DateTime now = DateTime.Now;
     bool toContinue = true;
+    int progress = 0;
 
     public OrderTrackingWindow()
     {
@@ -51,6 +52,7 @@ public partial class OrderTrackingWindow : Window
         else
         {
             MessageBox.Show("In Middle!!!");
+            toContinue = true;
         }
     }
 
@@ -78,7 +80,7 @@ public partial class OrderTrackingWindow : Window
         toContinue = false;
         for (int i = 0; i < orders.Count; i++)
         {
-            if (orders[i].Status == BO.OrderStatus.Ordered && orders[i].OrderDate <= now + day * 4)
+            if (orders[i].Status == BO.OrderStatus.Ordered && orders[i].OrderDate + day * 14 >= now )
                 bl.Order.UpdateStatusToShipped(orders[i].ID);
             else if (orders[i].Status == BO.OrderStatus.Shipped && orders[i].ShipDate <= now + day * 4)
                 bl.Order.UpdateStatusToProvided(orders[i].ID);
@@ -111,8 +113,9 @@ public partial class OrderTrackingWindow : Window
 
     private void Start_Click(object sender, RoutedEventArgs e)
     {
-        if (!worker.IsBusy)
+       // if (!worker.IsBusy)
             worker.RunWorkerAsync();
+        //toContinue = true;
 
     }
 
@@ -121,9 +124,10 @@ public partial class OrderTrackingWindow : Window
         if (worker.WorkerSupportsCancellation)
         {
             worker.CancelAsync();
-            toContinue = false;
-        }
+           // toContinue = false;
+            
         MessageBox.Show("I am Stoppped");
+        }
     }
 
     private void Button_Click_1(object sender, RoutedEventArgs e)
