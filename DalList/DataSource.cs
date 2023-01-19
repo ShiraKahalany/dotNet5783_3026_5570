@@ -59,13 +59,18 @@ internal class DataSource
             myCustomerName = myCusFirstName + " " + myCusLastName;
             myCustomerEmail = myCusFirstName + myCusLastName + "@gmail.com";
             myCustomerAdress = (streetArr[rnd.Next(streetArr.Length)]) + " " + rnd.Next(200) + ", " + citiesArr[rnd.Next(citiesArr.Length)];
-            myOrderDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 100L));
-            myShipDate = null;
-            if (i >25)
-                myShipDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 50L));
-            myDeliveryDate = null;
+            myOrderDate = DateTime.Now.AddDays(-(rnd.Next(14,31)));
+            if (i > 25)
+                myShipDate = DateTime.Now.AddDays(-(rnd.Next(7, 14)));
             if (i > 31)
-                myDeliveryDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 20L));
+                myDeliveryDate = DateTime.Now.AddDays(-(rnd.Next(1, 7)));
+            //myOrderDate = DateTime.Now - new TimeSpan(rnd.n(10L * 1000L * 3600L * 24L * 100L));
+            //myShipDate = null;
+            //if (i >25)
+            //    myShipDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 50L));
+            //myDeliveryDate = null;
+            //if (i > 31)
+            //    myDeliveryDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 20L));
            
             Orders.Add(
             new Order
@@ -265,7 +270,7 @@ internal class DataSource
     }
     private void createOrderItems()  // יצירת פריטי-הזמנה
     {
-        for(int j=0; j < 20; j++)
+        for(int j=0; j < 40; j++)
         {
             Product? product = Products[rnd.Next(10)];
             int NumOfItemsToThisOrder = rnd.Next(1,5);

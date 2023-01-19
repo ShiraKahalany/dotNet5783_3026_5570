@@ -14,19 +14,25 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.6*"></RowDefinition>
-            <RowDefinition Height="0.5*"></RowDefinition>
-            <RowDefinition Height="2.8*"></RowDefinition>
+            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1.3*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Content="Order Tracking" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Book Antiqua" FontSize="20" FontWeight="Bold"/>
-        <Label Content="{Binding ID}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Book Antiqua" FontSize="15" FontWeight="Bold"/>
+        <Label Content="Order Tracking" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Book Antiqua" FontSize="20" FontWeight="Bold" />
+        <Label Content="{Binding ID}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Book Antiqua" Height="20" FontSize="15" FontWeight="Bold"/>
 
-        <StackPanel Height="130" Width="250" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Height="40" Width="150" HorizontalAlignment="Left" Content="{Binding Tracking[0].Item1}" FontFamily="Book Antiqua" />
-            <Label Height="40" Width="150" HorizontalAlignment="Left" Content="{Binding Tracking[1].Item1}" FontFamily="Book Antiqua" />
-            <Label Height="40" Width="150" HorizontalAlignment="Left" Content="{Binding Tracking[2].Item1}" FontFamily="Book Antiqua"/>
-        </StackPanel>
-        <Image  Grid.Row="3" Height="96" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Source="/Orders/truck3.png"/>
+        <Label Grid.Row="2" Height="40" Width="150" HorizontalAlignment="Left" Margin="10,0,0,0" Content="{Binding Tracking[0].Item1}" FontSize="13" FontWeight="Bold" FontFamily="Calibri" />
+        <Label Grid.Row="2" Height="40" Width="150" HorizontalAlignment="Right" Margin="0,0,10,0" Content="{Binding Tracking[0].Item2}" FontSize="13" FontWeight="Bold" FontFamily="Calibri" />
+
+        <Label Height="40" Margin="10,0,0,0" Grid.Row="3" Width="150" HorizontalAlignment="Left" Content="{Binding Tracking[1].Item1}" FontSize="13" FontWeight="Bold" FontFamily="Calibri" />
+        <Label Height="40" Margin="0,0,10,0" Grid.Row="3" Width="150" HorizontalAlignment="Right" Content="{Binding Tracking[1].Item2}" FontSize="13" FontWeight="Bold" FontFamily="Calibri" />
+
+        <Label Height="40" Grid.Row="4" Margin="10,0,0,0" Width="150" HorizontalAlignment="Left" Content="{Binding Tracking[2].Item1}" FontSize="13" FontWeight="Bold" FontFamily="Calibri"/>
+        <Label Height="40" Grid.Row="4" Margin="0,0,10,0" Width="150" HorizontalAlignment="Right" Content="{Binding Tracking[2].Item2}" FontSize="13" FontWeight="Bold" FontFamily="Calibri"/>
+
+        <Image  Grid.Row="6" Height="96" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Source="/Orders/truck3.png"/>
 
     </Grid>
 </Window>
