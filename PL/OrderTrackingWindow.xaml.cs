@@ -22,6 +22,7 @@ public partial class OrderTrackingWindow : Window
     TimeSpan day = new TimeSpan(24, 0, 0);
     DateTime now = DateTime.Now;
     bool toContinue = true;
+    int from = 0;
 
     public OrderTrackingWindow()
     {
@@ -42,15 +43,18 @@ public partial class OrderTrackingWindow : Window
         worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
         worker.WorkerSupportsCancellation = true;
         worker.WorkerReportsProgress = true;
+        
+   
     }
 
     private void Worker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
-        if (!toContinue)
+        if (from==0)
             MessageBox.Show("yesssss it does!!!");
-        else
+        else if(from==1)
         {
-            MessageBox.Show("In Middle!!!");
+             toContinue = true;
+            from = 0;
         }
     }
 
@@ -58,10 +62,10 @@ public partial class OrderTrackingWindow : Window
     {
         while (toContinue)
         {
-            now += day * 0.1;
+            now += day ;
             if (worker.WorkerReportsProgress)
                 worker.ReportProgress(1);
-            Thread.Sleep(4000);
+            Thread.Sleep(1000);
         }
     }
 
@@ -78,12 +82,13 @@ public partial class OrderTrackingWindow : Window
         toContinue = false;
         for (int i = 0; i < orders.Count; i++)
         {
-            if (orders[i].Status == BO.OrderStatus.Ordered && orders[i].OrderDate <= now + day * 4)
+            if (orders[i].Status == BO.OrderStatus.Ordered && orders[i].OrderDate <= now.AddDays(-31) )
                 bl.Order.UpdateStatusToShipped(orders[i].ID);
-            else if (orders[i].Status == BO.OrderStatus.Shipped && orders[i].ShipDate <= now + day * 4)
+            else if (orders[i].Status == BO.OrderStatus.Shipped && orders[i].ShipDate <= now.AddDays(-14))
                 bl.Order.UpdateStatusToProvided(orders[i].ID);
             if (orders[i].Status != BO.OrderStatus.Delivered)
                 toContinue = true;
+           
             // Thread.Sleep(500);
         }
 
@@ -113,7 +118,7 @@ public partial class OrderTrackingWindow : Window
     {
         if (!worker.IsBusy)
             worker.RunWorkerAsync();
-
+        //toContinue = true;
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)
@@ -122,8 +127,8 @@ public partial class OrderTrackingWindow : Window
         {
             worker.CancelAsync();
             toContinue = false;
+            from = 1;
         }
-        MessageBox.Show("I am Stoppped");
     }
 
     private void Button_Click_1(object sender, RoutedEventArgs e)
