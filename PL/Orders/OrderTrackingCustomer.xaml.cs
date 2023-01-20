@@ -28,6 +28,7 @@ public partial class OrderTrackingCustomer : Page
         InitializeComponent();
         boOrder = order;
         DataContext = boOrder;
+        ItemsListView.ItemsSource =boOrder.Items;
     }
 
 

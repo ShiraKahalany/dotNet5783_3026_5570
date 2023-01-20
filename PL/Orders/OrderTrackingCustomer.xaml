@@ -16,8 +16,47 @@
         <converter:DeliveredToVisibilityConverter  x:Key="DeliveredToVisibilityConverter"/>
     </Page.Resources>
     <Grid Background="White">
-        <Grid Name="OrderItems" Background="AliceBlue" Margin="437,74,59,30">
-
+        <Grid Name="OrderItems" Background="white" Margin="488,74,59,23">
+            <ListView x:Name="ItemsListView"  HorizontalAlignment="Center" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="400">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding Path}" 
+                               Height="100" Grid.Column="1"></Image>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="300" Grid.Column="3">
+                                <TextBlock Name="name" Width="260" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding Name}"></TextBlock>
+                                <TextBlock Text="Item Price" FontSize="10" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                <StackPanel Grid.Column="3" Name="price" Orientation="Horizontal" Width="160" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
+                                    <TextBlock Text="$" FontSize="20"></TextBlock>
+                                    <TextBlock Text="{Binding Price}" Width="160" FontSize="20"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="300" Grid.Column="4">
+                                <TextBlock Text="Item Total" FontSize="10" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                <StackPanel Grid.Column="4" Name="totalprice" Orientation="Horizontal" Width="160" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
+                                    <TextBlock Text="$" FontSize="20"></TextBlock>
+                                    <TextBlock Name="TotalItem" Text="{Binding TotalItem}" Width="250" FontSize="20"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <Button x:Name="RemoveFromCartButton"
+                                Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
+                                Height="43" Width="42"
+                                Grid.Column="0">
+                                <materialDesign:PackIcon Kind="Trash" 
+                                         Foreground="Black"
+                                         Height="25" Width="25"/>
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
 
 
@@ -128,7 +167,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        
+
         <Button  HorizontalAlignment="Left" Margin="133,212,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}">
 
             <materialDesign:PackIcon Kind="TickCircle" 
@@ -159,8 +198,8 @@
                                          Foreground="Black"
                                          Height="40" Width="60" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
         </Button>
-        
-        
+
+
         <Button  HorizontalAlignment="Left" Margin="133,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}"
                   Visibility="{Binding Path=Status, Converter={StaticResource ShippedToVisibilityConverter}}">
 

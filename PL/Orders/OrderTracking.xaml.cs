@@ -35,8 +35,7 @@ public partial class OrderTracking : Page
         }
         order = boOrder.CopyFields<BO.Order, PO.OrderPO>(order);
         DataContext = order;
-        //CartItems.ItemsSource = boOrder.Items;
-        //CartItems.DataContext = boOrder.Items;
+        ItemsListView.ItemsSource = boOrder.Items;
     }
 
 

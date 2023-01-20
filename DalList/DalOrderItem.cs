@@ -72,7 +72,9 @@ public class DalOrderItem : IOrderItem
             OrderID = temp?.OrderID,
             Price = temp?.Price,
             ProductID = temp?.ProductID,
-            TotalItem =(temp?.Price)*(temp?.Amount)
+            TotalItem =(temp?.Price)*(temp?.Amount),
+            Name = temp?.Name,
+            Path = temp?.Path
         };
         Add(orderItem);
     }

@@ -274,7 +274,7 @@ internal class DataSource
     {
         for(int j=0; j < 40; j++)
         {
-            Product? product = Products[rnd.Next(10)];
+            Product? product = Products[rnd.Next(15)];
             int NumOfItemsToThisOrder = rnd.Next(1,5);
             Order? order = Orders[j];
             for (int k=0; k < NumOfItemsToThisOrder; k++)
@@ -289,7 +289,9 @@ internal class DataSource
                     OrderID = order?.ID ?? 0,
                     Price = product?.Price ?? 0,
                     Amount = amount,
-                    TotalItem =amount*(product?.Price ?? 0)
+                    TotalItem =amount*(product?.Price ?? 0),
+                    Name = product?.Name,
+                    Path = product?.Path
                 });
 
                 product = Products[rnd.Next(10)];
