@@ -1,3 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <products>
+  <Product>
+    <ID>100020</ID>
+    <Name>Kitchen rug</Name>
+    <Category>Kitchen</Category>
+    <Price>60</Price>
+    <InStock>5</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/image/Kitchen rug.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100021</ID>
+    <Name>Black Soft Luxury Bath Rug</Name>
+    <Category>Bathroom</Category>
+    <Price>40</Price>
+    <InStock>198</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/image/Black Soft Luxury Bath Rug.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100022</ID>
+    <Name>Astoria Stoneware Holder</Name>
+    <Category>Kitchen</Category>
+    <Price>29</Price>
+    <InStock>45</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/image/Astoria Stoneware Holder.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100023</ID>
+    <Name>White Bunk Bed With Stairs and Slide</Name>
+    <Category>Bedroom</Category>
+    <Price>1999</Price>
+    <InStock>130</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/image/White Bunk Bed With Stairs and Slide.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100024</ID>
+    <Name>White Fluted Ceramic Indoor-outdoor-windowsill Planter</Name>
+    <Category>Garden</Category>
+    <Price>99</Price>
+    <InStock>100</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/image/White Fluted Ceramic Indoor-outdoor-windowsill Planter.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100025</ID>
+    <Name>3-Pieces Green Sofa</Name>
+    <Category>Living_room</Category>
+    <Price>3347</Price>
+    <InStock>155</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/image/3-Pieces Green Sofa.jpg</Path>
+  </Product>
 </products>

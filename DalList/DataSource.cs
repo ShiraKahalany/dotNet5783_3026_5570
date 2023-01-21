@@ -161,7 +161,7 @@ internal class DataSource
             InStock = 15,
             Path = "/image/3-Pieces Green Sofa.jpg"
         });
-
+        //till here xml
         Products.Add(
         new Product
         {
@@ -267,6 +267,102 @@ internal class DataSource
             InStock = 102,
             Path = "/image/Utility Stoneware Kitchen Canisters.jpg"
         });
+
+        Products.Add(
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Modern Kitchen Drying Rack",
+            Price = 35,
+            Category = Category.Kitchen,
+            InStock = 150,
+            Path = "/image/Modern Kitchen Drying Rack.jpg"
+        });
+
+        Products.Add(
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Kaloh Storage Carts",
+            Price = 250,
+            Category = Category.Kitchen,
+            InStock = 150,
+            Path = "/image/Kaloh Storage Carts.jpg"
+        });
+
+        Products.Add(
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Huron Outdoor Lounge Chair",
+            Price = 1298,
+            Category = Category.Garden,
+            InStock = 150,
+            Path = "/image/Huron Outdoor Lounge Chair.jpg"
+        });
+
+        Products.Add(
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Coastal Outdoor Swivel Chair",
+            Price = 1079.10,
+            Category = Category.Garden,
+            InStock = 150,
+            Path = "/image/Coastal Outdoor Swivel Chair.jpg"
+        });
+
+        Products.Add(
+       new Product
+       {
+           IsDeleted = false,
+           ID = Config.NextProductNumber,
+           Name = "Concrete Indoor or Outdoor Pedestal Round Dining Table",
+           Price = 599,
+           Category = Category.Garden,
+           InStock = 150,
+           Path = "/image/Concrete Indoor or Outdoor Pedestal Round Dining Table.jpg"
+       });
+
+      Products.Add(
+      new Product
+      {
+          IsDeleted = false,
+          ID = Config.NextProductNumber,
+          Name = "Porto Pedestal Concrete Outdoor Dining Table",
+          Price = 999,
+          Category = Category.Garden,
+          InStock = 150,
+          Path = "/image/Porto Pedestal Concrete Outdoor Dining Table.jpg"
+      });
+
+        Products.Add(
+     new Product
+     {
+         IsDeleted = false,
+         ID = Config.NextProductNumber,
+         Name = "Porto Pedestal Concrete Outdoor Dining Table",
+         Price = 180,
+         Category = Category.Bedroom,
+         InStock = 150,
+         Path = "/image/Lakeside Matelasse Duvet Cover & Shams.jpg"
+     });
+
+        Products.Add(
+   new Product
+   {
+       IsDeleted = false,
+       ID = Config.NextProductNumber,
+       Name = "Porto Pedestal Concrete Outdoor Dining Table",
+       Price = 125,
+       Category = Category.Bedroom,
+       InStock = 150,
+       Path = "/image/Crinkle Velvet Duvet Cover & Shams.jpg"
+   });
 
 
     }
