@@ -349,11 +349,11 @@ internal class Order : IOrder
             enumFilter switch
             {
                 BO.Filters.filterByStatus =>
-                 dal!.Order.GetAll(dp => ((filterValue != null ? (dp?.GetStatus() == (BO.OrderStatus)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))),
+                 dal!.Order.GetAll(dp => ((filterValue != null ? (dp?.GetStatus() == (BO.OrderStatus)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))).OrderBy(x=>x?.ID),
 
                 BO.Filters.None =>
-                dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false),
-                _ => dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false),
+                dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false).OrderBy(x => x?.ID),
+                _ => dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false).OrderBy(x => x?.ID),
             };
 
             //return (from DO.Product doProduct in doProductList
