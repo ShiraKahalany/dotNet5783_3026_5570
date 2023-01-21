@@ -52,7 +52,7 @@ public partial class ProductDetails : Page
             //bocart.Items.Add(new PO.OrderItemPO() { ProductID = id,Name= PoProduct.Name, Amount = amount, Price = price, IsDeleted=false, Path= PoProduct.Path});
             //pocart.TotalPrice += price * amount;
             //bl.Cart.AddProductToCart(cart,id, amount);
-            MessageBox.Show("Add To Cart Seccessfully", "Add To Cart", MessageBoxButton.OK);
+            //MessageBox.Show("Add To Cart Seccessfully", "Add To Cart", MessageBoxButton.OK);
             itemsList.Remove(PoProduct);
             PoProduct.Amount = amount;
             itemsList.Add(PoProduct);

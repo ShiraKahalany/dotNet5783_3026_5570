@@ -183,9 +183,85 @@ internal static class Tools
         return amount;
     }
 
+    public static void updateItemsStock(this BO.Order order)
+    //
+    {
+        DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
+        foreach (var item in order.Items)
+        {
+            DO.Product product;
+            try
+            {
+                product = dal.Product.GetTByFilter(x => x?.ID == item.ProductID) ?? throw new BO.NotExistException();
+            }
+            catch (DO.NotExistException)
+            {
+                throw new BO.NotExistException("The product is no longer available");
+            }
+            product.InStock += item.Amount;
+            dal.Product.Update(product);
+        }
+    }
 
 
+    public static void checkStock(this List<BO.OrderItem> items)
+    //מתודת הרחבה - מקבלת רשימת מוצרי-הזמנה ובודקת האם כל המוצרים נמצאים במלאי ובכמות המבוקשת
+    {
+        DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
+        foreach (var item in items)
+        {
+            DO.Product product;
+            try
+            {
+                product = dal.Product.GetTByFilter(x => x?.ID == item.ProductID && x?.IsDeleted == false) ?? throw new BO.NotExistException();
+            }
+            catch (DO.NotExistException)
+            {
+                throw new BO.NotExistException("The product is no longer available");
+            }
+            if (product.InStock < item.Amount)
+                throw new BO.NotInStockException();
+            // list.Add(new BO.OrderItem { Amount = item.Amount, ID = item.ID, IsDeleted = false, Name = product.Name, Path = product.Path, Price = product.Price, ProductID = item.ProductID, TotalItem = Math.Round(product.Price ?? 0 * item.Amount ?? 0, 2) });
+            //order.TotalPrice += Math.Round(product.Price ?? 0 * item.Amount ?? 0, 2);
+        }
+    }
+
+    public static void updateStock(this List<BO.OrderItem> items)
+    {
+        DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
+        foreach (BO.OrderItem item in items)
+        {
+            DO.Product product;
+            DO.OrderItem orderItem;
+            try
+            {
+                product = dal.Product.GetTByFilter(x => x?.ID == item.ProductID && x?.IsDeleted == false) ?? throw new BO.NotExistException();
+            }
+            catch (DO.NotExistException)
+            {
+                throw new BO.NotExistException("The product is no longer available");
+            }
+            try
+            {
+                orderItem = dal.OrderItem.GetTByFilter(x => x?.ID == item.ID && x?.IsDeleted == true) ?? throw new BO.NotExistException();
+            }
+            catch (DO.NotExistException)
+            {
+                throw new BO.NotExistException();
+            }
+            
+            orderItem.Price = product.Price;
+            orderItem.TotalItem = Math.Round(orderItem.Price ?? 0 * orderItem.Amount ?? 0, 2);
+            orderItem.Path = product.Path;
+            product.InStock -= orderItem.Amount;
+            dal.OrderItem.Update(orderItem);
+            dal.OrderItem.Restore(orderItem);
+            product.InStock = product.InStock - item.Amount;
+            dal.Product.Update((DO.Product)product);
+        }
+    }
 }
+
 
 
 

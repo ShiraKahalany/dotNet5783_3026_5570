@@ -281,8 +281,11 @@ internal class Order : IOrder
             throw new BO.NotExistException();
         try
         {
+            BO.Order boOrder =GetDeletedOrderById(id);
+            boOrder.Items!.checkStock();
+            boOrder.Items!.updateStock();
             DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted);
-            dal.Order.Restore((DO.Order)order);
+            dal.Order.Restore((DO.Order)order!);
         }
         catch (DO.NotExistException ex)
         {
@@ -290,16 +293,19 @@ internal class Order : IOrder
         }
     }
 
-    public void CancelOrder(int id)
+    public void CancelOrder(BO.Order or)
     //מתודה לביטול הזמנה
     {
         try
         {
-            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
+            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == or.ID) && order.GetValueOrDefault().IsDeleted == false);
             if (order?.ShipDate != null)
                 throw new BO.CanNotUpdateOrderException();
             if (order?.OrderDate != null)
-                dal.Order.Delete(id);
+            {
+                or.updateItemsStock();
+                dal.Order.Delete(or.ID);
+            }
             else
                 throw new BO.CantCancelOrderException();
         }

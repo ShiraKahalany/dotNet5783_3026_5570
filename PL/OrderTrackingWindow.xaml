@@ -13,7 +13,7 @@
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converter:StatusToColorConverter x:Key="StatusToColorConverter"/>
-
+        <converter:ProgressToIntConverter x:Key="ProgressToIntConverter"/>
     </Window.Resources>
     <Grid>
         <ListView  Name="OrderListView" 
@@ -76,8 +76,7 @@
                     <GridViewColumn  Header="Process" Width="125">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ProgressBar Name="progressBar" Minimum="0" Maximum="100" Width="110" Height="15" Value="70" BorderBrush="Gray" Foreground="{Binding Status, Converter={StaticResource StatusToColorConverter}}" >
-                                    
+                                <ProgressBar Name="progressBar"  Minimum="0" Maximum="100" Width="110"  Height="15" BorderBrush="Gray" Foreground="{Binding Status, Converter={StaticResource StatusToColorConverter}}" >
                                 </ProgressBar>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

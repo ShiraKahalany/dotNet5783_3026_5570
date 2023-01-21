@@ -32,14 +32,14 @@ public partial class ManagerOrdersPage : Page
         myframe = MainManagerOptionsFrame;
         try
         {
-            BOorderforlist = bl.Order.GetOrders();
+            BOorderforlist = bl.Order.GetOrders()!;
         }
         catch (BO.NoItemsException)
         {
             MessageBox.Show("There Are NO Items", "ERROR", MessageBoxButton.OK);
         }
         
-        ob = BOorderforlist.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
+        ob = BOorderforlist!.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
         //ProductListView.DataContext = observeproducts;
         OrderListView.ItemsSource = ob;
         AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
@@ -52,7 +52,7 @@ public partial class ManagerOrdersPage : Page
         {
             try
             {
-                BOorderforlist = bl.Order.GetOrders();
+                BOorderforlist = bl.Order.GetOrders()!;
             }
             catch (BO.NoItemsException)
             {
@@ -71,7 +71,7 @@ public partial class ManagerOrdersPage : Page
             }
         }
         ob.Clear();
-        ob = BOorderforlist.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
+        ob = BOorderforlist!.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
         // ProductListView.DataContext = observeproducts;
     }
 
@@ -119,12 +119,13 @@ public partial class ManagerOrdersPage : Page
 
     private void DeleteOrder_Click(object sender, RoutedEventArgs e)
     {
-        PO.OrderForListPO po = ((Button)(sender)).DataContext as PO.OrderForListPO;
+        PO.OrderForListPO? po = ((Button)(sender)).DataContext as PO.OrderForListPO;
         int id = po?.ID ?? 0;
         try
         {
-            bl.Order.CancelOrder(id);
-            ob.Remove(po);
+            BO.Order or = bl.Order.GetOrderById(id)!;
+            bl.Order.CancelOrder(or);
+            ob.Remove(po!);
         }
         catch(BO.CanNotUpdateOrderException)
         {

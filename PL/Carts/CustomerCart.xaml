@@ -7,13 +7,13 @@
       xmlns:local="clr-namespace:PL.Carts"
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       Background="{DynamicResource MaterialDesignPaper}"
-         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:po="clr-namespace:PO" d:DataContext="{d:DesignInstance Type=po:ProductPO}"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:po="clr-namespace:PO" d:DataContext="{d:DesignInstance Type=po:CartPO}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CustomerCart">
     <Page.Resources>
-        <converter:IsEmptyToNotVisibilityConverter x:Key="isEmptyToNotVisibilityConverter"/>
-        <converter:IsEmptyToVisibleConverter x:Key="isEmptyToVisibleConverter"/>
+        <converter:IsEmptyToNotVisibility2Converter x:Key="isEmptyToNotVisibility2Converter"/>
+        <converter:IsEmptyToVisible2Converter x:Key="isEmptyToVisible2Converter"/>
         <converter:IntToStringConverter x:Key="intToStringConverter "/>
         <Style x:Key="Design" TargetType="Button">
             <Setter Property="BorderBrush" Value="Black"/>
@@ -58,7 +58,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="1" Grid.Column="1" x:Name="CartDetailsGrid" Visibility="{Binding Path=Items,Mode=OneWay, Converter={StaticResource isEmptyToVisibleConverter}}">
+            <Grid Grid.Row="1" Grid.Column="1" x:Name="CartDetailsGrid"  Visibility="{Binding Items.Count, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource isEmptyToVisible2Converter}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="128*"/>
                     <RowDefinition Height="69*"/>
@@ -190,9 +190,9 @@
             </ListView>
 
 
-            <StackPanel x:Name="NoItems" HorizontalAlignment="Center" Margin="250, 100, 0,0" Visibility="{Binding Path=Items,Mode=OneWay, Converter={StaticResource isEmptyToNotVisibilityConverter} }">
-                <TextBlock Grid.Row="1"  Grid.Column="0" TextWrapping="Wrap" Text=" * Your cart is empty *" FontSize="24" HorizontalAlignment="Center" FontFamily="Sitka Text" FontWeight="Bold" Foreground="#FFD2CECE"/>
-                <Image Source="/Carts/emptyCart.png" Height="150" Width="150"></Image>
+            <StackPanel x:Name="NoItems" HorizontalAlignment="Center" Width="400" Margin="250, 50, 0,0" Visibility="{Binding Items.Count, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, Converter={StaticResource isEmptyToNotVisibility2Converter} }" VerticalAlignment="Center">
+                <TextBlock   TextWrapping="Wrap" Text="  Your cart is empty " FontSize="40" HorizontalAlignment="Center" FontFamily="Book Antiqua" Foreground="#FFD2CECE"/>
+                <Image Source="/Carts/emptyCart.png" Height="250" Width="250"></Image>
             </StackPanel>
         </Grid>
     </Grid>

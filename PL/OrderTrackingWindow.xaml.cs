@@ -20,7 +20,8 @@ public partial class OrderTrackingWindow : Window
     List<BO.Order> orders;
     private BackgroundWorker worker;
     TimeSpan day = new TimeSpan(24, 0, 0);
-    DateTime now = DateTime.Now;
+    DateTime now /*{ get; set; }*/ = DateTime.Now;
+    int addedDays = 0;
     bool toContinue = true;
     int progress = 0;
     int from = 0;
@@ -64,6 +65,7 @@ public partial class OrderTrackingWindow : Window
         while (toContinue)
         {
             now += day ;
+            addedDays++;
             if (worker.WorkerReportsProgress)
                 worker.ReportProgress(1);
             Thread.Sleep(1000);

@@ -69,7 +69,7 @@ namespace PO;
             items = value;
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs("items"));
+                PropertyChanged(this, new PropertyChangedEventArgs("Items"));
             }
         }
     }

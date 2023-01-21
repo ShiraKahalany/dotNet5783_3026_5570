@@ -1,21 +1,15 @@
 ﻿using BO;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using BlApi;
 using System.Windows.Media;
-using System.Collections.ObjectModel;
 
 
 namespace PLConverter;
-using PO;
-
 public class NotVisibilityToVisibilityConverter : IValueConverter //used
 {
     //convert from source property type to target property type
@@ -99,6 +93,26 @@ public class IsEmptyToNotVisibilityConverter : IValueConverter ///ours ,picture
     }
 }
 
+
+public class IsEmptyToNotVisibility2Converter : IValueConverter ///ours ,picture
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((int)value==0)
+            return Visibility.Visible;
+        else
+            return Visibility.Hidden;
+
+    }
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return null!;
+    }
+}
+
 public class IsEmptyToVisibleConverter : IValueConverter
 {
     //convert from source property type to target property type
@@ -117,6 +131,26 @@ public class IsEmptyToVisibleConverter : IValueConverter
         return null!;
     }
 }
+
+public class IsEmptyToVisible2Converter : IValueConverter
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((int)value ==0)
+            return Visibility.Hidden;
+        else
+            return Visibility.Visible;
+
+    }
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return null!;
+    }
+}
+
 
 public class CategoryToStringConverter : IValueConverter
 {
@@ -155,7 +189,7 @@ public class BoolToVisibilityConverter : IValueConverter
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        bool boolvalue =(bool)value;
+        bool boolvalue = (bool)value;
         if (boolvalue)
             return Visibility.Hidden;
         else
@@ -192,7 +226,7 @@ public class AmountToVisibilityConverter : IValueConverter //used
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if((int)value==0)
+        if ((int)value == 0)
             return Visibility.Visible; //Visibility.Collapsed;
         else return Visibility.Collapsed;
     }
@@ -239,7 +273,7 @@ public class IsInStockToColorConverter : IValueConverter
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        
+
         if ((bool)value)
             return Brushes.Green;
         else
@@ -260,7 +294,7 @@ public class BoolToIsEnabledConverter : IValueConverter
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-return (bool)value;
+        return (bool)value;
     }
 
 
@@ -301,7 +335,7 @@ public class BoolToVisibility2Converter : IValueConverter
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if ((int)value>0)
+        if ((int)value > 0)
             return Visibility.Visible;
         else
             return Visibility.Hidden;
@@ -321,11 +355,11 @@ public class ShippedToVisibilityConverter : IValueConverter
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (((BO.OrderStatus)value == BO.OrderStatus.Shipped)||((BO.OrderStatus)value == BO.OrderStatus.Delivered))
+        if (((BO.OrderStatus)value == BO.OrderStatus.Shipped) || ((BO.OrderStatus)value == BO.OrderStatus.Delivered))
             return Visibility.Visible;
         else
             return Visibility.Hidden;
-        
+
     }
 
 
@@ -403,7 +437,7 @@ public class AmountToColorConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
 
-        if ((int)value==0)
+        if ((int)value == 0)
             return Brushes.LightGray;
         else
             return Brushes.LightGreen;
@@ -468,7 +502,7 @@ public class IntToVisibilityConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
 
-        if ((int)value<=0)
+        if ((int)value <= 0)
             return Visibility.Hidden;
         else
             return Visibility.Visible;
@@ -529,7 +563,7 @@ public class AllTextBoxesFilled7Converter : IMultiValueConverter
     {
         foreach (var value in values)
         {
-            if (value != values.Last()&& string.IsNullOrWhiteSpace((string)value))
+            if (value != values.Last() && string.IsNullOrWhiteSpace((string)value))
             {
                 return false;
             }
@@ -544,4 +578,82 @@ public class AllTextBoxesFilled7Converter : IMultiValueConverter
     {
         throw new NotImplementedException();
     }
+
 }
+
+
+public class ProgressToIntConverter : IValueConverter
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        DateTime now = (DateTime)parameter;
+        if (((PO.OrderPO)value).Status == BO.OrderStatus.Ordered)
+        {
+            DateTime? date = ((PO.OrderPO)value).OrderDate;
+            TimeSpan? diff = now - date;
+            int days = diff?.Days ?? 0;
+            return days - 31;
+        }
+        if (((PO.OrderPO)value).Status == BO.OrderStatus.Shipped)
+        {
+            DateTime? date = ((PO.OrderPO)value).ShipDate;
+            TimeSpan? diff = now - date;
+            int days = diff?.Days ?? 0;
+            return days - 14;
+        }
+        if (((PO.OrderPO)value).Status == BO.OrderStatus.Delivered)
+        {
+            DateTime? date = ((PO.OrderPO)value).OrderDate;
+            TimeSpan? diff = now - date;
+            int days = diff?.Days ?? 0;
+            return days - 7;
+        }
+        return 0;
+    }
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        //try { int.Parse(value.ToString()); }
+        return 1;
+    }
+}
+
+
+//public class ProgressToInt2Converter : IMultiValueConverter
+//{
+//    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        var now = values[1] as DateTime?;
+//        //var DaysToAdd = values[1] as Int32?;
+//        //DateTime now = DateTime.Now.AddDays(DaysToAdd??0);
+
+//        if (((PO.OrderPO)values[0]).Status == BO.OrderStatus.Ordered)
+//        {
+//            DateTime? date = ((PO.OrderPO)values[0]).OrderDate;
+//            TimeSpan? diff = now - date;
+//            int days = diff?.Days ?? 0;
+//            return days - 31;
+//        }
+//        if (((PO.OrderPO)values[0]).Status == BO.OrderStatus.Shipped)
+//        {
+//            DateTime? date = ((PO.OrderPO)values[0]).ShipDate;
+//            TimeSpan? diff = now - date;
+//            int days = diff?.Days ?? 0;
+//            return days - 14;
+//        }
+//        if (((PO.OrderPO)values[0]).Status == BO.OrderStatus.Delivered)
+//        {
+//            DateTime? date = ((PO.OrderPO)values[0]).OrderDate;
+//            TimeSpan? diff = now - date;
+//            int days = diff?.Days ?? 0;
+//            return days - 7;
+//        }
+//        return 0;
+//    }
+//    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+//    {
+//        throw new NotImplementedException();
+//    }
+//}

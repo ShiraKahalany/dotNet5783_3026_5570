@@ -33,9 +33,10 @@ public partial class CustomerCart : Page
         cartPO = PL.Tools.CopyBOCartToPO(cartBo);
         //cartBo=cartPO.CopyPOCartToBO();
         CartItems.ItemsSource= cartPO.Items;
-        CartItems.DataContext=cartPO.Items;
-        totalPrice.DataContext=cartPO;
-        NoItems.DataContext = cartPO;
+        //CartItems.DataContext=cartPO.Items;
+        //totalPrice.DataContext=cartPO;
+        //NoItems.DataContext = cartPO;
+        DataContext = cartPO;
         //CartDetailsGrid.DataContext = cartPO;
         myframe=frame;
         //NoItems.DataContext = (cartPO.Items!.Count==0);
@@ -173,7 +174,10 @@ public partial class CustomerCart : Page
 
     private void back_click(object sender, RoutedEventArgs e)
     {
-        NavigationService.GoBack();
+        //if (myframe.NavigationService.CanGoBack)
+        //    NavigationService.GoBack();
+       // else
+            myframe.Content = null;
     }
 
 }
