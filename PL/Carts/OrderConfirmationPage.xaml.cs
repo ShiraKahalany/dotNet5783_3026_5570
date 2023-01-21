@@ -32,6 +32,7 @@ public partial class OrderConfirmationPage : Page
         BOcart = cart;
         DataContext = BOcart;
         myframe = frame;
+        ItemsListView.ItemsSource = BOcart.Items;
     }
 
     private void PlaceOrder_Click(object sender, RoutedEventArgs e)

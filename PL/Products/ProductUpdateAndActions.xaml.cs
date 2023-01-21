@@ -38,6 +38,7 @@ namespace PL.Products
             // BO.Product pro = bl.Product.GetProduct(poProduct.ID)!;
             SelectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
             //SelectCategory.SelectedItem = poProduct.Category;
+            path = poProduct.Path!;
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
@@ -47,7 +48,7 @@ namespace PL.Products
             double price = double.Parse(InsertPrice.Text);
             int amount = int.Parse(InsertInStock.Text);
             BO.Category category = (BO.Category)SelectCategory.SelectedItem;
-            BO.Product newproduct = new BO.Product { ID = id, Name = name, Price = price, InStock = amount, Category = category, IsDeleted = false,Path=path };
+            BO.Product newproduct = new BO.Product { ID = id, Name = name, Price = price, InStock = amount, Category = category, IsDeleted = false, Path=path };
             try
             {
                 bl.Product.UpdateProduct(newproduct);
@@ -84,7 +85,8 @@ namespace PL.Products
             if (f.ShowDialog() == true)
             {
                 ProductImage.Source = new BitmapImage(new Uri(f.FileName));
-                path = (ProductImage.Source).ToString();
+                string[] str = (ProductImage.Source).ToString().Split("PL",2,StringSplitOptions.RemoveEmptyEntries);
+                path = str[1];
             }
         }
 

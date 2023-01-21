@@ -82,7 +82,7 @@
         <Button Name="GoBack" HorizontalAlignment="Left" Margin="21,21,0,0" VerticalAlignment="Top" Width="51" Background="{x:Null}" BorderBrush="{x:Null}" Click="GoBack_Click">
             <materialDesign:PackIcon Kind="ArrowBack" Width="26" Height="20" VerticalAlignment="Center"></materialDesign:PackIcon>
         </Button>
-        <Label Content="Orders Archive" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" Width="110" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="Orders Archive" FontWeight="Bold" FontSize="16" FontFamily="Book Antiqua" HorizontalAlignment="Left" Margin="319,23,0,0" VerticalAlignment="Top" Width="130" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="28"/>
 
     </Grid>
 </Page>

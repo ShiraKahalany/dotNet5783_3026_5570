@@ -40,7 +40,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <Image x:Name="backgroundimage" Source="/Updated background.jpg"  RenderTransformOrigin="0.841,0.493" Height="659" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Left" Width="1114" Margin="-27,-28,0,0"/>
+        <Image x:Name="backgroundimage" Source="/image/Updated background.jpg"  RenderTransformOrigin="0.841,0.493" Height="659" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Left" Width="1114" Margin="-27,-28,0,0"/>
         <Grid Grid.Row="0" Background="#f5f5f0" Grid.ColumnSpan="3" VerticalAlignment="Stretch" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="471*"/>
@@ -97,7 +97,7 @@
             </Button>
             <Button  Name="LogoButton" HorizontalAlignment="Left" Margin="454,14,0,10" Width="128" BorderBrush="{x:Null}" RenderTransformOrigin="0.495,0.098" Click="LogoButton_Click">
                 <Button.Background>
-                    <ImageBrush ImageSource="/myLogo2.jpg"/>
+                    <ImageBrush ImageSource="/image/myLogo2.jpg"/>
                 </Button.Background>
             </Button>
         </Grid>

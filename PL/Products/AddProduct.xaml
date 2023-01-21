@@ -68,7 +68,7 @@
                 </MultiBinding>
             </Button.IsEnabled>
         </Button>
-        <Image HorizontalAlignment="Left" Height="47" Margin="282,16,0,0" VerticalAlignment="Top" Width="99" Source="/Products/download.png" RenderTransformOrigin="1.231,0.428"/>
+        <Image HorizontalAlignment="Left" Height="47" Margin="282,16,0,0" VerticalAlignment="Top" Width="99" Source="/image/download.png" RenderTransformOrigin="1.231,0.428"/>
 
     </Grid>
 </Window>

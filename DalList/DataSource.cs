@@ -161,7 +161,7 @@ internal class DataSource
             InStock = 15,
             Path = "/image/3-Pieces Green Sofa.jpg"
         });
-
+        //till here xml
         Products.Add(
         new Product
         {
@@ -268,13 +268,109 @@ internal class DataSource
             Path = "/image/Utility Stoneware Kitchen Canisters.jpg"
         });
 
+        Products.Add(
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Modern Kitchen Drying Rack",
+            Price = 35,
+            Category = Category.Kitchen,
+            InStock = 150,
+            Path = "/image/Modern Kitchen Drying Rack.jpg"
+        });
+
+        Products.Add(
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Kaloh Storage Carts",
+            Price = 250,
+            Category = Category.Kitchen,
+            InStock = 150,
+            Path = "/image/Kaloh Storage Carts.jpg"
+        });
+
+        Products.Add(
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Huron Outdoor Lounge Chair",
+            Price = 1298,
+            Category = Category.Garden,
+            InStock = 150,
+            Path = "/image/Huron Outdoor Lounge Chair.jpg"
+        });
+
+        Products.Add(
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Coastal Outdoor Swivel Chair",
+            Price = 1079.10,
+            Category = Category.Garden,
+            InStock = 150,
+            Path = "/image/Coastal Outdoor Swivel Chair.jpg"
+        });
+
+        Products.Add(
+       new Product
+       {
+           IsDeleted = false,
+           ID = Config.NextProductNumber,
+           Name = "Concrete Indoor or Outdoor Pedestal Round Dining Table",
+           Price = 599,
+           Category = Category.Garden,
+           InStock = 150,
+           Path = "/image/Concrete Indoor or Outdoor Pedestal Round Dining Table.jpg"
+       });
+
+      Products.Add(
+      new Product
+      {
+          IsDeleted = false,
+          ID = Config.NextProductNumber,
+          Name = "Porto Pedestal Concrete Outdoor Dining Table",
+          Price = 999,
+          Category = Category.Garden,
+          InStock = 150,
+          Path = "/image/Porto Pedestal Concrete Outdoor Dining Table.jpg"
+      });
+
+        Products.Add(
+     new Product
+     {
+         IsDeleted = false,
+         ID = Config.NextProductNumber,
+         Name = "Porto Pedestal Concrete Outdoor Dining Table",
+         Price = 180,
+         Category = Category.Bedroom,
+         InStock = 150,
+         Path = "/image/Lakeside Matelasse Duvet Cover & Shams.jpg"
+     });
+
+        Products.Add(
+   new Product
+   {
+       IsDeleted = false,
+       ID = Config.NextProductNumber,
+       Name = "Porto Pedestal Concrete Outdoor Dining Table",
+       Price = 125,
+       Category = Category.Bedroom,
+       InStock = 150,
+       Path = "/image/Crinkle Velvet Duvet Cover & Shams.jpg"
+   });
+
 
     }
     private void createOrderItems()  // יצירת פריטי-הזמנה
     {
         for(int j=0; j < 40; j++)
         {
-            Product? product = Products[rnd.Next(10)];
+            Product? product = Products[rnd.Next(15)];
             int NumOfItemsToThisOrder = rnd.Next(1,5);
             Order? order = Orders[j];
             for (int k=0; k < NumOfItemsToThisOrder; k++)
@@ -289,7 +385,9 @@ internal class DataSource
                     OrderID = order?.ID ?? 0,
                     Price = product?.Price ?? 0,
                     Amount = amount,
-                    TotalItem =amount*(product?.Price ?? 0)
+                    TotalItem =amount*(product?.Price ?? 0),
+                    Name = product?.Name,
+                    Path = product?.Path
                 });
 
                 product = Products[rnd.Next(10)];

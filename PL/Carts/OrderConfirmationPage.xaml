@@ -78,8 +78,42 @@
                    
                     FontWeight="Bold"
                     Foreground="black" Background="{x:Null}"  Margin="292,319,0,0" Click="PlaceOrder_Click"/>
-        <Grid Background="AliceBlue" Margin="582,63,35,141"/>
-        <Grid Background="White" Name="OrderSuccessGrid"  Margin="49,28,35,23">
+        <Grid Background="White" Margin="594,63,35,102">
+            <ListView x:Name="ItemsListView"  HorizontalAlignment="Center" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="400">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding Path}" 
+                               Height="100" Grid.Column="1"></Image>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="300" Grid.Column="3">
+                                <TextBlock Name="name" Width="260" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding Name}"></TextBlock>
+                                <TextBlock Text="Item Price" FontSize="10" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                <StackPanel Grid.Column="3" Name="price" Orientation="Horizontal" Width="160" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
+                                    <TextBlock Text="$" FontSize="20"></TextBlock>
+                                    <TextBlock Text="{Binding Price}" Width="160" FontSize="20"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="300" Grid.Column="4">
+                                <TextBlock Text="Item Total" FontSize="10" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                <StackPanel Grid.Column="4" Name="totalprice" Orientation="Horizontal" Width="160" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
+                                    <TextBlock Text="$" FontSize="20"></TextBlock>
+                                    <TextBlock Name="TotalItem" Text="{Binding TotalItem}" Width="250" FontSize="20"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <Grid Background="White" Name="OrderSuccessGrid"  Margin="49,28,63,23">
             <StackPanel Orientation="Vertical" Width="450" Margin="133,206,133,85">
                 <StackPanel Orientation="Horizontal" Width="250" Height="30" HorizontalAlignment="Center">
                     <TextBlock Height="30" VerticalAlignment="Top" Text="Your order ID is:  " FontSize="18" FontFamily="Segoe UI Light"/>
@@ -98,7 +132,7 @@
                     HorizontalContentAlignment="Center"
                     FontWeight="Bold"
                     Foreground="black" Background="{x:Null}" Click="ContinueShopping_Click"/>
-            <Image HorizontalAlignment="Center" Height="131" Margin="0,55,0,0" VerticalAlignment="Top" Width="134" Source="/Carts/vii.png"/>
+            <Image HorizontalAlignment="Left" Height="148" Margin="395,58,0,0" VerticalAlignment="Top" Width="176" Source="/Carts/vii.png"/>
         </Grid>
 
     </Grid>
