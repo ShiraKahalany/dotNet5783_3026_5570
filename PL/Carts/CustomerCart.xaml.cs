@@ -65,8 +65,8 @@ public partial class CustomerCart : Page
         {
             MessageBox.Show("Sorry!It Is Out Of Stock", "ERROR", MessageBoxButton.OK);
         }
-        cartPO.Items!.Remove(or);
-        cartPO.TotalPrice=Math.Round((double)(cartPO.TotalPrice-or.Price*or.Amount)!,2);
+        cartPO.Items!.Remove(or!);
+        cartPO.TotalPrice=Math.Round((double)(cartPO.TotalPrice-or?.Price*or?.Amount)!,2);
     }
 
     private void chooseAmount_MouseEnter(object sender, MouseEventArgs e)
@@ -90,7 +90,7 @@ public partial class CustomerCart : Page
     {
         try
         {
-            PO.OrderItemPO item = new();
+            PO.OrderItemPO? item = new();
             TextBox t;
             Button b;
             if (isTextBox)
@@ -119,14 +119,14 @@ public partial class CustomerCart : Page
 
             if (amount == 0)
             {
-                cartPO.Items.Remove(item);
-                cartPO.TotalPrice = cartBo.TotalPrice;
+                cartPO?.Items?.Remove(item!);
+                cartPO!.TotalPrice = cartBo.TotalPrice;
                 return;
             }
-            item.Amount = amount;
+            item!.Amount = amount;
             item.TotalItem = amount * item.Price;
         }
-        catch (BO.NotInStockException ex)
+        catch (BO.NotInStockException)
         {
             MessageBox.Show("אין עוד מהמוצר הזה במלאי" +
                "", "Error", MessageBoxButton.OKCancel, MessageBoxImage.Error);
@@ -161,15 +161,15 @@ public partial class CustomerCart : Page
 
     private void Empty(BO.Cart cart)
     {
-        cart.Items.Clear();
-        cart.TotalPrice = 0;
+        cart?.Items?.Clear();
+        cart!.TotalPrice = 0;
     }
     private void EmptyCart_Click(object sender, RoutedEventArgs e)
     {
-        cartPO.Items.Clear();   
-        cartBo.Items.Clear();
-        cartBo.TotalPrice = 0;
-        cartPO.TotalPrice = 0;
+        cartPO?.Items?.Clear();   
+        cartBo?.Items?.Clear();
+        cartBo!.TotalPrice = 0;
+        cartPO!.TotalPrice = 0;
     }
 
     private void back_click(object sender, RoutedEventArgs e)

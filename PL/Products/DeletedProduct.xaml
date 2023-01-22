@@ -21,11 +21,7 @@
             <Label Content="Deleted Product Details" Background="{x:Null}" HorizontalAlignment="Left" Width="286" FontSize="20" HorizontalContentAlignment="Center" FontWeight="Bold" Foreground="#FF974E4E" Margin="56,30,0,335"/>
             <Button Content="Restore" HorizontalAlignment="Left" Margin="160,358,0,0" VerticalAlignment="Top" Height="30" Width="94" RenderTransformOrigin="1.111,1.387" Click="Restore" Background="{x:Null}" BorderBrush="#FF7D0E0E"/>
             <StackPanel Margin="441,65,0,106" HorizontalAlignment="Left" Width="234">
-                <Button x:Name="changeImageButton" 
-                    Content="update picture"
-                        Visibility="Hidden"
-               Background="{x:Null}"/>
-                <Image Name="ProductImage" Source="{Binding Path=Path}" MaxHeight="300"/>
+                <Image Name="ProductImage" Source="{Binding Path=Path}" MaxHeight="300" Height="263"/>
             </StackPanel>
         </Grid>
     </Grid>
