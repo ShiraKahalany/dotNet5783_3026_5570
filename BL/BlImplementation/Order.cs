@@ -39,7 +39,7 @@ internal class Order : IOrder
         try
         {
             DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
-            return order?.OrderToBO();
+            return order?.OrderToBO()!;
         }
         catch (DO.NotExistException ex)
         {
@@ -52,7 +52,7 @@ internal class Order : IOrder
     {
         try
         {
-            DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
+            DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false)!;
             if (order.ShipDate != null)
                 throw new BO.OrderHasShippedException();
             order.ShipDate = DateTime.Now;
@@ -69,7 +69,7 @@ internal class Order : IOrder
     {
         try
         {
-            DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
+            DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false)!;
             if (order.DeliveryDate != null)
                 throw new BO.OrderHasDeliveredException();
             if (order.ShipDate == null)
@@ -229,7 +229,7 @@ internal class Order : IOrder
         try
         {
             DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted);
-            return order?.OrderToBO();
+            return order?.OrderToBO()!;
         }
         catch (DO.NotExistException ex)
         {

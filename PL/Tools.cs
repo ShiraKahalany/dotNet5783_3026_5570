@@ -33,6 +33,7 @@ public static class Tools
             IsDeleted = orPO.IsDeleted,
             ID = orPO.ID,
             Name = orPO.Name,
+            TotalItem = orPO.TotalItem,
             ProductID = orPO.ProductID,
             Amount = orPO.Amount,
             Path = orPO.Path,

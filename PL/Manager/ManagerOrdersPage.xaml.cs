@@ -78,22 +78,6 @@ public partial class ManagerOrdersPage : Page
     private void OrderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         PO.OrderForListPO po=(PO.OrderForListPO)((ListView)sender).SelectedItem;
-        //BO.OrderForList boorder = new();
-        //boorder = po.CopyFields<PO.OrderForListPO,BO.OrderForList>(boorder);
-        //int id = po.ID;
-        //BO.Order boorder = new BO.Order();
-        //try
-        //{
-        //   boorder = bl.Order.GetOrderById(id)!;
-        //}
-        //catch (BO.IllegalIdException)
-        //{
-        //    MessageBox.Show("Illegal Order ID", "ERROR");
-        //}
-        //catch(BO.OrderNotExistException)
-        //{
-        //    MessageBox.Show("Order Not Exist", "ERROR");
-        //}
         myframe.Content = new Orders.OrderTracking(po, ob);
       //myframe.Content = new Orders.OrderTracking(boorder, po);
 

@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using BO;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -81,7 +82,8 @@ namespace PL.Manager
 
         private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            PO.OrderForListPO po = (PO.OrderForListPO)((ListView)sender).SelectedItem;
+            new Orders.DeletedOrder(po, ob).ShowDialog();
         }
     }
 }

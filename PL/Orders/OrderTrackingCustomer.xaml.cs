@@ -31,7 +31,10 @@ public partial class OrderTrackingCustomer : Page
         ItemsListView.ItemsSource =boOrder.Items;
     }
 
+    private void back_click(object sender, RoutedEventArgs e)
+    {
+        NavigationService.GoBack();
+    }
 
 
-   
 }

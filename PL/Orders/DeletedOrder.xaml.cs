@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PL.Orders;
@@ -23,7 +24,7 @@ public partial class DeletedOrder : Window
 {
     BO.Order boOrder;
     private IBL bl = BLFactory.GetBL();
-    public DeletedOrder(PO.ProductPO poPro, ObservableCollection<PO.ProductPO> products)
+    public DeletedOrder(PO.OrderForListPO POorder, ObservableCollection<PO.OrderForListPO> obse)
     {
         InitializeComponent();
        // boOrder = order;

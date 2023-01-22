@@ -389,7 +389,7 @@ internal class DataSource
                     OrderID = order?.ID ?? 0,
                     Price = product?.Price ?? 0,
                     Amount = amount,
-                    TotalItem =amount*(product?.Price ?? 0),
+                    TotalItem = Math.Round(amount*(product?.Price ?? 0),2),
                     Name = product?.Name,
                     Path = product?.Path
                 });
