@@ -17,8 +17,8 @@
     </Window.Resources>
     <Grid>
 
-        <Grid Background="White">
-            <Grid Name="OrderItems" Background="AliceBlue" Margin="437,74,59,30"> </Grid>
+        <Grid Background="#FFFFEEEE" >
+            <Grid Name="OrderItems" Background="AliceBlue" Margin="437,74,59,30"></Grid>
 
 
             <Label Grid.Column="0"
@@ -135,25 +135,25 @@
                                          Foreground="#1f7a1f"
                                          Height="36" Width="62" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Button>
-            <Button  HorizontalAlignment="Left" Margin="133,249,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="44" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button Visibility="Hidden" HorizontalAlignment="Left" Margin="133,249,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="44" Background="{x:Null}" BorderBrush="{x:Null}">
 
                 <materialDesign:PackIcon Kind="ChevronTripleDown" 
                                          Foreground="#1f7a1f"
                                          Height="40" Width="25" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
             </Button>
-            <Button  HorizontalAlignment="Left" Margin="133,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button Visibility="Hidden" HorizontalAlignment="Left" Margin="133,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}">
 
                 <materialDesign:PackIcon Kind="PackageVariant" 
                                          Foreground="Black"
                                          Height="40" Width="60" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
             </Button>
-            <Button  HorizontalAlignment="Left" Margin="133,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="44" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button Visibility="Hidden" HorizontalAlignment="Left" Margin="133,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="44" Background="{x:Null}" BorderBrush="{x:Null}">
 
                 <materialDesign:PackIcon Kind="ChevronTripleDown" 
                                          Foreground="Black"
                                          Height="40" Width="25" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
             </Button>
-            <Button  HorizontalAlignment="Left" Margin="133,381,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button Visibility="Hidden" HorizontalAlignment="Left" Margin="133,381,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}">
 
                 <materialDesign:PackIcon Kind="house" 
                                          Foreground="Black"
@@ -161,22 +161,22 @@
             </Button>
 
 
-            <Button  HorizontalAlignment="Left" Margin="133,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}"
-                  Visibility="{Binding Path=Status, Converter={StaticResource ShippedToVisibilityConverter}}">
+            <Button Visibility="Hidden" HorizontalAlignment="Left" Margin="133,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}"
+                 >
 
                 <materialDesign:PackIcon Kind="PackageVariant" 
                                          Foreground="#1f7a1f"
                                          Height="40" Width="60" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
             </Button>
             <Button  HorizontalAlignment="Left" Margin="133,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="44" Background="{x:Null}" BorderBrush="{x:Null}"
-                  Visibility="{Binding Path=Status, Converter={StaticResource ShippedToVisibilityConverter }}">
+                 Visibility="Hidden">
 
                 <materialDesign:PackIcon Kind="ChevronTripleDown" 
                                          Foreground="#1f7a1f"
                                          Height="40" Width="25" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
             </Button>
             <Button  HorizontalAlignment="Left" Margin="133,381,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}"
-                  Visibility="{Binding Path=Status, Converter={StaticResource DeliveredToVisibilityConverter }}">
+                  Visibility="Hidden">
 
                 <materialDesign:PackIcon Kind="house" 
                                          Foreground="#1f7a1f"
@@ -188,6 +188,7 @@
                                          Foreground="Black"
                                          Height="40" Width="73" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Button>
+            <Image HorizontalAlignment="Left" Height="58" Margin="162,212,0,0" VerticalAlignment="Top" Width="42" Source="/Orders/ex.png"/>
         </Grid>
     </Grid>
 </Window>

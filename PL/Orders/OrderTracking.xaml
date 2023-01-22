@@ -18,139 +18,157 @@
         <converter:DeliveredToNotVisibilityConverter  x:Key="DeliveredToNotVisibilityConverter"/>
         <converter:TimeToColorConverter x:Key="TimeToColorConverter"/>
     </Page.Resources>
-    <Grid x:Name="orderitemsgrid" Background="White">
-        <Grid Name="OrderItems" Background="white" Margin="488,117,61,91" >
-
-            <ListView x:Name="ItemsListView"  HorizontalAlignment="Center" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Width="400">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="3*"/>
-                                <ColumnDefinition Width="3*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{Binding Path}" 
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2.4*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="2" Text="Order ID:" FontSize="22" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontWeight="Bold" TextAlignment="Right" Margin="60,7,0,0"></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="2" FontSize="22" TextWrapping="Wrap" VerticalAlignment="Top" Height="29" Width="86" Text="{Binding ID}" Margin="180,10,0,0"/>
+        <ListView x:Name="ItemsListView"  HorizontalAlignment="Center" Grid.Column="2" Margin="0,60,0,0" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="340">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding Path}" 
                                Height="100" Grid.Column="1"></Image>
-                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="300" Grid.Column="3">
-                                <TextBlock Name="name" Width="260" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding Name}"></TextBlock>
-                                <TextBlock Text="Item Price" FontSize="10" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                                <StackPanel Grid.Column="3" Name="price" Orientation="Horizontal" Width="160" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
-                                    <TextBlock Text="$" FontSize="20"></TextBlock>
-                                    <TextBlock Text="{Binding Price}" Width="160" FontSize="20"></TextBlock>
-                                </StackPanel>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="300" Grid.Column="3">
+                            <TextBlock Name="name" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding Name}"></TextBlock>
+                            <TextBlock Text="Item Price" FontSize="10"  HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <StackPanel Grid.Column="3" Name="price" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
+                                <TextBlock Text="$" FontSize="20"></TextBlock>
+                                <TextBlock Text="{Binding Price}" FontSize="20"></TextBlock>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="300" Grid.Column="4">
-                                <TextBlock Text="Item Total" FontSize="10" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                                <StackPanel Grid.Column="4" Name="totalprice" Orientation="Horizontal" Width="160" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
-                                    <TextBlock Text="$" FontSize="20"></TextBlock>
-                                    <TextBlock Name="TotalItem" Text="{Binding TotalItem}" Width="250" FontSize="20"></TextBlock>
-                                </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="4">
+                            <TextBlock Text="Item Total" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <StackPanel Grid.Column="4" Name="totalprice" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
+                                <TextBlock Text="$" FontSize="20"></TextBlock>
+                                <TextBlock Name="TotalItem" Text="{Binding TotalItem}" FontSize="20"></TextBlock>
                             </StackPanel>
-                            <Button x:Name="RemoveFromCartButton"
+                        </StackPanel>
+                        <Button x:Name="RemoveFromCartButton"
                                 Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
-                                Height="43" Width="42"
+                                Height="20" Width="20"
                                 Grid.Column="0">
-                                <materialDesign:PackIcon Kind="Trash" 
+                            <materialDesign:PackIcon Kind="Trash" 
                                          Foreground="Black"
-                                         Height="25" Width="25"/>
-                            </Button>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                         Height="15" Width="15"/>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
 
+        <Grid Grid.Column="1" Height="350" Background="#FFE5EDE2" Width="260">
+            <Label
+               Content="Address:" 
+               FontSize="16" 
+               HorizontalAlignment="Center" 
+               Margin="0,285,0,0" 
+               VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBlock x:Name="costumerAdressTextBox"
+                   FontSize="16"
+                   HorizontalAlignment="Center"
+                   Height="NaN" 
+                   Margin="0,314,0,0" 
+                   Text="{Binding CustomerAddress}" 
+                   VerticalAlignment="Top" 
+                   Width="204"/>
+
+            <Label
+               Content="Email Address:" 
+               FontSize="16" 
+               HorizontalAlignment="Center" 
+               Margin="0,230,0,0" 
+               VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBox x:Name="costumerEmailTextBox"
+                   HorizontalAlignment="Center"
+                      VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"
+                     BorderBrush="{x:Null}"
+                   FontSize="16"
+                   Height="NaN" 
+                   Margin="0,259,0,0" 
+                   Text="{Binding CustomerEmail}"
+                   VerticalAlignment="Top" Width="196"/>
+            <Label Content="Name:"
+               HorizontalAlignment="Center"
+               FontSize="16"
+               Margin="0,166,0,0" 
+               VerticalAlignment="Top" RenderTransformOrigin="-0.194,0.854" FontWeight="Bold"/>
+            <TextBox x:Name="costumerNameTextBox"  
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="16" 
+                   Height="NaN" 
+                   Margin="0,195,0,0"
+                   Text="{Binding CustomerName , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                   VerticalAlignment="Top"
+                   Width="196" BorderBrush="{x:Null}"/>
+
+
+            <TextBox HorizontalAlignment="Left"
+                     BorderBrush="{x:Null}"
+                   FontSize="22" 
+                   Margin="32,89,0,0" 
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Top" Width="190" FontWeight="Bold" TextAlignment="Right"
+                   Text="Customer Details"/>
         </Grid>
 
 
-        <Label Grid.Column="0"
-               Content="Address:" 
-               FontSize="16" 
-               HorizontalAlignment="Left" 
-               Margin="32,165,0,0" 
-               VerticalAlignment="Top"/>
-        <TextBlock x:Name="costumerAdressTextBox" 
-                   FontSize="16"
-                   HorizontalAlignment="Left"
-                   Height="NaN" 
-                   Margin="147,169,0,0" 
-                   Text="{Binding CustomerAddress}" 
-                   VerticalAlignment="Top" 
-                   Width="205"/>
-
-        <Label Grid.Column="0"
-               Content="Email Address:" 
-               FontSize="16" 
-               HorizontalAlignment="Left" 
-               Margin="32,117,0,0" 
-               VerticalAlignment="Top"/>
-        <TextBlock x:Name="costumerEmailTextBox" 
-                   HorizontalAlignment="Left"
-                   FontSize="16"
-                   Height="NaN" 
-                   Margin="157,125,0,0" 
-                   Text="{Binding CustomerEmail}"
-                   VerticalAlignment="Top" Width="195"/>
-        <Label Content="Name:" 
-               HorizontalAlignment="Left"
-               FontSize="16"
-               Margin="39,74,0,0" 
-               VerticalAlignment="Top" RenderTransformOrigin="-0.194,0.854"/>
-        <TextBox x:Name="costumerNameTextBox"  
-                   HorizontalAlignment="Left"
-                   FontSize="16" 
-                   Height="NaN" 
-                   Margin="157,82,0,0"
-                   Text="{Binding CustomerName , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                   VerticalAlignment="Top" 
-                   Width="195" BorderBrush="{x:Null}"/>
 
 
-        <TextBlock HorizontalAlignment="Left"
-                   FontSize="22" 
-                   Margin="32,24,0,0" 
-                   TextWrapping="Wrap" 
-                   VerticalAlignment="Top" Width="190" FontWeight="Bold" TextAlignment="Right"
-                   Text="Customer Details:">
-        </TextBlock>
 
-        <Image x:Name="delevired" Visibility="Hidden" HorizontalAlignment="Left" Height="117" Margin="256,95,0,0" VerticalAlignment="Top" Width="198" />
+
+
+        <!--<Image x:Name="delevired" Visibility="Hidden" HorizontalAlignment="Left" Height="117" Margin="256,95,0,0" VerticalAlignment="Top" Width="198" />-->
         <!--<Image x:Name="shipped" Visibility="Hidden" HorizontalAlignment="Left" Height="117" Margin="94,95,0,0" VerticalAlignment="Top" Width="198" Source="/Order/deliver.png"/>
         <Image x:Name="approved" Visibility="Hidden" HorizontalAlignment="Left" Height="97" Margin="32,99,0,0" VerticalAlignment="Top" Width="87" Source="/Order/approved.png"/>-->
-        <TextBlock HorizontalAlignment="Left" Text="Order ID:" FontSize="22" Margin="368,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" FontWeight="Bold" TextAlignment="Right"></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="488,24,0,0" FontSize="22" TextWrapping="Wrap" VerticalAlignment="Top" Height="29" Width="86" Text="{Binding ID}"/>
+
+
 
         <TextBlock 
             Name="ShipDate"
             HorizontalAlignment="Left"
-            Margin="19,304,0,0"
+            Margin="10,272,0,0"
             TextWrapping="Wrap" 
             Text="{Binding ShipDate}" 
             VerticalAlignment="Top"
-            Height="35" Width="123" RenderTransformOrigin="0.495,0.02"/>
+            Height="36" Width="123" RenderTransformOrigin="0.495,0.02"/>
 
         <TextBlock 
             x:Name="OrderDate"
+            Grid.Column="0"
             HorizontalAlignment="Left"
-            Margin="19,222,0,0"
+            Margin="10,152,0,0"
             TextWrapping="Wrap" 
             Text="{Binding OrderDate}" 
             VerticalAlignment="Top"
-           Height="35" Width="123"/>
+           Height="34" Width="123" Grid.ColumnSpan="2"/>
 
         <TextBlock 
             x:Name="DeliveryDate"
             HorizontalAlignment="Left"
-            Margin="19,385,0,0"
+            Margin="8,378,0,0"
             TextWrapping="Wrap" 
+            Grid.Column="0"
             Text="{Binding DeliveryDate}" 
             VerticalAlignment="Top"
-            Height="35" Width="123"/>
+            Height="34" Width="122" Grid.ColumnSpan="2"/>
 
-        <ListView x:Name="OrderItemView" 
+        <!--<ListView x:Name="OrderItemView" 
                   ItemsSource="{Binding}"
                   Margin="0,10,0,-10" 
                   HorizontalAlignment="Right"
@@ -171,63 +189,65 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
 
-        <Grid Name="AdminButton" HorizontalAlignment="Left" Height="198" Margin="209,222,0,0" VerticalAlignment="Top" Width="120">
 
-            <Button Name="UpdateShip" Visibility="{Binding Path=Status, Converter={StaticResource ShippedToNotVisibilityConverter }}" Content="Update Shipped" FontWeight="Bold" FontSize="10" HorizontalAlignment="Center" Height="24" VerticalAlignment="Center" Width="120"  Click="UpdateShip_Click" RenderTransformOrigin="0.032,0.445" Background="{x:Null}" Foreground="#DD5F2C46"  >
 
-            </Button>
-            <Button Name="UpdateDel" Visibility="{Binding Path=Status, Converter={StaticResource DeliveredToNotVisibilityConverter }}" Content="Update Delivered" FontSize="10" FontWeight="Bold" Foreground="#DD5F2C46" HorizontalAlignment="Center" Height="24" Margin="0,174,0,0" VerticalAlignment="Top" Width="120"  Click="UpdateDel_Click"  RenderTransformOrigin="0.474,1.548" Background="{x:Null}">
+        <Button Name="UpdateShip" Visibility="{Binding Path=Status, Converter={StaticResource ShippedToNotVisibilityConverter }}" Content="Shipped" FontWeight="Bold" FontSize="10" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="70"  Click="UpdateShip_Click" RenderTransformOrigin="0.032,0.445" Background="{x:Null}" Foreground="#DD5F2C46" Margin="34,272,0,0"  >
 
-            </Button>
-        </Grid>
-        <Button  HorizontalAlignment="Left" Margin="133,212,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}">
+        </Button>
+        <Button Name="UpdateDel" Visibility="{Binding Path=Status, Converter={StaticResource DeliveredToNotVisibilityConverter }}" Content="Delivered" FontSize="10" FontWeight="Bold" Foreground="#DD5F2C46" HorizontalAlignment="Left" Height="24"  VerticalAlignment="Top" Width="70"  Click="UpdateDel_Click" Background="{x:Null}" Margin="34,378,0,0">
+
+        </Button>
+
+
+
+        <Button Grid.Column="0" HorizontalAlignment="Left" Margin="29,109,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="70" Height="46" Background="{x:Null}" BorderBrush="{x:Null}">
 
             <materialDesign:PackIcon Kind="TickCircle" 
                                          Foreground="#1f7a1f"
                                          Height="36" Width="62" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Button>
-        <Button  HorizontalAlignment="Left" Margin="133,249,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="44" Background="{x:Null}" BorderBrush="{x:Null}">
+        <Button Grid.Column="0" HorizontalAlignment="Left" Margin="41,182,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="50" Height="44" Background="{x:Null}" BorderBrush="{x:Null}">
 
             <materialDesign:PackIcon Kind="ChevronTripleDown" 
                                          Foreground="#1f7a1f"
                                          Height="40" Width="25" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
         </Button>
-        <Button  HorizontalAlignment="Left" Margin="133,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}">
+        <Button HorizontalAlignment="Left" Margin="19,226,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="82" Height="46" Background="{x:Null}" BorderBrush="{x:Null}">
 
             <materialDesign:PackIcon Kind="PackageVariant" 
                                          Foreground="Black"
-                                         Height="40" Width="60" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
+                                         Height="40" Width="60" RenderTransformOrigin="1.331,0.471"/>
         </Button>
-        <Button  HorizontalAlignment="Left" Margin="133,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="44" Background="{x:Null}" BorderBrush="{x:Null}">
+        <Button HorizontalAlignment="Left" Margin="44,296,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="50" Height="44" Background="{x:Null}" BorderBrush="{x:Null}">
 
             <materialDesign:PackIcon Kind="ChevronTripleDown" 
                                          Foreground="Black"
                                          Height="40" Width="25" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
         </Button>
-        <Button  HorizontalAlignment="Left" Margin="133,381,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}">
+        <Button HorizontalAlignment="Left" Margin="37,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="64" Height="46" Background="{x:Null}" BorderBrush="{x:Null}">
 
             <materialDesign:PackIcon Kind="house" 
                                          Foreground="Black"
                                          Height="40" Width="60" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
         </Button>
 
-        <Button  HorizontalAlignment="Left" Margin="133,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}"
+        <Button Grid.Column="0" HorizontalAlignment="Left" Margin="19,225,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="80" Height="46" Background="{x:Null}" BorderBrush="{x:Null}"
                   Visibility="{Binding Path=Status, Converter={StaticResource ShippedToVisibilityConverter}}">
 
             <materialDesign:PackIcon Kind="PackageVariant" 
                                          Foreground="#1f7a1f"
-                                         Height="40" Width="60" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
+                                         Height="40" Width="60" RenderTransformOrigin="1.331,0.471"/>
         </Button>
-        <Button  HorizontalAlignment="Left" Margin="133,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="44" Background="{x:Null}" BorderBrush="{x:Null}"
+        <Button Grid.Column="0" HorizontalAlignment="Left" Margin="44,296,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="50" Height="44" Background="{x:Null}" BorderBrush="{x:Null}"
                   Visibility="{Binding Path=Status, Converter={StaticResource ShippedToVisibilityConverter }}">
 
             <materialDesign:PackIcon Kind="ChevronTripleDown" 
                                          Foreground="#1f7a1f"
                                          Height="40" Width="25" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
         </Button>
-        <Button  HorizontalAlignment="Left" Margin="133,381,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="100" Height="46" Background="{x:Null}" BorderBrush="{x:Null}"
+        <Button  HorizontalAlignment="Left" Margin="34,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="70" Height="46" Background="{x:Null}" BorderBrush="{x:Null}"
                   Visibility="{Binding Path=Status, Converter={StaticResource DeliveredToVisibilityConverter }}">
 
             <materialDesign:PackIcon Kind="house" 
@@ -236,13 +256,13 @@
         </Button>
 
 
-        <Button  HorizontalAlignment="Left" Margin="209,18,0,0" VerticalAlignment="Top" Width="84" Height="41" Background="{x:Null}" BorderBrush="{x:Null}">
+        <Button Grid.Column="1" HorizontalAlignment="Center" Margin="0,55,0,0" VerticalAlignment="Top" Width="140" Height="100" Background="{x:Null}" BorderBrush="{x:Null}">
             <materialDesign:PackIcon Kind="Person" 
                                          Foreground="Black"
-                                         Height="40" Width="73" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                         Height="80" Width="130" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Button>
-        <Label Content="Products:" HorizontalAlignment="Left" FontSize="16" Margin="437,77,0,0" VerticalAlignment="Top" Width="117"/>
-        <Button x:Name="back" HorizontalAlignment="Left" Margin="8,418,0,0" VerticalAlignment="Top" Click="back_click" Background="{x:Null}" BorderBrush="{x:Null}" Width="58">
+        <!--<Label Content="Products:" HorizontalAlignment="Left" FontSize="16" Margin="437,77,0,0" VerticalAlignment="Top" Width="117"/>-->
+        <Button Grid.Column="0" x:Name="back" HorizontalAlignment="Left" VerticalAlignment="Top" Click="back_click" Background="{x:Null}" BorderBrush="{x:Null}" Width="58" Margin="0,7,0,0">
             <materialDesign:PackIcon Kind="ArrowBack"
                                          Foreground="Black"
                                          Height="30" Width="30" RenderTransformOrigin="0.5,0.5">

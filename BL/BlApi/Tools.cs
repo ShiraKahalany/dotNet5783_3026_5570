@@ -200,6 +200,7 @@ internal static class Tools
             }
             product.InStock += item.Amount;
             dal.Product.Update(product);
+            dal.OrderItem.Delete(item.ID);
         }
     }
 

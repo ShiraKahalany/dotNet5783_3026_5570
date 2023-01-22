@@ -70,6 +70,7 @@
     <None Remove="order.png" />
     <None Remove="Orders\approved.jpeg" />
     <None Remove="Orders\deliver.jpeg" />
+    <None Remove="Orders\ex.png" />
     <None Remove="Orders\track1.jpeg" />
     <None Remove="Orders\truck.png" />
     <None Remove="Orders\truck2.png" />
@@ -189,6 +190,7 @@
 
   <ItemGroup>
     <Resource Include="Carts\vii.png" />
+    <Resource Include="Orders\ex.png" />
   </ItemGroup>
 
 </Project>

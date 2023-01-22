@@ -76,7 +76,7 @@
                     <GridViewColumn  Header="Process" Width="125">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ProgressBar Name="progressBar"  Minimum="0" Maximum="100" Width="110"  Height="15" BorderBrush="Gray" Foreground="{Binding Status, Converter={StaticResource StatusToColorConverter}}" >
+                                <ProgressBar Name="progressBar"  Minimum="0" Maximum="100" Width="110"  Height="15" BorderBrush="Gray"  Foreground="{Binding Status, Converter={StaticResource StatusToColorConverter}}" >
                                 </ProgressBar>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -88,6 +88,7 @@
         <Label Content="Tracking Simulator" FontSize="25" FontFamily="Book Antiqua" HorizontalAlignment="Left" Margin="54,10,0,0" VerticalAlignment="Top" Width="225" Height="44"/>
         <Button Name="Start" HorizontalAlignment="Left" Margin="807,31,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="#FF9BE388" Click="Start_Click">
             <materialDesign:PackIcon Kind="Play" Width="20" Height="20"></materialDesign:PackIcon>
+            
         </Button>
         <Button  HorizontalAlignment="Left" Margin="878,31,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="#FFC16767" Click="Button_Click">
             <materialDesign:PackIcon Kind="Stop" Width="20" Height="20"></materialDesign:PackIcon>

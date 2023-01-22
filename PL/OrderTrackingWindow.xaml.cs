@@ -20,7 +20,8 @@ public partial class OrderTrackingWindow : Window
     List<BO.Order> orders;
     private BackgroundWorker worker;
     TimeSpan day = new TimeSpan(24, 0, 0);
-    DateTime now /*{ get; set; }*/ = DateTime.Now;
+   // public DateTime now { get; set; } = DateTime.Now;
+   DateTime now = DateTime.Now;
     int addedDays = 0;
     bool toContinue = true;
     int progress = 0;
@@ -38,6 +39,7 @@ public partial class OrderTrackingWindow : Window
             MessageBox.Show("There Are NO Items", "ERROR", MessageBoxButton.OK);
         }
         ob = orders.ToObservableByConverter<BO.Order, PO.OrderPO>(ob, PL.Tools.BoToPoOrder);
+        DataContext = this;
         OrderListView.ItemsSource = ob;
         worker = new BackgroundWorker();
         worker.DoWork += Worker_DoWork;
@@ -65,7 +67,8 @@ public partial class OrderTrackingWindow : Window
         while (toContinue)
         {
             now += day ;
-            addedDays++;
+            //now.now += day;
+            //addedDays++;
             if (worker.WorkerReportsProgress)
                 worker.ReportProgress(1);
             Thread.Sleep(1000);

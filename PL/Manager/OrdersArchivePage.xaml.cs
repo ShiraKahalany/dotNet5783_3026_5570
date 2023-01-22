@@ -77,7 +77,6 @@ namespace PL.Manager
             //BOproducts = bl.Product.GetProducts(BO.Filters.filterByIsDeleted);
             //observeproducts.Clear();
             //observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
-
         }
 
         private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

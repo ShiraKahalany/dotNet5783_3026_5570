@@ -1,4 +1,6 @@
 ﻿using DO;
+using System.Security.Cryptography.X509Certificates;
+
 namespace Dal;
 
 
@@ -371,6 +373,8 @@ internal class DataSource
         for(int j=0; j < 40; j++)
         {
             Product? product = Products[rnd.Next(15)];
+            List<int> productsInUse = new List<int>();
+            productsInUse.Add(product?.ID??0);  
             int NumOfItemsToThisOrder = rnd.Next(1,5);
             Order? order = Orders[j];
             for (int k=0; k < NumOfItemsToThisOrder; k++)
@@ -390,7 +394,9 @@ internal class DataSource
                     Path = product?.Path
                 });
 
-                product = Products[rnd.Next(10)];
+                do { product = Products[rnd.Next(10)]; }
+                while (productsInUse?.Find(x=>x==product?.ID) != 0);
+                productsInUse?.Add(product?.ID ?? 0);
             }           
         }
     }

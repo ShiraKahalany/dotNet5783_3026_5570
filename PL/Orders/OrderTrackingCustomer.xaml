@@ -45,14 +45,6 @@
                                     <TextBlock Name="TotalItem" Text="{Binding TotalItem}" Width="250" FontSize="20"></TextBlock>
                                 </StackPanel>
                             </StackPanel>
-                            <Button x:Name="RemoveFromCartButton"
-                                Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
-                                Height="43" Width="42"
-                                Grid.Column="0">
-                                <materialDesign:PackIcon Kind="Trash" 
-                                         Foreground="Black"
-                                         Height="25" Width="25"/>
-                            </Button>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

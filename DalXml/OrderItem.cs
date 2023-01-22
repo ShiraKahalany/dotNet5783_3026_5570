@@ -56,8 +56,8 @@ internal class OrderItem : IOrderItem
 
         DO.OrderItem or = listOrderItems.Find(p => p?.ID == OrderItem.ID) ?? throw new DO.NotExistException("missing id");
 
-        if (or.IsDeleted == true)
-            throw new DO.NotExistException();
+        //if (or.IsDeleted == true)
+        //    throw new DO.NotExistException();
         DeletePermanently(OrderItem.ID);
         Add(OrderItem);
     }
