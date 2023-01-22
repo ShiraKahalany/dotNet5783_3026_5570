@@ -60,7 +60,7 @@ public partial class ManagerProductsPage : Page
 
     private void DeleteProduct_Click(object sender, RoutedEventArgs e)
     {
-        PO.ProductPO po = ((Button)(sender)).DataContext as PO.ProductPO;
+        PO.ProductPO? po = ((Button)(sender)).DataContext as PO.ProductPO;
         int id = po?.ID ?? 0;
         bool isDelete = true;
         try
@@ -78,7 +78,7 @@ public partial class ManagerProductsPage : Page
             MessageBox.Show("The Product Is In An Order", "Can Not Delete Product", MessageBoxButton.OK);
         }
         if(isDelete)
-            observeproducts.Remove(po);
+            observeproducts.Remove(po!);
     }
 
     private void ShowDeletedProducts_Click(object sender, RoutedEventArgs e)

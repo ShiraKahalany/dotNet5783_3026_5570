@@ -79,7 +79,7 @@ internal class Product : IProduct
         try
         {
             DO.Product? p = dal.Product.GetTByFilter((DO.Product? product) => product.GetValueOrDefault().IsDeleted && (product.GetValueOrDefault().ID == id));
-            dal.Product.Restore((DO.Product)p);
+            dal.Product.Restore((DO.Product)p!);
         }
         catch (DO.NotExistException ex)
         {
@@ -88,7 +88,7 @@ internal class Product : IProduct
 
     }
 
-    public BO.ProductItem GetProductItem(int id, BO.Cart cart)
+    public BO.ProductItem GetProductItem(int id, BO.Cart? cart)
     // בקשת פרטי מוצר עבור הקונה
     {
         try
@@ -126,12 +126,12 @@ internal class Product : IProduct
             throw new BO.NotExistException(ex.Message);
         }
     }
-    public int AddProduct(BO.Product product)
+    public int AddProduct(BO.Product? product)
     //הוספת מוצר עבור מנהל
     {
         try
         {
-            if ((product.Name != null) && (product.Price > 0) && (product.InStock >= 0))
+            if ((product?.Name != null) && (product.Price > 0) && (product.InStock >= 0))
             {
                 return dal.Product.Add((DO.Product)Tools.CopyPropToStruct(product, typeof(DO.Product)));
             }
@@ -170,11 +170,11 @@ internal class Product : IProduct
         }
 
     }
-    public void UpdateProduct(BO.Product newproduct)
+    public void UpdateProduct(BO.Product? newproduct)
     //עידכון נתוני מוצר עבור מנהל
     {
 
-        if (!((newproduct.ID > 0) && (newproduct.Name != null) && (newproduct.Price > 0) && (newproduct.InStock >= 0)))
+        if (!((newproduct?.ID > 0) && (newproduct.Name != null) && (newproduct.Price > 0) && (newproduct.InStock >= 0)))
             throw new BO.NotExistException();
         try
         {

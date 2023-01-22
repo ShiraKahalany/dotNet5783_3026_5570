@@ -27,8 +27,6 @@ namespace PL.Products
         private IEnumerable<BO.Product> BOproducts;
         private IBL bl = BLFactory.GetBL();
         PO.ProductPO poProduct;
-        BO.Category category;
-        string path;
 
         public DeletedProduct(PO.ProductPO poPro, ObservableCollection<PO.ProductPO> products)
         {
@@ -46,10 +44,10 @@ namespace PL.Products
 
         private void Restore(object sender, RoutedEventArgs e)
         {
-            PO.ProductPO restorepro = ((Button)(sender)).DataContext as PO.ProductPO;
+            PO.ProductPO? restorepro = ((Button)(sender)).DataContext as PO.ProductPO;
             try
             {
-                bl.Product.Restore(restorepro.ID);
+                bl.Product.Restore(restorepro!.ID);
                 observeproducts.Remove(restorepro);
                 MessageBox.Show("Seccessfully Restored", "Restore Product", MessageBoxButton.OK);
                 //observeproductsToSave.Add(restorepro);

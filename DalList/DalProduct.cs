@@ -63,7 +63,7 @@ public class DalProduct : IProduct
         if(temp?.IsDeleted==true)
             throw new DO.NotExistException("The item is already deleted");
         dataSource.Products.Remove(temp);
-        Product product=new Product { IsDeleted=true, Category=temp?.Category??0, InStock=temp?.InStock, Name=temp?.Name, Price=temp?.Price, ID= temp.GetValueOrDefault().ID};
+        Product product=new Product { IsDeleted=true, Category=temp?.Category??0, InStock=temp?.InStock, Name=temp?.Name, Price=temp?.Price, ID= temp.GetValueOrDefault().ID, Path=temp?.Path};
         Add(product);
     }
 
