@@ -111,7 +111,12 @@ public partial class ManagerOrdersPage : Page
             bl.Order.CancelOrder(or);
             ob.Remove(po!);
         }
-        catch(BO.CanNotUpdateOrderException)
+        catch (BO.IllegalIdException)
+        {
+            MessageBox.Show("Illegal ID", "Can Not Cancal Order");
+
+        }
+        catch (BO.CanNotUpdateOrderException)
         {
             MessageBox.Show("The Order Has Already Been Shipped", "Can Not Cancal Order");
 

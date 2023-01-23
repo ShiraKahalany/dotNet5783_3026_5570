@@ -43,7 +43,7 @@ internal class Order : IOrder
         }
         catch (DO.NotExistException ex)
         {
-            throw new BO.OrderNotExistException(ex.Message);
+            throw new BO.NotExistException(ex.Message);
         }
     }
 
@@ -299,7 +299,7 @@ internal class Order : IOrder
         try
         {
             DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == or.ID) && order.GetValueOrDefault().IsDeleted == false);
-            if (order?.ShipDate != null)
+            if (order?.ShipDate != null ||order?.DeliveryDate!=null)
                 throw new BO.CanNotUpdateOrderException();
             if (order?.OrderDate != null)
             {

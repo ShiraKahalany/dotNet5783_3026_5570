@@ -53,7 +53,7 @@ public partial class OrderTracking : Page
         }
         catch (BO.OrderHasNotShippedException)
         {
-            MessageBox.Show("The Order Has Not Yet Shipped", "Not Shipped Yet", MessageBoxButton.OK);
+            MessageBox.Show("The Order Has NOT Yet Shipped", "Not Shipped Yet", MessageBoxButton.OK);
             isStatusChanged = false;
         }
         catch (BO.NotExistException)
