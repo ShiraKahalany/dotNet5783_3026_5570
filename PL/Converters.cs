@@ -657,3 +657,29 @@ public class ProgressToIntConverter : IValueConverter
 //        throw new NotImplementedException();
 //    }
 //}
+
+
+
+
+public class StatusToValue : IValueConverter
+{
+    //convert from source property type to target property type
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+
+        if ((BO.OrderStatus)value == BO.OrderStatus.Ordered)
+            return 33;
+        if ((BO.OrderStatus)value == BO.OrderStatus.Shipped)
+            return 66;
+        if ((BO.OrderStatus)value == BO.OrderStatus.Delivered)
+            return 100;
+        return 0;
+    }
+
+    //convert from target property type to source property type
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        //try { int.Parse(value.ToString()); }
+        return 1;
+    }
+}

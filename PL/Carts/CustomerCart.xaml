@@ -192,7 +192,7 @@
 
             <StackPanel x:Name="NoItems" HorizontalAlignment="Center" Width="400" Margin="250, 50, 0,0" Visibility="{Binding Items.Count, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, Converter={StaticResource isEmptyToNotVisibility2Converter} }" VerticalAlignment="Center">
                 <TextBlock   TextWrapping="Wrap" Text="  Your cart is empty " FontSize="40" HorizontalAlignment="Center" FontFamily="Book Antiqua" Foreground="#FFD2CECE"/>
-                <Image Source="/Carts/emptyCart.png" Height="250" Width="250"></Image>
+                <Image Source="/Carts/emptyCart.png" Height="250" Width="250"/>
             </StackPanel>
         </Grid>
     </Grid>

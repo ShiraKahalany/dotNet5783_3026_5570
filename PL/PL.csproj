@@ -190,6 +190,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Carts\emptyCart.png" />
     <Resource Include="Carts\vii.png" />
     <Resource Include="Manager\Updated background.jpg" />
     <Resource Include="Orders\ex.png" />

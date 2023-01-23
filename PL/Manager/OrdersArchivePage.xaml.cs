@@ -35,7 +35,9 @@ namespace PL.Manager
             observeproductsToSave = observeproducts;
             try
             {
-                BOorders = bl.Order.GetDeletedOrders();
+                BOorders = bl.Order.GetDeletedOrders()!;
+                ob = BOorders!.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
+                ProductListView.ItemsSource = ob;
             }
             catch(BO.NotExistException)
             {
@@ -45,8 +47,6 @@ namespace PL.Manager
             {
                 MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
             }
-            ob = BOorders.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
-            ProductListView.ItemsSource = ob;
         }
 
 

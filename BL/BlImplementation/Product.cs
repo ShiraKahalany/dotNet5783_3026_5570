@@ -25,25 +25,25 @@ internal class Product : IProduct
     //    return listproduct;
     //}
 
-    //public BO.Product GetProduct(int id)
-    ////בקשת פרטי מוצר עבור מנהל
-    //{
-    //    if (id > 0)
-    //    {
-    //        DO.Product? pro;
-    //        try
-    //        {
-    //            pro = dal.Product.GetTByFilter((DO.Product? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().ID == id));
-    //        }
-    //        catch (DO.NotExistException ex)
-    //        {
-    //            throw new BO.NotExistException(ex.Message);
-    //        }
-    //        BO.Product product = new BO.Product();
-    //        return pro.CopyFields(product);
-    //    }
-    //    throw new BO.NotExistException("Invalid ID");
-    //}
+    public BO.Product GetById(int id)
+    //בקשת פרטי מוצר עבור מנהל
+    {
+        if (id > 0)
+        {
+            DO.Product? pro;
+            try
+            {
+                pro = dal.Product.GetTByFilter((DO.Product? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().ID == id));
+            }
+            catch (DO.NotExistException ex)
+            {
+                throw new BO.NotExistException(ex.Message);
+            }
+            BO.Product product = new BO.Product();
+            return pro.CopyFields(product);
+        }
+        throw new BO.NotExistException("Invalid ID");
+    }
     public IEnumerable<BO.Product> GetProducts(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
     //עבור מנהל ועבור קטלוג קונה .בקשת רשימת מוצרים
     {

@@ -26,10 +26,12 @@ public partial class CustomerCart : Page
     PO.CartPO cartPO;
     Frame myframe;
     BO.Cart cartBo = new BO.Cart();
+    //List<BO.Cart> CartItems=new List<BO.Cart>();
     public CustomerCart(BO.Cart cart,Frame frame)
     {
         InitializeComponent();
         cartBo = cart;
+        cartBo.refreshCart();
         cartPO = PL.Tools.CopyBOCartToPO(cartBo);
         //cartBo=cartPO.CopyPOCartToBO();
         CartItems.ItemsSource= cartPO.Items;
@@ -43,7 +45,6 @@ public partial class CustomerCart : Page
         //CartDetailsGrid.DataContext = (cartPO.Items!.Count != 0);
         //CartDetailsGrid.Visibility= Visibility.Collapsed;
         //chooseAmount.ItemSource = numArray;
-
 
     }
     
