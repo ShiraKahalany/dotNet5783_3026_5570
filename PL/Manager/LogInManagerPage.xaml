@@ -17,7 +17,7 @@
         <converter:FalseToTrueConverter x:Key="falseToTrueConverter"/>
     </Page.Resources>
 
-    <Grid Background="#26E8E5E5">
+    <Grid Background="#f5f5f0">
 
         <materialDesign:Card
                 materialDesign:ShadowAssist.ShadowDepth="Depth5"
@@ -49,7 +49,7 @@
                                Text="MANAGER ACCESS" 
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center" 
-                               Foreground="#FF2B331F"
+                               Foreground="#DD1A0F0F"
                                FontSize="30" 
                                Margin="0,0,0,30"/>
                 <PasswordBox  x:Name="PasswordBox"
@@ -65,7 +65,7 @@
                             Width="150" Height="35"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Content="Log In" Background="#FF2B331F" 
+                            Content="Log In" Background="#DD1A0F0F" 
                             FontFamily="Bahnschrift" 
                             FontSize="25" Margin="10,30,20,0" 
                             BorderBrush="Transparent"
@@ -79,14 +79,14 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Content="MANAGER" 
-                    Background="#FF2B331F" 
+                    Background="#DD1A0F0F" 
                     FontSize="25" 
                     FontWeight="Normal" 
                     FontFamily="Bahnschrift" 
                     BorderBrush="Transparent"
                     Click="ManagerLogIn_Click"
                     Visibility="Visible"
-                    IsEnabled="True"/>
+                    IsEnabled="True" Foreground="white"/>
 
 
     </Grid>

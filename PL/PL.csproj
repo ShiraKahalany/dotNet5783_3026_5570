@@ -65,6 +65,7 @@
     <None Remove="logoWithBackground.png" />
     <None Remove="Manager\992651.png" />
     <None Remove="Manager\pluss.png" />
+    <None Remove="Manager\Updated background.jpg" />
     <None Remove="menu.png" />
     <None Remove="myLogo2.jpg" />
     <None Remove="order.png" />
@@ -190,6 +191,7 @@
 
   <ItemGroup>
     <Resource Include="Carts\vii.png" />
+    <Resource Include="Manager\Updated background.jpg" />
     <Resource Include="Orders\ex.png" />
   </ItemGroup>
 

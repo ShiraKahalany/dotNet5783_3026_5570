@@ -72,6 +72,7 @@ public partial class OrderTrackingByID : Page
         try
         {
             order= bl.Order.GetOrderById(orderID);
+            myframe.Content = new Orders.OrderTrackingCustomer(order);
         }
         catch (BO.IllegalIdException)
         {
@@ -81,7 +82,7 @@ public partial class OrderTrackingByID : Page
         {
             MessageBox.Show("Order not found", "OrderTracking", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-        myframe.Content = new Orders.OrderTrackingCustomer(order);
+        
 
         //if (PasswordBox.Password == "1234")
         //{

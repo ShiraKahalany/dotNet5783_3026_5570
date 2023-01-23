@@ -122,7 +122,7 @@ public partial class OrderTrackingWindow : Window
 
     private void Start_Click(object sender, RoutedEventArgs e)
     {
-       // if (!worker.IsBusy)
+        if (!worker.IsBusy)
             worker.RunWorkerAsync();
         //toContinue = true;
     }

@@ -18,12 +18,12 @@
         <converter:FalseToTrueConverter x:Key="falseToTrueConverter"/>
     </Page.Resources>
 
-    <Grid Background="white">
+    <Grid Background="#f5f5f0">
         <materialDesign:Card
                 materialDesign:ShadowAssist.ShadowDepth="Depth5"
                 Padding="32"
                 Background="#26E8E5E5"
-                Width="477" Height="400" 
+                Width="368" Height="400" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center">
 
@@ -49,7 +49,7 @@
                                Text="FOR ORDER TRACKING" 
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center" 
-                               Foreground="#FF2B331F"
+                               Foreground="#DD1A0F0F"
                                FontSize="30" 
                                Margin="0,0,0,30"/>
                 <TextBox  x:Name="PasswordBox"
@@ -65,7 +65,7 @@
                             Width="150" Height="35"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Content="Enter" Background="#FF2B331F" 
+                            Content="Enter" Background="#DD1A0F0F" 
                             FontFamily="Bahnschrift" 
                             FontSize="25" Margin="10,30,20,0" 
                             BorderBrush="Transparent"
@@ -79,7 +79,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Content="Order Tracking" 
-                    Background="#FF2B331F" 
+                    Background="#DD1A0F0F" 
                     FontSize="25" 
                     FontWeight="Normal" 
                     FontFamily="Bahnschrift" 
