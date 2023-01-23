@@ -265,8 +265,8 @@
             </materialDesign:PackIcon>
         </Button>
         <Grid Grid.Column="2" Height="38" Margin="47,405,56,10" Width="239.857142857143">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="106,0,0,0">
-                <TextBox HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Text="{Binding TotalPrice}" BorderBrush="{x:Null}" FontSize="16" Width="100" FontWeight="Bold" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="92,0,0,0">
+                <TextBox Foreground="Black" IsReadOnly="True" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Text="{Binding TotalPrice}" BorderBrush="{x:Null}" FontSize="16" Width="100" FontWeight="Bold"/>
                 <TextBlock Text="$" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Width="11"/>
             </StackPanel>
             <Label Grid.Column="2" Content="Total Price:" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="101" Height="32" FontSize="16" FontWeight="Bold"/>

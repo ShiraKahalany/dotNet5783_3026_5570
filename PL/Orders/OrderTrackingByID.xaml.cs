@@ -61,10 +61,13 @@ public partial class OrderTrackingByID : Page
         EnterPassword();
     }
 
-    private void EnterPressed_KeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.Key == Key.Enter) EnterPassword();
-    }
+    //private void EnterPressed_KeyDown(object sender, KeyEventArgs e)
+    //{
+    //    if (e.Key == Key.Enter) EnterPassword();
+    //}
+
+
+    private void OnlyNumbers(object sender, KeyEventArgs e) => Tools.EnterNumbersOnly(sender, e);
 
     private void EnterPassword()
     {
