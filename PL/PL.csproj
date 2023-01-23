@@ -72,6 +72,7 @@
     <None Remove="Orders\approved.jpeg" />
     <None Remove="Orders\deliver.jpeg" />
     <None Remove="Orders\ex.png" />
+    <None Remove="Orders\loginBackground.png" />
     <None Remove="Orders\track1.jpeg" />
     <None Remove="Orders\truck.png" />
     <None Remove="Orders\truck2.png" />
@@ -194,6 +195,7 @@
     <Resource Include="Carts\vii.png" />
     <Resource Include="Manager\Updated background.jpg" />
     <Resource Include="Orders\ex.png" />
+    <Resource Include="Orders\loginBackground.png" />
   </ItemGroup>
 
 </Project>

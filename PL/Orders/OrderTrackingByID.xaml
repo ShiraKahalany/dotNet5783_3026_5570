@@ -18,7 +18,10 @@
         <converter:FalseToTrueConverter x:Key="falseToTrueConverter"/>
     </Page.Resources>
 
-    <Grid Background="#f5f5f0">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Orders/loginBackground.png"/>
+        </Grid.Background>
         <materialDesign:Card
                 materialDesign:ShadowAssist.ShadowDepth="Depth5"
                 Padding="32"
