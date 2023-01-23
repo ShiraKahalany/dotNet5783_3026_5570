@@ -60,8 +60,9 @@ namespace PL.Manager
             {
                 bl.Order.Restore(POor.ID);
                 ob.Remove(POor);
-                MessageBox.Show("Seccessfully Restored", "Restore Order", MessageBoxButton.OK);
+               // MessageBox.Show("Seccessfully Restored", "Restore Order", MessageBoxButton.OK);
                 observeproductsToSave.Add(POor);
+                new PL.Orders.CanceledOrderUpdatedDetailsWindow().ShowDialog();
             }
             catch(BO.NotExistException)
             {

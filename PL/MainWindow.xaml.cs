@@ -24,6 +24,7 @@ namespace PL;
 /// </summary>
 public partial class MainWindow : Window
 {
+    
     private IBL bl = BLFactory.GetBL();
     private PO.CartPO pocart;
     private BO.Cart BOcart;
@@ -37,7 +38,7 @@ public partial class MainWindow : Window
    // cartDetails.DataContext = pocart;
     }
 
-
+     
 
     private void showCategory(object sender, RoutedEventArgs e)
     {
@@ -62,6 +63,7 @@ public partial class MainWindow : Window
 
     private void Categories_Click(object sender, RoutedEventArgs e)
     {
+        LogIn.IsEnabled = true;
         ListCategories.Visibility = Visibility.Visible;
         //MainFrame.Visibility = Visibility.Hidden;
 
@@ -82,21 +84,80 @@ public partial class MainWindow : Window
     private void CartButton_Click(object sender, RoutedEventArgs e)
     {
         //cartDetails.Visibility = Visibility.Hidden;
+        LogIn.IsEnabled = true;
         MainFrame.Content = new PL.Carts.CustomerCart(BOcart,MainFrame);
     }
 
-    private void LogIn_Click(object sender, RoutedEventArgs e) => MainFrame.Content = new Manager.LogInManagerPage(MainFrame);
-
-    private void LogoButton_Click(object sender, RoutedEventArgs e)
+    private void LogIn_Click(object sender, RoutedEventArgs e)
     {
+       ((Button)(sender)).IsEnabled = false;
         MainFrame.Content = null;
     }
 
-    private void Tracking_Click(object sender, RoutedEventArgs e) => MainFrame.Content = new Orders.OrderTrackingByID(MainFrame);
-
     private void MainFrame_Navigated(object sender, NavigationEventArgs e)
     {
+      
+    }
+
+    private void LogoButton_Click(object sender, RoutedEventArgs e)
+    {
+        LogIn.IsEnabled = true;
+        MainFrame.Content = null;
+    }
+
+    private void Tracking_Click(object sender, RoutedEventArgs e)
+    {
+        LogIn.IsEnabled = true;
+        MainFrame.Content = new Orders.OrderTrackingByID(MainFrame);
+    }
+
+   
+    private void CloseManagerLogIn_Click(object sender, RoutedEventArgs e)
+    {
+        //managerButton.Visibility = Visibility.Visible;
+        //managerButton.IsEnabled = true;
+        PasswordBox.Password = "";
+        LogIn.IsEnabled = true;
+    }
+
+    private void ManagerLogIn_Click(object sender, RoutedEventArgs e)
+    {
+        //managerButton.Visibility = Visibility.Hidden;
+        //managerButton.IsEnabled = false;
 
     }
+
+    private void PanelHeader_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        //if (e.LeftButton == MouseButtonState.Pressed)
+        //{
+        //    DragMove();
+        //}
+    }
+
+    // private void Close_MouseDown(object sender, MouseButtonEventArgs e) => this.Close();
+
+    private void ManagerlogInWithPassword_Click(object sender, RoutedEventArgs e)
+    {
+        EnterPassword();
+
+    }
+
+    private void EnterPressed_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter) EnterPassword();
+    }
+
+    private void EnterPassword()
+    {
+        if (PasswordBox.Password == "1234")
+        {
+            LogIn.IsEnabled = true;
+            PL.Manager.ManagerOptionsPage homeManager = new();
+            PasswordBox.Password = "";
+            MainFrame.Content = homeManager;
+        }
+    }
+
 }
 

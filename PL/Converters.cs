@@ -683,3 +683,29 @@ public class StatusToValue : IValueConverter
         return 1;
     }
 }
+
+public class IsEnabledToVisibilityConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return ((bool)value) ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (Visibility)value == Visibility.Visible;
+    }
+}
+
+public class OpacityToVisibilityConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return ((Visibility)value== Visibility.Visible) ? 0.4 : 1;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (Visibility) Visibility.Visible;
+    }
+}
