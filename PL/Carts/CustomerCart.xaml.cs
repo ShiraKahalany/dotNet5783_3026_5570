@@ -147,11 +147,20 @@ public partial class CustomerCart : Page
     private void txtNum_TextChanged(object sender, TextChangedEventArgs e)
     {
         var t = (TextBox)sender;
+        if (t.Text == "")
+            return;
+        //try
+        //{
         int amount = int.Parse(t.Text);
+        //}
+        //catch { MessageBox.Show("Please enter a number",")}
         if (amount == 0)
             return;
         UpdateAmount(sender, amount, true);
     }
+
+        private void OnlyNumbers(object sender, KeyEventArgs e) => Tools.EnterNumbersOnly(sender, e);
+
 
     private void CountUp_Click(object sender, RoutedEventArgs e)
     {

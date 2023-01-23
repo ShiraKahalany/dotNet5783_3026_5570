@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Runtime.CompilerServices;
+using System.Diagnostics;
 
 namespace PL;
 
@@ -19,9 +20,11 @@ public static class Tools
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
         if (cart.Items == null)
             return;
+        try
+        {
         var x = from item in cart.Items
-                let product = dal.Product.GetTByFilter(x => x?.ID == item.ProductID && x?.IsDeleted == false)
-                where product?.InStock >= item.Amount
+                let product = dal.Product.GetTByFilter(x => x?.ID == item.ProductID)
+                where product?.IsDeleted==false && product?.InStock >= item.Amount 
                 select new BO.OrderItem
                 {
                     Amount = item.Amount,
@@ -33,8 +36,13 @@ public static class Tools
                     TotalItem = Math.Round((item?.Amount * product?.Price)??0, 2),
                     Name = product?.Name
                 };
-        cart.Items = x.ToList();
-        cart.TotalPrice = Math.Round(x.Sum(item => item.Price * item.Amount)??0,2);
+            cart.Items = x.ToList();
+            cart.TotalPrice = Math.Round(x.Sum(item => item.Price * item.Amount) ?? 0, 2);
+        }
+        catch(DO.NotExistException)
+        {
+            throw new BO.NotExistException();
+        }
     }
 
     public static BO.Product CopyProductToBO(this PO.ProductPO prodPO)

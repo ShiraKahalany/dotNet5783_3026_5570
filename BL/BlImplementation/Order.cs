@@ -43,7 +43,7 @@ internal class Order : IOrder
         }
         catch (DO.NotExistException ex)
         {
-            throw new BO.NotExistException(ex.Message);
+            throw new BO.OrderNotExistException(ex.Message);
         }
     }
 

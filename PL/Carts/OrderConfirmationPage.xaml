@@ -8,9 +8,13 @@
       Background="{DynamicResource MaterialDesignPaper}"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d"
+       xmlns:converter="clr-namespace:PLConverter"     
       d:DesignHeight="450" d:DesignWidth="800"
+      
       Title="OrderConfirmationPage">
-
+    <Page.Resources>
+        <converter:TextBoxesFilledConverter x:Key="TextBoxesFilledConverter"/>
+    </Page.Resources>
     <Grid Background="white">
         <Label Content="Sign Up To Checkout" 
                HorizontalAlignment="Left" 
@@ -77,7 +81,15 @@
                     HorizontalContentAlignment="Center"
                    
                     FontWeight="Bold"
-                    Foreground="black" Background="{x:Null}"  Margin="292,319,0,0" Click="PlaceOrder_Click"/>
+                    Foreground="black" Background="{x:Null}"  Margin="292,319,0,0" Click="PlaceOrder_Click">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource TextBoxesFilledConverter}">
+                    <Binding ElementName="costumerEmailTextBox" Path="Text" />
+                    <Binding ElementName="costumerAddressTextBox" Path="Text" />
+                    <Binding ElementName="costumerNameTextBox" Path="Text" />
+                </MultiBinding>
+            </Button.IsEnabled>
+        </Button>
         <Grid Background="White" Margin="594,63,35,102">
             <ListView x:Name="ItemsListView"  HorizontalAlignment="Center" >
                 <ListView.ItemTemplate>

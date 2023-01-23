@@ -143,8 +143,9 @@
                                 </Button>
 
                                 <TextBox x:Name="textNumber" 
-                                     
+                                     BorderBrush="{x:Null}"
                                      Width="15" 
+                                         KeyDown="OnlyNumbers"
                                      TextAlignment="Center"
                                      FontSize="10"
                                      Text="{Binding Amount}"
