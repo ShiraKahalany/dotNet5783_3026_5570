@@ -125,7 +125,7 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
-        <Grid Background="White" Name="OrderSuccessGrid"  Margin="49,28,63,23">
+        <Grid Background="White" Name="OrderSuccessGrid"  Margin="49,28,35,23">
             <StackPanel Orientation="Vertical" Width="450" Margin="133,206,133,85">
                 <StackPanel Orientation="Horizontal" Width="250" Height="30" HorizontalAlignment="Center">
                     <TextBlock Height="30" VerticalAlignment="Top" Text="Your order ID is:  " FontSize="18" FontFamily="Segoe UI Light"/>

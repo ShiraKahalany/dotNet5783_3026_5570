@@ -349,7 +349,7 @@ internal class DataSource
      {
          IsDeleted = false,
          ID = Config.NextProductNumber,
-         Name = "Porto Pedestal Concrete Outdoor Dining Table",
+         Name = "Lakeside Matelasse Duvet Cover & Shams",
          Price = 180,
          Category = Category.Bedroom,
          InStock = 150,
@@ -361,7 +361,7 @@ internal class DataSource
    {
        IsDeleted = false,
        ID = Config.NextProductNumber,
-       Name = "Porto Pedestal Concrete Outdoor Dining Table",
+       Name = "Crinkle Velvet Duvet Cover & Shams",
        Price = 125,
        Category = Category.Bedroom,
        InStock = 150,
