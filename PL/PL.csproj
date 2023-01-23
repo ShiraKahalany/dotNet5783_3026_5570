@@ -189,6 +189,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Carts\emptyCart.png" />
     <Resource Include="Carts\vii.png" />
     <Resource Include="Orders\ex.png" />
   </ItemGroup>

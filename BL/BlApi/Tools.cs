@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using BlImplementation;
+using System.Collections;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 //namespace BO;
 namespace BlApi;
 
@@ -156,7 +158,7 @@ internal static class Tools
     public static void CalcPriceAndAmount(this DO.Order order, ref double totalPrice, ref int amountOfItems)
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
-        IEnumerable<DO.OrderItem?> items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == order.ID && orderItem.GetValueOrDefault().IsDeleted == false);
+        IEnumerable<DO.OrderItem?> items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => (orderItem?.OrderID == order.ID) && (order.IsDeleted==orderItem?.IsDeleted));
         foreach (var item in items)
         {
             amountOfItems += item?.Amount ?? 0;
@@ -261,6 +263,10 @@ internal static class Tools
             dal.Product.Update((DO.Product)product);
         }
     }
+
+
+
+
 }
 
 

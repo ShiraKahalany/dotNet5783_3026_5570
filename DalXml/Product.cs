@@ -28,11 +28,11 @@ internal class Product : IProduct
         ? XMLTools.LoadListFromXMLElement(s_products).Elements().Select(s => getProduct(s))
         : XMLTools.LoadListFromXMLElement(s_products).Elements().Select(s => getProduct(s)).Where(filter);
 
-    //public DO.Product GetById(int id) =>
-    //    (DO.Product)getProduct(XMLTools.LoadListFromXMLElement(s_products)?.Elements()
-    //    .FirstOrDefault(st => st.ToIntNullable("ID") == id)
-    //    // fix to: throw new DalMissingIdException(id);
-    //    ?? throw new Exception("missing id"))!;
+    public DO.Product GetById(int id) =>
+        (DO.Product)getProduct(XMLTools.LoadListFromXMLElement(s_products)?.Elements()
+        .FirstOrDefault(st => st.ToIntNullable("ID") == id && ((bool)st.Element("IsDeleted")!)==false)
+        // fix to: throw new DalMissingIdException(id);
+        ?? throw new DO.NotExistException("missing id"))!;
 
     public int Add(DO.Product product)
     {

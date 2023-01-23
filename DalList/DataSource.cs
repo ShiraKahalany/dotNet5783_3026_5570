@@ -63,10 +63,12 @@ internal class DataSource
             myCustomerAdress = (streetArr[rnd.Next(streetArr.Length)]) + " " + rnd.Next(200) + ", " + citiesArr[rnd.Next(citiesArr.Length)];
             myOrderDate = DateTime.Now.AddDays(-(rnd.Next(14,31)));
             myShipDate = null;
-            if (i > 25)
+            int[] shipArr = {1,3,5,7,12,22,33,6,36,19,27,12,27,18,39};
+            int[] deliverArr = { 2, 6, 36, 19, 27, 12, 27, 18, 39 };
+            if (shipArr.Contains(i))
                 myShipDate = DateTime.Now.AddDays(-(rnd.Next(7, 14)))- new TimeSpan(rnd.NextInt64(40000000000000));
             myDeliveryDate = null;
-            if (i > 31)
+            if (deliverArr.Contains(i))
                 myDeliveryDate = DateTime.Now.AddDays(-(rnd.Next(1, 7))) - new TimeSpan(rnd.NextInt64(6000000000));
             //myOrderDate = DateTime.Now - new TimeSpan(rnd.n());
             //myShipDate = null;

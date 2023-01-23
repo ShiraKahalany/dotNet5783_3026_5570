@@ -12,7 +12,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-        Title="DeletedOrder" Height="450" Width="800">
+        Title="DeletedOrder" Height="572" Width="1088">
     <Window.Resources>
         <converter:ShippedToVisibilityConverter  x:Key="ShippedToVisibilityConverter"/>
         <converter:DeliveredToVisibilityConverter  x:Key="DeliveredToVisibilityConverter"/>
