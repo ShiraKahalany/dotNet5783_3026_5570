@@ -28,11 +28,14 @@ namespace PL.Manager
         private ObservableCollection<PO.OrderForListPO> ob = new ObservableCollection<PO.OrderForListPO>();
         private ObservableCollection<PO.OrderForListPO> observeproductsToSave = new ObservableCollection<PO.OrderForListPO>();
         private IEnumerable<BO.OrderForList> BOorders;
+        Frame myframe;
 
-        public OrdersArchivePage(ObservableCollection<PO.OrderForListPO> observeproducts)
+
+        public OrdersArchivePage(ObservableCollection<PO.OrderForListPO> observeproducts, Frame MainManagerOptionsFrame)
         {
             InitializeComponent();
             observeproductsToSave = observeproducts;
+            myframe = MainManagerOptionsFrame;
             try
             {
                 BOorders = bl.Order.GetDeletedOrders()!;
@@ -74,16 +77,21 @@ namespace PL.Manager
 
         private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            PO.OrderForListPO po = (PO.OrderForListPO)((ListView)sender).SelectedItem;
+            myframe.Content = new Orders.DeletedOrderPage(po, ob, observeproductsToSave, myframe);
+
+
+
             //new Orders.DeletedOrder((PO.ProductPO)ProductListView.SelectedItem, observeproducts).ShowDialog();
             //BOproducts = bl.Product.GetProducts(BO.Filters.filterByIsDeleted);
             //observeproducts.Clear();
             //observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
         }
 
-        private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            PO.OrderForListPO po = (PO.OrderForListPO)((ListView)sender).SelectedItem;
-            new Orders.DeletedOrder(po, ob).ShowDialog();
-        }
+        //private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    PO.OrderForListPO po = (PO.OrderForListPO)((ListView)sender).SelectedItem;
+        //    new Orders.DeletedOrder(po, ob).ShowDialog();
+        //}
     }
 }

@@ -17,6 +17,9 @@ public partial class ProductsArchivePage : Page
     private ObservableCollection<PO.ProductPO> observeproducts = new ObservableCollection<PO.ProductPO>();
     private ObservableCollection<PO.ProductPO> observeproductsToSave = new ObservableCollection<PO.ProductPO>();
     private IEnumerable<BO.Product> BOproducts;
+
+
+
     public ProductsArchivePage(ObservableCollection<PO.ProductPO> ob)
     {
         InitializeComponent();
@@ -29,19 +32,19 @@ public partial class ProductsArchivePage : Page
 
     private void Restore_Click(object sender, RoutedEventArgs e)
     {
-        PO.ProductPO restorepro = ((Button)(sender)).DataContext as PO.ProductPO;
+        PO.ProductPO?  restorepro = ((Button)(sender)).DataContext as PO.ProductPO;
         try
         {
-            bl.Product.Restore(restorepro.ID);
+            bl.Product.Restore(restorepro?.ID??0);
         }
         catch (BO.NotExistException)
         {
             MessageBox.Show("Product Not Exist", "Not Exist Product", MessageBoxButton.OK);
 
         }
-        observeproducts.Remove(restorepro);
+        observeproducts.Remove(restorepro!);
         MessageBox.Show("Seccessfully Restored", "Restore Product", MessageBoxButton.OK);
-        observeproductsToSave.Add(restorepro);
+        observeproductsToSave.Add(restorepro!);
     }
 
     private void GoBack_Click(object sender, RoutedEventArgs e)
@@ -51,8 +54,12 @@ public partial class ProductsArchivePage : Page
 
     private void ShowDeletedProduct(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-        new Products.DeletedProduct((PO.ProductPO)ProductListView.SelectedItem, observeproducts).ShowDialog();
-            BOproducts = bl.Product.GetProducts(BO.Filters.filterByIsDeleted);
+
+
+
+
+        //new Products.DeletedProduct((PO.ProductPO)ProductListView.SelectedItem, observeproducts).ShowDialog();
+        BOproducts = bl.Product.GetProducts(BO.Filters.filterByIsDeleted);
             observeproducts.Clear();
             observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
     }

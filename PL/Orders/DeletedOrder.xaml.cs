@@ -22,6 +22,8 @@ namespace PL.Orders;
 /// </summary>
 public partial class DeletedOrder : Window
 {
+
+
     BO.Order boOrder;
     private IBL bl = BLFactory.GetBL();
     public DeletedOrder(PO.OrderForListPO POorder, ObservableCollection<PO.OrderForListPO> obse)

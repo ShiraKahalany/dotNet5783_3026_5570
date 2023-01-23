@@ -134,6 +134,6 @@ public partial class ManagerOrdersPage : Page
 
     private void ShowDeletedOrders_Click(object sender, RoutedEventArgs e)
     {
-       myframe.Content = new Manager.OrdersArchivePage(ob);
+       myframe.Content = new Manager.OrdersArchivePage(ob, myframe);
     }
 }

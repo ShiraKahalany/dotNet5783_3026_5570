@@ -16,7 +16,7 @@
                    MouseDoubleClick="ProductListView_MouseDoubleClick" 
                    FontSize="13"
                    MaxWidth="830"
-                   Background="{x:Null}"  RenderTransformOrigin="0.9,0.9" Margin="22,56,22,35" Grid.RowSpan="2" SelectionChanged="ProductListView_SelectionChanged">
+                   Background="{x:Null}"  RenderTransformOrigin="0.9,0.9" Margin="22,56,22,35" Grid.RowSpan="2" >
 
 
 

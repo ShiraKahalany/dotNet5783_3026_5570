@@ -114,7 +114,7 @@ internal static class Tools
     public static List<BO.OrderItem> GetItems(this DO.Order order, ref double totalprice)
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
-        IEnumerable<DO.OrderItem?> items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == order.ID && orderItem.GetValueOrDefault().IsDeleted == false);
+        IEnumerable<DO.OrderItem?> items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == order.ID && order.IsDeleted==orderItem?.IsDeleted);
         List<BO.OrderItem> list = new List<BO.OrderItem>();
         double? sum = 0;
         foreach (DO.OrderItem item in items)

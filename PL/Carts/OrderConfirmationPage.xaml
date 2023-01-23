@@ -126,13 +126,16 @@
             </ListView>
         </Grid>
         <Grid Background="White" Name="OrderSuccessGrid"  Margin="49,28,63,23">
-            <StackPanel Orientation="Vertical" Width="450" Margin="133,206,133,85">
-                <StackPanel Orientation="Horizontal" Width="250" Height="30" HorizontalAlignment="Center">
-                    <TextBlock Height="30" VerticalAlignment="Top" Text="Your order ID is:  " FontSize="18" FontFamily="Segoe UI Light"/>
+            <StackPanel Orientation="Vertical" Width="450" Margin="133,206,105,58">
+                <StackPanel Orientation="Horizontal" Width="229" Height="30" HorizontalAlignment="Center">
+                    <TextBlock Height="30" VerticalAlignment="Top" Text="Your order ID is:  " FontSize="18" FontFamily="Segoe UI Light" FontWeight="Bold"/>
                     <TextBlock Name="OrderId" Text="{Binding}" Width="100" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Light"/>
                 </StackPanel>
-                <TextBlock Text="Save it for tracking" Height="30" TextAlignment="Center" FontSize="18" FontFamily="Yu Gothic UI Light"/>
-                <TextBlock Text="Thank you for buying!" Margin="0,10,0,0" TextAlignment="Center" FontWeight="Bold" FontSize="29" FontFamily="Bradley Hand ITC" Foreground="#FF4A6843"/>
+                <TextBlock Text="Save it for tracking" Height="30" TextAlignment="Center" FontSize="18" FontFamily="Yu Gothic UI Light" FontWeight="Bold"/>
+                <TextBlock Text="*The order cannot be canceled after it has been shipped*" Height="30" TextAlignment="Center" FontSize="16" FontFamily="Yu Gothic UI Light" Foreground="#DD9C1F1F"/>
+
+                <TextBlock Text="Thank you for buying!" Margin="0,10,0,0" TextAlignment="Center" FontWeight="Bold" FontSize="29" FontFamily="Bradley Hand ITC" Foreground="#FF4A6843" Height="40"/>
+            
             </StackPanel>
             <Button Name="ContinueShopping"
                     Content="CONTINUE SHOPPING"

@@ -34,8 +34,7 @@
     <Grid Background="White">
         <Image HorizontalAlignment="Left" 
                Height="281" Margin="490,97,0,0" 
-               VerticalAlignment="Top" Width="257" Source="{
-            }" />
+               VerticalAlignment="Top" Width="257" Source="{Binding Path }" />
 
         <TextBlock 
             Name="nameofproduct"
