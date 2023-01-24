@@ -201,7 +201,6 @@
     <Resource Include="ICON2.png" />
     <Resource Include="Manager\Updated background.jpg" />
     <Resource Include="Orders\ex.png" />
-    <Resource Include="Orders\loginBackground.png" />
     <Resource Include="Updated background.jpg" />
   </ItemGroup>
 
