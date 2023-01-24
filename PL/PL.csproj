@@ -27,7 +27,6 @@
     <None Remove="green-sofa-white-living-room-with-free-space.jpg" />
     <None Remove="home.jpg" />
     <None Remove="ICON.png" />
-    <None Remove="ICON2.png" />
     <None Remove="image\3-piece dark gray sofa.jpg" />
     <None Remove="image\3-Pieces Green Sofa.jpg" />
     <None Remove="image\approved.jpeg" />
@@ -198,7 +197,6 @@
     <Resource Include="Carts\vii.png" />
     <Resource Include="GH.png" />
     <Resource Include="ICON.png" />
-    <Resource Include="ICON2.png" />
     <Resource Include="Manager\Updated background.jpg" />
     <Resource Include="Orders\ex.png" />
     <Resource Include="Updated background.jpg" />
