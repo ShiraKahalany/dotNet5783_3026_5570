@@ -13,7 +13,6 @@ public class ProductForList
     public string? Name { get; set; }  //שם המוצר
     public double? Price { get; set; }  //מחיר המוצר
     public Category Category { get; set; }  //הקטגוריה אליה שייך המוצר
-                                            //public string? path;  //כתובת תמונה של המוצר
     public string? Path { get; set; }
     public override string ToString() => this.ToStringProperty();  //הפיכה למחרוזת
 }

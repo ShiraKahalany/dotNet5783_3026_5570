@@ -187,19 +187,21 @@ public static class Tools
     //בדיקה האם ניתן לשנות את הכמות המבוקשת לפי הזמינות במלאי. אם ניתן - החזרת הכמות
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
+        DO.Product? product;
         try
         {
-            DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
+            product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
             //int? difference = amount - item.Amount;
             if (product?.InStock < amount)  //אם אין מספיק במלאי מהמוצר
                 throw new BO.NotInStockException();
+            return amount;
         }
         catch (DO.NotExistException)
         {
             throw new BO.NotInStockException();
         }
 
-        return amount;
+        return product?.InStock??0;
     }
 
     public static void updateItemsStock(this BO.Order order)

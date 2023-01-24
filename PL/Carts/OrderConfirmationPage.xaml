@@ -103,13 +103,13 @@
                             </Grid.ColumnDefinitions>
                             <Image Source="{Binding Path}" 
                                Height="50" Grid.Column="0" Width="50"></Image>
-                            <TextBlock  Width="30" 
+                            <TextBlock  Width="32" 
                                    Grid.Column="1"
                                      TextAlignment="Center"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     FontWeight="Bold"
-                                     FontSize="16"
+                                     FontSize="14"
                                      Text="{Binding Amount}"
                                   IsEnabled="False"
                                      Height="30" />
