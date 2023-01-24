@@ -142,7 +142,7 @@
                         >
                 </Button>
             </ListViewItem>
-            <ListViewItem Selected="ListViewItem_Selected">
+            <ListViewItem >
                 <Button Name="bed_room"
                         Width="112"
                         Height="58"
