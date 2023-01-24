@@ -13,7 +13,6 @@
 
     <Grid Background="white">
         <ListView  Name="ProductListView"
-                  
                    FontSize="13"
                    
                    MaxWidth="650"

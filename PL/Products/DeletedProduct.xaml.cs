@@ -49,13 +49,13 @@ namespace PL.Products
             {
                 bl.Product.Restore(restorepro!.ID);
                 observeproducts.Remove(restorepro);
-                MessageBox.Show("Seccessfully Restored", "Restore Product", MessageBoxButton.OK);
+                //MessageBox.Show("Seccessfully Restored", "Restore Product", MessageBoxButton.OK);
                 //observeproductsToSave.Add(restorepro);
+                Close();
             }
             catch (BO.NotExistException)
             {
                 MessageBox.Show("Product Not Exist", "Not Exist Product", MessageBoxButton.OK);
-
             }
             
         }
