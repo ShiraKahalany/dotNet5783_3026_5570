@@ -58,7 +58,7 @@ public partial class OrderTrackingByID : Page
 
     private void ManagerlogInWithPassword_Click(object sender, RoutedEventArgs e)
     {
-        EnterPassword();
+     //   EnterPassword();
     }
 
     //private void EnterPressed_KeyDown(object sender, KeyEventArgs e)
@@ -69,13 +69,13 @@ public partial class OrderTrackingByID : Page
 
     private void OnlyNumbers(object sender, KeyEventArgs e) => Tools.EnterNumbersOnly(sender, e);
 
-    private void EnterPassword()
+    private void EnterID()
     {
         int orderID = int.Parse(PasswordBox.Text);
         try
         {
             order= bl.Order.GetOrderById(orderID);
-            myframe.Content = new Orders.OrderTrackingCustomer(order);
+         //   myframe.Content = new Orders.OrderTrackingCustomer(order);
         }
         catch (BO.IllegalIdException)
         {

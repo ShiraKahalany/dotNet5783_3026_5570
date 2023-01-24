@@ -42,6 +42,7 @@ public partial class ManagerOrdersPage : Page
         ob = BOorderforlist!.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
         //ProductListView.DataContext = observeproducts;
         OrderListView.ItemsSource = ob;
+        AttributeSelector.SelectedItem = BO.OrderStatus.None;
         AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
 
     }
@@ -78,7 +79,8 @@ public partial class ManagerOrdersPage : Page
     private void OrderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         PO.OrderForListPO po=(PO.OrderForListPO)((ListView)sender).SelectedItem;
-        myframe.Content = new Orders.OrderTracking(po, ob);
+        BO.OrderStatus selectedStatus = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), AttributeSelector.SelectedItem.ToString()!);
+        myframe.Content = new Orders.OrderTracking(po, ob, selectedStatus);
       //myframe.Content = new Orders.OrderTracking(boorder, po);
 
         //if ((AttributeSelector.SelectedItem != null) && (BO.OrderStatus)AttributeSelector.SelectedItem != BO.OrderStatus.None)

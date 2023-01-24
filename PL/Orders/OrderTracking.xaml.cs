@@ -14,12 +14,14 @@ public partial class OrderTracking : Page
     PO.OrderForListPO poorder = new();
     private PO.OrderPO order = new();
     private ObservableCollection<PO.OrderForListPO> ob = new ObservableCollection<PO.OrderForListPO>();
-    public OrderTracking(PO.OrderForListPO POorder, ObservableCollection<PO.OrderForListPO> obse)
+    BO.OrderStatus stat;
+    public OrderTracking(PO.OrderForListPO POorder, ObservableCollection<PO.OrderForListPO> obse,BO.OrderStatus status)
     {
         InitializeComponent();
         ob = obse;
         poorder = POorder;
         int id = poorder.ID;
+        stat = status;
        // BO.Order boOrder = new BO.Order();
         try
         {
@@ -45,6 +47,7 @@ public partial class OrderTracking : Page
         try
         {
             boOrder = bl.Order.UpdateStatusToProvided(boOrder.ID);
+            
         }
         catch (BO.OrderHasDeliveredException)
         {
@@ -62,8 +65,8 @@ public partial class OrderTracking : Page
             isStatusChanged = false;
         }
         poorder = boOrder.CopyFields<BO.Order, PO.OrderForListPO>(poorder);
-        order= boOrder.CopyFields<BO.Order, PO.OrderPO>(order);
-        if (isStatusChanged)
+        order = boOrder.CopyFields<BO.Order, PO.OrderPO>(order);
+        if (isStatusChanged && stat!= BO.OrderStatus.None)
             ob.Remove(poorder);
         // }
     }
@@ -73,10 +76,7 @@ public partial class OrderTracking : Page
         bool isStatusChanged = true;
         try
         {
-            boOrder = bl.Order.UpdateStatusToShipped(boOrder.ID);
-           // poorder.ShipDate = boOrder.ShipDate;
-            poorder = boOrder.CopyFields<BO.Order, PO.OrderForListPO>(poorder);
-           // DataContext=poorder;
+            boOrder = bl.Order.UpdateStatusToShipped(boOrder.ID)!;
         }
         catch (BO.OrderHasShippedException)
         {
@@ -90,7 +90,7 @@ public partial class OrderTracking : Page
         }
         poorder = boOrder.CopyFields<BO.Order, PO.OrderForListPO>(poorder);
         order = boOrder.CopyFields<BO.Order, PO.OrderPO>(order);
-        if (isStatusChanged)
+        if (isStatusChanged &&(stat != BO.OrderStatus.None))
             ob.Remove(poorder);
     }
 

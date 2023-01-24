@@ -28,6 +28,7 @@ public partial class MainWindow : Window
     private IBL bl = BLFactory.GetBL();
     private PO.CartPO pocart;
     private BO.Cart BOcart;
+    BO.Order order;
     public MainWindow()
     {
         InitializeComponent();
@@ -64,6 +65,7 @@ public partial class MainWindow : Window
     private void Categories_Click(object sender, RoutedEventArgs e)
     {
         LogIn.IsEnabled = true;
+        Tracking.IsEnabled = true;
         ListCategories.Visibility = Visibility.Visible;
         //MainFrame.Visibility = Visibility.Hidden;
 
@@ -85,13 +87,16 @@ public partial class MainWindow : Window
     {
         //cartDetails.Visibility = Visibility.Hidden;
         LogIn.IsEnabled = true;
+        Tracking.IsEnabled = true;
         MainFrame.Content = new PL.Carts.CustomerCart(BOcart,MainFrame);
     }
 
     private void LogIn_Click(object sender, RoutedEventArgs e)
     {
        ((Button)(sender)).IsEnabled = false;
+        Tracking.IsEnabled = true;
         MainFrame.Content = null;
+        
     }
 
     private void MainFrame_Navigated(object sender, NavigationEventArgs e)
@@ -102,13 +107,16 @@ public partial class MainWindow : Window
     private void LogoButton_Click(object sender, RoutedEventArgs e)
     {
         LogIn.IsEnabled = true;
+        Tracking.IsEnabled = true;
         MainFrame.Content = null;
     }
 
+    private void OnlyNumbers(object sender, KeyEventArgs e) => Tools.EnterNumbersOnly(sender, e);
     private void Tracking_Click(object sender, RoutedEventArgs e)
     {
         LogIn.IsEnabled = true;
-        MainFrame.Content = new Orders.OrderTrackingByID(MainFrame);
+        ((Button)(sender)).IsEnabled = false;
+        MainFrame.Content = null;
     }
 
    
@@ -118,6 +126,14 @@ public partial class MainWindow : Window
         //managerButton.IsEnabled = true;
         PasswordBox.Password = "";
         LogIn.IsEnabled = true;
+    }
+    
+    private void CloseOrderTracking_Click(object sender, RoutedEventArgs e)
+    {
+        //managerButton.Visibility = Visibility.Visible;
+        //managerButton.IsEnabled = true;
+        PasswordBox.Password = "";
+        Tracking.IsEnabled = true;
     }
 
     private void ManagerLogIn_Click(object sender, RoutedEventArgs e)
@@ -142,6 +158,12 @@ public partial class MainWindow : Window
         EnterPassword();
 
     }
+    
+    private void OrderTrackingID_Click(object sender, RoutedEventArgs e)
+    {
+        EnterID();
+
+    }
 
     private void EnterPressed_KeyDown(object sender, KeyEventArgs e)
     {
@@ -159,5 +181,25 @@ public partial class MainWindow : Window
         }
     }
 
-}
+    private void EnterID()
+    {
+        int orderID = int.Parse(IDText.Text);
+        try
+        {
+            order = bl.Order.GetOrderById(orderID)!;
+            Tracking.IsEnabled = true;
+            IDText.Text = "";
+            MainFrame.Content = new Orders.OrderTrackingCustomer(order,MainFrame);
+        }
+        catch (BO.IllegalIdException)
+        {
+            MessageBox.Show("The ID number is not standard. Enter 4 digits", "OrderTracking", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        catch (BO.OrderNotExistException)
+        {
+            MessageBox.Show("Order not found", "OrderTracking", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    }
 

@@ -23,17 +23,19 @@ public partial class OrderTrackingCustomer : Page
 {
     BO.Order boOrder;
     private IBL bl = BLFactory.GetBL();
-    public OrderTrackingCustomer(BO.Order order)
+    Frame myframe;
+    public OrderTrackingCustomer(BO.Order order,Frame frame)
     {
         InitializeComponent();
         boOrder = order;
+        myframe = frame;
         DataContext = boOrder;
         ItemsListView.ItemsSource =boOrder.Items;
     }
 
     private void back_click(object sender, RoutedEventArgs e)
     {
-        NavigationService.GoBack();
+        myframe.Content=null;
     }
 
 

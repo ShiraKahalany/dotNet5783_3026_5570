@@ -18,8 +18,6 @@
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
 
-
-
         <Button 
                 x:Name="ShowDeletedOrders" 
                 Grid.Row="0"
@@ -38,7 +36,7 @@
 
 
         <ComboBox x:Name="AttributeSelector" 
-                      materialDesign:HintAssist.Hint="         Status"
+                    
                   SelectionChanged="AttributeSelector_SelectionChanged"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Left"

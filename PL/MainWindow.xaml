@@ -14,8 +14,6 @@
 
     <Window.Resources>
         <converter:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
-        <converter:NotVisibilityToVisibilityConverter x:Key="notVisibilityToVisibilityConverter"/>
-        <converter:FalseToTrueConverter x:Key="falseToTrueConverter"/>
         <converter:IsEnabledToVisibilityConverter x:Key="IsEnabledToVisibilityConverter"/>
         <converter:OpacityToVisibilityConverter x:Key="OpacityToVisibilityConverter"/>
         <Style x:Key="Design" TargetType="Button">
@@ -51,7 +49,7 @@
                 <ColumnDefinition Width="73*"/>
             </Grid.ColumnDefinitions>
             <Button Name="Tracking"
-                    HorizontalAlignment="Left" 
+                    HorizontalAlignment="Left"
                     Margin="897,12,0,0" 
                     VerticalAlignment="Top" 
                     Width="69" Grid.ColumnSpan="2" Height="35" Background="{x:Null}" BorderBrush="{x:Null}" Click="Tracking_Click">
@@ -128,6 +126,7 @@
                         VerticalAlignment="Bottom"
                         Click="ListCategories_Click" 
                         >
+
                 </Button>
             </ListViewItem>
             <ListViewItem>
@@ -141,10 +140,6 @@
                         Click="ListCategories_Click"
                         Content="Living Room"
                         >
-
-
-
-
                 </Button>
             </ListViewItem>
             <ListViewItem Selected="ListViewItem_Selected">
@@ -156,10 +151,6 @@
                         Padding="0"
                         Content="Bed Room"
                         Click="ListCategories_Click">
-
-                    <!--<StackPanel>
-
-                    </StackPanel>-->
                 </Button>
             </ListViewItem>
             <ListViewItem>
@@ -171,8 +162,6 @@
                         Padding="0"
                         Content="Bath Room"
                         Click="ListCategories_Click">
-
-
                 </Button>
             </ListViewItem>
             <ListViewItem>
@@ -184,8 +173,6 @@
                         Padding="0"
                         Content="Garden"
                         Click="ListCategories_Click">
-
-
                 </Button>
             </ListViewItem>
             <ListViewItem Height="71">
@@ -197,23 +184,19 @@
                         Padding="0"
                         Content="All Products"
                         Click="ListCategories_Click"
-                       
                         >
-
                 </Button>
             </ListViewItem>
         </ListView>
-        <!--<Grid Name="cartDetails" Background="#f5f5f0"  Margin="0,0,75,250" Width="208" HorizontalAlignment="Right" 
-              MouseMove="showCart" MouseLeave="hideCart" MouseEnter="showCart" MouseUp="showCart" Grid.Row="1" />-->
         <Frame x:Name="MainFrame" Margin="0,43,0,0" Grid.RowSpan="2" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated"/>
 
         <materialDesign:Card 
       Visibility="{Binding ElementName=LogIn, Path=IsEnabled, Converter={StaticResource IsEnabledToVisibilityConverter}}"
            Background="{x:Null}"
                 materialDesign:ShadowAssist.ShadowDepth="Depth5"
-                Width="330" Height="330" 
+                Width="368" Height="400" 
                 HorizontalAlignment="Left" 
-                VerticalAlignment="Top" Margin="368,41,0,0" Grid.Row="1">
+                VerticalAlignment="Top" Margin="346,22,0,0" Grid.Row="1">
             <Grid Name="LogInGrid" 
                   Background="#f5f5f0" 
                   
@@ -221,9 +204,7 @@
                 <StackPanel Name="managetLogin"  
                             Orientation="Vertical" 
                             HorizontalAlignment="Center" 
-                            VerticalAlignment="Center"
-                            Visibility= "{Binding ElementName=managerButton, Path=Visibility, Converter={StaticResource notVisibilityToVisibilityConverter}}"
-                            IsEnabled= "{Binding ElementName=managerButton, Path=IsEnabled , Converter={StaticResource falseToTrueConverter}}">
+                            VerticalAlignment="Center" >
 
                     <Button
                     Opacity="1"
@@ -265,20 +246,61 @@
                 </StackPanel>
             </Grid>
         </materialDesign:Card>
-        <!--<Button Name="managerButton" 
-                    Visibility="{Binding ElementName=LogIn, Path=IsEnabled, Converter={StaticResource IsEnabledToVisibilityConverter}}"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                    Width="250" Height="70" Opacity="1"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="MANAGER" 
-                    Background="#DD1A0F0F" 
-                    FontSize="25" 
-                    FontWeight="Normal" 
-                    FontFamily="Bahnschrift" 
-                    BorderBrush="Transparent"
-                    Click="ManagerLogIn_Click"
-                    IsEnabled="True" Foreground="white" Margin="405,159,0,0" Grid.Row="1"/>-->
+
+        <materialDesign:Card
+                materialDesign:ShadowAssist.ShadowDepth="Depth5"
+                Visibility="{Binding ElementName=Tracking, Path=IsEnabled, Converter={StaticResource IsEnabledToVisibilityConverter}}"
+                Background="#26E8E5E5"
+                Width="368" Height="400"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" Margin="346,22,0,0" Grid.Row="1">
+            <Grid Name="orderTrackingGrid"
+                  Background="#f5f5f0" 
+                Visibility="{Binding ElementName=Tracking, Path=IsEnabled, Converter={StaticResource IsEnabledToVisibilityConverter}}">
+                <StackPanel Name="orderTracking"  
+                            Orientation="Vertical" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center">
+
+                    <Button
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Click="CloseOrderTracking_Click" 
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Top" Margin="0,-20,0,0">
+                        <materialDesign:PackIcon Kind="ArrowLeftThin"
+                                                 Height="30" Width="30"/>
+                    </Button>
+                    <TextBlock 
+                               Text="FOR ORDER TRACKING" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" 
+                               Foreground="#DD1A0F0F"
+                               FontSize="30" 
+                               Margin="0,0,0,30"/>
+                    <TextBox
+                                  Name="IDText"
+                                  materialDesign:HintAssist.Hint="Enter order ID"
+                                  Width="300" Height="70"
+                                  materialDesign:HintAssist.Foreground="Black"
+                                  materialDesign:TextFieldAssist.UnderlineBrush="Black"
+                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                  FontSize="20" KeyDown="OnlyNumbers" />
+
+                    <Button Grid.Column="1"
+                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                            Width="150" Height="35"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Content="Enter" Background="#DD1A0F0F" 
+                            FontFamily="Bahnschrift" 
+                            FontSize="25" Margin="10,30,20,0" 
+                            BorderBrush="Transparent"
+                            Click="OrderTrackingID_Click"/>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+
 
     </Grid>
 </Window>

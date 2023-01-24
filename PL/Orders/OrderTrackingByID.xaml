@@ -30,7 +30,7 @@
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center">
 
-            <StackPanel Name="managetLogin"  
+            <StackPanel Name="orderTracking"  
                             Orientation="Vertical" 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center"
