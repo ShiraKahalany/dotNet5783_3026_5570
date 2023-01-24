@@ -40,6 +40,9 @@ public partial class DeletedProduct : Window
     private void Restore(object sender, RoutedEventArgs e)
     {
         PO.ProductPO? restorepro = ((Button)(sender)).DataContext as PO.ProductPO;
+        var result = MessageBox.Show("Are you sure you want to return the product to the store?", "Restore product", MessageBoxButton.YesNo);
+        if (result == MessageBoxResult.No)
+            return;
         try
         {
             bl.Product.Restore(restorepro!.ID);
