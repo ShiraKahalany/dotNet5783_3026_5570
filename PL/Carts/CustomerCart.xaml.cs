@@ -45,7 +45,6 @@ public partial class CustomerCart : Page
         //CartDetailsGrid.DataContext = (cartPO.Items!.Count != 0);
         //CartDetailsGrid.Visibility= Visibility.Collapsed;
         //chooseAmount.ItemSource = numArray;
-
     }
     
 

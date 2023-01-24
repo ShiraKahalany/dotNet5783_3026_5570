@@ -53,9 +53,9 @@ internal class Order : IOrder
         try
         {
             DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false)!;
-            if (/*time==null&&*/order.ShipDate != null)
+            if (/*time == null && */order.ShipDate != null)
                 throw new BO.OrderHasShippedException();
-                order.ShipDate = /*time??*/DateTime.Now;
+                order.ShipDate = /*time ?? */DateTime.Now;
             dal.Order.Update((DO.Order)order);
             return order.OrderToBO();
         }
@@ -71,11 +71,11 @@ internal class Order : IOrder
         {
             DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false)!;
            
-            if (/*time==null&&*/order.DeliveryDate != null)
+            if (/*time == null && */order.DeliveryDate != null)
                 throw new BO.OrderHasDeliveredException();
             if (/*time == null && */order.ShipDate == null)
                 throw new BO.OrderHasNotShippedException();
-            order.DeliveryDate = /*time??*/DateTime.Now;
+            order.DeliveryDate = /*time ?? */DateTime.Now;
             dal.Order.Update((DO.Order)order);
             return order.OrderToBO();
         }
@@ -275,7 +275,7 @@ internal class Order : IOrder
         return x.ToList();
     }
 
-    public void Restore(int id)
+    public double Restore(int id)
     //שיחזור הזמנה שנמחקה, לפי מזהה הזמנה
     {
         if (id <= 0)
@@ -284,9 +284,10 @@ internal class Order : IOrder
         {
             BO.Order boOrder = GetDeletedOrderById(id);
             boOrder.Items!.checkStock();
-            boOrder.Items!.updateStock();
+           double totalPrice= boOrder.Items!.updateStockAndReturnTotalPrice();
             DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted);
             dal.Order.Restore((DO.Order)order!);
+            return totalPrice;
         }
         catch (DO.NotExistException ex)
         {

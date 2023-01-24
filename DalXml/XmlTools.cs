@@ -18,16 +18,16 @@ static class XMLTools
 
     #region Extension Fuctions
     public static T? ToEnumNullable<T>(this XElement element, string name) where T : struct, Enum =>
-        Enum.TryParse<T>((string)element.Element(name), out var result) ? (T)result : default;
+        Enum.TryParse<T>((string)element.Element(name)!, out var result) ? (T)result : default;
 
     public static DateTime? ToDateTimeNullable(this XElement element, string name) =>
-        DateTime.TryParse((string)element.Element(name), out var result) ? (DateTime?)result : null;
+        DateTime.TryParse((string)element.Element(name)!, out var result) ? (DateTime?)result : null;
 
     public static double? ToDoubleNullable(this XElement element, string name) =>
-        double.TryParse((string)element.Element(name), out var result) ? (double)result : default;
+        double.TryParse((string)element.Element(name)!, out var result) ? (double)result : default;
 
     public static int? ToIntNullable(this XElement element, string name) =>
-        int.TryParse((string)element.Element(name), out var result) ? (int)result : default;
+        int.TryParse((string)element.Element(name)!, out var result) ? (int)result : default;
     #endregion
 
     #region SaveLoadWithXElement
@@ -82,7 +82,7 @@ static class XMLTools
         }
         catch (Exception ex)
         {
-            // DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {dir + filePath}", ex);            }
+           // DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {dir + filePath}", ex);            }
             throw new Exception($"fail to create xml file: {filePath}", ex);
         }
     }

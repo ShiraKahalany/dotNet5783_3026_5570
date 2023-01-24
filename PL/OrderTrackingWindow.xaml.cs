@@ -55,7 +55,7 @@ public partial class OrderTrackingWindow : Window
     private void Worker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
         if (from==0)
-            MessageBox.Show("yesssss it does!!!");
+            MessageBox.Show("All orders have been successfully delivered", "Simulator", MessageBoxButton.OK, MessageBoxImage.Hand);
         else if(from==1)
         {
              toContinue = true;
@@ -72,7 +72,7 @@ public partial class OrderTrackingWindow : Window
             //addedDays++;
             if (worker.WorkerReportsProgress)
                 worker.ReportProgress(1);
-            Thread.Sleep(1000);
+            Thread.Sleep(900);
         }
     }
 

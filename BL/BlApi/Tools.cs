@@ -1,7 +1,5 @@
-﻿using BlImplementation;
-using System.Collections;
+﻿using System.Collections;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 //namespace BO;
 namespace BlApi;
 
@@ -9,14 +7,13 @@ namespace BlApi;
 //public static class Tools
 //{
 
-internal static class Tools
+public static class Tools
 {
     public static string ToStringProperty<T>(this T t, string suffix = "") =>
 
         t!.GetType().GetProperties().Aggregate(suffix, (str, prop) =>
 
         {
-
             str += "\n" + suffix;
 
             var value = prop!.GetValue(t, null);
@@ -35,33 +32,33 @@ internal static class Tools
 
         + "\n" + suffix + "==============";
 
-    //public static string ToStringProperty<T>(this T t, string suffix = "")
-    ////מתודה להפיכת ישות למחרוזת לצורך הצגת הפרטים
-    //{
-    //    string str = "";
-    //    foreach (PropertyInfo prop in t.GetType().GetProperties())
-    //    {
-    //        if (prop.Name == "IsDeleted")
-    //        {
-    //            bool? val = (bool?)prop.GetValue(t, null);
-    //            if (val ?? false)
-    //                str += " * * * DELETED * * *:";
-    //            continue;
-    //        }
-    //        var value = prop.GetValue(t, null);
-    //        if (value is not string && value is IEnumerable)
-    //        {
-    //            str = str + "\n" + prop.Name + ":";
-    //            foreach (var item in (IEnumerable)value)
-    //                str += item.ToStringProperty("      ");
-    //        }
+    public static string ToStringProperty2<T>(this T t, string suffix = "")
+    //מתודה להפיכת ישות למחרוזת לצורך הצגת הפרטים
+    {
+        string str = "";
+        foreach (PropertyInfo prop in t.GetType().GetProperties())
+        {
+            if (prop.Name == "IsDeleted")
+            {
+                bool? val = (bool?)prop.GetValue(t, null);
+                if (val ?? false)
+                    str += " * * * DELETED * * *:";
+                continue;
+            }
+            var value = prop.GetValue(t, null);
+            if (value is not string && value is IEnumerable)
+            {
+                str = str + "\n" + prop.Name + ":";
+                foreach (var item in (IEnumerable)value)
+                    str += item.ToStringProperty("      ");
+            }
 
-    //        else
-    //            str += "\n" + suffix + prop.Name + ": " + value;
-    //    }
-    //    str += "\n";
-    //    return str;
-    //}
+            else
+                str += "\n" + suffix + prop.Name + ": " + value;
+        }
+        str += "\n";
+        return str;
+    }
 
     public static Target CopyFields<Source, Target>(this Source source, Target target)
     {
@@ -114,16 +111,22 @@ internal static class Tools
     public static List<BO.OrderItem> GetItems(this DO.Order order, ref double totalprice)
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
-        IEnumerable<DO.OrderItem?> items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == order.ID && order.IsDeleted==orderItem?.IsDeleted);
+        IEnumerable<DO.OrderItem?> items;
         List<BO.OrderItem> list = new List<BO.OrderItem>();
-        double? sum = 0;
-        foreach (DO.OrderItem item in items)
+        try
         {
-            sum += item.Amount * item.Price;
-            BO.OrderItem temp = new BO.OrderItem();
-            list.Add(item.CopyFields(temp));
+            items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == order.ID && order.IsDeleted == orderItem?.IsDeleted);
+            double? sum = 0;
+            foreach (DO.OrderItem item in items)
+            {
+                sum += item.Amount * item.Price;
+                BO.OrderItem temp = new BO.OrderItem();
+                list.Add(item.CopyFields(temp));
+            }
+            totalprice = Math.Round(sum ?? 0, 2);
         }
-        totalprice = Math.Round(sum ?? 0, 2);
+        catch (DO.NotExistException)
+        { }
         return list;
     }
 
@@ -158,13 +161,19 @@ internal static class Tools
     public static void CalcPriceAndAmount(this DO.Order order, ref double totalPrice, ref int amountOfItems)
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
-        IEnumerable<DO.OrderItem?> items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => (orderItem?.OrderID == order.ID) && (order.IsDeleted==orderItem?.IsDeleted));
-        foreach (var item in items)
+        try
         {
-            amountOfItems += item?.Amount ?? 0;
-            totalPrice += item?.Price * item?.Amount ?? 0;
+            IEnumerable<DO.OrderItem?> items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => (orderItem?.OrderID == order.ID) && (order.IsDeleted == orderItem?.IsDeleted));
+            foreach (var item in items)
+            {
+                amountOfItems += item?.Amount ?? 0;
+                totalPrice += item?.Price * item?.Amount ?? 0;
+            }
+            totalPrice = Math.Round(totalPrice, 2);
         }
-        totalPrice = Math.Round(totalPrice, 2);
+        catch (DO.NotExistException)
+        { }
+
     }
 
     public static void UpdateTotalpriceInCart(ref BO.Cart cart, BO.OrderItem item, int dif)
@@ -178,10 +187,18 @@ internal static class Tools
     //בדיקה האם ניתן לשנות את הכמות המבוקשת לפי הזמינות במלאי. אם ניתן - החזרת הכמות
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
-        DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
-        //int? difference = amount - item.Amount;
-        if (product?.InStock < amount)  //אם אין מספיק במלאי מהמוצר
+        try
+        {
+            DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
+            //int? difference = amount - item.Amount;
+            if (product?.InStock < amount)  //אם אין מספיק במלאי מהמוצר
+                throw new BO.NotInStockException();
+        }
+        catch (DO.NotExistException)
+        {
             throw new BO.NotInStockException();
+        }
+
         return amount;
     }
 
@@ -229,11 +246,13 @@ internal static class Tools
         }
     }
 
-    public static void updateStock(this List<BO.OrderItem> items)
+    public static double updateStockAndReturnTotalPrice(this List<BO.OrderItem> items)
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
+        double totalPrice = 0;
         foreach (BO.OrderItem item in items)
         {
+
             DO.Product product;
             DO.OrderItem orderItem;
             try
@@ -252,19 +271,51 @@ internal static class Tools
             {
                 throw new BO.NotExistException();
             }
-            
+
             orderItem.Price = product.Price;
-            orderItem.TotalItem = Math.Round(orderItem.Price ?? 0 * orderItem.Amount ?? 0, 2);
+            double total = (orderItem.Price ?? 0) * (orderItem.Amount ?? 0);
+            orderItem.TotalItem = Math.Round(total, 2);
             orderItem.Path = product.Path;
             product.InStock -= orderItem.Amount;
             dal.OrderItem.Update(orderItem);
             dal.OrderItem.Restore(orderItem);
             product.InStock = product.InStock - item.Amount;
             dal.Product.Update((DO.Product)product);
+            totalPrice = totalPrice + orderItem.TotalItem ?? 0;
         }
+        return Math.Round(totalPrice, 2);
     }
 
 
+    public static void refreshCart(this BO.Cart cart)
+    {
+        DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
+        if (cart.Items == null)
+            return;
+        try
+        {
+            var x = from item in cart.Items
+                    let product = dal.Product.GetTByFilter(x => x?.ID == item.ProductID)
+                    where product?.IsDeleted == false && product?.InStock >= item.Amount
+                    select new BO.OrderItem
+                    {
+                        Amount = item.Amount,
+                        Price = product?.Price,
+                        ProductID = item.ProductID,
+                        Path = product?.Path,
+                        ID = item.ID,
+                        IsDeleted = item.IsDeleted,
+                        TotalItem = Math.Round((item?.Amount * product?.Price) ?? 0, 2),
+                        Name = product?.Name
+                    };
+            cart.Items = x.ToList();
+            cart.TotalPrice = Math.Round(x.Sum(item => item.Price * item.Amount) ?? 0, 2);
+        }
+        catch (DO.NotExistException)
+        {
+            throw new BO.NotExistException();
+        }
+    }
 
 
 }

@@ -4,9 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Orders"
-        mc:Ignorable="d"
-        Title="CanceledOrderUpdatedDetailsWindow" Height="450" Width="800">
-    <Grid>
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      Background="{DynamicResource MaterialDesignPaper}"
+
         
+        mc:Ignorable="d"
+        Title="CanceledOrderUpdatedDetailsWindow" Height="400" Width="400"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="Design" TargetType="Button">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="25,25,25,25"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="myGrid">
+        <Button Content="OK" HorizontalAlignment="Center" Margin="0,287,0,0" VerticalAlignment="Top" Height="46" Width="72" Background="{x:Null}" FontSize="24" FontFamily="Book Antiqua" Click="Button_Click_1"/>
+        <TextBox x:Name="success" IsReadOnly="True" BorderBrush="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,50,0,0" TextWrapping="Wrap" Text="The order has been restored successfully!" VerticalAlignment="Top" Height="114" Width="312" FontSize="30" FontFamily="Bradley Hand ITC" FontWeight="Bold" Foreground="#DD217936"/>
+        <TextBox x:Name="notSuccess" IsReadOnly="True" BorderBrush="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,50,0,0" TextWrapping="Wrap" Text="Sorry,&#xD;&#xA;the order cannot be restored.&#xD;&#xA;Some products are no longer in our stock" VerticalAlignment="Top" Height="209" Width="348" FontSize="32" FontFamily="Bradley Hand ITC" FontWeight="Bold" Foreground="#FFAB1616"/>
+
+        <TextBox x:Name="total" IsReadOnly="True" BorderBrush="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Its current total price is:" VerticalAlignment="Center" Height="56" Width="312" FontSize="24" Foreground="#DD000000" FontFamily="Bradley Hand ITC" FontWeight="Bold"/>
+        <StackPanel x:Name="price" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,214,0,0">
+            <TextBox x:Name="thePrice" Foreground="Black" IsReadOnly="True" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  BorderBrush="{x:Null}" FontSize="30" Width="120"/>
+            <TextBlock HorizontalAlignment="Left" Text="$" FontSize="30" FontFamily="Bradley Hand ITC" FontWeight="Bold" VerticalAlignment="Center" Width="18"/>
+        </StackPanel>
+
+
     </Grid>
 </Window>
