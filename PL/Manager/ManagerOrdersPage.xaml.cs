@@ -105,6 +105,9 @@ public partial class ManagerOrdersPage : Page
 
     private void DeleteOrder_Click(object sender, RoutedEventArgs e)
     {
+        var result = MessageBox.Show("Are you sure you want to cancel the order?", "Delete order", MessageBoxButton.YesNo);
+        if (result == MessageBoxResult.No)
+            return;
         PO.OrderForListPO? po = ((Button)(sender)).DataContext as PO.OrderForListPO;
         int id = po?.ID ?? 0;
         try

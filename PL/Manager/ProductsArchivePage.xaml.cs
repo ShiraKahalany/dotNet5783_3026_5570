@@ -32,6 +32,9 @@ public partial class ProductsArchivePage : Page
 
     private void Restore_Click(object sender, RoutedEventArgs e)
     {
+        var result = MessageBox.Show("Are you sure you want to return the product to the store?", "Restore product", MessageBoxButton.YesNo);
+        if (result == MessageBoxResult.No)
+            return;
         PO.ProductPO?  restorepro = ((Button)(sender)).DataContext as PO.ProductPO;
         try
         {

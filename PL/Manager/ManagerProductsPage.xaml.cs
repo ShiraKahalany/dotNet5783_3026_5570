@@ -60,6 +60,9 @@ public partial class ManagerProductsPage : Page
 
     private void DeleteProduct_Click(object sender, RoutedEventArgs e)
     {
+        var result=MessageBox.Show("Are you sure you want to delete the product?", "Delete product", MessageBoxButton.YesNo);
+        if (result == MessageBoxResult.No)
+            return;
         PO.ProductPO? po = ((Button)(sender)).DataContext as PO.ProductPO;
         int id = po?.ID ?? 0;
         bool isDelete = true;
