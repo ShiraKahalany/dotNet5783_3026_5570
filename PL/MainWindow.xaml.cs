@@ -85,7 +85,6 @@ public partial class MainWindow : Window
 
     private void CartButton_Click(object sender, RoutedEventArgs e)
     {
-        //cartDetails.Visibility = Visibility.Hidden;
         LogIn.IsEnabled = true;
         Tracking.IsEnabled = true;
         MainFrame.Content = new PL.Carts.CustomerCart(BOcart,MainFrame);

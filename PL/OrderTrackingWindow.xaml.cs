@@ -21,12 +21,9 @@ public partial class OrderTrackingWindow : Window
     List<BO.Order>? orders;
     private BackgroundWorker worker;
     TimeSpan day = new TimeSpan(24, 0, 0);
-   // public DateTime now { get; set; } = DateTime.Now;
    DateTime now = DateTime.Now;
-    int addedDays = 0;
     bool toContinue = true;
-    int progress = 0;
-    int from = 0;
+    int from=0;
 
     public OrderTrackingWindow()
     {
@@ -48,8 +45,6 @@ public partial class OrderTrackingWindow : Window
         worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
         worker.WorkerSupportsCancellation = true;
         worker.WorkerReportsProgress = true;
-        
-   
     }
 
     private void Worker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
@@ -68,8 +63,6 @@ public partial class OrderTrackingWindow : Window
         while (toContinue)
         {
             now += day ;
-            //now.now += day;
-            //addedDays++;
             if (worker.WorkerReportsProgress)
                 worker.ReportProgress(1);
             Thread.Sleep(900);
@@ -78,23 +71,15 @@ public partial class OrderTrackingWindow : Window
 
     private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
     {
-        //foreach (BO.Order order in orders)
-        //    if (order.OrderDate /*+ day * 4*/ <= now && order.Status == BO.OrderStatus.Ordered)
-        //        bl.Order.UpdateStatusToShipped(order.ID);
-
-        //foreach (BO.Order order in orders)
-        //    if (order.ShipDate /*+ day * 4*/ <= now && order.Status == BO.OrderStatus.Shipped)
-        //        bl.Order.UpdateStatusToProvided(order.ID);
-
         toContinue = false;
         for (int i = 0; i < orders!.Count; i++)
         {
             try
             {
                 if (orders[i].Status == BO.OrderStatus.Ordered && orders[i].OrderDate <= now.AddDays(-31))
-                    bl.Order.UpdateStatusToShipped(orders[i].ID/*, now*/);
+                    bl.Order.UpdateStatusToShipped(orders[i].ID);
                 else if (orders[i].Status == BO.OrderStatus.Shipped && orders[i].ShipDate <= now.AddDays(-14))
-                    bl.Order.UpdateStatusToProvided(orders[i].ID/*, now*/);
+                    bl.Order.UpdateStatusToProvided(orders[i].ID);
                 if (orders[i].Status != BO.OrderStatus.Delivered)
                     toContinue = true;
             }
@@ -106,12 +91,8 @@ public partial class OrderTrackingWindow : Window
             { }
             catch(BO.NotExistException)
             { }
-            // Thread.Sleep(500);
         }
 
-        //var ToShipped = from BO.Order order in orders
-        //                where order.OrderDate /*+ day * 4*/ <= now && order.Status == BO.OrderStatus.Ordered
-        //                select order;
 
         try
         {
@@ -121,12 +102,6 @@ public partial class OrderTrackingWindow : Window
         {
             MessageBox.Show("There Are NO Items", "ERROR", MessageBoxButton.OK);
         }
-        int a = 2;
-
-        //var ToDelivered = from BO.Order order in orders
-        //                  where order.ShipDate /*+ day * 4*/ <= now && order.Status == BO.OrderStatus.Shipped
-        //                  select  (bl.Order.UpdateStatusToProvided(order.ID));
-
         ob = orders.ToObservableByConverter<BO.Order, PO.OrderPO>(ob, PL.Tools.BoToPoOrder);
 
     }

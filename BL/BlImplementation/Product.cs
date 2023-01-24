@@ -1,7 +1,6 @@
 ﻿using BlApi;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
-
 namespace BlImplementation;
 
 
@@ -9,21 +8,6 @@ namespace BlImplementation;
 internal class Product : IProduct
 {
     DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
-
-    //public IEnumerable<BO.ProductForList> GetListedProducts()
-    ////מתודה לקבלת רשימת כל המוצרים התקפים
-    //{
-    //    IEnumerable<DO.Product?> listpro = dal.Product.GetAll(null);
-    //    if (!listpro.Any())
-    //        throw new BO.NoItemsException();
-    //    List<BO.ProductForList> listproducts = new List<BO.ProductForList>();
-
-    //    //  BO ממיר רשימה שלDO  לרשימה של  
-    //    var listproduct = from DO.Product product in listpro
-    //                      let p = new BO.ProductForList()
-    //                      select product.CopyFields(p);
-    //    return listproduct;
-    //}
 
     public BO.Product GetById(int id)
     //בקשת פרטי מוצר עבור מנהל
@@ -50,9 +34,7 @@ internal class Product : IProduct
         IEnumerable<DO.Product?> doProductList =
                enumFilter switch
                {
-                   BO.Filters.filterByCategory =>
-                   //dal!.Product.GetAll(dp => (dp?.Category == (filterValue != null ? (DO.Category)filterValue : DO.Category.All)) && dp?.IsDeleted == false),
-                   dal!.Product.GetAll(dp => ((filterValue != null ? (dp?.Category == (DO.Category)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))),
+                   BO.Filters.filterByCategory =>  dal!.Product.GetAll(dp => ((filterValue != null ? (dp?.Category == (DO.Category)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))),
                    BO.Filters.filterByIsDeleted =>
                     dal!.Product.GetAll(dp => dp?.IsDeleted == true),
 
@@ -64,11 +46,8 @@ internal class Product : IProduct
                    _ => dal!.Product.GetAll((DO.Product? order) => order.GetValueOrDefault().IsDeleted == false),
                };
 
-        //return (from DO.Product doProduct in doProductList
-        //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
-        //       .ToList();
-        return (from DO.Product doProduct in doProductList
-                select BlApi.Tools.CopyFields(doProduct, new BO.Product()));
+        return from DO.Product doProduct in doProductList
+                select BlApi.Tools.CopyFields(doProduct, new BO.Product());
     }
 
 
@@ -85,7 +64,6 @@ internal class Product : IProduct
         {
             throw new BO.NotExistException(ex.Message);
         }
-
     }
 
     public BO.ProductItem GetProductItem(int id, BO.Cart? cart)
@@ -101,11 +79,9 @@ internal class Product : IProduct
                     BO.ProductItem p =new BO.ProductItem { Amount = 0, IsInStock = (pro?.InStock > 0) };
                     return pro.CopyFields(p);
                 }
-                // new BO.NotExistException("There Are No Items In The Cart");
                 var LIST = (IEnumerable<BO.OrderItem>)cart.Items;
                 BO.OrderItem? oi = cart.Items.Find((BO.OrderItem? item) => item?.ProductID == id);
                 int amt = (oi == null)? 0: oi.Amount??0;
-                //int counter = LIST.Sum((BO.OrderItem item) => item.Amount ?? 0);
                 BO.ProductItem prod = new BO.ProductItem
                 {
                     IsDeleted = pro.GetValueOrDefault().IsDeleted,
@@ -166,9 +142,7 @@ internal class Product : IProduct
             {
                 throw new BO.NotExistException(ex.Message);
             }
-
         }
-
     }
     public void UpdateProduct(BO.Product? newproduct)
     //עידכון נתוני מוצר עבור מנהל
@@ -186,32 +160,6 @@ internal class Product : IProduct
         }
     }
 
-    public IEnumerable<BO.ProductForList> GetProductList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
-    {
-        IEnumerable<DO.Product?> doProductList =
-        enumFilter switch
-        {
-            BO.Filters.filterByCategory =>
-            //dal!.Product.GetAll(dp => (dp?.Category == (filterValue != null ? (DO.Category)filterValue : DO.Category.All)) && dp?.IsDeleted == false),
-            dal!.Product.GetAll(dp => ((filterValue != null ? (dp?.Category == (DO.Category)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))),
-
-
-
-            BO.Filters.filterByName =>
-             dal!.Product.GetAll(dp => (dp?.Name == (string?)(filterValue)) && dp?.IsDeleted == false),
-
-            BO.Filters.None =>
-            dal!.Product.GetAll((DO.Product? order) => order.GetValueOrDefault().IsDeleted == false),
-            _ => dal!.Product.GetAll((DO.Product? order) => order.GetValueOrDefault().IsDeleted == false),
-        };
-
-        //return (from DO.Product doProduct in doProductList
-        //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
-        //       .ToList();
-        return (from DO.Product doProduct in doProductList
-                select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()));
-    }
-
     public IEnumerable<BO.ProductItem> GetProductItemsList(BO.Cart cart, BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
     {
 
@@ -219,7 +167,6 @@ internal class Product : IProduct
         enumFilter switch
         {
             BO.Filters.filterByCategory =>
-            //dal!.Product.GetAll(dp => (dp?.Category == (filterValue != null ? (DO.Category)filterValue : DO.Category.All)) && dp?.IsDeleted == false),
             dal!.Product.GetAll(dp => ((filterValue != null ? (dp?.Category == (DO.Category)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))),
 
 
@@ -231,14 +178,9 @@ internal class Product : IProduct
             dal!.Product.GetAll((DO.Product? order) => order.GetValueOrDefault().IsDeleted == false),
             _ => dal!.Product.GetAll((DO.Product? order) => order.GetValueOrDefault().IsDeleted == false),
         };
-
-        //return (from DO.Product doProduct in doProductList
-        //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
-        //       .ToList();
          var x= from DO.Product doProduct in doProductList
                 select GetProductItem(doProduct.ID, cart);
         return x;
-               // select BlApi.Tools.CopyFields(doProduct, new BO.ProductItem { IsInStock = (doProduct.InStock > 0), Amount = 0 }));
     }
 
 }

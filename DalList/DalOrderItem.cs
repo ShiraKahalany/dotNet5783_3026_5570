@@ -28,8 +28,6 @@ public class DalOrderItem : IOrderItem
         OrderItem? temp = dataSource.OrderItems.Find(x => x?.ID == item.ID);
         if (temp == null) //if it is not exist throw exception
             throw new DO.NotExistException("The item is not exist");
-        //if (temp?.IsDeleted == true)
-        //    throw new DO.NotExistException("The item is not exist");
         DeletePermanently(item.ID);
         Add(item);
     }

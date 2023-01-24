@@ -22,10 +22,9 @@ public partial class OrderTracking : Page
         poorder = POorder;
         int id = poorder.ID;
         stat = status;
-       // BO.Order boOrder = new BO.Order();
         try
         {
-            boOrder = bl.Order.GetOrderById(id)!;
+            boOrder = bl.Order.GetOrder(x=>x?.ID==id);
         }
         catch (BO.IllegalIdException)
         {

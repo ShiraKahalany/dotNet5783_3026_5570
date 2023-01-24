@@ -18,7 +18,7 @@ internal class Order : IOrder
         {
             listor = dal.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false);
         }
-        catch (DO.NotExistException ex)
+        catch (DO.NotExistException)
         {
             throw new BO.NoItemsException();
         }
@@ -47,15 +47,15 @@ internal class Order : IOrder
         }
     }
 
-    public BO.Order UpdateStatusToShipped(int id/*, DateTime? time = null*/)
+    public BO.Order UpdateStatusToShipped(int id)
     //עידכון הזמנה ששולחה
     {
         try
         {
-            DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false)!;
-            if (/*time == null && */order.ShipDate != null)
+            DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order?.ID == id) && order?.IsDeleted == false)!;
+            if (order.ShipDate != null)
                 throw new BO.OrderHasShippedException();
-                order.ShipDate = /*time ?? */DateTime.Now;
+            order.ShipDate = DateTime.Now;
             dal.Order.Update((DO.Order)order);
             return order.OrderToBO();
         }
@@ -64,18 +64,18 @@ internal class Order : IOrder
             throw new BO.NotExistException(ex.Message);
         }
     }
-    public BO.Order UpdateStatusToProvided(int id/*, DateTime? time = null*/)
+    public BO.Order UpdateStatusToProvided(int id)
     //עידכון הזמנה שסופקה
     {
         try
         {
             DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false)!;
-           
-            if (/*time == null && */order.DeliveryDate != null)
+
+            if (order.DeliveryDate != null)
                 throw new BO.OrderHasDeliveredException();
-            if (/*time == null && */order.ShipDate == null)
+            if (order.ShipDate == null)
                 throw new BO.OrderHasNotShippedException();
-            order.DeliveryDate = /*time ?? */DateTime.Now;
+            order.DeliveryDate = DateTime.Now;
             dal.Order.Update((DO.Order)order);
             return order.OrderToBO();
         }
@@ -83,16 +83,15 @@ internal class Order : IOrder
         {
             throw new BO.NotExistException(ex.Message);
         }
-
     }
     public BO.OrderTracking FollowOrder(int id)
     //מעקב הזמנה - הצגת האירועים של ההזמנה והתאריכים שלהם
     {
         try
         {
-            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false);
+            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order?.ID == id) && order?.IsDeleted == false);
             BO.OrderTracking orderTracking = new BO.OrderTracking();
-            orderTracking.ID = order.GetValueOrDefault().ID;
+            orderTracking.ID = order?.ID ?? 0;
             List<Tuple<DateTime?, string>?>? tuples = new List<Tuple<DateTime?, string>?>();
             if (order?.OrderDate != null && order?.OrderDate <= DateTime.Now)
             {
@@ -120,6 +119,7 @@ internal class Order : IOrder
     }
 
     public static BO.OrderItem? checkAmount(DO.OrderItem item, int id, int newAmount, ref int difference, DO.Product? product)
+   //פונקציה המקבלת מוצר-בהזמנה, ומוצר, ובודקת האם אפשר להזמין את המוצר, מעדכנת את ההפרש בין הכמות במלאי לכמות המבוקשת
     {
         try
         {
@@ -160,7 +160,7 @@ internal class Order : IOrder
             BO.Order border = new BO.Order();
             border = order.CopyFields(border);
             DO.OrderItem? theItem = dal.OrderItem.GetTByFilter((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == orderId && orderItem.GetValueOrDefault().IsDeleted == false && orderItem.GetValueOrDefault().ProductID == productId);
-            border.Status = BO.OrderStatus.Ordered;     /////??????????
+            border.Status = BO.OrderStatus.Ordered;
             IEnumerable<DO.OrderItem?>? items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == order?.ID && orderItem.GetValueOrDefault().IsDeleted == false);
             if (items == null || !items.Any())
                 return border;
@@ -171,35 +171,9 @@ internal class Order : IOrder
                     where temp != null
                     select temp;
 
-
-            //foreach (DO.OrderItem it in items)
-            //{
-            //    if (productId == it.ProductID)
-            //    {
-            //        if (amount == 0)
-            //            break;
-            //        difference = amount - it.Amount ?? 0;
-            //        if (difference > 0)
-            //            if (product?.InStock < amount)
-            //                throw new BO.NotInStockException();
-            //        BO.OrderItem temp = new BO.OrderItem();
-            //        temp = it.CopyFields(temp);
-            //        temp.Amount = amount;
-            //        list.Add(temp);
-            //    }
-            //    else
-            //        list.Add(it.CopyFields(new BO.OrderItem()));
-            //}
-
-            //border.TotalPrice += product?.Price *  difference; //////////(amount*)
             border.TotalPrice = Math.Round(border.TotalPrice ?? 0, 2);
             border.Items = x.ToList();
 
-            //if (amount == 0)
-            //{
-            //    dal.OrderItem.Delete(theItem?.ID ?? 0);
-            //    return border;
-            //}
             dal.OrderItem.Update(new DO.OrderItem
             {
                 ID = theItem?.ID ?? 0,
@@ -256,25 +230,6 @@ internal class Order : IOrder
         return x.ToList();
     }
 
-    public List<BO.OrderForList?> GetOrdersWithDeleted()
-    //קבלת רשימת כל ההזמנות - כולל אלו שנמחקו
-    {
-        IEnumerable<DO.Order?> listor = new List<DO.Order?>();
-        try
-        {
-            listor = dal.Order.GetAll(null);
-        }
-        catch (DO.NotExistException ex)
-        {
-            throw new BO.NotExistException(ex.Message);
-        }
-        if (!listor.Any())
-            throw new BO.NoItemsException();
-        var x = from DO.Order order in listor
-                select order.OrderToOrderForList();
-        return x.ToList();
-    }
-
     public double Restore(int id)
     //שיחזור הזמנה שנמחקה, לפי מזהה הזמנה
     {
@@ -284,7 +239,7 @@ internal class Order : IOrder
         {
             BO.Order boOrder = GetDeletedOrderById(id);
             boOrder.Items!.checkStock();
-           double totalPrice= boOrder.Items!.updateStockAndReturnTotalPrice();
+            double totalPrice = boOrder.Items!.updateStockAndReturnTotalPrice();
             DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted);
             dal.Order.Restore((DO.Order)order!);
             return totalPrice;
@@ -318,6 +273,22 @@ internal class Order : IOrder
 
     }
 
+    public BO.Order GetOrder(Func<BO.Order?, bool> filter)
+    {
+        List<BO.Order> orders;
+        try
+        {
+            orders = GetOrdersByFilter().ToList();
+        }
+        catch (DO.NotExistException ex)
+        {
+            throw new BO.OrderNotExistException(ex.Message);
+        }
+        BO.Order? order = orders.FirstOrDefault(or => filter(or));
+        return order ?? throw new BO.OrderNotExistException();
+    }
+
+
     public IEnumerable<BO.OrderForList> GetOrderList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
     {
         try
@@ -332,10 +303,6 @@ internal class Order : IOrder
                 dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false),
                 _ => dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false),
             };
-
-            //return (from DO.Product doProduct in doProductList
-            //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
-            //       .ToList();
             return (from DO.Order doorder in doOrderList
                     select doorder.OrderToOrderForList());
         }
@@ -345,11 +312,8 @@ internal class Order : IOrder
         }
     }
 
-
-
-
-
     public IEnumerable<BO.Order> GetOrdersByFilter(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
+    //מתודה שמקבלת סוג סינון+מסנן רצוי ומחזירה את כל ההזמנות ששייכות אליו
     {
         try
         {
@@ -364,9 +328,6 @@ internal class Order : IOrder
                 _ => dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false).OrderBy(x => x?.ID),
             };
 
-            //return (from DO.Product doProduct in doProductList
-            //        select BlApi.Tools.CopyFields(doProduct, new BO.ProductForList()))
-            //       .ToList();
             return (from DO.Order doorder in doOrderList
                     select doorder.OrderToBO());
         }
@@ -375,7 +336,6 @@ internal class Order : IOrder
             throw new BO.NotExistException(ex.Message);
         }
     }
-
 }
 
 

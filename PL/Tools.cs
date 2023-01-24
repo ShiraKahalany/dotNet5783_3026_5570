@@ -228,8 +228,7 @@ public static class Tools
             CustomerName = cartBO.CustomerName,
             TotalPrice = cartBO.TotalPrice
         };
-        copycart.Items = cartBO.Items!.ToObservableByConverter<BO.OrderItem, PO.OrderItemPO>(copycart.Items, CopyProp<BO.OrderItem, PO.OrderItemPO>);
-        //copycart.Items = cartPO.Items!.ObservableToIEnumerable().ToList();
+        copycart.Items = cartBO.Items!.ToObservableByConverter<BO.OrderItem, PO.OrderItemPO>(copycart.Items!, CopyProp<BO.OrderItem, PO.OrderItemPO>);
         return copycart;
     }
 

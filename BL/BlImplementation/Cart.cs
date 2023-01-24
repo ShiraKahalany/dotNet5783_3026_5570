@@ -68,8 +68,6 @@ internal class Cart : ICart
         {
             throw new BO.NotExistException(ex.Message);
         }
-        //if (cart.Items == null)
-        //    throw new BO.NotExistException();
         var x = from item in cart.Items
                 where item != null
                 where !(item.ProductID == id && amount == 0)
@@ -104,25 +102,19 @@ internal class Cart : ICart
         if (cart.Items == null || cart.Items.Count == 0)
             throw new BO.NotItemsInCartException();
 
-
-        //בדיקת זמינות המוצרים במלאי
-        //******פה במקום פוראיצ' לנסות להשתמש בפונקציות של רשימות, כמו פיינד*******
-
-        //List<BO.OrderItem> newlist = new List<BO.OrderItem>();  //מה הפואנטה של הרשימה הזאת??
         try
         {
             if (cart.Items.Count < 0)
                 throw new BO.NotItemsInCartException("The cart is empty");
-            foreach (BO.OrderItem item in cart.Items)
+            foreach (BO.OrderItem? item in cart.Items)
             {
-                DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
+                DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product?.ID == item?.ProductID) && product?.IsDeleted == false);
                 if (item == null)
                     break;
                 if (product?.InStock < item.Amount)
                     throw new BO.NotInStockException("The product " + product?.Name + " is not in stock");
                 if (item.Amount <= 0)
                     throw new BO.AmountNotPossitiveException();
-                // newlist.Add(item);
             }
 
 
@@ -142,21 +134,16 @@ internal class Cart : ICart
 
             int newId = dal.Order.Add(neworder);  //הוספת ההזמנה למאגר ההזמנות
 
-
-            // var x= from item in newlist
-
-
-
             //עידכון מלאי המוצרים
-            foreach (BO.OrderItem item in cart.Items)
+            foreach (BO.OrderItem? item in cart.Items)
             {
-                DO.Product product = (DO.Product)dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
+                DO.Product product = (DO.Product)dal.Product.GetTByFilter((DO.Product? product) => (product?.ID == item?.ProductID) && product?.IsDeleted == false)!;
                 DO.OrderItem temp = new DO.OrderItem();
                 temp.ProductID = product.ID;
                 temp = (DO.OrderItem)Tools.CopyPropToStruct(item, typeof(DO.OrderItem));
                 temp.OrderID = newId;
                 dal.OrderItem.Add(temp);
-                product.InStock = product.InStock - item.Amount;
+                product.InStock = product.InStock - item?.Amount;
                 dal.Product.Update((DO.Product)product);
             }
             return newId;
@@ -169,7 +156,5 @@ internal class Cart : ICart
         {
             throw new BO.NotExistException(ex.Message);
         }
-
     }
-
 }

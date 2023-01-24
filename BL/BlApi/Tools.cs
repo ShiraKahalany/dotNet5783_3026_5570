@@ -62,7 +62,6 @@ public static class Tools
 
     public static Target CopyFields<Source, Target>(this Source source, Target target)
     {
-
         if (source is not null && target is not null)
         {
             Dictionary<string, PropertyInfo> propertiesInfoTarget = target.GetType().GetProperties()
@@ -90,6 +89,7 @@ public static class Tools
     }
 
     public static BO.OrderStatus GetStatus(this DO.Order order)
+        //פונקציה המקבלת הזמנה ומחזירה את הסטטוס שלה
     {
         if (order.DeliveryDate != null && order.DeliveryDate < DateTime.Now)
             return BO.OrderStatus.Delivered;
@@ -109,17 +109,18 @@ public static class Tools
 
 
     public static List<BO.OrderItem> GetItems(this DO.Order order, ref double totalprice)
+        //פונקציה המקבלת רשימת מוצרים, ומחזירה את אלה
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
         IEnumerable<DO.OrderItem?> items;
         List<BO.OrderItem> list = new List<BO.OrderItem>();
         try
         {
-            items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == order.ID && order.IsDeleted == orderItem?.IsDeleted);
+            items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem?.OrderID == order.ID && order.IsDeleted == orderItem?.IsDeleted);
             double? sum = 0;
-            foreach (DO.OrderItem item in items)
+            foreach (DO.OrderItem? item in items)
             {
-                sum += item.Amount * item.Price;
+                sum += item?.Amount * item?.Price;
                 BO.OrderItem temp = new BO.OrderItem();
                 list.Add(item.CopyFields(temp));
             }
@@ -190,8 +191,7 @@ public static class Tools
         DO.Product? product;
         try
         {
-            product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == item.ProductID) && product.GetValueOrDefault().IsDeleted == false);
-            //int? difference = amount - item.Amount;
+            product = dal.Product.GetTByFilter((DO.Product? product) => (product?.ID == item.ProductID) && product?.IsDeleted == false);
             if (product?.InStock < amount)  //אם אין מספיק במלאי מהמוצר
                 throw new BO.NotInStockException();
             return amount;
@@ -200,15 +200,13 @@ public static class Tools
         {
             throw new BO.NotInStockException();
         }
-
-        return product?.InStock??0;
     }
 
     public static void updateItemsStock(this BO.Order order)
     //
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
-        foreach (var item in order.Items)
+        foreach (var item in order.Items!)
         {
             DO.Product product;
             try

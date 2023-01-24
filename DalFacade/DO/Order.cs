@@ -1,6 +1,5 @@
 ﻿namespace DO;
 
-/// Structure for representing  an order of a customer.
 public struct Order
     //מחלקה עבור הישות הזמנה - מתאר הזמנה של לקוח
 {
