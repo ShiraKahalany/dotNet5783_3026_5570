@@ -275,7 +275,7 @@ internal class Order : IOrder
         return x.ToList();
     }
 
-    public void Restore(int id)
+    public double Restore(int id)
     //שיחזור הזמנה שנמחקה, לפי מזהה הזמנה
     {
         if (id <= 0)
@@ -284,9 +284,10 @@ internal class Order : IOrder
         {
             BO.Order boOrder = GetDeletedOrderById(id);
             boOrder.Items!.checkStock();
-            boOrder.Items!.updateStock();
+           double totalPrice= boOrder.Items!.updateStockAndReturnTotalPrice();
             DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted);
             dal.Order.Restore((DO.Order)order!);
+            return totalPrice;
         }
         catch (DO.NotExistException ex)
         {

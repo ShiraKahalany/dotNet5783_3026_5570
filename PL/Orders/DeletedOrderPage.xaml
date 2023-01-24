@@ -25,7 +25,7 @@
             <ColumnDefinition Width="2.4*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="* The order details are correct as of the time the order was placed"  FontSize="13" Grid.Column="2" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" TextAlignment="Center" Margin="10,10,0,0" HorizontalAlignment="Left" Foreground="#FF7E3232"/>
+        <TextBlock Text="* The order details are correct as of the time the order was placed"  FontSize="13" Grid.Column="2" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" TextAlignment="Center" Margin="0,378,0,0" HorizontalAlignment="Center" Foreground="#FF7E3232"/>
 
         <TextBlock Text="Order ID:" FontSize="16" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" TextAlignment="Center" Margin="0,55,98,0"/>
         <TextBlock  FontSize="16" TextWrapping="Wrap" VerticalAlignment="Top" Height="29" Width="86" Text="{Binding ID}" Margin="5,76,92,0" TextAlignment="Center"/>

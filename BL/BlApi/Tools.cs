@@ -229,11 +229,13 @@ internal static class Tools
         }
     }
 
-    public static void updateStock(this List<BO.OrderItem> items)
+    public static double updateStockAndReturnTotalPrice(this List<BO.OrderItem> items)
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
+        double totalPrice = 0;
         foreach (BO.OrderItem item in items)
         {
+            
             DO.Product product;
             DO.OrderItem orderItem;
             try
@@ -254,14 +256,17 @@ internal static class Tools
             }
             
             orderItem.Price = product.Price;
-            orderItem.TotalItem = Math.Round(orderItem.Price ?? 0 * orderItem.Amount ?? 0, 2);
+            double total = (orderItem.Price??0) * (orderItem.Amount ?? 0);
+            orderItem.TotalItem = Math.Round(total, 2);
             orderItem.Path = product.Path;
             product.InStock -= orderItem.Amount;
             dal.OrderItem.Update(orderItem);
             dal.OrderItem.Restore(orderItem);
             product.InStock = product.InStock - item.Amount;
             dal.Product.Update((DO.Product)product);
+            totalPrice = totalPrice + orderItem.TotalItem??0;
         }
+        return Math.Round(totalPrice,2);
     }
 
 

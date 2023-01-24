@@ -68,19 +68,19 @@ public partial class DeletedOrderPage : Page
     private void Button_Click(object sender, RoutedEventArgs e)
     {
 /*        PO.OrderForListPO? POor = ((Button)(sender)).DataContext as PO.OrderForListPO*/;
-        try
-        {
-            bl.Order.Restore(poorder.ID);
-            ob.Remove(poorder);
-            ////////here to open a window
-            MessageBox.Show("Seccessfully Restored", "Restore Order", MessageBoxButton.OK);
-            ////////////////
-            observeproductsToSave.Add(poorder);
-        }
-        catch (BO.NotExistException)
-        {
-            MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
-        }
+        //try
+        //{
+            new Orders.CanceledOrderUpdatedDetailsWindow(poorder, ob, observeproductsToSave).ShowDialog();
+
+        //}
+        //catch (BO.NotExistException)
+        //{
+        //    MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
+        //}
+        //catch(BO.NotInStockException)
+        //{
+
+        //}
         NavigationService.GoBack();
     }
 }

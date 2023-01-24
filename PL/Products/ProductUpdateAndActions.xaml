@@ -17,7 +17,7 @@
     <Grid Margin="0,0,0,0">
         <TextBox x:Name="InserId" IsEnabled="False" HorizontalAlignment="Right" Text="{Binding Path=ID}"  FontSize="10"  TextWrapping="Wrap" VerticalAlignment="Top" Width="139"  Height="27" Margin="0,104,308,0" />
         <TextBox Name="InsertName" HorizontalAlignment="Left"  Margin="203,136,0,0" TextWrapping="Wrap" Text="{Binding Path=Name}" VerticalAlignment="Top" Width="139" Height="27" />
-        <TextBox Name="InsertPrice"  HorizontalAlignment="Left" Margin="203,177,0,0" TextWrapping="Wrap" Text="{Binding Path=Price}" VerticalAlignment="Top" Width="40" Height="27" KeyDown="OnlyNumbers"/>
+        <TextBox Name="InsertPrice"  HorizontalAlignment="Left" Margin="203,177,0,0" TextWrapping="Wrap" Text="{Binding Path=Price}" VerticalAlignment="Top" Width="40" Height="27" KeyDown="EnterNumbersOrPointOnly"/>
         <TextBox Name="InsertInStock" KeyDown="OnlyNumbers" HorizontalAlignment="Left" Margin="203,217,0,0" TextWrapping="Wrap" Text="{Binding Path=InStock}" VerticalAlignment="Top" Width="40" Height="27" RenderTransformOrigin="2.818,0.141"/>
         <ComboBox Name ="SelectCategory" HorizontalAlignment="Left" Margin="203,273,0,0" SelectedItem="{Binding Path=Category}" VerticalAlignment="Top" Width="139" Height="27" />
         <Label Content="ID:" HorizontalAlignment="Left" Margin="86,99,0,0" VerticalAlignment="Top" Height="26" Width="69" RenderTransformOrigin="-2.51,0.255"/>

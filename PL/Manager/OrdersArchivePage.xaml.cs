@@ -56,19 +56,18 @@ namespace PL.Manager
         private void RestoreOrder_Click(object sender, RoutedEventArgs e)
         {
             PO.OrderForListPO POor = ((Button)(sender)).DataContext as PO.OrderForListPO;
-            try
-            {
-                bl.Order.Restore(POor.ID);
-                ob.Remove(POor);
+            //try
+            //{
+                //bl.Order.Restore(POor.ID);
+                //ob.Remove(POor);
                // MessageBox.Show("Seccessfully Restored", "Restore Order", MessageBoxButton.OK);
-                observeproductsToSave.Add(POor);
-                new PL.Orders.CanceledOrderUpdatedDetailsWindow().ShowDialog();
-            }
-            catch(BO.NotExistException)
-            {
-                MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
-            }
-           
+                //observeproductsToSave.Add(POor);
+                new PL.Orders.CanceledOrderUpdatedDetailsWindow(POor, ob,observeproductsToSave).ShowDialog();
+            //}
+            //catch(BO.NotExistException)
+            //{
+            //    MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
+            //}
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)

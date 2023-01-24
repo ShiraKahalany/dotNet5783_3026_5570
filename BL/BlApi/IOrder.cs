@@ -16,7 +16,7 @@ public interface IOrder
     public List<BO.OrderForList?>? GetDeletedOrders();  //קבלת רשימת כל ההזמנות המחוקות
 
     public List<BO.OrderForList?>? GetOrdersWithDeleted();  //קבלת הרשימה המלאה של כל ההזמנות, גם המחוקות וגם התקפות
-    public void Restore (int id);  //שיחזור הזמנה שבוטלה
+    public double Restore (int id);  //שיחזור הזמנה שבוטלה
     //public BO.Order Restore(int id);   //
     public IEnumerable<BO.OrderForList> GetOrderList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null);
     public IEnumerable<BO.Order> GetOrdersByFilter(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null);
