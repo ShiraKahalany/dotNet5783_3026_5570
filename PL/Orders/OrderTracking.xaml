@@ -16,7 +16,6 @@
         <converter:DeliveredToVisibilityConverter  x:Key="DeliveredToVisibilityConverter"/>
         <converter:ShippedToNotVisibilityConverter  x:Key="ShippedToNotVisibilityConverter"/>
         <converter:DeliveredToNotVisibilityConverter  x:Key="DeliveredToNotVisibilityConverter"/>
-        <converter:TimeToColorConverter x:Key="TimeToColorConverter"/>
     </Page.Resources>
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -138,18 +137,6 @@
                    VerticalAlignment="Top" Width="190" FontWeight="Bold" TextAlignment="Right"
                    Text="Customer Details"/>
         </Grid>
-
-
-
-
-
-
-
-        <!--<Image x:Name="delevired" Visibility="Hidden" HorizontalAlignment="Left" Height="117" Margin="256,95,0,0" VerticalAlignment="Top" Width="198" />-->
-        <!--<Image x:Name="shipped" Visibility="Hidden" HorizontalAlignment="Left" Height="117" Margin="94,95,0,0" VerticalAlignment="Top" Width="198" Source="/Order/deliver.png"/>
-        <Image x:Name="approved" Visibility="Hidden" HorizontalAlignment="Left" Height="97" Margin="32,99,0,0" VerticalAlignment="Top" Width="87" Source="/Order/approved.png"/>-->
-
-
         <Grid Width="125" Grid.Column="0" Margin="70,-10,267,54" Grid.ColumnSpan="2">
             <TextBlock 
             Name="ShipDate"
@@ -249,7 +236,6 @@
                                          Foreground="Black"
                                          Height="80" Width="130" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Button>
-        <!--<Label Content="Products:" HorizontalAlignment="Left" FontSize="16" Margin="437,77,0,0" VerticalAlignment="Top" Width="117"/>-->
         <Button Grid.Column="0" x:Name="back" HorizontalAlignment="Left" VerticalAlignment="Top" Click="back_click" Background="{x:Null}" BorderBrush="{x:Null}" Width="58" Margin="0,7,0,0">
             <materialDesign:PackIcon Kind="ArrowBack"
                                          Foreground="Black"

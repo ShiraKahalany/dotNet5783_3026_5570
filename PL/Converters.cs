@@ -10,88 +10,6 @@ using System.Windows.Media;
 
 
 namespace PLConverter;
-public class NotVisibilityToVisibilityConverter : IValueConverter //used
-{
-    //convert from source property type to target property type
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        Visibility visibilityValue = (Visibility)value;
-        if (visibilityValue == Visibility.Hidden)
-        {
-            return Visibility.Visible; //Visibility.Collapsed;
-        }
-        else
-        {
-            return Visibility.Hidden;
-        }
-    }
-
-
-    //convert from target property type to source property type
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        Visibility visibilityValue = (Visibility)value;
-        if (visibilityValue == Visibility.Hidden)
-        {
-            return Visibility.Visible; //Visibility.Collapsed;
-        }
-        else
-        {
-            return Visibility.Hidden;
-        }
-    }
-}
-
-
-public class FalseToTrueConverter : IValueConverter //used
-{
-    //convert from source property type to target property type
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        bool boolValue = (bool)value;
-        if (boolValue)
-        {
-            return false; //Visibility.Collapsed;
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    //convert from target property type to source property type
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        bool boolValue = (bool)value;
-        if (boolValue)
-        {
-            return false; //Visibility.Collapsed;
-        }
-        else
-        {
-            return true;
-        }
-    }
-}
-
-public class IsEmptyToNotVisibilityConverter : IValueConverter ///ours ,picture
-{
-    //convert from source property type to target property type
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        if (((ObservableCollection<PO.OrderItemPO>)value).Any())
-            return Visibility.Hidden;
-        else
-            return Visibility.Visible;
-
-    }
-
-    //convert from target property type to source property type
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return null!;
-    }
-}
 
 
 public class IsEmptyToNotVisibility2Converter : IValueConverter ///ours ,picture
@@ -99,26 +17,7 @@ public class IsEmptyToNotVisibility2Converter : IValueConverter ///ours ,picture
     //convert from source property type to target property type
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if ((int)value==0)
-            return Visibility.Visible;
-        else
-            return Visibility.Hidden;
-
-    }
-
-    //convert from target property type to source property type
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return null!;
-    }
-}
-
-public class IsEmptyToVisibleConverter : IValueConverter
-{
-    //convert from source property type to target property type
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        if (((ObservableCollection<PO.OrderItemPO>)value).Any())
+        if ((int)value == 0)
             return Visibility.Visible;
         else
             return Visibility.Hidden;
@@ -152,37 +51,6 @@ public class IsEmptyToVisible2Converter : IValueConverter
 }
 
 
-public class CategoryToStringConverter : IValueConverter
-{
-    //convert from source property type to target property type
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        switch ((BO.Category)value)
-        {
-            case Category.Kitchen:
-                return "Kitchen";
-            case Category.Garden:
-                return "Garden";
-            case Category.Living_room:
-                return "Living Room";
-            case Category.Bedroom:
-                return "Bed Room";
-            case Category.Bathroom:
-                return "Bath Room";
-            case Category.All:
-                return "All Products";
-            default:
-                return " ";
-        }
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return " ";
-    }
-}
-
-
 
 public class BoolToVisibilityConverter : IValueConverter
 {
@@ -203,23 +71,6 @@ public class BoolToVisibilityConverter : IValueConverter
         return false;
     }
 }
-
-public class StringConverterTodouble : IValueConverter
-{
-    //convert from source property type to target property type
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return (double)value;
-    }
-
-    //convert from target property type to source property type
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        //try { int.Parse(value.ToString()); }
-        return value.ToString();
-    }
-}
-
 
 public class AmountToVisibilityConverter : IValueConverter //used
 {
@@ -431,26 +282,6 @@ public class DeliveredToNotVisibilityConverter : IValueConverter
 }
 
 
-public class AmountToColorConverter : IValueConverter
-{
-    //convert from source property type to target property type
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-
-        if ((int)value == 0)
-            return Brushes.LightGray;
-        else
-            return Brushes.LightGreen;
-    }
-
-    //convert from target property type to source property type
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        //try { int.Parse(value.ToString()); }
-        return 1;
-    }
-}
-
 public class StatusToColorConverter : IValueConverter
 {
     //convert from source property type to target property type
@@ -473,27 +304,6 @@ public class StatusToColorConverter : IValueConverter
         return 1;
     }
 }
-
-public class TimeToColorConverter : IValueConverter
-{
-    //convert from source property type to target property type
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-
-        if (value == null)
-            return "";
-        else
-            return ((DateTime)value).ToString();
-    }
-
-    //convert from target property type to source property type
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        //try { int.Parse(value.ToString()); }
-        return DateTime.Now;
-    }
-}
-
 
 
 public class IntToVisibilityConverter : IValueConverter
@@ -527,38 +337,8 @@ class TextBoxesFilledConverter : IMultiValueConverter
         throw new NotImplementedException();
     }
 }
-
-
-class AllTextBoxesFilledConverter : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        var textboxes = parameter as TextBox[];
-        if (textboxes == null) return true;
-        return textboxes.All(x => !string.IsNullOrWhiteSpace(x.Text)) && !string.IsNullOrWhiteSpace((string)value);
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
-
-
 public class AllTextBoxesFilled7Converter : IMultiValueConverter
 {
-    //public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-    //{
-    //    foreach (var value in values)
-    //    {
-    //        if (string.IsNullOrWhiteSpace((string)value))
-    //        {
-    //            return false;
-    //        }
-    //    }
-    //    return true;
-    //}
-
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
         foreach (var value in values)
@@ -620,47 +400,6 @@ public class ProgressToIntConverter : IValueConverter
     }
 }
 
-
-//public class ProgressToInt2Converter : IMultiValueConverter
-//{
-//    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-//    {
-//        var now = values[1] as DateTime?;
-//        //var DaysToAdd = values[1] as Int32?;
-//        //DateTime now = DateTime.Now.AddDays(DaysToAdd??0);
-
-//        if (((PO.OrderPO)values[0]).Status == BO.OrderStatus.Ordered)
-//        {
-//            DateTime? date = ((PO.OrderPO)values[0]).OrderDate;
-//            TimeSpan? diff = now - date;
-//            int days = diff?.Days ?? 0;
-//            return days - 31;
-//        }
-//        if (((PO.OrderPO)values[0]).Status == BO.OrderStatus.Shipped)
-//        {
-//            DateTime? date = ((PO.OrderPO)values[0]).ShipDate;
-//            TimeSpan? diff = now - date;
-//            int days = diff?.Days ?? 0;
-//            return days - 14;
-//        }
-//        if (((PO.OrderPO)values[0]).Status == BO.OrderStatus.Delivered)
-//        {
-//            DateTime? date = ((PO.OrderPO)values[0]).OrderDate;
-//            TimeSpan? diff = now - date;
-//            int days = diff?.Days ?? 0;
-//            return days - 7;
-//        }
-//        return 0;
-//    }
-//    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-//    {
-//        throw new NotImplementedException();
-//    }
-//}
-
-
-
-
 public class StatusToValue : IValueConverter
 {
     //convert from source property type to target property type
@@ -679,7 +418,6 @@ public class StatusToValue : IValueConverter
     //convert from target property type to source property type
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        //try { int.Parse(value.ToString()); }
         return 1;
     }
 }

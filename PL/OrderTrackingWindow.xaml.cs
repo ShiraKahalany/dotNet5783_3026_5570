@@ -18,7 +18,7 @@ public partial class OrderTrackingWindow : Window
 {
     private IBL bl = BLFactory.GetBL();
     private ObservableCollection<PO.OrderPO> ob = new ObservableCollection<PO.OrderPO>();
-    List<BO.Order> orders;
+    List<BO.Order>? orders;
     private BackgroundWorker worker;
     TimeSpan day = new TimeSpan(24, 0, 0);
    // public DateTime now { get; set; } = DateTime.Now;
@@ -39,7 +39,7 @@ public partial class OrderTrackingWindow : Window
         {
             MessageBox.Show("There Are NO Items", "ERROR", MessageBoxButton.OK);
         }
-        ob = orders.ToObservableByConverter<BO.Order, PO.OrderPO>(ob, PL.Tools.BoToPoOrder);
+        ob = orders!.ToObservableByConverter<BO.Order, PO.OrderPO>(ob, PL.Tools.BoToPoOrder);
         DataContext = this;
         OrderListView.ItemsSource = ob;
         worker = new BackgroundWorker();
@@ -87,7 +87,7 @@ public partial class OrderTrackingWindow : Window
         //        bl.Order.UpdateStatusToProvided(order.ID);
 
         toContinue = false;
-        for (int i = 0; i < orders.Count; i++)
+        for (int i = 0; i < orders!.Count; i++)
         {
             try
             {
