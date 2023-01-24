@@ -32,11 +32,8 @@ public partial class OrderTrackingCustomer : Page
         DataContext = boOrder;
         ItemsListView.ItemsSource =boOrder.Items;
     }
-
     private void back_click(object sender, RoutedEventArgs e)
     {
         myframe.Content=null;
     }
-
-
 }

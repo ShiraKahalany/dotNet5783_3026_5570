@@ -15,49 +15,40 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL.Products
+namespace PL.Products;
+
+/// <summary>
+/// Interaction logic for DeletedProduct.xaml
+/// </summary>
+public partial class DeletedProduct : Window
 {
-    /// <summary>
-    /// Interaction logic for DeletedProduct.xaml
-    /// </summary>
-    public partial class DeletedProduct : Window
+    private ObservableCollection<PO.ProductPO> observeproducts = new ObservableCollection<PO.ProductPO>();
+    private IEnumerable<BO.Product> BOproducts;
+    private IBL bl = BLFactory.GetBL();
+    PO.ProductPO poProduct;
+
+    public DeletedProduct(PO.ProductPO poPro, ObservableCollection<PO.ProductPO> products)
     {
-        private ObservableCollection<PO.ProductPO> observeproducts = new ObservableCollection<PO.ProductPO>();
-        //private ObservableCollection<PO.ProductPO> observeproductsToSave = new ObservableCollection<PO.ProductPO>();
-        private IEnumerable<BO.Product> BOproducts;
-        private IBL bl = BLFactory.GetBL();
-        PO.ProductPO poProduct;
+        InitializeComponent();
+        BOproducts = bl.Product.GetProducts(BO.Filters.filterByIsDeleted);
+        observeproducts=products;
+        poProduct = poPro;
+        DataContext = poProduct;
+        SelectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
+    }
 
-        public DeletedProduct(PO.ProductPO poPro, ObservableCollection<PO.ProductPO> products)
+    private void Restore(object sender, RoutedEventArgs e)
+    {
+        PO.ProductPO? restorepro = ((Button)(sender)).DataContext as PO.ProductPO;
+        try
         {
-            InitializeComponent();
-            //observeproductsToSave = ob;
-            BOproducts = bl.Product.GetProducts(BO.Filters.filterByIsDeleted);
-            //observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
-            observeproducts=products;
-            poProduct = poPro;
-            DataContext = poProduct;
-            // BO.Product pro = bl.Product.GetProduct(poProduct.ID)!;
-            SelectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
-            //SelectCategory.SelectedItem = poProduct.Category;
+            bl.Product.Restore(restorepro!.ID);
+            observeproducts.Remove(restorepro);
+            Close();
         }
-
-        private void Restore(object sender, RoutedEventArgs e)
+        catch (BO.NotExistException)
         {
-            PO.ProductPO? restorepro = ((Button)(sender)).DataContext as PO.ProductPO;
-            try
-            {
-                bl.Product.Restore(restorepro!.ID);
-                observeproducts.Remove(restorepro);
-                //MessageBox.Show("Seccessfully Restored", "Restore Product", MessageBoxButton.OK);
-                //observeproductsToSave.Add(restorepro);
-                Close();
-            }
-            catch (BO.NotExistException)
-            {
-                MessageBox.Show("Product Not Exist", "Not Exist Product", MessageBoxButton.OK);
-            }
-            
-        }
+            MessageBox.Show("Product Not Exist", "Not Exist Product", MessageBoxButton.OK);
+        }       
     }
 }

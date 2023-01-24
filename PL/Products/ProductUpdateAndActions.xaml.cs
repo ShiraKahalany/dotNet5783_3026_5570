@@ -36,9 +36,7 @@ namespace PL.Products
             poProduct = poPro;
             DataContext = poProduct;
             ob=products;
-            // BO.Product pro = bl.Product.GetProduct(poProduct.ID)!;
             SelectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
-            //SelectCategory.SelectedItem = poProduct.Category;
             path = poProduct.Path!;
         }
 
@@ -59,7 +57,6 @@ namespace PL.Products
                 poProduct.InStock = amount;
                 poProduct.Category = category;
                 poProduct.Path = path;
-                //MessageBox.Show("successfully updated", "UPDATE PRODUCT", MessageBoxButton.OK);
                 Close();
             }
             catch(BO.NotExistException)

@@ -1,5 +1,4 @@
 ﻿using BlApi;
-using PL.Products;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -26,7 +25,6 @@ public partial class ProductsArchivePage : Page
         observeproductsToSave = ob;
         BOproducts = bl.Product.GetProducts(BO.Filters.filterByIsDeleted);
         observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
-        //ProductListView.DataContext = observeproducts;
         ProductListView.ItemsSource = observeproducts;
     }
 
@@ -35,10 +33,10 @@ public partial class ProductsArchivePage : Page
         var result = MessageBox.Show("Are you sure you want to return the product to the store?", "Restore product", MessageBoxButton.YesNo);
         if (result == MessageBoxResult.No)
             return;
-        PO.ProductPO?  restorepro = ((Button)(sender)).DataContext as PO.ProductPO;
+        PO.ProductPO? restorepro = ((Button)(sender)).DataContext as PO.ProductPO;
         try
         {
-            bl.Product.Restore(restorepro?.ID??0);
+            bl.Product.Restore(restorepro?.ID ?? 0);
         }
         catch (BO.NotExistException)
         {
@@ -57,14 +55,10 @@ public partial class ProductsArchivePage : Page
 
     private void ShowDeletedProduct(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-
-
-
-
         new Products.DeletedProduct((PO.ProductPO)ProductListView.SelectedItem, observeproducts).ShowDialog();
         BOproducts = bl.Product.GetProducts(BO.Filters.filterByIsDeleted);
-            observeproducts.Clear();
-            observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
+        observeproducts.Clear();
+        observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
     }
 
 

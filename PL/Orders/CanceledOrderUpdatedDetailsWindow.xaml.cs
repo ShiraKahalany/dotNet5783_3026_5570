@@ -33,7 +33,6 @@ namespace PL.Orders
         {
             
             InitializeComponent();
-           // DataContext = this;
             poorder = order;
             ob=obse;
             observeproductsToSave=toSave;

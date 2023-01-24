@@ -16,7 +16,6 @@ public partial class CatalogPage : Page
     private IEnumerable<BO.ProductItem> BOproducts;
     private List<PO.ProductItemPO> itemsList;
     Frame frame;
-    //private PO.CartPO pocart;
     private BO.Cart bocart;
     public CatalogPage(string category, Frame mainFrame, BO.Cart bcart)
     {
@@ -28,7 +27,6 @@ public partial class CatalogPage : Page
         switch (category)
         {
             case "kitchen":
-                // BOproducts = bl.Product.GetProductItemsList(bocart, BO.Filters.filterByCategory, BO.Category.Kitchen);
                 BOproducts = (IEnumerable<BO.ProductItem>)x.Where(g => g.Key == BO.Category.Kitchen).SelectMany(g=>g);
                 break;
             case "living_room":

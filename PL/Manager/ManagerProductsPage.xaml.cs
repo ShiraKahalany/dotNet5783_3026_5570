@@ -28,7 +28,6 @@ public partial class ManagerProductsPage : Page
         myframe = MainManagerOptionsFrame;
         BOproducts = bl.Product.GetProducts();
         observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
-        //ProductListView.DataContext = observeproducts;
         ProductListView.ItemsSource = observeproducts;
         AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Category));
     }
@@ -44,7 +43,6 @@ public partial class ManagerProductsPage : Page
             BOproducts = bl.Product.GetProducts(BO.Filters.filterByCategory, (BO.Category)AttributeSelector.SelectedItem).ToList();
         observeproducts.Clear();
         observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
-        // ProductListView.DataContext = observeproducts;
     }
 
     private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
