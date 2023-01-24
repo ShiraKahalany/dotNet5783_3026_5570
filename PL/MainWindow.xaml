@@ -9,7 +9,7 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 
         mc:Ignorable="d"
-        Title="MainWindow" Height="572" Width="1088">
+        Title="MainWindow" Height="572" Width="1088" Icon="/ICON.png">
 
 
     <Window.Resources>
