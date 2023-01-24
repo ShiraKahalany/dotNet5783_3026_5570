@@ -47,15 +47,15 @@ internal class Order : IOrder
         }
     }
 
-    public BO.Order UpdateStatusToShipped(int id)
+    public BO.Order UpdateStatusToShipped(int id/*, DateTime? time = null*/)
     //עידכון הזמנה ששולחה
     {
         try
         {
             DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false)!;
-            if (order.ShipDate != null)
+            if (/*time==null&&*/order.ShipDate != null)
                 throw new BO.OrderHasShippedException();
-            order.ShipDate = DateTime.Now;
+                order.ShipDate = /*time??*/DateTime.Now;
             dal.Order.Update((DO.Order)order);
             return order.OrderToBO();
         }
@@ -64,17 +64,18 @@ internal class Order : IOrder
             throw new BO.NotExistException(ex.Message);
         }
     }
-    public BO.Order UpdateStatusToProvided(int id)
+    public BO.Order UpdateStatusToProvided(int id/*, DateTime? time = null*/)
     //עידכון הזמנה שסופקה
     {
         try
         {
             DO.Order order = (DO.Order)dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted == false)!;
-            if (order.DeliveryDate != null)
+           
+            if (/*time==null&&*/order.DeliveryDate != null)
                 throw new BO.OrderHasDeliveredException();
-            if (order.ShipDate == null)
+            if (/*time == null && */order.ShipDate == null)
                 throw new BO.OrderHasNotShippedException();
-            order.DeliveryDate = DateTime.Now;
+            order.DeliveryDate = /*time??*/DateTime.Now;
             dal.Order.Update((DO.Order)order);
             return order.OrderToBO();
         }
@@ -209,7 +210,7 @@ internal class Order : IOrder
                 Amount = amount,
                 IsDeleted = false,
                 Path = theItem?.Path,
-                TotalItem = (theItem?.Price ?? 0)*amount
+                TotalItem = (theItem?.Price ?? 0) * amount
             });
             return border;
         }
@@ -281,7 +282,7 @@ internal class Order : IOrder
             throw new BO.NotExistException();
         try
         {
-            BO.Order boOrder =GetDeletedOrderById(id);
+            BO.Order boOrder = GetDeletedOrderById(id);
             boOrder.Items!.checkStock();
             boOrder.Items!.updateStock();
             DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == id) && order.GetValueOrDefault().IsDeleted);
@@ -299,7 +300,7 @@ internal class Order : IOrder
         try
         {
             DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == or.ID) && order.GetValueOrDefault().IsDeleted == false);
-            if (order?.ShipDate != null ||order?.DeliveryDate!=null)
+            if (order?.ShipDate != null || order?.DeliveryDate != null)
                 throw new BO.CanNotUpdateOrderException();
             if (order?.OrderDate != null)
             {
@@ -355,7 +356,7 @@ internal class Order : IOrder
             enumFilter switch
             {
                 BO.Filters.filterByStatus =>
-                 dal!.Order.GetAll(dp => ((filterValue != null ? (dp?.GetStatus() == (BO.OrderStatus)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))).OrderBy(x=>x?.ID),
+                 dal!.Order.GetAll(dp => ((filterValue != null ? (dp?.GetStatus() == (BO.OrderStatus)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))).OrderBy(x => x?.ID),
 
                 BO.Filters.None =>
                 dal!.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false).OrderBy(x => x?.ID),

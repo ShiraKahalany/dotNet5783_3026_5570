@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -88,13 +89,23 @@ public partial class OrderTrackingWindow : Window
         toContinue = false;
         for (int i = 0; i < orders.Count; i++)
         {
-            if (orders[i].Status == BO.OrderStatus.Ordered && orders[i].OrderDate <= now.AddDays(-31) )
-                bl.Order.UpdateStatusToShipped(orders[i].ID);
-            else if (orders[i].Status == BO.OrderStatus.Shipped && orders[i].ShipDate <= now.AddDays(-14))
-                bl.Order.UpdateStatusToProvided(orders[i].ID);
-            if (orders[i].Status != BO.OrderStatus.Delivered)
-                toContinue = true;
-           
+            try
+            {
+                if (orders[i].Status == BO.OrderStatus.Ordered && orders[i].OrderDate <= now.AddDays(-31))
+                    bl.Order.UpdateStatusToShipped(orders[i].ID/*, now*/);
+                else if (orders[i].Status == BO.OrderStatus.Shipped && orders[i].ShipDate <= now.AddDays(-14))
+                    bl.Order.UpdateStatusToProvided(orders[i].ID/*, now*/);
+                if (orders[i].Status != BO.OrderStatus.Delivered)
+                    toContinue = true;
+            }
+            catch (BO.OrderHasDeliveredException)
+            { }
+            catch (BO.OrderHasNotShippedException)
+            { }
+            catch(BO.OrderHasShippedException)
+            { }
+            catch(BO.NotExistException)
+            { }
             // Thread.Sleep(500);
         }
 
