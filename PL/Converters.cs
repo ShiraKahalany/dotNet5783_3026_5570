@@ -422,6 +422,9 @@ public class StatusToValue : IValueConverter
     }
 }
 
+
+
+
 public class IsEnabledToVisibilityConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -447,3 +450,6 @@ public class OpacityToVisibilityConverter : IValueConverter
         return (Visibility) Visibility.Visible;
     }
 }
+
+
+

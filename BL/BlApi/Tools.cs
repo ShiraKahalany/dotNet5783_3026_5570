@@ -181,7 +181,6 @@ public static class Tools
     {
         cart.TotalPrice = (cart.TotalPrice ?? 0) + (item.Price * dif);
         cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
-        //return cart;
     }
 
     public static int CheckAmount(this BO.OrderItem item, int amount)

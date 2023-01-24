@@ -188,7 +188,7 @@
                 </Button>
             </ListViewItem>
         </ListView>
-        <Frame x:Name="MainFrame" Margin="0,43,0,0" Grid.RowSpan="2" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated"/>
+        <Frame x:Name="MainFrame" Margin="0,43,0,0" Grid.RowSpan="2" NavigationUIVisibility="Hidden"/>
 
         <materialDesign:Card 
       Visibility="{Binding ElementName=LogIn, Path=IsEnabled, Converter={StaticResource IsEnabledToVisibilityConverter}}"

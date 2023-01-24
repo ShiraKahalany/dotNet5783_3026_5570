@@ -26,7 +26,7 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="Order ID:" FontSize="16" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" TextAlignment="Center" Margin="0,55,98,0"/>
         <TextBlock  FontSize="16" TextWrapping="Wrap" VerticalAlignment="Top" Height="29" Width="86" Text="{Binding ID}" Margin="5,76,92,0" TextAlignment="Center"/>
-        <ListView x:Name="ItemsListView"  HorizontalAlignment="Center" Grid.Column="2" Margin="0,60,0,50" >
+        <ListView x:Name="ItemsListView" HorizontalAlignment="Center" Grid.Column="2" Margin="0,60,0,50" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid >
@@ -64,8 +64,8 @@
                                 <TextBlock Name="TotalItem" Text="{Binding TotalItem}" FontSize="20"></TextBlock>
                             </StackPanel>
                         </StackPanel>
-                        <Button Grid.Column="0" Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" Margin="0,0,10,0" Height="25" Width="25" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalAlignment="Center">
-                            <materialDesign:PackIcon Kind="Trash" Width="20" Height="20"></materialDesign:PackIcon>
+                        <Button Grid.Column="0" Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" Margin="0,0,10,0" Height="25" Width="25" BorderBrush="{x:Null}" Background="{x:Null}" Click="updateItem" HorizontalAlignment="Center">
+                            <materialDesign:PackIcon Kind="BookEditOutline" Width="20" Height="20"></materialDesign:PackIcon>
                         </Button>
                     </Grid>
                 </DataTemplate>

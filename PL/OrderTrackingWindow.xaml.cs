@@ -50,7 +50,7 @@ public partial class OrderTrackingWindow : Window
     private void Worker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
         if (from==0)
-            MessageBox.Show("All orders have been successfully delivered", "Simulator", MessageBoxButton.OK, MessageBoxImage.Hand);
+            MessageBox.Show("All orders have been successfully delivered", "Simulator", MessageBoxButton.OK);
         else if(from==1)
         {
              toContinue = true;

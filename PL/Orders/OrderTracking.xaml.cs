@@ -2,6 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.Generic;
+using System.Windows.Navigation;
+using BO;
+
 namespace PL.Orders;
 
 /// <summary>
@@ -10,12 +14,13 @@ namespace PL.Orders;
 public partial class OrderTracking : Page
 {
     private IBL bl = BLFactory.GetBL();
+    ObservableCollection<PO.OrderItemPO> poItems = new();
     BO.Order boOrder= new BO.Order();
     PO.OrderForListPO poorder = new();
     private PO.OrderPO order = new();
     private ObservableCollection<PO.OrderForListPO> ob = new ObservableCollection<PO.OrderForListPO>();
     BO.OrderStatus stat;
-    public OrderTracking(PO.OrderForListPO POorder, ObservableCollection<PO.OrderForListPO> obse,BO.OrderStatus status)
+    public OrderTracking(PO.OrderForListPO POorder, ObservableCollection<PO.OrderForListPO> obse, BO.OrderStatus status)
     {
         InitializeComponent();
         ob = obse;
@@ -35,8 +40,10 @@ public partial class OrderTracking : Page
             MessageBox.Show("Order Not Exist", "ERROR");
         }
         order = boOrder.CopyFields<BO.Order, PO.OrderPO>(order);
+        poItems = boOrder.Items!.ToObservableByConverter<BO.OrderItem, PO.OrderItemPO>(poItems, PL.Tools.CopyProp<BO.OrderItem, PO.OrderItemPO>);
         DataContext = order;
-        ItemsListView.ItemsSource = boOrder.Items;
+        //ItemsListView.ItemsSource = boOrder.Items;
+        ItemsListView.ItemsSource = poItems;
     }
 
 
@@ -96,5 +103,23 @@ public partial class OrderTracking : Page
     private void back_click(object sender, RoutedEventArgs e)
     {
         NavigationService.GoBack();
+    }
+
+    private void updateItem(object sender, RoutedEventArgs e)
+    {
+        if(order.Status != BO.OrderStatus.Ordered)
+        {
+            MessageBox.Show("The order has already been shipped, no changes can be made");
+            return;
+        }
+
+        new UpdateItemInOrder((PO.OrderItemPO)ItemsListView.SelectedItem, poItems, ob, order).ShowDialog();
+
+ //BOproducts = bl.Product.GetProducts(BO.Filters.filterByIsDeleted);
+ //       observeproducts.Clear();
+ //       observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
+
+
+
     }
 }
