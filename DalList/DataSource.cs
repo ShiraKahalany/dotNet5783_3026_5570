@@ -9,7 +9,6 @@ internal class DataSource
 {
     internal static DataSource s_instance { get; } = new DataSource();   //יצירת מופע נתונים
     public DataSource() { s_Initialize(); }    /// <summary>
-    /// ???private??
     /// </summary>
 
     public readonly Random rnd = new Random(); //a random number
@@ -70,13 +69,6 @@ internal class DataSource
             myDeliveryDate = null;
             if (deliverArr.Contains(i))
                 myDeliveryDate = DateTime.Now.AddDays(-(rnd.Next(1, 7))) - new TimeSpan(rnd.NextInt64(6000000000));
-            //myOrderDate = DateTime.Now - new TimeSpan(rnd.n());
-            //myShipDate = null;
-            //if (i >25)
-            //    myShipDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 50L));
-            //myDeliveryDate = null;
-            //if (i > 31)
-            //    myDeliveryDate = DateTime.Now - new TimeSpan(rnd.NextInt64(10L * 1000L * 3600L * 24L * 20L));
 
             Orders.Add(
             new Order
@@ -211,7 +203,7 @@ internal class DataSource
             InStock = 82,
             Path = "/image/Dark-Bronze Mid-Century-Contour-Bathroom Hardware.jpg"
         });
-        //////newwww
+        
         Products.Add(
         new Product
         {

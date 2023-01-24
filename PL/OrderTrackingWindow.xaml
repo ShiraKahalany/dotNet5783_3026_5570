@@ -15,8 +15,10 @@
         <converter:StatusToColorConverter x:Key="StatusToColorConverter"/>
         <converter:ProgressToIntConverter x:Key="ProgressToIntConverter"/>
         <converter:StatusToValue x:Key="StatusToValue"/>
+        
     </Window.Resources>
     <Grid>
+
         <ListView  Name="OrderListView" 
                    FontSize="13"
                    MaxWidth="880"
@@ -41,7 +43,7 @@
                     <GridViewColumn Header="Amount" Width="113">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ContentControl Margin="5,5,0,0" Content="{Binding Items.Count}"> </ContentControl>
+                                <ContentControl Margin="5,5,0,0" Content="{Binding Items.Count}"></ContentControl>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -89,7 +91,7 @@
         <Label Content="Tracking Simulator" FontSize="25" FontFamily="Book Antiqua" HorizontalAlignment="Left" Margin="54,10,0,0" VerticalAlignment="Top" Width="225" Height="44"/>
         <Button Name="Start" HorizontalAlignment="Left" Margin="807,31,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="#FF9BE388" Click="Start_Click">
             <materialDesign:PackIcon Kind="Play" Width="20" Height="20"></materialDesign:PackIcon>
-            
+
         </Button>
         <Button  HorizontalAlignment="Left" Margin="878,31,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="#FFC16767" Click="Button_Click">
             <materialDesign:PackIcon Kind="Stop" Width="20" Height="20"></materialDesign:PackIcon>

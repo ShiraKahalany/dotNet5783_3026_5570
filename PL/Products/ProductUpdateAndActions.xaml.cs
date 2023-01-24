@@ -28,12 +28,14 @@ namespace PL.Products
         private IBL bl = BLFactory.GetBL();
         PO.ProductPO poProduct;
         BO.Category category;
+        ObservableCollection<PO.ProductPO> ob;
         string path;
         public ProductUpdateAndActions(PO.ProductPO poPro, ObservableCollection<PO.ProductPO> products)
         {
             InitializeComponent();
             poProduct = poPro;
             DataContext = poProduct;
+            ob=products;
             // BO.Product pro = bl.Product.GetProduct(poProduct.ID)!;
             SelectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
             //SelectCategory.SelectedItem = poProduct.Category;
@@ -56,18 +58,14 @@ namespace PL.Products
                 poProduct.Price = price;
                 poProduct.InStock = amount;
                 poProduct.Category = category;
-                MessageBox.Show("Seccessfully", "UPDATE PRODUCT", MessageBoxButton.OK);
+                poProduct.Path = path;
+                //MessageBox.Show("successfully updated", "UPDATE PRODUCT", MessageBoxButton.OK);
                 Close();
             }
             catch(BO.NotExistException)
             {
                 MessageBox.Show("The Product Does Not Exist", "ERROR", MessageBoxButton.OK);
             }
-
-        }
-
-        private void SelectCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
         }
 

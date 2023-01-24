@@ -7,9 +7,9 @@ namespace Dal;
 //מימוש ממשק המוצרים
 public class DalProduct : IProduct
 {
-    DataSource dataSource = DataSource.s_instance;
+   DataSource dataSource = DataSource.s_instance;
   public int Add(Product item)
-        //מתחודה שמקבלת מוצר ומוסיפה אותו אל רשימת כל המוצרים
+        //הוספת מוצר חדש לרשימת המוצרים, מחזירה את המזהה של המוצר החדש
     {
 
         if (item.ID >= 100000 && dataSource.Orders.Find(x => x?.ID == item.ID) == null)
