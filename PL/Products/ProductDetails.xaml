@@ -19,7 +19,6 @@
         <converter:BoolToIsEnabledConverter x:Key="boolToIsEnabled"/>
         <converter:IntToStringConverter x:Key="intToStringConverter"/>
         <converter:BoolToVisibility2Converter x:Key="boolToVisibility2Converter"/>
-        <converter:AmountToColorConverter x:Key="AmountToColorConverter"/>
         <converter:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
         <Style x:Key="Design" TargetType="Button">
             <Setter Property="BorderBrush" Value="Black"/>
@@ -119,20 +118,5 @@
                    Height="20"
                    Background="{Binding Path=IsInStock, Converter={StaticResource isInStockToColor}}"
                    Foreground="White" FontWeight="Bold" FontFamily="Tw Cen MT"/>
-
-
-        <!--<TextBlock HorizontalAlignment="Left"
-                   Margin="234,259,0,0" TextWrapping="Wrap" FontSize="20" FontWeight="Bold" Text="{Binding Path=Amount, Converter={StaticResource intToStringConverter}}" VerticalAlignment="Top" Height="40" Width="39" Background="#FFC4EE89" TextAlignment="Center" Visibility="{Binding Path=Amount, Converter={StaticResource boolToVisibility2Converter}}"/>-->
-        <!--<Button Content="{Binding Path=Amount, Converter={StaticResource intToStringConverter}}"
-                Margin="199,252,0,0"
-                Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}"
-                HorizontalAlignment="Left"
-                Background="LightGreen"
-                Height="25" Width="27"
-                IsEnabled="False"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                VerticalAlignment="Top"/>-->
-
     </Grid>
 </Page>

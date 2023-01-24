@@ -18,7 +18,7 @@ public partial class OrderTrackingWindow : Window
 {
     private IBL bl = BLFactory.GetBL();
     private ObservableCollection<PO.OrderPO> ob = new ObservableCollection<PO.OrderPO>();
-    List<BO.Order> orders;
+    List<BO.Order>? orders;
     private BackgroundWorker worker;
     TimeSpan day = new TimeSpan(24, 0, 0);
    DateTime now = DateTime.Now;
@@ -72,7 +72,7 @@ public partial class OrderTrackingWindow : Window
     private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
     {
         toContinue = false;
-        for (int i = 0; i < orders.Count; i++)
+        for (int i = 0; i < orders!.Count; i++)
         {
             try
             {

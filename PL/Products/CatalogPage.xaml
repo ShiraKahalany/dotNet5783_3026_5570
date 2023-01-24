@@ -15,23 +15,6 @@
         <converter:AmountToVisibilityConverter x:Key="amountToVisibilityConverter"/>
     </Page.Resources>
     <Grid Background="White">
-        <!--<ListView x:Name="listCatalog" MouseDoubleClick="ProductDetails_MouseDoubleClick" HorizontalAlignment="Center" ItemsSource="{Binding}" Height="450" VerticalAlignment="Center"  Width="800">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="5" VerticalAlignment="Top"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical" Width="200" Height="250" >
-                        <Image Source="{Binding Path}" HorizontalAlignment="Center" Width="120" Height="120" VerticalAlignment="Top" />
-                        <TextBlock TextWrapping="WrapWithOverflow"  Text="{Binding Name}" Width="120" Height="60"></TextBlock>
-                        <TextBlock Text="{Binding Price }" FontSize="30"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>-->
-
         <ListView x:Name="listCatalog" MouseDoubleClick="ProductDetails_MouseDoubleClick"
                   ItemsSource="{Binding}" Margin="21,0,0,0">
             <ListView.ItemsPanel>
