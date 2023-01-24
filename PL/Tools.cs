@@ -15,36 +15,6 @@ public static class Tools
 {
     private static IBL bl = BLFactory.GetBL();
 
-    public static void refreshCart(this BO.Cart cart)
-    {
-        DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
-        if (cart.Items == null)
-            return;
-        try
-        {
-        var x = from item in cart.Items
-                let product = dal.Product.GetTByFilter(x => x?.ID == item.ProductID)
-                where product?.IsDeleted==false && product?.InStock >= item.Amount 
-                select new BO.OrderItem
-                {
-                    Amount = item.Amount,
-                    Price = product?.Price,
-                    ProductID = item.ProductID,
-                    Path = product?.Path,
-                    ID = item.ID,
-                    IsDeleted = item.IsDeleted,
-                    TotalItem = Math.Round((item?.Amount * product?.Price)??0, 2),
-                    Name = product?.Name
-                };
-            cart.Items = x.ToList();
-            cart.TotalPrice = Math.Round(x.Sum(item => item.Price * item.Amount) ?? 0, 2);
-        }
-        catch(DO.NotExistException)
-        {
-            throw new BO.NotExistException();
-        }
-    }
-
     public static BO.Product CopyProductToBO(this PO.ProductPO prodPO)
     {
         BO.Product copyProduct = new()
@@ -258,14 +228,14 @@ public static class Tools
             CustomerName = cartBO.CustomerName,
             TotalPrice = cartBO.TotalPrice
         };
-        copycart.Items = cartBO.Items.ToObservableByConverter<BO.OrderItem, PO.OrderItemPO>(copycart.Items, CopyProp<BO.OrderItem, PO.OrderItemPO>);
+        copycart.Items = cartBO.Items!.ToObservableByConverter<BO.OrderItem, PO.OrderItemPO>(copycart.Items, CopyProp<BO.OrderItem, PO.OrderItemPO>);
         //copycart.Items = cartPO.Items!.ObservableToIEnumerable().ToList();
         return copycart;
     }
 
     public static void AddToPOCart(this PO.CartPO cart, PO.OrderItemPO item, int amountToAdd = 1)
     {
-        if (cart.Items.Contains(item))
+        if (cart.Items!.Contains(item))
         {
             cart.Items.Remove(item);
             item.Amount += amountToAdd;

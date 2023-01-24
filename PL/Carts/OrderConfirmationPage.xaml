@@ -94,32 +94,40 @@
             <ListView x:Name="ItemsListView"  HorizontalAlignment="Center" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Width="400">
+                        <Grid >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="3*"/>
-                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Image Source="{Binding Path}" 
-                               Height="100" Grid.Column="1"></Image>
-                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="300" Grid.Column="3">
-                                <TextBlock Name="name" Width="260" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding Name}"></TextBlock>
-                                <TextBlock Text="Item Price" FontSize="10" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                                <StackPanel Grid.Column="3" Name="price" Orientation="Horizontal" Width="160" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
-                                    <TextBlock Text="$" FontSize="20"></TextBlock>
-                                    <TextBlock Text="{Binding Price}" Width="160" FontSize="20"></TextBlock>
+                               Height="50" Grid.Column="0" Width="50"></Image>
+                            <TextBlock  Width="30" 
+                                   Grid.Column="1"
+                                     TextAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontWeight="Bold"
+                                     FontSize="16"
+                                     Text="{Binding Amount}"
+                                  IsEnabled="False"
+                                     Height="30" />
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="150" Grid.Column="2">
+                                <TextBlock TextWrapping="Wrap" FontSize="12" Name="name" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding Name}"></TextBlock>
+                                <!--<TextBlock Text="Item Price" FontSize="10"  HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>-->
+                                <StackPanel Grid.Column="3" Name="price" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
+                                    <TextBlock Text="$" FontSize="18"></TextBlock>
+                                    <TextBlock Text="{Binding Price}" FontSize="18"></TextBlock>
                                 </StackPanel>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="300" Grid.Column="4">
-                                <TextBlock Text="Item Total" FontSize="10" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                                <StackPanel Grid.Column="4" Name="totalprice" Orientation="Horizontal" Width="160" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Vertical" Width="150" VerticalAlignment="Center" Grid.Column="3">
+                                <TextBlock Text="Item Total" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                <StackPanel Grid.Column="4" Name="totalprice" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
                                     <TextBlock Text="$" FontSize="20"></TextBlock>
-                                    <TextBlock Name="TotalItem" Text="{Binding TotalItem}" Width="250" FontSize="20"></TextBlock>
+                                    <TextBlock Name="TotalItem" Text="{Binding TotalItem}" FontSize="20"></TextBlock>
                                 </StackPanel>
                             </StackPanel>
-
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -21,7 +21,7 @@ public interface IOrder
     public IEnumerable<BO.OrderForList> GetOrderList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null);
     public IEnumerable<BO.Order> GetOrdersByFilter(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null);
 
-    public BO.Order? UpdateStatusToShipped  (int id/*, DateTime? time=null*/);  //עידכון הזמנה ל "שולחה"
+    public BO.Order? UpdateStatusToShipped  (int id/*, DateTime? time = null*/);  //עידכון הזמנה ל "שולחה"
     public BO.Order? UpdateStatusToProvided(int id/*, DateTime? time = null*/);  //עידכון הזמנה ל "סופקה"
     public BO.OrderTracking? FollowOrder (int id);  //מעקב הזמנה, הצגת השלבים של ההזמנה והתאריכים
     public BO.Order? UpdateAmountOfProduct (int orderId,int productId, int amount);   //עידכון כמות של מוצר בהזמנה

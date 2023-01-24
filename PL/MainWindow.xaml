@@ -222,8 +222,7 @@
                             Orientation="Vertical" 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center"
-                            Visibility= "{Binding ElementName=managerButton, Path=Visibility, Converter={StaticResource notVisibilityToVisibilityConverter}}"
-                            IsEnabled= "{Binding ElementName=managerButton, Path=IsEnabled , Converter={StaticResource falseToTrueConverter}}">
+                            >
 
                     <Button
                     Opacity="1"
@@ -279,6 +278,7 @@
                     BorderBrush="Transparent"
                     Click="ManagerLogIn_Click"
                     IsEnabled="True" Foreground="white" Margin="405,159,0,0" Grid.Row="1"/>-->
+
 
     </Grid>
 </Window>
