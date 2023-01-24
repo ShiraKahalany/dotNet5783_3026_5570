@@ -21,18 +21,12 @@ namespace PL.Products
         {
             InitializeComponent();
             observeproducts = ob;
-            //ProductListView.ItemsSource = bl.Product.GetListedProducts();
             SelectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
-            //SelectCategory.Items.Remove(BO.Category.All);
-            // SelectCategory.SelectedItem = BO.Category.All;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string name = InsertName.Text;
-            //if(name==null|| name.Length==0)
-            //    throw 
-           // int id = int.Parse(InserId.Text);
             double price = double.Parse(InsertPrice.Text);
             int amount = int.Parse(InsertAmount.Text);
 
@@ -77,7 +71,5 @@ namespace PL.Products
 
         private void OnlyNumbers(object sender, KeyEventArgs e) => Tools.EnterNumbersOnly(sender, e);
         private void EnterNumbersOrPointOnly(object sender, KeyEventArgs e) => Tools.EnterNumbersOrPointOnly(sender, e);
-
-
     }
 }

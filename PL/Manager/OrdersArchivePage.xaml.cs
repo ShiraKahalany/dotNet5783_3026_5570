@@ -17,81 +17,57 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 
 
-namespace PL.Manager
+namespace PL.Manager;
+
+/// <summary>
+/// Interaction logic for OrdersArchivePage.xaml
+/// </summary>
+public partial class OrdersArchivePage : Page
 {
-    /// <summary>
-    /// Interaction logic for OrdersArchivePage.xaml
-    /// </summary>
-    public partial class OrdersArchivePage : Page
+    private IBL bl = BLFactory.GetBL();
+    private ObservableCollection<PO.OrderForListPO> ob = new ObservableCollection<PO.OrderForListPO>();
+    private ObservableCollection<PO.OrderForListPO> observeproductsToSave = new ObservableCollection<PO.OrderForListPO>();
+    private IEnumerable<BO.OrderForList> BOorders;
+    Frame myframe;
+
+
+    public OrdersArchivePage(ObservableCollection<PO.OrderForListPO> observeproducts, Frame MainManagerOptionsFrame)
     {
-        private IBL bl = BLFactory.GetBL();
-        private ObservableCollection<PO.OrderForListPO> ob = new ObservableCollection<PO.OrderForListPO>();
-        private ObservableCollection<PO.OrderForListPO> observeproductsToSave = new ObservableCollection<PO.OrderForListPO>();
-        private IEnumerable<BO.OrderForList> BOorders;
-        Frame myframe;
-
-
-        public OrdersArchivePage(ObservableCollection<PO.OrderForListPO> observeproducts, Frame MainManagerOptionsFrame)
+        InitializeComponent();
+        observeproductsToSave = observeproducts;
+        myframe = MainManagerOptionsFrame;
+        try
         {
-            InitializeComponent();
-            observeproductsToSave = observeproducts;
-            myframe = MainManagerOptionsFrame;
-            try
-            {
-                BOorders = bl.Order.GetDeletedOrders()!;
-                ob = BOorders!.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
-                ProductListView.ItemsSource = ob;
-            }
-            catch(BO.NotExistException)
-            {
-                MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
-            }
-            catch(BO.NoItemsException)
-            {
-                MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
-            }
+            BOorders = bl.Order.GetDeletedOrders()!;
+            ob = BOorders!.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
+            ProductListView.ItemsSource = ob;
         }
-
-
-        private void RestoreOrder_Click(object sender, RoutedEventArgs e)
+        catch(BO.NotExistException)
         {
-            PO.OrderForListPO POor = ((Button)(sender)).DataContext as PO.OrderForListPO;
-            //try
-            //{
-                //bl.Order.Restore(POor.ID);
-                //ob.Remove(POor);
-               // MessageBox.Show("Seccessfully Restored", "Restore Order", MessageBoxButton.OK);
-                //observeproductsToSave.Add(POor);
-                new PL.Orders.CanceledOrderUpdatedDetailsWindow(POor, ob,observeproductsToSave).ShowDialog();
-            //}
-            //catch(BO.NotExistException)
-            //{
-            //    MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
-            //}
+            MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
         }
-
-        private void GoBack_Click(object sender, RoutedEventArgs e)
+        catch(BO.NoItemsException)
         {
-            NavigationService.GoBack();
+            MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
         }
-
-        private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            PO.OrderForListPO po = (PO.OrderForListPO)((ListView)sender).SelectedItem;
-            myframe.Content = new Orders.DeletedOrderPage(po, ob, observeproductsToSave, myframe);
-
-
-
-            //new Orders.DeletedOrder((PO.ProductPO)ProductListView.SelectedItem, observeproducts).ShowDialog();
-            //BOproducts = bl.Product.GetProducts(BO.Filters.filterByIsDeleted);
-            //observeproducts.Clear();
-            //observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
-        }
-
-        //private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    PO.OrderForListPO po = (PO.OrderForListPO)((ListView)sender).SelectedItem;
-        //    new Orders.DeletedOrder(po, ob).ShowDialog();
-        //}
     }
+
+
+    private void RestoreOrder_Click(object sender, RoutedEventArgs e)
+    {
+        PO.OrderForListPO? POor = ((Button)(sender)).DataContext as PO.OrderForListPO;
+        new PL.Orders.CanceledOrderUpdatedDetailsWindow(POor!, ob,observeproductsToSave).ShowDialog();
+    }
+
+    private void GoBack_Click(object sender, RoutedEventArgs e)
+    {
+        NavigationService.GoBack();
+    }
+
+    private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        PO.OrderForListPO po = (PO.OrderForListPO)((ListView)sender).SelectedItem;
+        myframe.Content = new Orders.DeletedOrderPage(po, ob, observeproductsToSave, myframe);
+    }
+
 }

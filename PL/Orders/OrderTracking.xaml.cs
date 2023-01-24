@@ -45,7 +45,7 @@ public partial class OrderTracking : Page
         bool isStatusChanged = true;
         try
         {
-            boOrder = bl.Order.UpdateStatusToProvided(boOrder.ID);
+            boOrder = bl.Order.UpdateStatusToProvided(boOrder.ID)!;
             
         }
         catch (BO.OrderHasDeliveredException)

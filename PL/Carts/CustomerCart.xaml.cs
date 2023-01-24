@@ -15,33 +15,21 @@ public partial class CustomerCart : Page
     PO.CartPO cartPO;
     Frame myframe;
     BO.Cart cartBo = new BO.Cart();
-    //List<BO.Cart> CartItems=new List<BO.Cart>();
     public CustomerCart(BO.Cart cart, Frame frame)
     {
         InitializeComponent();
         cartBo = cart;
         cartBo.refreshCart();
         cartPO = PL.Tools.CopyBOCartToPO(cartBo);
-        //cartBo=cartPO.CopyPOCartToBO();
         CartItems.ItemsSource = cartPO.Items;
-        //CartItems.DataContext=cartPO.Items;
-        //totalPrice.DataContext=cartPO;
-        //NoItems.DataContext = cartPO;
         DataContext = cartPO;
-        //CartDetailsGrid.DataContext = cartPO;
         myframe = frame;
-        //NoItems.DataContext = (cartPO.Items!.Count==0);
-        //CartDetailsGrid.DataContext = (cartPO.Items!.Count != 0);
-        //CartDetailsGrid.Visibility= Visibility.Collapsed;
-        //chooseAmount.ItemSource = numArray;
     }
-
 
     private void delete_Click(object sender, RoutedEventArgs e)
     {
         OrderItemPO or = ((OrderItemPO)((Button)sender).DataContext);
         int id = or?.ProductID ?? 0;
-        //BO.Cart boCart = PL.Tools.CopyPOCartToBO(cartPO);
         try
         {
             bl.Cart.UpdateAmountOfProductInCart(cartBo, id, 0);
@@ -64,15 +52,10 @@ public partial class CustomerCart : Page
         ((ComboBox)sender).ItemsSource = arr;
     }
 
-    private void OrderConfirmation_Click(object sender, RoutedEventArgs e)
-    {
-        myframe.Content = new OrderConfirmationPage(cartBo, myframe);
-    }
+    private void OrderConfirmation_Click(object sender, RoutedEventArgs e)=>  myframe.Content = new OrderConfirmationPage(cartBo, myframe);
 
-    private void ContinueShopping_Click(object sender, RoutedEventArgs e)
-    {
-        myframe.Content = new Products.CatalogPage("all", myframe, cartBo);
-    }
+
+    private void ContinueShopping_Click(object sender, RoutedEventArgs e)=> myframe.Content = new Products.CatalogPage("all", myframe, cartBo);
 
 
     private void UpdateAmount(object sender, int amount, bool isTextBox = false)
@@ -150,21 +133,12 @@ public partial class CustomerCart : Page
             return;
         UpdateAmount(sender, amount, true);
     }
-
     private void OnlyNumbers(object sender, KeyEventArgs e) => Tools.EnterNumbersOnly(sender, e);
-
-
     private void CountUp_Click(object sender, RoutedEventArgs e)
     {
         var b = (Button)sender;
         int amount = ((PO.OrderItemPO)b.DataContext)?.Amount ?? 0;
         UpdateAmount(sender, amount + 1);
-    }
-
-    private void Empty(BO.Cart cart)
-    {
-        cart?.Items?.Clear();
-        cart!.TotalPrice = 0;
     }
     private void EmptyCart_Click(object sender, RoutedEventArgs e)
     {
@@ -173,13 +147,7 @@ public partial class CustomerCart : Page
         cartBo!.TotalPrice = 0;
         cartPO!.TotalPrice = 0;
     }
+    private void back_click(object sender, RoutedEventArgs e)=> myframe.Content = null;
 
-    private void back_click(object sender, RoutedEventArgs e)
-    {
-        //if (myframe.NavigationService.CanGoBack)
-        //    NavigationService.GoBack();
-        // else
-        myframe.Content = null;
-    }
 
 }

@@ -15,9 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BlApi;
-using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Controls;
 namespace PL.Orders;
 
 /// <summary>
@@ -41,7 +38,6 @@ public partial class DeletedOrderPage : Page
         poorder = POorder;
         int id = poorder.ID;
         myFrame = MainManagerOptionsFrame;
-        // BO.Order boOrder = new BO.Order();
         try
         {
             boOrder = bl.Order.GetDeletedOrderById(id)!;
@@ -67,20 +63,7 @@ public partial class DeletedOrderPage : Page
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-/*        PO.OrderForListPO? POor = ((Button)(sender)).DataContext as PO.OrderForListPO*/;
-        //try
-        //{
-            new Orders.CanceledOrderUpdatedDetailsWindow(poorder, ob, observeproductsToSave).ShowDialog();
-
-        //}
-        //catch (BO.NotExistException)
-        //{
-        //    MessageBox.Show("There Are No Deleted Orders", "No Deleted", MessageBoxButton.OK);
-        //}
-        //catch(BO.NotInStockException)
-        //{
-
-        //}
+        new Orders.CanceledOrderUpdatedDetailsWindow(poorder, ob, observeproductsToSave).ShowDialog();
         NavigationService.GoBack();
     }
 }

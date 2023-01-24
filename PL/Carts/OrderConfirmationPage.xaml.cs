@@ -41,8 +41,7 @@ public partial class OrderConfirmationPage : Page
         {
             int id = bl.Cart.MakeAnOrder(BOcart);
             OrderId.DataContext = id;
-            //MessageBox.Show("Purchase Seccessfully :) Your Order ID Is " + id, "THANK YOU", MessageBoxButton.OK);
-            BOcart.Items.Clear();
+            BOcart.Items?.Clear();
             BOcart.TotalPrice = 0;
             BOcart.CustomerName = null;
             BOcart.CustomerAddress = null;
@@ -82,10 +81,6 @@ public partial class OrderConfirmationPage : Page
             MessageBox.Show("Already Exist!", "ERROR", MessageBoxButton.OK);
         }
 
-        
-
-        //int id = bl.Cart.MakeAnOrder(BOcart);
-        //MessageBox.Show("Purchase Seccessfully :)", "THANK YOU", MessageBoxButton.OK);
     }
 
     private void ContinueShopping_Click(object sender, RoutedEventArgs e)

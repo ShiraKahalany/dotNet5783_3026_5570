@@ -40,7 +40,6 @@ public partial class ManagerOrdersPage : Page
         }
         
         ob = BOorderforlist!.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
-        //ProductListView.DataContext = observeproducts;
         OrderListView.ItemsSource = ob;
         AttributeSelector.SelectedItem = BO.OrderStatus.None;
         AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
@@ -73,7 +72,6 @@ public partial class ManagerOrdersPage : Page
         }
         ob.Clear();
         ob = BOorderforlist!.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
-        // ProductListView.DataContext = observeproducts;
     }
 
     private void OrderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -81,26 +79,6 @@ public partial class ManagerOrdersPage : Page
         PO.OrderForListPO po=(PO.OrderForListPO)((ListView)sender).SelectedItem;
         BO.OrderStatus selectedStatus = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), AttributeSelector.SelectedItem.ToString()!);
         myframe.Content = new Orders.OrderTracking(po, ob, selectedStatus);
-      //myframe.Content = new Orders.OrderTracking(boorder, po);
-
-        //if ((AttributeSelector.SelectedItem != null) && (BO.OrderStatus)AttributeSelector.SelectedItem != BO.OrderStatus.None)
-        //{
-          
-        
-        //******BOorderforlist = bl.Order.GetOrderList(BO.Filters.filterByStatus, (BO.OrderStatus)AttributeSelector.SelectedItem).ToList();
-           
-        //****ob.Clear();
-        //    //ob = BOorderforlist.ToObservableByConverter<BO.>;
-        //****    ob = BOorderforlist.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
-        ////}
-
-
-        //if ((BO.Category)AttributeSelector.SelectedItem != BO.Category.All)
-        //{
-        //    BOproducts = bl.Product.GetProducts(BO.Filters.filterByCategory, (BO.Category)AttributeSelector.SelectedItem).ToList();
-        //    observeproducts.Clear();
-        //    observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
-        //}
     }
 
     private void DeleteOrder_Click(object sender, RoutedEventArgs e)
@@ -137,8 +115,6 @@ public partial class ManagerOrdersPage : Page
         
     }
 
-    private void ShowDeletedOrders_Click(object sender, RoutedEventArgs e)
-    {
-       myframe.Content = new Manager.OrdersArchivePage(ob, myframe);
-    }
+    private void ShowDeletedOrders_Click(object sender, RoutedEventArgs e) => myframe.Content = new Manager.OrdersArchivePage(ob, myframe);
+
 }
