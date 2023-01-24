@@ -27,6 +27,7 @@
         <Label Content="Category:" HorizontalAlignment="Left" Margin="91,273,0,0" VerticalAlignment="Top" Height="26" Width="64"/>
         <Label Content="Update Product" Background="{x:Null}" HorizontalAlignment="Left" Width="193" FontSize="20" HorizontalContentAlignment="Center" FontWeight="Bold" Foreground="#FF974E4E" Margin="50,60,0,350"/>
         <Button Content="Update" HorizontalAlignment="Left" Margin="165,331,0,0" VerticalAlignment="Top" Height="30" Width="78" RenderTransformOrigin="1.111,1.387" Click="Update_Click" Background="{x:Null}">
+            
             <Button.IsEnabled>
                 <MultiBinding Converter="{StaticResource AllTextBoxesFilled7Converter}">
                     <Binding ElementName="InsertName" Path="Text" />

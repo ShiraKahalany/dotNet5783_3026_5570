@@ -15,7 +15,7 @@
     <Category>Garden</Category>
     <Price>600</Price>
     <InStock>149</InStock>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
     <Path>/image/Concrete Indoor or Outdoor Pedestal Round Dining Table.jpg</Path>
   </Product>
   <Product>

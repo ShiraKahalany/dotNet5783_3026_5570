@@ -32,8 +32,8 @@
 
     <Grid Background="White">
         <Image HorizontalAlignment="Left" 
-               Height="281" Margin="490,97,0,0" 
-               VerticalAlignment="Top" Width="257" Source="{Binding Path}" />
+               Height="300" Margin="538,62,0,0" 
+               VerticalAlignment="Top" Width="300" Source="{Binding Path}" />
 
         <TextBlock 
             Name="nameofproduct"
@@ -62,7 +62,7 @@
              IsEnabled="false"
             HorizontalAlignment="Left"
             FontSize="20"  TextWrapping="Wrap"
-            Text="{Binding Category}" VerticalAlignment="Top" Height="48" Width="196" Margin="37,84,0,0" Foreground="Gray"/>
+            Text="{Binding Category}" VerticalAlignment="Top" Height="48" Width="196" Margin="37,97,0,0" Foreground="Gray"/>
         <TextBlock
             Name="idofproduct"
              IsEnabled="false"
