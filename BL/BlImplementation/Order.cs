@@ -26,9 +26,9 @@ internal class Order : IOrder
             throw new BO.NoItemsException();
 
         var x = from DO.Order order in listor
+                orderby order.ID
                 select order.OrderToOrderForList();
         return x.ToList();
-
     }
 
     public BO.Order GetOrderById(int id)

@@ -22,22 +22,26 @@ public partial class CatalogPage : Page
     {
         InitializeComponent();
         bocart = bcart;
+        BOproducts = bl.Product.GetProductItemsList(bocart, BO.Filters.filterByCategory);
+        var x = from product in BOproducts
+                group product by product.Category;
         switch (category)
         {
             case "kitchen":
-                BOproducts = bl.Product.GetProductItemsList(bocart, BO.Filters.filterByCategory, BO.Category.Kitchen);
+                // BOproducts = bl.Product.GetProductItemsList(bocart, BO.Filters.filterByCategory, BO.Category.Kitchen);
+                BOproducts = (IEnumerable<BO.ProductItem>)x.Where(g => g.Key == BO.Category.Kitchen).SelectMany(g=>g);
                 break;
             case "living_room":
-                BOproducts = bl.Product.GetProductItemsList(bocart, BO.Filters.filterByCategory, BO.Category.Living_room);
+                BOproducts = (IEnumerable<BO.ProductItem>)x.Where(g => g.Key == BO.Category.Living_room).SelectMany(g => g);
                 break;
             case "bath_room":
-                BOproducts = bl.Product.GetProductItemsList(bocart, BO.Filters.filterByCategory, BO.Category.Bathroom);
+                BOproducts = (IEnumerable<BO.ProductItem>)x.Where(g => g.Key == BO.Category.Bathroom).SelectMany(g => g);
                 break;
             case "bed_room":
-                BOproducts = bl.Product.GetProductItemsList(bocart, BO.Filters.filterByCategory, BO.Category.Bedroom);
+                BOproducts = (IEnumerable<BO.ProductItem>)x.Where(g => g.Key == BO.Category.Bedroom).SelectMany(g => g);
                 break;
             case "garden":
-                BOproducts = bl.Product.GetProductItemsList(bocart, BO.Filters.filterByCategory, BO.Category.Garden);
+                BOproducts = (IEnumerable<BO.ProductItem>)x.Where(g => g.Key == BO.Category.Garden).SelectMany(g => g);
                 break;
             case "all":
                 BOproducts = bl.Product.GetProductItemsList(bocart);
@@ -48,7 +52,6 @@ public partial class CatalogPage : Page
                 view.GroupDescriptions.Add(groupDescription);
                 break;
         }
-
         if (category != "all")
             itemsList = (from BO.ProductItem p in BOproducts select Tools.CopyProp<BO.ProductItem, PO.ProductItemPO>(p)).ToList();
         listCatalog.DataContext = itemsList;
