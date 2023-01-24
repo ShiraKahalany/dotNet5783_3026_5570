@@ -89,7 +89,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn  Header="Delete" Width="100">
+                    <GridViewColumn  Header="Delete" Width="106">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" Margin="20,10,0,0" Height="25" Width="25" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalAlignment="Center" Click="DeleteProduct_Click">
