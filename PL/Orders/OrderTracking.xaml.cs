@@ -113,13 +113,6 @@ public partial class OrderTracking : Page
             return;
         }
 
-        new UpdateItemInOrder((PO.OrderItemPO)ItemsListView.SelectedItem, poItems, ob, order).ShowDialog();
-
- //BOproducts = bl.Product.GetProducts(BO.Filters.filterByIsDeleted);
- //       observeproducts.Clear();
- //       observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
-
-
-
+        new UpdateItemInOrder((PO.OrderItemPO)ItemsListView.SelectedItem, poItems, ob, order, poorder).ShowDialog();
     }
 }
