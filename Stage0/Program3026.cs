@@ -29,7 +29,7 @@ namespace Targil0
         private static void Welcome3026()
         {
             Console.Write("Enter your name: ");
-            string input = Console.ReadLine();
+            string input = Console.ReadLine()!;
             Console.WriteLine("{0}, welcome to my first console application", input);
         }
     }

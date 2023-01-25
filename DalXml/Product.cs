@@ -83,9 +83,9 @@ internal class Product : IProduct
     public void Restore(DO.Product item)
     {
         XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
-        if(productsRootElem.Elements().FirstOrDefault(st => (int?)st.Element("ID") == item.ID && (bool)st.Element("IsDeleted") == false) != null)
+        if(productsRootElem.Elements().FirstOrDefault(st => (int?)st.Element("ID") == item.ID && (bool)st.Element("IsDeleted")! == false) != null)
             throw new DO.NotExistException();
-        XElement product = productsRootElem.Elements().FirstOrDefault(st => (int?)st.Element("ID") == item.ID && (bool)st.Element("IsDeleted") == true);
+        XElement product = productsRootElem.Elements().FirstOrDefault(st => (int?)st.Element("ID") == item.ID && (bool)st.Element("IsDeleted")! == true)!;
         //if (product.ToBoolNullable("IsDeleted") == false)
         //    throw new DO.NotExistException();
         //DeletePermanently(item.ID);
