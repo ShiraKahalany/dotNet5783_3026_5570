@@ -64,7 +64,7 @@
                                 <TextBlock Name="TotalItem" Text="{Binding TotalItem}" FontSize="20"></TextBlock>
                             </StackPanel>
                         </StackPanel>
-                        <Button Grid.Column="0" Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" Margin="0,0,10,0" Height="25" Width="25" BorderBrush="{x:Null}" Background="{x:Null}" Click="updateItem" HorizontalAlignment="Center">
+                        <Button Visibility="Hidden" Grid.Column="0" Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" Margin="0,0,10,0" Height="25" Width="25" BorderBrush="{x:Null}" Background="{x:Null}" Click="updateItem" HorizontalAlignment="Center">
                             <materialDesign:PackIcon Kind="BookEditOutline" Width="20" Height="20"></materialDesign:PackIcon>
                         </Button>
                     </Grid>

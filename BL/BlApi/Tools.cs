@@ -1,11 +1,6 @@
 ﻿using System.Collections;
 using System.Reflection;
-//namespace BO;
 namespace BlApi;
-
-//מתודות הרחבה
-//public static class Tools
-//{
 
 public static class Tools
 {

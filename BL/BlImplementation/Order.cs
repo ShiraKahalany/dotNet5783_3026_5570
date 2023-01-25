@@ -1,5 +1,6 @@
 ﻿
 using BlApi;
+using DO;
 
 namespace BlImplementation;
 
@@ -119,7 +120,7 @@ internal class Order : IOrder
     }
 
     public static BO.OrderItem? checkAmount(DO.OrderItem item, int id, int newAmount, ref int difference, DO.Product? product)
-   //פונקציה המקבלת מוצר-בהזמנה, ומוצר, ובודקת האם אפשר להזמין את המוצר, מעדכנת את ההפרש בין הכמות במלאי לכמות המבוקשת
+    //פונקציה המקבלת מוצר-בהזמנה, ומוצר, ובודקת האם אפשר להזמין את המוצר, מעדכנת את ההפרש בין הכמות במלאי לכמות המבוקשת
     {
         try
         {
@@ -149,31 +150,42 @@ internal class Order : IOrder
         }
     }
     public BO.Order UpdateAmountOfProduct(int orderId, int productId, int amount)
-    //עידכון כמות מוצר בהזמנה
+    //עידכון כמות מוצר בהזמנה- על ידי המנהל
     {
         try
         {
-            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order.GetValueOrDefault().ID == orderId) && order.GetValueOrDefault().IsDeleted == false);
+            DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order?.ID == orderId) && order?.IsDeleted == false);
             if (order?.ShipDate != null && order?.ShipDate < DateTime.Now)
                 throw new BO.CanNotUpdateOrderException();
-            DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product.GetValueOrDefault().ID == productId) && product.GetValueOrDefault().IsDeleted == false);
-            BO.Order border = new BO.Order();
-            border = order.CopyFields(border);
-            DO.OrderItem? theItem = dal.OrderItem.GetTByFilter((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == orderId && orderItem.GetValueOrDefault().IsDeleted == false && orderItem.GetValueOrDefault().ProductID == productId);
-            border.Status = BO.OrderStatus.Ordered;
-            IEnumerable<DO.OrderItem?>? items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem.GetValueOrDefault().OrderID == order?.ID && orderItem.GetValueOrDefault().IsDeleted == false);
-            if (items == null || !items.Any())
-                return border;
-            int difference = 0;
+            DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product?.ID == productId) && product?.IsDeleted == false);
+            
+            BO.Order border = order?.OrderToBO()!;
+           //border = order.CopyFields(border);
+            DO.OrderItem? theItem = dal.OrderItem.GetTByFilter((DO.OrderItem? orderItem) => orderItem?.OrderID == orderId && orderItem?.IsDeleted == false && orderItem?.ProductID == productId);
+            if (theItem?.Amount < product?.InStock)
+                throw new BO.NotInStockException();
+            //border.Status = BO.OrderStatus.Ordered;
 
-            var x = from DO.OrderItem it in items
-                    let temp = checkAmount(it, productId, amount, ref difference, product)
-                    where temp != null
-                    select temp;
 
-            border.TotalPrice = Math.Round(border.TotalPrice ?? 0, 2);
-            border.Items = x.ToList();
 
+            //IEnumerable<DO.OrderItem?>? items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem?.OrderID == order?.ID && orderItem?.IsDeleted == false);
+            //if (items == null || !items.Any())
+            //    return border;
+            //int difference = 0;
+
+            //var x = from DO.OrderItem it in items
+            //        let temp = checkAmount(it, productId, amount, ref difference, product)
+            //        where temp != null
+            //        select temp;
+
+            //border.TotalPrice = Math.Round(border.TotalPrice ?? 0, 2);
+            //border.Items = x.ToList();
+
+            BO.OrderItem? itemBO = border.Items?.FirstOrDefault(x => x.ProductID == product?.ID);
+            if (itemBO == null)
+                throw new BO.NotExistException();
+            border.Items?.Remove(itemBO);
+            itemBO.Amount = amount;
             dal.OrderItem.Update(new DO.OrderItem
             {
                 ID = theItem?.ID ?? 0,
@@ -186,6 +198,11 @@ internal class Order : IOrder
                 Path = theItem?.Path,
                 TotalItem = (theItem?.Price ?? 0) * amount
             });
+            DO.Product p = new();
+            p= product.CopyFields(p);
+            p.InStock=p.InStock+theItem?.Amount-itemBO.Amount;
+            dal.Product.Update(p);
+            border.Items?.Add(itemBO);
             return border;
         }
         catch (DO.NotExistException ex)
