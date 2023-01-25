@@ -13,6 +13,24 @@
       Title="CatalogPage">
     <Page.Resources>
         <converter:AmountToVisibilityConverter x:Key="amountToVisibilityConverter"/>
+        <Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                        <Expander x:Name="expander" IsExpanded="True"
+                                  Background="Transparent"
+                                  Foreground="#2b331f">
+                            <Expander.Header>
+                                <TextBlock Text="{Binding Name}"
+                                               FontSize="20" FontWeight="Bold" Foreground="#FF009BA6" HorizontalAlignment="Right">
+                                </TextBlock>
+                            </Expander.Header>
+                            <ItemsPresenter/>
+                        </Expander>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     <Grid Background="White">
         <ListView x:Name="listCatalog" MouseDoubleClick="ProductDetails_MouseDoubleClick"
@@ -29,6 +47,7 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
+                
                 <DataTemplate>
                     <StackPanel Height="240" Width="230">
                         <Image Source="{Binding Path}" Width="180"  Height="180"></Image>
