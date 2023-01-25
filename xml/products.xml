@@ -163,15 +163,6 @@
     <Path>/image/Black Soft Luxury Bath Rug.jpg</Path>
   </Product>
   <Product>
-    <ID>100037</ID>
-    <Name>Huron Outdoor Lounge Chair</Name>
-    <Category>Garden</Category>
-    <Price>1298</Price>
-    <InStock>15</InStock>
-    <IsDeleted>false</IsDeleted>
-    <Path>/image/Huron Outdoor Lounge Chair.jpg</Path>
-  </Product>
-  <Product>
     <ID>100035</ID>
     <Name>Modern Kitchen Drying Rack</Name>
     <Category>Kitchen</Category>
@@ -179,15 +170,6 @@
     <InStock>148</InStock>
     <IsDeleted>false</IsDeleted>
     <Path>/image/Modern Kitchen Drying Rack.jpg</Path>
-  </Product>
-  <Product>
-    <ID>100030</ID>
-    <Name>3-piece dark gray sofa</Name>
-    <Category>Living_room</Category>
-    <Price>2398</Price>
-    <InStock>15</InStock>
-    <IsDeleted>false</IsDeleted>
-    <Path>/image/3-piece dark gray sofa.jpg</Path>
   </Product>
   <Product>
     <ID>100020</ID>
@@ -206,5 +188,23 @@
     <InStock>13</InStock>
     <IsDeleted>false</IsDeleted>
     <Path>/image/Kaloh Storage Carts.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100037</ID>
+    <Name>Huron Outdoor Lounge Chair</Name>
+    <Category>Garden</Category>
+    <Price>1298</Price>
+    <InStock>13</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/image/Huron Outdoor Lounge Chair.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100030</ID>
+    <Name>3-piece dark gray sofa</Name>
+    <Category>Living_room</Category>
+    <Price>2398</Price>
+    <InStock>14</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/image/3-piece dark gray sofa.jpg</Path>
   </Product>
 </products>

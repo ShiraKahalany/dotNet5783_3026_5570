@@ -44,7 +44,6 @@ public partial class ProductsArchivePage : Page
 
         }
         observeproducts.Remove(restorepro!);
-        MessageBox.Show("Seccessfully Restored", "Restore Product", MessageBoxButton.OK);
         observeproductsToSave.Add(restorepro!);
     }
 

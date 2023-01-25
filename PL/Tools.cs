@@ -47,18 +47,6 @@ public static class Tools
     }
 
 
-
-
-    public static ObservableCollection<T> ToObservable<T>(this IEnumerable<T> ienumcollect, ObservableCollection<T> observablecollect)
-    {
-        observablecollect.Clear();
-        foreach (T item in ienumcollect)
-        {
-            observablecollect.Add(item);
-        }
-        return observablecollect;
-    }
-
     public static ObservableCollection<U> ToObservableByConverter<T, U>(this IEnumerable<T> ienumcollect, ObservableCollection<U> observablecollect, Func<T, U> converter)
     {
         if(observablecollect==null)
@@ -162,7 +150,6 @@ public static class Tools
 
     public static Target CopyFields<Source, Target>(this Source source, Target target)
     {
-
         if (source is not null && target is not null)
         {
             Dictionary<string, PropertyInfo> propertiesInfoTarget = target.GetType().GetProperties()

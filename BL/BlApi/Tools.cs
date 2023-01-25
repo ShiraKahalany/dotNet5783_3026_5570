@@ -89,7 +89,7 @@ public static class Tools
     }
 
     public static BO.OrderStatus GetStatus(this DO.Order order)
-        //פונקציה המקבלת הזמנה ומחזירה את הסטטוס שלה
+    //פונקציה המקבלת הזמנה ומחזירה את הסטטוס שלה
     {
         if (order.DeliveryDate != null && order.DeliveryDate < DateTime.Now)
             return BO.OrderStatus.Delivered;
@@ -109,7 +109,7 @@ public static class Tools
 
 
     public static List<BO.OrderItem> GetItems(this DO.Order order, ref double totalprice)
-        //פונקציה המקבלת רשימת מוצרים, ומחזירה את אלה
+    //פונקציה המקבלת רשימת מוצרים, ומחזירה את אלה
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
         IEnumerable<DO.OrderItem?> items;
@@ -240,8 +240,6 @@ public static class Tools
             }
             if (product.InStock < item.Amount)
                 throw new BO.NotInStockException();
-            // list.Add(new BO.OrderItem { Amount = item.Amount, ID = item.ID, IsDeleted = false, Name = product.Name, Path = product.Path, Price = product.Price, ProductID = item.ProductID, TotalItem = Math.Round(product.Price ?? 0 * item.Amount ?? 0, 2) });
-            //order.TotalPrice += Math.Round(product.Price ?? 0 * item.Amount ?? 0, 2);
         }
     }
 
