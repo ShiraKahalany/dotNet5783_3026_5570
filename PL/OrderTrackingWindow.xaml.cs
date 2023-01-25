@@ -110,10 +110,9 @@ public partial class OrderTrackingWindow : Window
     {
         if (!worker.IsBusy)
             worker.RunWorkerAsync();
-        //toContinue = true;
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    private void Button_Click(object sender, RoutedEventArgs e) //stop
     {
         if (worker.WorkerSupportsCancellation)
         {
@@ -123,7 +122,7 @@ public partial class OrderTrackingWindow : Window
         }
     }
 
-    private void Button_Click_1(object sender, RoutedEventArgs e)
+    private void Button_Click_1(object sender, RoutedEventArgs e) //tracking
     {
         BO.OrderTracking orderTracking = bl.Order.FollowOrder((((Button)(sender)).DataContext as PO.OrderPO)!.ID)!;
         new Orders.OrderWatchWindow(orderTracking).ShowDialog();
