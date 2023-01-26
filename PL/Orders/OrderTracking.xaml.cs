@@ -92,7 +92,7 @@ public partial class OrderTracking : Page
         }
         catch (BO.NotExistException)
         {
-            MessageBox.Show("The Order Not Exit", "Not Exist");
+            MessageBox.Show("The Order Is Not Exist", "Not Exist");
             isStatusChanged = false;
         }
         poorder = boOrder.CopyFields<BO.Order, PO.OrderForListPO>(poorder);
@@ -114,6 +114,6 @@ public partial class OrderTracking : Page
             return;
         }
         PO.OrderItemPO? poitem = ((Button)(sender)).DataContext as PO.OrderItemPO;
-        new UpdateItemInOrder(poitem, poItems, ob, order, poorder).ShowDialog();
+        new UpdateItemInOrder(poitem!, poItems, ob, order, poorder).ShowDialog();
     }
 }

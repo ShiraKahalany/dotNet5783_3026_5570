@@ -35,7 +35,15 @@ public partial class UpdateItemInOrder : Window
         UpdateAmountOfItem(amount);
     }
 
-    private void Delete_Click(object sender, RoutedEventArgs e) => UpdateAmountOfItem(0);
+    private void Delete_Click(object sender, RoutedEventArgs e)
+    { 
+        if(order?.Items?.Count==1)
+        {
+            MessageBox.Show("This is the only product in the cart. His order cannot be cancelled.\r\nYou can delete the entire order through order management.");
+            return;
+        }
+        UpdateAmountOfItem(0); 
+    }
 
     private void UpdateAmountOfItem(int amount)
     {
