@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using DalApi;
 namespace Dal;
 
-//מחלקת דל-ליסט המממשת את הממשק איי-דל
- internal sealed class DalList : IDal
+// IDal מחלקת דל-ליסט המממשת את הממשק 
+internal sealed class DalList : IDal
 {
     public static IDal Instance { get; }=new DalList();  //יצירת אןבייקט מסוג DalList
     private DalList() { }   //בנאי (פרטי)

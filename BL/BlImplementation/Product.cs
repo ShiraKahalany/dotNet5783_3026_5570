@@ -9,6 +9,7 @@ internal class Product : IProduct
 {
     DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
 
+    #region Get By ID
     public BO.Product GetById(int id)
     //בקשת פרטי מוצר עבור מנהל
     {
@@ -28,6 +29,9 @@ internal class Product : IProduct
         }
         throw new BO.NotExistException("Invalid ID");
     }
+    #endregion
+
+    #region Get Products
     public IEnumerable<BO.Product> GetProducts(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
     //עבור מנהל ועבור קטלוג קונה .בקשת רשימת מוצרים
     {
@@ -49,8 +53,9 @@ internal class Product : IProduct
         return from DO.Product doProduct in doProductList
                 select BlApi.Tools.CopyFields(doProduct, new BO.Product());
     }
+    #endregion
 
-
+    #region Restore
     public void Restore(int id)
     {
         if (id <= 0)
@@ -65,7 +70,9 @@ internal class Product : IProduct
             throw new BO.NotExistException(ex.Message);
         }
     }
+    #endregion
 
+    #region Get ProductItem
     public BO.ProductItem GetProductItem(int id, BO.Cart? cart)
     // בקשת פרטי מוצר עבור הקונה
     {
@@ -102,6 +109,9 @@ internal class Product : IProduct
             throw new BO.NotExistException(ex.Message);
         }
     }
+    #endregion
+
+    #region Add Product
     public int AddProduct(BO.Product? product)
     //הוספת מוצר עבור מנהל
     {
@@ -119,7 +129,9 @@ internal class Product : IProduct
             throw new BO.AlreadyExistException();
         }
     }
+    #endregion
 
+    #region Delete Product
     public void DeleteProduct(int id)
     //מחיקת מוצר עבור מנהל
     {
@@ -144,6 +156,9 @@ internal class Product : IProduct
             }
         }
     }
+    #endregion
+
+    #region Update Product
     public void UpdateProduct(BO.Product? newproduct)
     //עידכון נתוני מוצר עבור מנהל
     {
@@ -159,7 +174,9 @@ internal class Product : IProduct
             throw new BO.NotExistException(ex.Message);
         }
     }
+    #endregion
 
+    #region Get ProductItems List
     public IEnumerable<BO.ProductItem> GetProductItemsList(BO.Cart cart, BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
     {
 
@@ -182,5 +199,5 @@ internal class Product : IProduct
                 select GetProductItem(doProduct.ID, cart);
         return x;
     }
-
+    #endregion
 }

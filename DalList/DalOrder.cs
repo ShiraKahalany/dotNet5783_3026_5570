@@ -6,6 +6,8 @@ namespace Dal;
 public class DalOrder : IOrder
 {
     DataSource dataSource =DataSource.s_instance;
+
+    #region Add
     public int Add(Order item)
         //מתודה שמקבלת הזמנה ומוסיפה אותה לרשימת ההזמנות
     {        
@@ -18,7 +20,9 @@ public class DalOrder : IOrder
         dataSource.Orders.Add(item);
         return item.ID;
     }
+    #endregion
 
+    #region Update
     public void Update(Order item)
         //מתודה המעדכנת את הזמנה להזמנה המעודכנת שהתקבלה (שיש לה אותו ת"ז)ו
     {
@@ -30,7 +34,9 @@ public class DalOrder : IOrder
         DeletePermanently(item.ID);
         Add(item);
     }
+    #endregion
 
+    #region Restore
     public void Restore(Order item)
     //מתודה המעדכנת את הזמנה להזמנה המעודכנת שהתקבלה (שיש לה אותו ת"ז)ו
     {
@@ -43,12 +49,17 @@ public class DalOrder : IOrder
         item.IsDeleted = false;
         Add(item);
     }
-  
-public void DeletePermanently(int id)
+    #endregion
+
+    #region Delete Permanently
+    public void DeletePermanently(int id)
     {
         Order? temp = dataSource.Orders.Find(x => x?.ID == id); //check if the element exist in the orders list
         dataSource.Orders.Remove(temp);
     }
+    #endregion
+
+    #region Delete
     public void Delete(int id)
         //מתודה המוחקת את ההזמנה בעלת הת"ז שהתקבל
     {
@@ -61,8 +72,9 @@ public void DeletePermanently(int id)
         Order order = new Order { IsDeleted = true, ID = temp.GetValueOrDefault().ID, CustomerAddress = temp?.CustomerAddress, CustomerEmail = temp?.CustomerEmail, CustomerName = temp?.CustomerName, DeliveryDate = temp?.DeliveryDate, OrderDate = temp?.OrderDate, ShipDate = temp?.ShipDate };
         Add((Order)order);
     }
+    #endregion
 
-
+    #region Get All The Orders By Filter
     public IEnumerable<Order?> GetAll(Func<Order?, bool>? filter = null)
     {
         if(filter == null)
@@ -74,7 +86,9 @@ public void DeletePermanently(int id)
             throw new DO.NotExistException("Not Orders");
         return ieorders;
     }
+    #endregion
 
+    #region Get An Order By Filter
     public Order? GetTByFilter(Func<Order?, bool> filter)
     {
         DO.Order? item = dataSource.Orders.Find((DO.Order? order) => filter(order));
@@ -82,5 +96,6 @@ public void DeletePermanently(int id)
             throw new DO.NotExistException("Not Exist - Order");
         return item;
     }
+    #endregion
 
 }

@@ -24,4 +24,5 @@ public interface IOrder
     public void CancelOrder(BO.Order or); //ביטול הזמנה
 
     public BO.Order GetOrder(Func<BO.Order?, bool> filter);
+    public List<BO.OrderForList?> GetOrdersWithDeleted();
 }

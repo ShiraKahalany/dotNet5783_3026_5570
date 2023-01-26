@@ -1,5 +1,4 @@
 ﻿using DO;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Dal;
 
@@ -8,16 +7,25 @@ namespace Dal;
 internal class DataSource
 {
     internal static DataSource s_instance { get; } = new DataSource();   //יצירת מופע נתונים
-    public DataSource() { s_Initialize(); }    /// <summary>
-    /// </summary>
+    public DataSource() { s_Initialize(); }    
+                                              
+    private void s_Initialize()
+    // יצירת מופע נתונים
+    {
+        createProducts();
+        createOrders();
+        createOrderItems();
+    }                                          
 
     public readonly Random rnd = new Random(); //a random number
-    internal List<Order?> Orders { get;}=new List<Order?> { };  //רשימת הזמנות
+    internal List<Order?> Orders { get; } = new List<Order?> { };  //רשימת הזמנות
     internal List<Product?> Products { get; } = new List<Product?> { };  //רשימת מוצרים
     internal List<OrderItem?> OrderItems { get; } = new List<OrderItem?> { };  //רשימת פריטי הזמנות
+    
 
-    internal static class Config 
-        //מחלקה עבור הגדרת מספרים רצים להזמנות ולפריטי ההזמנות
+    #region Config Class For Running Numbers
+    internal static class Config
+    //מחלקה עבור הגדרת מספרים רצים להזמנות ולפריטי ההזמנות
     {
         //nextOrderNumber
         internal const int s_startOrderNumber = 1000;
@@ -31,16 +39,11 @@ internal class DataSource
         internal const int s_startProductNumber = 100000;
         private static int s_nextProductNumber = s_startProductNumber;
         internal static int NextProductNumber { get => ++s_nextProductNumber; }
-
     }
-    private void s_Initialize()
-        // יצירת מופע נתונים
-    {
-        createProducts();
-        createOrders();
-        createOrderItems();
-    }
+    #endregion
+    
 
+    #region Create Orders
     private void createOrders()  //יצירת הזמנות
     {
         string[] namesArr = { "Moshe", "Dina", "Shira", "Hallel", "Dani", "Yael", "Josef", "Michael", "Ruth", "Daniel", "Roei", "Shay", "Ron", "Yaron", "Shoshana", "Miryam", "Reut", "Eva", "Ayala", "Tikva", "Tirza", "Dikla", "Moriya", "Hadas", "Yafit", "Yossi", "Avi", "Merav", "Gital", "Helen" };
@@ -60,12 +63,12 @@ internal class DataSource
             myCustomerName = myCusFirstName + " " + myCusLastName;
             myCustomerEmail = myCusFirstName + myCusLastName + "@gmail.com";
             myCustomerAdress = (streetArr[rnd.Next(streetArr.Length)]) + " " + rnd.Next(200) + ", " + citiesArr[rnd.Next(citiesArr.Length)];
-            myOrderDate = DateTime.Now.AddDays(-(rnd.Next(14,31)));
+            myOrderDate = DateTime.Now.AddDays(-(rnd.Next(14, 31)));
             myShipDate = null;
-            int[] shipArr = {3,7,12,22,33,6,36,19,27,12,27,18,39};
+            int[] shipArr = { 3, 7, 12, 22, 33, 6, 36, 19, 27, 12, 27, 18, 39 };
             int[] deliverArr = { 2, 6, 36, 19, 27, 12, 27, 18, 39 };
             if (shipArr.Contains(i))
-                myShipDate = DateTime.Now.AddDays(-(rnd.Next(7, 14)))- new TimeSpan(rnd.NextInt64(40000000000000));
+                myShipDate = DateTime.Now.AddDays(-(rnd.Next(7, 14))) - new TimeSpan(rnd.NextInt64(40000000000000));
             myDeliveryDate = null;
             if (deliverArr.Contains(i))
                 myDeliveryDate = DateTime.Now.AddDays(-(rnd.Next(1, 7))) - new TimeSpan(rnd.NextInt64(6000000000));
@@ -73,17 +76,20 @@ internal class DataSource
             Orders.Add(
             new Order
             {
-                IsDeleted=false,
-                ID= myID,
-                CustomerName= myCustomerName,
-                CustomerEmail= myCustomerEmail,
-                CustomerAddress= myCustomerAdress,
-                OrderDate= myOrderDate,
-                ShipDate= myShipDate,
-                DeliveryDate= myDeliveryDate
+                IsDeleted = false,
+                ID = myID,
+                CustomerName = myCustomerName,
+                CustomerEmail = myCustomerEmail,
+                CustomerAddress = myCustomerAdress,
+                OrderDate = myOrderDate,
+                ShipDate = myShipDate,
+                DeliveryDate = myDeliveryDate
             });
         }
     }
+    #endregion
+
+    #region Create Products
     private void createProducts()  //יצירת מוצרים
     {
         string[] productnamesArr = { "Kitchen rug", "Sea view picture", "Table cloth", "Pine wood youth bed", "Children's bed", "One and a half beds", "Double bed", "White kitchen cabinet", "Wooden chest of drawers", "Iron dresser", "Kitchen chair", "Room mirror", "Body mirror", "Duck bath rug", "Large white fridge", "Small white fridge", "Black oven", "White kettle", "Black microwave", "toaster", "large stainless steel pot", "large glass pot", "small glass pot", "medium glass pot", "medium stainless steel pot", "small stainless steel pot", "green leather sofa", "microwave White", "powerful red microwave", "blue fabric sofa", "glass kettle", "vintage kettle", "white lamb", "Yellow lamb" };
@@ -96,7 +102,7 @@ internal class DataSource
             Price = 60,
             Category = Category.Kitchen,
             InStock = 3,
-            Path= "/image/Kitchen rug.jpg"
+            Path = "/image/Kitchen rug.jpg"
         });
 
         Products.Add(
@@ -203,7 +209,7 @@ internal class DataSource
             InStock = 82,
             Path = "/image/Dark-Bronze Mid-Century-Contour-Bathroom Hardware.jpg"
         });
-        
+
         Products.Add(
         new Product
         {
@@ -324,79 +330,79 @@ internal class DataSource
            Path = "/image/Concrete Indoor or Outdoor Pedestal Round Dining Table.jpg"
        });
 
-      Products.Add(
-      new Product
-      {
-          IsDeleted = false,
-          ID = Config.NextProductNumber,
-          Name = "Porto Pedestal Concrete Outdoor Dining Table",
-          Price = 999,
-          Category = Category.Garden,
-          InStock = 150,
-          Path = "/image/Porto Pedestal Concrete Outdoor Dining Table.jpg"
-      });
+        Products.Add(
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Porto Pedestal Concrete Outdoor Dining Table",
+            Price = 999,
+            Category = Category.Garden,
+            InStock = 150,
+            Path = "/image/Porto Pedestal Concrete Outdoor Dining Table.jpg"
+        });
 
         Products.Add(
-     new Product
-     {
-         IsDeleted = false,
-         ID = Config.NextProductNumber,
-         Name = "Lakeside Matelasse Duvet Cover & Shams",
-         Price = 180,
-         Category = Category.Bedroom,
-         InStock = 150,
-         Path = "/image/Lakeside Matelasse Duvet Cover & Shams.jpg"
-     });
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Lakeside Matelasse Duvet Cover & Shams",
+            Price = 180,
+            Category = Category.Bedroom,
+            InStock = 150,
+            Path = "/image/Lakeside Matelasse Duvet Cover & Shams.jpg"
+        });
 
         Products.Add(
-   new Product
-   {
-       IsDeleted = false,
-       ID = Config.NextProductNumber,
-       Name = "Crinkle Velvet Duvet Cover & Shams",
-       Price = 125,
-       Category = Category.Bedroom,
-       InStock = 150,
-       Path = "/image/Crinkle Velvet Duvet Cover & Shams.jpg"
-   });
-
-
+        new Product
+        {
+            IsDeleted = false,
+            ID = Config.NextProductNumber,
+            Name = "Crinkle Velvet Duvet Cover & Shams",
+            Price = 125,
+            Category = Category.Bedroom,
+            InStock = 150,
+            Path = "/image/Crinkle Velvet Duvet Cover & Shams.jpg"
+        });
     }
+    #endregion
+
+    #region Create OrderItems
     private void createOrderItems()  // יצירת פריטי-הזמנה
     {
-        for(int j=0; j < 40; j++)
+        for (int j = 0; j < 40; j++)
         {
             Product? product = Products[rnd.Next(15)];
             List<int> productsInUse = new List<int>();
-            productsInUse.Add(product?.ID??0);  
-            int NumOfItemsToThisOrder = rnd.Next(1,5);
+            productsInUse.Add(product?.ID ?? 0);
+            int NumOfItemsToThisOrder = rnd.Next(1, 5);
             Order? order = Orders[j];
-            for (int k=0; k < NumOfItemsToThisOrder; k++)
+            for (int k = 0; k < NumOfItemsToThisOrder; k++)
             {
                 int amount = rnd.Next(1, 5);
-            OrderItems.Add(
-                new OrderItem
-                {
-                    IsDeleted = false,
-                    ID = Config.NextOrderItemNumber,
-                    ProductID = product?.ID ?? 0,
-                    OrderID = order?.ID ?? 0,
-                    Price = product?.Price ?? 0,
-                    Amount = amount,
-                    TotalItem = Math.Round(amount*(product?.Price ?? 0),2),
-                    Name = product?.Name,
-                    Path = product?.Path
-                });
+                OrderItems.Add(
+                    new OrderItem
+                    {
+                        IsDeleted = false,
+                        ID = Config.NextOrderItemNumber,
+                        ProductID = product?.ID ?? 0,
+                        OrderID = order?.ID ?? 0,
+                        Price = product?.Price ?? 0,
+                        Amount = amount,
+                        TotalItem = Math.Round(amount * (product?.Price ?? 0), 2),
+                        Name = product?.Name,
+                        Path = product?.Path
+                    });
 
                 do { product = Products[rnd.Next(10)]; }
-                while (productsInUse?.Find(x=>x==product?.ID) != 0);
+                while (productsInUse?.Find(x => x == product?.ID) != 0);
                 productsInUse?.Add(product?.ID ?? 0);
-            }           
+            }
         }
     }
-    
+    #endregion
 
-    
 }
 
 

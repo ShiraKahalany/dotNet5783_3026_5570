@@ -22,7 +22,6 @@
     <None Remove="Carts\vi.jpg" />
     <None Remove="Carts\vii.png" />
     <None Remove="garden.jpg" />
-    <None Remove="GH.png" />
     <None Remove="Gray-interior-design_Photographee.eu_Shutterstock-scaled.jpg" />
     <None Remove="green-sofa-white-living-room-with-free-space.jpg" />
     <None Remove="home.jpg" />
@@ -195,7 +194,6 @@
   <ItemGroup>
     <Resource Include="Carts\emptyCart.png" />
     <Resource Include="Carts\vii.png" />
-    <Resource Include="GH.png" />
     <Resource Include="ICON.png" />
     <Resource Include="Manager\Updated background.jpg" />
     <Resource Include="Orders\ex.png" />

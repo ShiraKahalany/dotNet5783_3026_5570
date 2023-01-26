@@ -7,6 +7,8 @@ namespace Dal;
 public class DalOrderItem : IOrderItem
 {
     DataSource dataSource = DataSource.s_instance;
+
+    #region Add
     public int Add(OrderItem item)
     //מתודת הוספת מוצר בהזמנה
     {
@@ -20,8 +22,9 @@ public class DalOrderItem : IOrderItem
         dataSource.OrderItems.Add(item);
         return item.ID;
     }
+    #endregion
 
-    
+    #region Update
     public void Update(OrderItem item)
     //מתודת עידכון. מקבלת עצם חדש, ומעדכנת את העצם עם הת"ז הזה להיות העצם המעודכן
     {
@@ -31,7 +34,9 @@ public class DalOrderItem : IOrderItem
         DeletePermanently(item.ID);
         Add(item);
     }
+    #endregion
 
+    #region Restore
     public void Restore(OrderItem item)
     //מתודה המעדכנת את הזמנה להזמנה המעודכנת שהתקבלה (שיש לה אותו ת"ז)ו
     {
@@ -44,7 +49,9 @@ public class DalOrderItem : IOrderItem
         item.IsDeleted = false;
         Add(item);
     }
+    #endregion
 
+    #region Delete Permanently
     public void DeletePermanently(int id)
     {
         OrderItem? temp = dataSource.OrderItems.Find(x => x?.ID == id); //check if the element exist in the orders list
@@ -52,7 +59,9 @@ public class DalOrderItem : IOrderItem
             throw new DO.NotExistException("The order is not exist");
         dataSource.OrderItems.Remove(temp);
     }
+    #endregion
 
+    #region Delete
     public void Delete(int id)
     //מתודה למחיקת המוצר-בהזמנה בעל ה ת"ז שהתקבלה
     {
@@ -76,8 +85,9 @@ public class DalOrderItem : IOrderItem
         };
         Add(orderItem);
     }
-    
+    #endregion
 
+    #region Get All The OrderItems By Filter
     public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filter = null)
         //מתודה לקבלת רשימת כל המוצרי הזמנה שעונים על התנאי המבוקש
     {
@@ -88,7 +98,9 @@ public class DalOrderItem : IOrderItem
                            select orderitem;
         return ieorderitems;
     }
+    #endregion
 
+    #region Get OrderItem By Filter
     public OrderItem? GetTByFilter(Func<OrderItem?, bool> filter)
         //מתודה לקבלת פריט-הזמנה לפי פילטר
     {
@@ -98,4 +110,5 @@ public class DalOrderItem : IOrderItem
         return item;
 
     }
+    #endregion
 }

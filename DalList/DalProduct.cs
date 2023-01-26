@@ -8,7 +8,9 @@ namespace Dal;
 public class DalProduct : IProduct
 {
    DataSource dataSource = DataSource.s_instance;
-  public int Add(Product item)
+
+    #region Add
+    public int Add(Product item)
         //הוספת מוצר חדש לרשימת המוצרים, מחזירה את המזהה של המוצר החדש
     {
 
@@ -21,7 +23,9 @@ public class DalProduct : IProduct
         dataSource.Products.Add(item);
         return item.ID;
     }
+    #endregion
 
+    #region Update
     public void Update(Product item)
         //מתודה המעדכנת את המוצר עם ה "ז שהתקבל בהתאם למוצר המעודכן שהתקבל כפרמטר
     {
@@ -33,7 +37,9 @@ public class DalProduct : IProduct
         DeletePermanently(item.ID);
         Add(item);
     }
+    #endregion
 
+    #region Restore
     public void Restore(Product item)
     {
         Product? temp = dataSource.Products.Find(x => x?.ID == item.ID);
@@ -45,7 +51,9 @@ public class DalProduct : IProduct
         item.IsDeleted = false;
         Add(item);
     }
+    #endregion
 
+    #region Delete Permanently
     public void DeletePermanently(int id)
         //מחיקה לצמיתות של מוצר
     {
@@ -54,6 +62,9 @@ public class DalProduct : IProduct
             throw new DO.NotExistException("The item is not exist");
         dataSource.Products.Remove(temp);
     }
+    #endregion
+
+    #region Delete
     public void Delete(int id)
         //העברת מוצר לארכיון -סימון כמחוק
     {
@@ -66,9 +77,9 @@ public class DalProduct : IProduct
         Product product=new Product { IsDeleted=true, Category=temp?.Category??0, InStock=temp?.InStock, Name=temp?.Name, Price=temp?.Price, ID= temp.GetValueOrDefault().ID, Path=temp?.Path};
         Add(product);
     }
+    #endregion
 
-  
-
+    #region Get All The Products By Filter
     public IEnumerable<Product?> GetAll(Func<Product?, bool>? filter = null)
     {
         if (filter == null)
@@ -79,7 +90,9 @@ public class DalProduct : IProduct
        
         return ieproducts;
     }
+    #endregion
 
+    #region Get Product By Filter
     public Product? GetTByFilter(Func<Product?, bool> filter)
     {
         DO.Product? item = dataSource.Products.Find((DO.Product? product) => filter(product));
@@ -88,4 +101,5 @@ public class DalProduct : IProduct
         return item;
 
     }
+    #endregion
 }

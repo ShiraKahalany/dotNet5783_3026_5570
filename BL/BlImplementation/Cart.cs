@@ -6,6 +6,7 @@ internal class Cart : ICart
 {
     DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
 
+    #region Add Product To Cart
     public BO.Cart? AddProductToCart(BO.Cart? cart, int id, int amountToAdd)
     //מתודה המקבלת עגלה,מספר מזהה של מוצר, וכמות להוספה, ומוסיפה את המוצר לעגלה
     {
@@ -55,8 +56,9 @@ internal class Cart : ICart
         cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
         return cart;
     }
+    #endregion
 
-
+    #region Update Amount Of Product In Cart
     public BO.Cart UpdateAmountOfProductInCart(BO.Cart cart, int id, int amount)
     //מתודה המקבלת סל קניות, מזהה מוצר, וכמות רצויה - ומעדכנת את הכמות של המורצ בסל לכמות הרצויה
     {
@@ -86,8 +88,9 @@ internal class Cart : ICart
         cart.TotalPrice = Math.Round(x.Sum(item => (double)(item.Price * item.Amount)!), 2);
         return cart;
     }
+    #endregion
 
-
+    #region Make An Order
     public int MakeAnOrder(BO.Cart? cart)
     //מתודה המקבלת סל קניות ויוצרת ממנו הזמנה
     {
@@ -157,4 +160,5 @@ internal class Cart : ICart
             throw new BO.NotExistException(ex.Message);
         }
     }
+    #endregion
 }

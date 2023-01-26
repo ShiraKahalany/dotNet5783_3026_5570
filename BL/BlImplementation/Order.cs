@@ -10,7 +10,7 @@ internal class Order : IOrder
 {
     DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
 
-
+    #region Get All Undeleted Orders
     public List<BO.OrderForList?>? GetOrders()
     //מתודה לקבלת רשימת כל ההזמנות התקפות
     {
@@ -31,7 +31,30 @@ internal class Order : IOrder
                 select order.OrderToOrderForList();
         return x.ToList();
     }
+    #endregion
 
+    #region Get All Orders With Deleted
+    public List<BO.OrderForList?> GetOrdersWithDeleted()
+    //קבלת רשימת כל ההזמנות - כולל אלו שנמחקו
+    {
+        IEnumerable<DO.Order?> listor = new List<DO.Order?>();
+        try
+        {
+            listor = dal.Order.GetAll(null);
+        }
+        catch (DO.NotExistException ex)
+        {
+            throw new BO.NotExistException(ex.Message);
+        }
+        if (!listor.Any())
+            throw new BO.NoItemsException();
+        var x = from DO.Order order in listor
+                select order.OrderToOrderForList();
+        return x.ToList();
+    }
+    #endregion
+
+    #region Get Order By ID
     public BO.Order GetOrderById(int id)
     //קבלת הזמנה לפי מספר מזהה
     {
@@ -47,7 +70,9 @@ internal class Order : IOrder
             throw new BO.OrderNotExistException(ex.Message);
         }
     }
+    #endregion
 
+    #region Update Status In Order To Shipped
     public BO.Order UpdateStatusToShipped(int id)
     //עידכון הזמנה ששולחה
     {
@@ -65,6 +90,9 @@ internal class Order : IOrder
             throw new BO.NotExistException(ex.Message);
         }
     }
+    #endregion
+
+    #region Update Status In Order To Provided
     public BO.Order UpdateStatusToProvided(int id)
     //עידכון הזמנה שסופקה
     {
@@ -85,6 +113,9 @@ internal class Order : IOrder
             throw new BO.NotExistException(ex.Message);
         }
     }
+    #endregion
+
+    #region Follow Order
     public BO.OrderTracking FollowOrder(int id)
     //מעקב הזמנה - הצגת האירועים של ההזמנה והתאריכים שלהם
     {
@@ -116,9 +147,10 @@ internal class Order : IOrder
         {
             throw new BO.NotExistException(ex.Message);
         }
-
     }
+    #endregion
 
+    #region check Amount
     public static BO.OrderItem? checkAmount(DO.OrderItem item, int id, int newAmount, ref int difference, DO.Product? product)
     //פונקציה המקבלת מוצר-בהזמנה, ומוצר, ובודקת האם אפשר להזמין את המוצר, מעדכנת את ההפרש בין הכמות במלאי לכמות המבוקשת
     {
@@ -149,6 +181,9 @@ internal class Order : IOrder
             throw new BO.NotExistException(ex.Message);
         }
     }
+    #endregion
+
+    #region Update Amount Of Product
     public BO.Order UpdateAmountOfProduct(int orderId, int productId, int amount)
     //עידכון כמות מוצר בהזמנה- על ידי המנהל
     {
@@ -209,9 +244,10 @@ internal class Order : IOrder
         {
             throw new BO.NotExistException(ex.Message);
         }
-
     }
+    #endregion
 
+    #region Get Deleted Order By ID
     public BO.Order GetDeletedOrderById(int id)
     //קבלת הזמנה שנמחקה, לפי מזהה הזמנה
     {
@@ -228,6 +264,9 @@ internal class Order : IOrder
             throw new BO.NotExistException(ex.Message);
         }
     }
+    #endregion
+
+    #region Get Deleted Orders
     public List<BO.OrderForList?>? GetDeletedOrders()
     //קבלת רשימת כל ההזמנות המחוקות
     {
@@ -246,7 +285,9 @@ internal class Order : IOrder
                 select order.OrderToOrderForList();
         return x.ToList();
     }
+    #endregion
 
+    #region Restore 
     public double Restore(int id)
     //שיחזור הזמנה שנמחקה, לפי מזהה הזמנה
     {
@@ -266,7 +307,9 @@ internal class Order : IOrder
             throw new BO.NotExistException(ex.Message);
         }
     }
+    #endregion
 
+    #region Cancel Order
     public void CancelOrder(BO.Order or)
     //מתודה לביטול הזמנה
     {
@@ -287,9 +330,10 @@ internal class Order : IOrder
         {
             throw new BO.NotExistException(ex.Message);
         }
-
     }
+    #endregion
 
+    #region Get Order
     public BO.Order GetOrder(Func<BO.Order?, bool> filter)
     {
         List<BO.Order> orders;
@@ -304,8 +348,9 @@ internal class Order : IOrder
         BO.Order? order = orders.FirstOrDefault(or => filter(or));
         return order ?? throw new BO.OrderNotExistException();
     }
+    #endregion
 
-
+    #region Get Order List By Filter
     public IEnumerable<BO.OrderForList> GetOrderList(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
     {
         try
@@ -328,7 +373,9 @@ internal class Order : IOrder
             throw new BO.NotExistException(ex.Message);
         }
     }
+    #endregion
 
+    #region Get Orders By Filter
     public IEnumerable<BO.Order> GetOrdersByFilter(BO.Filters enumFilter = BO.Filters.None, Object? filterValue = null)
     //מתודה שמקבלת סוג סינון+מסנן רצוי ומחזירה את כל ההזמנות ששייכות אליו
     {
@@ -353,6 +400,7 @@ internal class Order : IOrder
             throw new BO.NotExistException(ex.Message);
         }
     }
+    #endregion
 }
 
 

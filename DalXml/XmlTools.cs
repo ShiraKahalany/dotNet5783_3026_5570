@@ -104,7 +104,8 @@ static class XMLTools
         }
     }
     #endregion
-    
+
+    #region Running Number For OrderID
     public static int RunningOrderID()
     {
         string configPath = "config";
@@ -118,7 +119,9 @@ static class XMLTools
         SaveListToXMLSerializer(runningList, configPath);
         return id;
     }
+    #endregion
 
+    #region Running Number For OrderItemID
     public static int RunningOrderItemID()
     {
         string configPath = "config";
@@ -132,7 +135,9 @@ static class XMLTools
         SaveListToXMLSerializer(runningList, configPath);
         return id;
     }
+    #endregion
 
+    #region Running Number For ProductID
     public static int RunningProductID()
     {
         string configPath = "config";
@@ -146,5 +151,5 @@ static class XMLTools
         SaveListToXMLSerializer(runningList, configPath);
         return id;
     }
-
+    #endregion
 }

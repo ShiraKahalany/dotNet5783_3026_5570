@@ -8,6 +8,7 @@ internal class Order : IOrder
 {
     const string s_Orders = "Orders"; //XML Serializer
 
+    #region Get All The Orders
     public IEnumerable<DO.Order?> GetAll(Func<DO.Order?, bool>? filter = null)
     {
         var listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders)!;
@@ -19,12 +20,9 @@ internal class Order : IOrder
             throw new DO.NotExistException();
         return x;
     }
+    #endregion
 
-    //public DO.Order GetById(int id) =>
-    //    XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders).FirstOrDefault(p => p?.ID == id)
-    //    //DalMissingIdException(id, "Order");
-    //    ?? throw new DO.NotExistException();
-
+    #region Add
     public int Add(DO.Order Order)
     {
         var listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders);
@@ -40,7 +38,9 @@ internal class Order : IOrder
        XMLTools.SaveListToXMLSerializer(listOrders, s_Orders);
         return Order.ID;
     }
+    #endregion
 
+    #region Delete
     public void Delete(int id)
     {
         var listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders);
@@ -54,7 +54,9 @@ internal class Order : IOrder
         listOrders.Add(order);
         XMLTools.SaveListToXMLSerializer(listOrders, s_Orders);
     }
+    #endregion
 
+    #region Update
     public void Update(DO.Order Order)
     {
         var listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders);
@@ -66,7 +68,9 @@ internal class Order : IOrder
         DeletePermanently(Order.ID);
         Add(Order);
     }
+    #endregion
 
+    #region Delete Order Permanently
     public void DeletePermanently(int id)
     {
         var listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders);
@@ -75,7 +79,9 @@ internal class Order : IOrder
         listOrders.Remove(or);
         XMLTools.SaveListToXMLSerializer(listOrders, s_Orders);
     }
+    #endregion
 
+    #region Restore
     public void Restore(DO.Order item)
     {
         var listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders);
@@ -87,9 +93,9 @@ internal class Order : IOrder
         item.IsDeleted = false;
         Add(item);
     }
+    #endregion
 
-    
-
+    #region Get Order By Filter
     public DO.Order? GetTByFilter(Func<DO.Order?, bool> filter)
     {
         var listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_Orders);
@@ -97,6 +103,6 @@ internal class Order : IOrder
         DO.Order or = listOrders.Find((DO.Order? p) => filter(p)) ?? throw new DO.NotExistException("missing id");
         return or;
     }
+    #endregion
 
-   
 }

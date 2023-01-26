@@ -4,6 +4,7 @@ namespace BlApi;
 
 public static class Tools
 {
+    #region ToStringProperty
     public static string ToStringProperty<T>(this T t, string suffix = "") =>
 
         t!.GetType().GetProperties().Aggregate(suffix, (str, prop) =>
@@ -26,7 +27,9 @@ public static class Tools
         })
 
         + "\n" + suffix + "==============";
+    #endregion
 
+    #region ToStringProperty2 
     public static string ToStringProperty2<T>(this T t, string suffix = "")
     //מתודה להפיכת ישות למחרוזת לצורך הצגת הפרטים
     {
@@ -54,7 +57,9 @@ public static class Tools
         str += "\n";
         return str;
     }
+    #endregion
 
+    #region CopyFields
     public static Target CopyFields<Source, Target>(this Source source, Target target)
     {
         if (source is not null && target is not null)
@@ -75,14 +80,18 @@ public static class Tools
         }
         return target;
     }
+    #endregion
 
+    #region CopyPropToStruct
     public static object CopyPropToStruct<S>(this S from, Type type)//get the typy we want to copy to 
     {
         object to = Activator.CreateInstance(type)!; // new object of the Type
         from.CopyFields(to);//copy all value of properties with the same name to the new object
         return to;
     }
+    #endregion
 
+    #region GetStatus
     public static BO.OrderStatus GetStatus(this DO.Order order)
     //פונקציה המקבלת הזמנה ומחזירה את הסטטוס שלה
     {
@@ -101,8 +110,9 @@ public static class Tools
             }
         }
     }
+    #endregion
 
-
+    #region GetItems
     public static List<BO.OrderItem> GetItems(this DO.Order order, ref double totalprice)
     //פונקציה המקבלת רשימת מוצרים, ומחזירה את אלה
     {
@@ -125,9 +135,9 @@ public static class Tools
         { }
         return list;
     }
+    #endregion
 
-
-
+    #region OrderToBO
     public static BO.Order OrderToBO(this DO.Order order)
     //
     {
@@ -139,7 +149,9 @@ public static class Tools
         or.TotalPrice = totalPrice;
         return or;
     }
+    #endregion
 
+    #region OrderToOrderForList
     public static BO.OrderForList OrderToOrderForList(this DO.Order order)
     //
     {
@@ -153,7 +165,9 @@ public static class Tools
         or.AmountOfItems = amountOfItems;
         return or;
     }
+    #endregion
 
+    #region CalcPriceAndAmount
     public static void CalcPriceAndAmount(this DO.Order order, ref double totalPrice, ref int amountOfItems)
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
@@ -171,13 +185,9 @@ public static class Tools
         { }
 
     }
+    #endregion
 
-    public static void UpdateTotalpriceInCart(ref BO.Cart cart, BO.OrderItem item, int dif)
-    {
-        cart.TotalPrice = (cart.TotalPrice ?? 0) + (item.Price * dif);
-        cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
-    }
-
+    #region CheckAmount
     public static int CheckAmount(this BO.OrderItem item, int amount)
     //בדיקה האם ניתן לשנות את הכמות המבוקשת לפי הזמינות במלאי. אם ניתן - החזרת הכמות
     {
@@ -195,7 +205,9 @@ public static class Tools
             throw new BO.NotInStockException();
         }
     }
+    #endregion
 
+    #region updateItemsStock
     public static void updateItemsStock(this BO.Order order)
     //
     {
@@ -216,8 +228,9 @@ public static class Tools
             dal.OrderItem.Delete(item.ID);
         }
     }
+    #endregion
 
-
+    #region checkStock
     public static void checkStock(this List<BO.OrderItem> items)
     //מתודת הרחבה - מקבלת רשימת מוצרי-הזמנה ובודקת האם כל המוצרים נמצאים במלאי ובכמות המבוקשת
     {
@@ -237,7 +250,9 @@ public static class Tools
                 throw new BO.NotInStockException();
         }
     }
+    #endregion
 
+    #region updateStockAndReturnTotalPrice
     public static double updateStockAndReturnTotalPrice(this List<BO.OrderItem> items)
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
@@ -277,8 +292,9 @@ public static class Tools
         }
         return Math.Round(totalPrice, 2);
     }
+    #endregion
 
-
+    #region refreshCart
     public static void refreshCart(this BO.Cart cart)
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
@@ -308,7 +324,7 @@ public static class Tools
             throw new BO.NotExistException();
         }
     }
-
+    #endregion
 
 }
 

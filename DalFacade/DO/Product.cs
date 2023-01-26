@@ -14,6 +14,4 @@ public struct Product
     //תיאור מוצר כמחרוזת
     public override string ToString() =>  Tools.ToStringProperty(this);
 
-
-
 }
