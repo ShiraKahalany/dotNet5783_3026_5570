@@ -1,6 +1,4 @@
 ﻿using BlApi;
-using System.Net.Http.Headers;
-using System.Security.Cryptography.X509Certificates;
 namespace BlImplementation;
 
 
@@ -34,7 +32,7 @@ internal class Product : IProduct
         IEnumerable<DO.Product?> doProductList =
                enumFilter switch
                {
-                   BO.Filters.filterByCategory =>  dal!.Product.GetAll(dp => ((filterValue != null ? (dp?.Category == (DO.Category)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))),
+                   BO.Filters.filterByCategory => dal!.Product.GetAll(dp => ((filterValue != null ? (dp?.Category == (DO.Category)filterValue && dp?.IsDeleted == false) : (dp?.IsDeleted == false)))),
                    BO.Filters.filterByIsDeleted =>
                     dal!.Product.GetAll(dp => dp?.IsDeleted == true),
 
@@ -47,7 +45,7 @@ internal class Product : IProduct
                };
 
         return from DO.Product doProduct in doProductList
-                select BlApi.Tools.CopyFields(doProduct, new BO.Product());
+               select BlApi.Tools.CopyFields(doProduct, new BO.Product());
     }
 
 
@@ -74,14 +72,14 @@ internal class Product : IProduct
             if (id > 0)
             {
                 DO.Product? pro = dal.Product.GetTByFilter((DO.Product? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().ID == id));
-                if (cart==null || cart.Items == null)
+                if (cart == null || cart.Items == null)
                 {
-                    BO.ProductItem p =new BO.ProductItem { Amount = 0, IsInStock = (pro?.InStock > 0) };
+                    BO.ProductItem p = new BO.ProductItem { Amount = 0, IsInStock = (pro?.InStock > 0) };
                     return pro.CopyFields(p);
                 }
                 var LIST = (IEnumerable<BO.OrderItem>)cart.Items;
                 BO.OrderItem? oi = cart.Items.Find((BO.OrderItem? item) => item?.ProductID == id);
-                int amt = (oi == null)? 0: oi.Amount??0;
+                int amt = (oi == null) ? 0 : oi.Amount ?? 0;
                 BO.ProductItem prod = new BO.ProductItem
                 {
                     IsDeleted = pro.GetValueOrDefault().IsDeleted,
@@ -127,16 +125,18 @@ internal class Product : IProduct
         {
             if (id < 0)
                 throw new BO.NotExistException();
-            IEnumerable<DO.Order?> lst = dal.Order.GetAll((DO.Order? order) => order.GetValueOrDefault().IsDeleted == false);
+            IEnumerable<DO.Order?> lst = dal.Order.GetAll((DO.Order? order) => order?.IsDeleted == false);
             List<DO.Order?> lst2 = lst.ToList();
-            if (lst2.Find((DO.Order? order) => dal.OrderItem.GetTByFilter((DO.OrderItem? product) => product.GetValueOrDefault().IsDeleted == false && (product.GetValueOrDefault().OrderID == order?.ID) && (product.GetValueOrDefault().ProductID == id)) != null) != null)
-                throw new BO.InAnOrderException();
+            DO.OrderItem? temp = dal.OrderItem.GetTByFilter((DO.OrderItem? x) => x?.IsDeleted == false && x?.ProductID == id);
+            //if (lst2.Find((DO.Order? order) => dal.OrderItem.GetTByFilter((DO.OrderItem? product) => product?.IsDeleted == false && (product?.OrderID == order?.ID) && (product?.ProductID == id)) != null) != null)
+               if(temp!=null) throw new BO.InAnOrderException();
         }
-        catch (DO.NotExistException)
+        catch (DO.NotExistException exc)
         {
             try
             {
-                dal.Product.Delete(id);  //אם המוצר לא מופיע באף הזמנה אפשר למחוק אותו
+                if (exc.Message.Contains("Not Exist - OrderItem"))
+                    dal.Product.Delete(id);  //אם המוצר לא מופיע באף הזמנה אפשר למחוק אותו
             }
             catch (DO.NotExistException ex)
             {
@@ -178,7 +178,7 @@ internal class Product : IProduct
             dal!.Product.GetAll((DO.Product? order) => order.GetValueOrDefault().IsDeleted == false),
             _ => dal!.Product.GetAll((DO.Product? order) => order.GetValueOrDefault().IsDeleted == false),
         };
-         var x= from DO.Product doProduct in doProductList
+        var x = from DO.Product doProduct in doProductList
                 select GetProductItem(doProduct.ID, cart);
         return x;
     }

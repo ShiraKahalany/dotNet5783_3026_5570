@@ -128,6 +128,5 @@ public partial class OrderTrackingWindow : Window
         BO.OrderTracking orderTracking = bl.Order.FollowOrder((((Button)(sender)).DataContext as PO.OrderPO)!.ID)!;
         new Orders.OrderWatchWindow(orderTracking).ShowDialog();
     }
-
 }
 

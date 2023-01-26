@@ -31,26 +31,34 @@ public partial class UpdateItemInOrder : Window
 
     private void Update_Click(object sender, RoutedEventArgs e)
     {
-        //int amount = (int)(comboBox.SelectedItem);
-        //try
-        //{
-        //    BO.Order newOrder= bl.Order.UpdateAmountOfProduct(order.ID, ItemPO.ProductID ?? 0, amount)!;
-        //    //ordersList.Remove(poorder);
-        //    order = newOrder.CopyFields(order);
-        //    itemsList.Remove(ItemPO);
-        //    ItemPO.Amount= amount;
-        //    ItemPO.TotalItem=amount* ItemPO.Price;
-        //   // ordersList.Remove(poorder);
-        //    itemsList.Add(ItemPO);
-        //    Close();
-        //}
-        //catch(BO.NotInStockException)
-        //{
-        //    MessageBox.Show("The product is not exist in this amount, can`t update");
-        //}
-        //catch (BO.NotExistException)
-        //{
-        //    MessageBox.Show("The product is not exist");
-        //}
+        int amount = (int)(comboBox.SelectedItem);
+        UpdateAmountOfItem(amount);
+    }
+
+    private void Delete_Click(object sender, RoutedEventArgs e) => UpdateAmountOfItem(0);
+
+    private void UpdateAmountOfItem(int amount)
+    {
+        try
+        {
+            BO.Order newOrder = bl.Order.UpdateAmountOfProduct(order.ID, ItemPO.ProductID ?? 0, amount)!;
+            ordersList.Remove(poorder);
+            order = newOrder.CopyFields(order);
+            itemsList.Remove(ItemPO);
+            ItemPO.Amount = amount;
+            ItemPO.TotalItem = amount * ItemPO.Price;
+            ordersList.Remove(poorder);
+            if (amount != 0) itemsList.Add(ItemPO);
+            MessageBox.Show("The item has been updated successfully!");
+        }
+        catch (BO.NotInStockException)
+        {
+            MessageBox.Show("The product is not exist in this amount, can`t update");
+        }
+        catch (BO.NotExistException)
+        {
+            MessageBox.Show("The product is not exist");
+        }
+        Close();
     }
 }

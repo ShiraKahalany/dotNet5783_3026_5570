@@ -6,7 +6,7 @@
     <Category>Kitchen</Category>
     <Price>70</Price>
     <InStock>99</InStock>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
     <Path>/image/Utility Stoneware Kitchen Canisters.jpg</Path>
   </Product>
   <Product>
@@ -24,17 +24,8 @@
     <Category>Bathroom</Category>
     <Price>35</Price>
     <InStock>79</InStock>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
     <Path>/image/Dark-Bronze Mid-Century-Contour-Bathroom Hardware.jpg</Path>
-  </Product>
-  <Product>
-    <ID>100023</ID>
-    <Name>White Bunk Bed With Stairs and Slide</Name>
-    <Category>Bedroom</Category>
-    <Price>1999</Price>
-    <InStock>129</InStock>
-    <IsDeleted>false</IsDeleted>
-    <Path>/image/White Bunk Bed With Stairs and Slide.jpg</Path>
   </Product>
   <Product>
     <ID>100040</ID>
@@ -42,7 +33,7 @@
     <Category>Garden</Category>
     <Price>999</Price>
     <InStock>149</InStock>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
     <Path>/image/Porto Pedestal Concrete Outdoor Dining Table.jpg</Path>
   </Product>
   <Product>
@@ -55,33 +46,6 @@
     <Path>/image/White Fluted Ceramic Indoor-outdoor-windowsill Planter.jpg</Path>
   </Product>
   <Product>
-    <ID>100042</ID>
-    <Name>Crinkle Velvet Duvet Cover &amp; Shams</Name>
-    <Category>Bedroom</Category>
-    <Price>125</Price>
-    <InStock>141</InStock>
-    <IsDeleted>false</IsDeleted>
-    <Path>/image/Crinkle Velvet Duvet Cover &amp; Shams.jpg</Path>
-  </Product>
-  <Product>
-    <ID>100033</ID>
-    <Name>Mid-Century Bath Ladder Storage</Name>
-    <Category>Bathroom</Category>
-    <Price>360</Price>
-    <InStock>96</InStock>
-    <IsDeleted>false</IsDeleted>
-    <Path>/image/Mid-Century Bath Ladder Storage.jpg</Path>
-  </Product>
-  <Product>
-    <ID>100026</ID>
-    <Name>Mid-Century Heathered Wool Rug</Name>
-    <Category>Living_room</Category>
-    <Price>60</Price>
-    <InStock>58</InStock>
-    <IsDeleted>false</IsDeleted>
-    <Path>/image/Mid-Century Heathered Wool Rug.jpg</Path>
-  </Product>
-  <Product>
     <ID>100032</ID>
     <Name>Fluted Glass Indoor or Outdoor Sconce</Name>
     <Category>Bathroom</Category>
@@ -91,39 +55,12 @@
     <Path>/image/Fluted Glass Indoor or Outdoor Sconce.jpg</Path>
   </Product>
   <Product>
-    <ID>100027</ID>
-    <Name>Thin-Wood-floor Mirror</Name>
-    <Category>Bedroom</Category>
-    <Price>280</Price>
-    <InStock>103</InStock>
-    <IsDeleted>false</IsDeleted>
-    <Path>/image/Thin-Wood-floor Mirror.jpg</Path>
-  </Product>
-  <Product>
-    <ID>100031</ID>
-    <Name>Mid-Century Single Bathroom Vanity</Name>
-    <Category>Bathroom</Category>
-    <Price>800</Price>
-    <InStock>98</InStock>
-    <IsDeleted>false</IsDeleted>
-    <Path>/image/Mid-Century Single Bathroom Vanity.jpg</Path>
-  </Product>
-  <Product>
     <ID>100028</ID>
     <Name>Round Outdoor Market Umbrella</Name>
     <Category>Garden</Category>
     <Price>503</Price>
     <InStock>60</InStock>
-    <IsDeleted>false</IsDeleted>
-    <Path>/image/download.png</Path>
-  </Product>
-  <Product>
-    <ID>100025</ID>
-    <Name>3-Pieces Green Sofa</Name>
-    <Category>Living_room</Category>
-    <Price>3347</Price>
-    <InStock>148</InStock>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
     <Path>/image/download.png</Path>
   </Product>
   <Product>
@@ -132,7 +69,7 @@
     <Category>Bedroom</Category>
     <Price>180</Price>
     <InStock>150</InStock>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
     <Path>/image/download.png</Path>
   </Product>
   <Product>
@@ -141,7 +78,7 @@
     <Category>Garden</Category>
     <Price>1080</Price>
     <InStock>149</InStock>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
     <Path>/image/download.png</Path>
   </Product>
   <Product>
@@ -163,20 +100,74 @@
     <Path>/image/Black Soft Luxury Bath Rug.jpg</Path>
   </Product>
   <Product>
-    <ID>100035</ID>
-    <Name>Modern Kitchen Drying Rack</Name>
-    <Category>Kitchen</Category>
-    <Price>15</Price>
-    <InStock>148</InStock>
+    <ID>100037</ID>
+    <Name>Huron Outdoor Lounge Chair</Name>
+    <Category>Garden</Category>
+    <Price>1298</Price>
+    <InStock>15</InStock>
     <IsDeleted>false</IsDeleted>
-    <Path>/image/Modern Kitchen Drying Rack.jpg</Path>
+    <Path>/image/Huron Outdoor Lounge Chair.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100030</ID>
+    <Name>3-piece dark gray sofa</Name>
+    <Category>Living_room</Category>
+    <Price>2398</Price>
+    <InStock>15</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/image/3-piece dark gray sofa.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100026</ID>
+    <Name>Mid-Century Heathered Wool Rug</Name>
+    <Category>Living_room</Category>
+    <Price>60</Price>
+    <InStock>61</InStock>
+    <IsDeleted>true</IsDeleted>
+    <Path>/image/Mid-Century Heathered Wool Rug.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100033</ID>
+    <Name>Mid-Century Bath Ladder Storage</Name>
+    <Category>Bathroom</Category>
+    <Price>360</Price>
+    <InStock>91</InStock>
+    <IsDeleted>true</IsDeleted>
+    <Path>/image/Mid-Century Bath Ladder Storage.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100023</ID>
+    <Name>White Bunk Bed With Stairs and Slide</Name>
+    <Category>Bedroom</Category>
+    <Price>1999</Price>
+    <InStock>128</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/image/White Bunk Bed With Stairs and Slide.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100027</ID>
+    <Name>Thin-Wood-floor Mirror</Name>
+    <Category>Bedroom</Category>
+    <Price>280</Price>
+    <InStock>100</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/image/Thin-Wood-floor Mirror.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100025</ID>
+    <Name>3-Pieces Green Sofa</Name>
+    <Category>Living_room</Category>
+    <Price>3347</Price>
+    <InStock>139</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/image/download.png</Path>
   </Product>
   <Product>
     <ID>100020</ID>
     <Name>Kitchen rug</Name>
     <Category>Kitchen</Category>
     <Price>60</Price>
-    <InStock>2</InStock>
+    <InStock>0</InStock>
     <IsDeleted>false</IsDeleted>
     <Path>/image/Kitchen rug.jpg</Path>
   </Product>
@@ -190,21 +181,30 @@
     <Path>/image/Kaloh Storage Carts.jpg</Path>
   </Product>
   <Product>
-    <ID>100037</ID>
-    <Name>Huron Outdoor Lounge Chair</Name>
-    <Category>Garden</Category>
-    <Price>1298</Price>
-    <InStock>13</InStock>
-    <IsDeleted>false</IsDeleted>
-    <Path>/image/Huron Outdoor Lounge Chair.jpg</Path>
+    <ID>100031</ID>
+    <Name>Mid-Century Single Bathroom Vanity</Name>
+    <Category>Bathroom</Category>
+    <Price>800</Price>
+    <InStock>95</InStock>
+    <IsDeleted>true</IsDeleted>
+    <Path>/image/Mid-Century Single Bathroom Vanity.jpg</Path>
   </Product>
   <Product>
-    <ID>100030</ID>
-    <Name>3-piece dark gray sofa</Name>
-    <Category>Living_room</Category>
-    <Price>2398</Price>
-    <InStock>14</InStock>
+    <ID>100035</ID>
+    <Name>Modern Kitchen Drying Rack</Name>
+    <Category>Kitchen</Category>
+    <Price>15</Price>
+    <InStock>144</InStock>
     <IsDeleted>false</IsDeleted>
-    <Path>/image/3-piece dark gray sofa.jpg</Path>
+    <Path>/image/Modern Kitchen Drying Rack.jpg</Path>
+  </Product>
+  <Product>
+    <ID>100042</ID>
+    <Name>Crinkle Velvet Duvet Cover &amp; Shams</Name>
+    <Category>Bedroom</Category>
+    <Price>125</Price>
+    <InStock>149</InStock>
+    <IsDeleted>false</IsDeleted>
+    <Path>/image/Crinkle Velvet Duvet Cover &amp; Shams.jpg</Path>
   </Product>
 </products>

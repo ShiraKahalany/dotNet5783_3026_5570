@@ -16,6 +16,7 @@
         <converter:DeliveredToVisibilityConverter  x:Key="DeliveredToVisibilityConverter"/>
         <converter:ShippedToNotVisibilityConverter  x:Key="ShippedToNotVisibilityConverter"/>
         <converter:DeliveredToNotVisibilityConverter  x:Key="DeliveredToNotVisibilityConverter"/>
+        <converter:NotVisibilityToVisibilityConverter x:Key="NotVisibilityToVisibilityConverter"/>
     </Page.Resources>
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -64,7 +65,7 @@
                                 <TextBlock Name="TotalItem" Text="{Binding TotalItem}" FontSize="20"></TextBlock>
                             </StackPanel>
                         </StackPanel>
-                        <Button Visibility="Hidden" Grid.Column="0" Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" Margin="0,0,10,0" Height="25" Width="25" BorderBrush="{x:Null}" Background="{x:Null}" Click="updateItem" HorizontalAlignment="Center">
+                        <Button Grid.Column="0" Visibility="{Binding ElementName=shipped, Path=Visibility, Converter={StaticResource NotVisibilityToVisibilityConverter}}" Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" Margin="0,0,10,0" Height="25" Width="25" BorderBrush="{x:Null}" Background="{x:Null}" Click="updateItem" HorizontalAlignment="Center">
                             <materialDesign:PackIcon Kind="BookEditOutline" Width="20" Height="20"></materialDesign:PackIcon>
                         </Button>
                     </Grid>
@@ -208,7 +209,7 @@
                                          Height="40" Width="60" RenderTransformOrigin="1.331,0.471" HorizontalAlignment="Center"/>
             </Button>
 
-            <Button Grid.Column="0" HorizontalAlignment="Left" Margin="19,225,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="80" Height="46" Background="{x:Null}" BorderBrush="{x:Null}"
+            <Button Grid.Column="0" x:Name="shipped" HorizontalAlignment="Left" Margin="19,225,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.082,-0.15" Width="80" Height="46" Background="{x:Null}" BorderBrush="{x:Null}"
                   Visibility="{Binding Path=Status, Converter={StaticResource ShippedToVisibilityConverter}}">
 
                 <materialDesign:PackIcon Kind="PackageVariant" 
