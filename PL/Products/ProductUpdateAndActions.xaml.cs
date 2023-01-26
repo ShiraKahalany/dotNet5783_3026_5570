@@ -27,7 +27,6 @@ namespace PL.Products
     {
         private IBL bl = BLFactory.GetBL();
         PO.ProductPO poProduct;
-        BO.Category category;
         ObservableCollection<PO.ProductPO> ob;
         string path;
         public ProductUpdateAndActions(PO.ProductPO poPro, ObservableCollection<PO.ProductPO> products)

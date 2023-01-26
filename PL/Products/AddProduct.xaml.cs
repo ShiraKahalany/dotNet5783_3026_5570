@@ -15,7 +15,7 @@ namespace PL.Products
         private IBL bl = BLFactory.GetBL();
         string path;
         private ObservableCollection<PO.ProductPO> observeproducts = new ObservableCollection<PO.ProductPO>();
-        private IEnumerable<BO.Product> BOproducts;
+        //private IEnumerable<BO.Product> BOproducts;
 
         public AddProduct(ObservableCollection<PO.ProductPO> ob)
         {

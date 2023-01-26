@@ -31,7 +31,7 @@ public static class Tools
     //מתודה להפיכת ישות למחרוזת לצורך הצגת הפרטים
     {
         string str = "";
-        foreach (PropertyInfo prop in t.GetType().GetProperties())
+        foreach (PropertyInfo prop in t!.GetType().GetProperties())
         {
             if (prop.Name == "IsDeleted")
             {

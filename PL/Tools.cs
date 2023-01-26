@@ -64,7 +64,7 @@ public static class Tools
 
     public static void EnterNumbersOnly(object sender, KeyEventArgs e)
     {
-        TextBox text = sender as TextBox;
+        TextBox? text = sender as TextBox;
         if (text == null) return;
         if (e == null) return;
 
@@ -96,7 +96,7 @@ public static class Tools
 
     public static void EnterNumbersOrPointOnly(object sender, KeyEventArgs e)
     {
-        TextBox text = sender as TextBox;
+        TextBox? text = sender as TextBox;
         if (text == null) return;
         if (e == null) return;
 

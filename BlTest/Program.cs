@@ -1,12 +1,12 @@
-﻿//using BO;
-////תכנית ראשית לבדיקות - שלב מספר2
-////שירה קהלני והלל אישון
-//namespace BlTest;
-//using BlApi;
-//using BlImplementation;
+﻿using BO;
+//תכנית ראשית לבדיקות - שלב מספר2
+//שירה קהלני והלל אישון
+namespace BlTest;
+using BlApi;
+using BlImplementation;
 
-//class Program
-//{
+class Program
+{
 //    //תוכנית ראשית זמנית הבודקת את נכונות כל הקבצים בשכבת הנתונים שעשינו עד כה
 //    static void testOrder(IBL bOrder)
 //    {
@@ -339,10 +339,10 @@
 //                }
 //                break;
 //        }
-//    }
-//    //[STAThread]
-//    public static void Main(string[] args) 
-//    {
+  //  }
+   //[STAThread]
+  public static void Main(string[] args) 
+   {
 //        IBL bl = BL.instance;
 //        // IDal dal = DalFactory.GetDal();
 //        BO.Cart? myCart = new BO.Cart();
@@ -385,6 +385,6 @@
 //            }
 //            Console.WriteLine();
 //        }
-//    }
-//}
+    }
+}
 
