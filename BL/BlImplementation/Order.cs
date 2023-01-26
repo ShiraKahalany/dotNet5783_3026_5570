@@ -1,6 +1,5 @@
 ﻿
 using BlApi;
-using DO;
 
 namespace BlImplementation;
 
@@ -157,28 +156,11 @@ internal class Order : IOrder
             DO.Order? order = dal.Order.GetTByFilter((DO.Order? order) => (order?.ID == orderId) && order?.IsDeleted == false);
             if (order?.ShipDate != null && order?.ShipDate < DateTime.Now)
                 throw new BO.CanNotUpdateOrderException();
-            DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product?.ID == productId) && product?.IsDeleted == false);          
+            DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product?.ID == productId) && product?.IsDeleted == false);
             BO.Order border = order?.OrderToBO()!;
-           //border = order.CopyFields(border);
             DO.OrderItem? theItem = dal.OrderItem.GetTByFilter((DO.OrderItem? orderItem) => orderItem?.OrderID == orderId && orderItem?.IsDeleted == false && orderItem?.ProductID == productId);
             if (theItem?.Amount > product?.InStock)
                 throw new BO.NotInStockException();
-            //border.Status = BO.OrderStatus.Ordered;
-
-
-
-            //IEnumerable<DO.OrderItem?>? items = dal.OrderItem.GetAll((DO.OrderItem? orderItem) => orderItem?.OrderID == order?.ID && orderItem?.IsDeleted == false);
-            //if (items == null || !items.Any())
-            //    return border;
-            //int difference = 0;
-
-            //var x = from DO.OrderItem it in items
-            //        let temp = checkAmount(it, productId, amount, ref difference, product)
-            //        where temp != null
-            //        select temp;
-
-            //border.TotalPrice = Math.Round(border.TotalPrice ?? 0, 2);
-            //border.Items = x.ToList();
 
             BO.OrderItem? itemBO = border.Items?.FirstOrDefault(x => x.ProductID == product?.ID);
             if (itemBO == null)
@@ -204,7 +186,6 @@ internal class Order : IOrder
                 return border;
             }
 
-            //itemBO.Amount = amount;
             dal.OrderItem.Update(new DO.OrderItem
             {
                 ID = theItem?.ID ?? 0,
@@ -218,23 +199,13 @@ internal class Order : IOrder
                 TotalItem = (theItem?.Price ?? 0) * amount
             });
 
-            //DO.Product p = new DO.Product();
-            //p = product.CopyFields(p);
-            //p.InStock=p.InStock+theItem?.Amount-itemBO.Amount;
-
-            
-            
-            
             border.Items?.Add(itemBO);
-            //border.TotalPrice=border.TotalPrice+amount*p.Price-p.Price*itemBO.Amount;
-
             return border;
         }
         catch (DO.NotExistException ex)
         {
             throw new BO.NotExistException(ex.Message);
         }
-
     }
 
     public BO.Order GetDeletedOrderById(int id)

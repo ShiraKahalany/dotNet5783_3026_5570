@@ -4,6 +4,7 @@ namespace BlApi;
 
 public static class Tools
 {
+    //מתודה להפיכת ישות למחרוזת לצורך הצגת הפרטים
     public static string ToStringProperty<T>(this T t, string suffix = "") =>
 
         t!.GetType().GetProperties().Aggregate(suffix, (str, prop) =>
@@ -56,6 +57,7 @@ public static class Tools
     }
 
     public static Target CopyFields<Source, Target>(this Source source, Target target)
+        //מתודת עזר - העתקת ערכי שדות עם שם זהה מאובייקט מקור לאובייקט יעד
     {
         if (source is not null && target is not null)
         {
@@ -76,7 +78,10 @@ public static class Tools
         return target;
     }
 
-    public static object CopyPropToStruct<S>(this S from, Type type)//get the typy we want to copy to 
+
+
+    public static object CopyPropToStruct<S>(this S from, Type type)
+        //מתודה ליצירת אובייקט חדש לפי הסוג שהתקבל, והעתקת כל השדות  הזהים מאובייקט המקור ולאובייקט החדש
     {
         object to = Activator.CreateInstance(type)!; // new object of the Type
         from.CopyFields(to);//copy all value of properties with the same name to the new object
@@ -84,6 +89,7 @@ public static class Tools
     }
 
     public static BO.OrderStatus GetStatus(this DO.Order order)
+        //מתודה המקבלת הזמנה מסוג דו ומחזירה את הסטטוס שלה
     //פונקציה המקבלת הזמנה ומחזירה את הסטטוס שלה
     {
         if (order.DeliveryDate != null && order.DeliveryDate < DateTime.Now)
@@ -104,7 +110,7 @@ public static class Tools
 
 
     public static List<BO.OrderItem> GetItems(this DO.Order order, ref double totalprice)
-    //פונקציה המקבלת רשימת מוצרים, ומחזירה את אלה
+    //מתודה המק בלת הזמנה ומחזירה את רשימת המוצרים שלה ואת המחיר הכולל של ההזמנה
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
         IEnumerable<DO.OrderItem?> items;
@@ -129,7 +135,7 @@ public static class Tools
 
 
     public static BO.Order OrderToBO(this DO.Order order)
-    //
+    //מתודה להעתקת הזמנה מסוג דו להזמנה מסוג בו
     {
         BO.Order or = new BO.Order();
         or = order.CopyFields(or);
@@ -141,7 +147,7 @@ public static class Tools
     }
 
     public static BO.OrderForList OrderToOrderForList(this DO.Order order)
-    //
+    //מתודה להפיכת הזמנה להזמנה-לרשימה
     {
         BO.OrderForList or = new BO.OrderForList();
         or = order.CopyFields(or);
@@ -155,6 +161,7 @@ public static class Tools
     }
 
     public static void CalcPriceAndAmount(this DO.Order order, ref double totalPrice, ref int amountOfItems)
+        //מתודה המקבלת הזמנה מסוג דו ומחשבת ומחזירה את כמות המוצרים שלה ואת המחיר הכולל שלה
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
         try
@@ -173,6 +180,7 @@ public static class Tools
     }
 
     public static void UpdateTotalpriceInCart(ref BO.Cart cart, BO.OrderItem item, int dif)
+        //מתודה לעדכון המחיר לתשלום הכולל של עגלה - מוסיפה את ההפרש ומעגלת
     {
         cart.TotalPrice = (cart.TotalPrice ?? 0) + (item.Price * dif);
         cart.TotalPrice = Math.Round(cart.TotalPrice ?? 0, 2);
@@ -197,7 +205,7 @@ public static class Tools
     }
 
     public static void updateItemsStock(this BO.Order order)
-    //
+    //מתודה לעדכון מלאי המוצרים בביטול הזמנה
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
         foreach (var item in order.Items!)
@@ -239,6 +247,7 @@ public static class Tools
     }
 
     public static double updateStockAndReturnTotalPrice(this List<BO.OrderItem> items)
+        //מתודה לעדכון מלאי המוצרים בעקבות שיחזור הזמנה, שגם מחשבת את המחיר הכולל של ההזמנה המשוחזרת
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
         double totalPrice = 0;
@@ -280,6 +289,7 @@ public static class Tools
 
 
     public static void refreshCart(this BO.Cart cart)
+        //מתודה ל"רענון" פריטי העגלה - מביאה את רשימת המוצרים מחדש, שאולי התעדכנו בינתיים
     {
         DalApi.IDal dal = DalApi.DalFactory.GetDal() ?? throw new NullReferenceException("Missing Dal");  //מופע הנתונים
         if (cart.Items == null)
