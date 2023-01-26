@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Collections.Generic;
 using System.Windows.Navigation;
 using BO;
+using PO;
 
 namespace PL.Orders;
 
@@ -91,7 +92,7 @@ public partial class OrderTracking : Page
         }
         catch (BO.NotExistException)
         {
-            MessageBox.Show("The Order Not Exit", "Not Exist");
+            MessageBox.Show("The Order Is Not Exist", "Not Exist");
             isStatusChanged = false;
         }
         poorder = boOrder.CopyFields<BO.Order, PO.OrderForListPO>(poorder);
@@ -112,7 +113,7 @@ public partial class OrderTracking : Page
             MessageBox.Show("The order has already been shipped, no changes can be made");
             return;
         }
-
-        new UpdateItemInOrder((PO.OrderItemPO)ItemsListView.SelectedItem, poItems, ob, order, poorder).ShowDialog();
+        PO.OrderItemPO? poitem = ((Button)(sender)).DataContext as PO.OrderItemPO;
+        new UpdateItemInOrder(poitem!, poItems, ob, order, poorder).ShowDialog();
     }
 }

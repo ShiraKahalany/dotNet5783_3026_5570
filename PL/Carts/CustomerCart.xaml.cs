@@ -112,7 +112,7 @@ public partial class CustomerCart : Page
         }
     }
 
-    private void CountDown_Click(object sender, RoutedEventArgs e)
+    private void Down_Click(object sender, RoutedEventArgs e)
     {
         var b = (Button)sender;
         int amount = ((PO.OrderItemPO)b.DataContext)?.Amount ?? 0;
@@ -121,7 +121,7 @@ public partial class CustomerCart : Page
         UpdateAmount(sender, amount - 1);
     }
 
-    private void txtNum_TextChanged(object sender, TextChangedEventArgs e)
+    private void textAmount_TextChanged(object sender, TextChangedEventArgs e)
     {
         var t = (TextBox)sender;
         if (t.Text == "")
@@ -134,7 +134,7 @@ public partial class CustomerCart : Page
         UpdateAmount(sender, amount, true);
     }
     private void OnlyNumbers(object sender, KeyEventArgs e) => Tools.EnterNumbersOnly(sender, e);
-    private void CountUp_Click(object sender, RoutedEventArgs e)
+    private void Up_Click(object sender, RoutedEventArgs e)
     {
         var b = (Button)sender;
         int amount = ((PO.OrderItemPO)b.DataContext)?.Amount ?? 0;
