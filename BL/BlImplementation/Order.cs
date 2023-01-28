@@ -194,7 +194,8 @@ internal class Order : IOrder
             DO.Product? product = dal.Product.GetTByFilter((DO.Product? product) => (product?.ID == productId) && product?.IsDeleted == false);
             BO.Order border = order?.OrderToBO()!;
             DO.OrderItem? theItem = dal.OrderItem.GetTByFilter((DO.OrderItem? orderItem) => orderItem?.OrderID == orderId && orderItem?.IsDeleted == false && orderItem?.ProductID == productId);
-            if (theItem?.Amount > product?.InStock)
+            
+            if (amount-theItem?.Amount > product?.InStock)
                 throw new BO.NotInStockException();
 
             BO.OrderItem? itemBO = border.Items?.FirstOrDefault(x => x.ProductID == product?.ID);
