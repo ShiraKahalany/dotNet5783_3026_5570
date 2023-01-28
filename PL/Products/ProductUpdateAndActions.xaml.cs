@@ -19,11 +19,7 @@ namespace PL.Products
     /// Interaction logic for ProductUpdateAndActions.xaml
     /// </summary>
     public partial class 
-        
-        
-        
-        
-        ProductUpdateAndActions : Window
+    ProductUpdateAndActions : Window
     {
         private IBL bl = BLFactory.GetBL();
         PO.ProductPO poProduct;
@@ -39,6 +35,7 @@ namespace PL.Products
             path = poProduct.Path!;
         }
 
+        #region Update_Click
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             string name = InsertName.Text;
@@ -62,9 +59,10 @@ namespace PL.Products
             {
                 MessageBox.Show("The Product Does Not Exist", "ERROR", MessageBoxButton.OK);
             }
-
         }
+        #endregion
 
+        #region ChangeImageButton_Click
         private void changeImageButton_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog f = new Microsoft.Win32.OpenFileDialog();
@@ -82,8 +80,14 @@ namespace PL.Products
                 path = str[1];
             }
         }
+        #endregion
 
+        #region OnlyNumbers
         private void OnlyNumbers(object sender, KeyEventArgs e) => Tools.EnterNumbersOnly(sender, e);
+        #endregion
+
+        #region EnterNumbersOrPointOnly
         private void EnterNumbersOrPointOnly(object sender, KeyEventArgs e) => Tools.EnterNumbersOrPointOnly(sender, e);
+        #endregion
     }
 }

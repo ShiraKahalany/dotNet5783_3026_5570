@@ -7,13 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PL.Products;
 
@@ -37,6 +30,7 @@ public partial class DeletedProduct : Window
         SelectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
     }
 
+    #region Restore
     private void Restore(object sender, RoutedEventArgs e)
     {
         PO.ProductPO? restorepro = ((Button)(sender)).DataContext as PO.ProductPO;
@@ -54,4 +48,5 @@ public partial class DeletedProduct : Window
             MessageBox.Show("Product Not Exist", "Not Exist Product", MessageBoxButton.OK);
         }       
     }
+    #endregion
 }

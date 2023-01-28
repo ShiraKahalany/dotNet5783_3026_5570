@@ -16,9 +16,6 @@ public partial class ProductsArchivePage : Page
     private ObservableCollection<PO.ProductPO> observeproducts = new ObservableCollection<PO.ProductPO>();
     private ObservableCollection<PO.ProductPO> observeproductsToSave = new ObservableCollection<PO.ProductPO>();
     private IEnumerable<BO.Product> BOproducts;
-
-
-
     public ProductsArchivePage(ObservableCollection<PO.ProductPO> ob)
     {
         InitializeComponent();
@@ -28,6 +25,7 @@ public partial class ProductsArchivePage : Page
         ProductListView.ItemsSource = observeproducts;
     }
 
+    #region Restore_Click
     private void Restore_Click(object sender, RoutedEventArgs e)
     {
         var result = MessageBox.Show("Are you sure you want to return the product to the store?", "Restore product", MessageBoxButton.YesNo);
@@ -46,12 +44,16 @@ public partial class ProductsArchivePage : Page
         observeproducts.Remove(restorepro!);
         observeproductsToSave.Add(restorepro!);
     }
+    #endregion
 
+    #region GoBack_Click
     private void GoBack_Click(object sender, RoutedEventArgs e)
     {
         NavigationService.GoBack();
     }
+    #endregion
 
+    #region ShowDeletedProduct
     private void ShowDeletedProduct(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         new Products.DeletedProduct((PO.ProductPO)ProductListView.SelectedItem, observeproducts).ShowDialog();
@@ -59,6 +61,6 @@ public partial class ProductsArchivePage : Page
         observeproducts.Clear();
         observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
     }
-
+    #endregion
 
 }

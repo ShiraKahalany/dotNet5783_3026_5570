@@ -58,7 +58,7 @@
                VerticalAlignment="Top" 
                Height="50" Width="244" 
                FontSize="30" FontFamily="Baskerville Old Face"/>
-        <Button Content="Add"   HorizontalAlignment="Left" Margin="160,345,0,0" VerticalAlignment="Top" Height="27" Width="63" RenderTransformOrigin="1.111,1.387" Click="Button_Click" Background="{x:Null}" BorderBrush="#FFD18888">
+        <Button Content="Add"   HorizontalAlignment="Left" Margin="160,345,0,0" VerticalAlignment="Top" Height="27" Width="63" RenderTransformOrigin="1.111,1.387" Click="AddPro_Click" Background="{x:Null}" BorderBrush="#FFD18888">
             <Button.IsEnabled>
                 <MultiBinding Converter="{StaticResource AllTextBoxesFilled7Converter}">
                     <Binding ElementName="InsertName" Path="Text" />

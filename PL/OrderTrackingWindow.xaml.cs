@@ -47,6 +47,7 @@ public partial class OrderTrackingWindow : Window
         worker.WorkerReportsProgress = true;
     }
 
+    #region Worker_RunWorkerCompleted
     private void Worker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
         if (from==0)
@@ -57,7 +58,9 @@ public partial class OrderTrackingWindow : Window
             from = 0;
         }
     }
+    #endregion
 
+    #region Worker_DoWork
     private void Worker_DoWork(object? sender, DoWorkEventArgs e)
     {
         while (toContinue)
@@ -68,7 +71,9 @@ public partial class OrderTrackingWindow : Window
             Thread.Sleep(900);
         }
     }
+    #endregion
 
+    #region Worker_ProgressChanged
     private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
     {
         toContinue = false;
@@ -92,8 +97,6 @@ public partial class OrderTrackingWindow : Window
             catch(BO.NotExistException)
             { }
         }
-
-
         try
         {
             orders = bl.Order.GetOrdersByFilter().ToList();
@@ -103,16 +106,19 @@ public partial class OrderTrackingWindow : Window
             MessageBox.Show("There Are NO Items", "ERROR", MessageBoxButton.OK);
         }
         ob = orders.ToObservableByConverter<BO.Order, PO.OrderPO>(ob, PL.Tools.BoToPoOrder);
-
     }
+    #endregion
 
+    #region Start_Click
     private void Start_Click(object sender, RoutedEventArgs e)
     {
         if (!worker.IsBusy)
             worker.RunWorkerAsync();
     }
+    #endregion
 
-    private void Button_Click(object sender, RoutedEventArgs e) //stop
+    #region Stop_Click
+    private void Stop_Click(object sender, RoutedEventArgs e)
     {
         if (worker.WorkerSupportsCancellation)
         {
@@ -121,11 +127,14 @@ public partial class OrderTrackingWindow : Window
             from = 1;
         }
     }
+    #endregion
 
-    private void Button_Click_1(object sender, RoutedEventArgs e) //tracking
+    #region WatchOrder_Click
+    private void WatchOrder_Click(object sender, RoutedEventArgs e) 
     {
         BO.OrderTracking orderTracking = bl.Order.FollowOrder((((Button)(sender)).DataContext as PO.OrderPO)!.ID)!;
         new Orders.OrderWatchWindow(orderTracking).ShowDialog();
     }
+    #endregion
 }
 

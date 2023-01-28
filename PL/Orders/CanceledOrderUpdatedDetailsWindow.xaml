@@ -23,7 +23,7 @@
         </Style>
     </Window.Resources>
     <Grid x:Name="myGrid">
-        <Button Content="OK" HorizontalAlignment="Center" Margin="0,287,0,0" VerticalAlignment="Top" Height="46" Width="72" Background="{x:Null}" FontSize="24" FontFamily="Book Antiqua" Click="Button_Click_1"/>
+        <Button Content="OK" HorizontalAlignment="Center" Margin="0,287,0,0" VerticalAlignment="Top" Height="46" Width="72" Background="{x:Null}" FontSize="24" FontFamily="Book Antiqua" Click="OK_Click"/>
         <TextBox x:Name="success" IsReadOnly="True" BorderBrush="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,50,0,0" TextWrapping="Wrap" Text="The order has been restored successfully!" VerticalAlignment="Top" Height="114" Width="312" FontSize="30" FontFamily="Bradley Hand ITC" FontWeight="Bold" Foreground="#DD217936"/>
         <TextBox x:Name="notSuccess" IsReadOnly="True" BorderBrush="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,50,0,0" TextWrapping="Wrap" Text="Sorry,&#xD;&#xA;the order cannot be restored.&#xD;&#xA;Some products are no longer in our stock" VerticalAlignment="Top" Height="209" Width="348" FontSize="32" FontFamily="Bradley Hand ITC" FontWeight="Bold" Foreground="#FFAB1616"/>
 

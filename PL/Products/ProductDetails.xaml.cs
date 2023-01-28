@@ -35,6 +35,7 @@ public partial class ProductDetails : Page
         BoProduct = PL.Tools.CopyProp<PO.ProductItemPO, BO.ProductItem>(PoProduct);
     }
 
+    #region AddToCart_Click
     private void AddTocart_Click(object sender, RoutedEventArgs e)
     {
         int id = PoProduct.ID;
@@ -62,11 +63,12 @@ public partial class ProductDetails : Page
         {
             MessageBox.Show("Sorry! It Is Out Of Stock", "ERROR", MessageBoxButton.OK);
         }
-        
     }
+    #endregion
+
+    #region GoBack+Click
     private void back_click(object sender, RoutedEventArgs e)=> NavigationService.GoBack();
-
-
+    #endregion
 
 }
 

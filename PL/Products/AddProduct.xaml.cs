@@ -24,7 +24,8 @@ namespace PL.Products
             SelectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        #region AddPro_Click
+        private void AddPro_Click(object sender, RoutedEventArgs e)
         {
             string name = InsertName.Text;
             double price = double.Parse(InsertPrice.Text);
@@ -49,8 +50,10 @@ namespace PL.Products
             {
                 MessageBox.Show("The Product Is Already Exist", "Can Not Add Product", MessageBoxButton.OK);
             }
-            
         }
+        #endregion
+
+        #region ChangeImageButton_Click
         private void changeImageButton_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog f = new Microsoft.Win32.OpenFileDialog();
@@ -68,8 +71,14 @@ namespace PL.Products
                 path = str[1];
             }
         }
+        #endregion
 
+        #region OnlyNumbers
         private void OnlyNumbers(object sender, KeyEventArgs e) => Tools.EnterNumbersOnly(sender, e);
+        #endregion
+
+        #region EnterNumbersOrPointOnly
         private void EnterNumbersOrPointOnly(object sender, KeyEventArgs e) => Tools.EnterNumbersOrPointOnly(sender, e);
+        #endregion
     }
 }

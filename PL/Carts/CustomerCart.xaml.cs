@@ -26,6 +26,7 @@ public partial class CustomerCart : Page
         myframe = frame;
     }
 
+    #region Delete Click
     private void delete_Click(object sender, RoutedEventArgs e)
     {
         OrderItemPO or = ((OrderItemPO)((Button)sender).DataContext);
@@ -45,19 +46,25 @@ public partial class CustomerCart : Page
         cartPO.Items!.Remove(or!);
         cartPO.TotalPrice = Math.Round((double)(cartPO.TotalPrice - or?.Price * or?.Amount)!, 2);
     }
+    #endregion
 
+    #region ChooseAmount_MouseEnter
     private void chooseAmount_MouseEnter(object sender, MouseEventArgs e)
     {
         int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
         ((ComboBox)sender).ItemsSource = arr;
     }
+    #endregion
 
+    #region OrderConfirmation Click
     private void OrderConfirmation_Click(object sender, RoutedEventArgs e)=>  myframe.Content = new OrderConfirmationPage(cartBo, myframe);
+    #endregion
 
-
+    #region ContinueShopping_Click
     private void ContinueShopping_Click(object sender, RoutedEventArgs e)=> myframe.Content = new Products.CatalogPage("all", myframe, cartBo);
+    #endregion
 
-
+    #region UpdateAmount
     private void UpdateAmount(object sender, int amount, bool isTextBox = false)
     {
         try
@@ -70,7 +77,6 @@ public partial class CustomerCart : Page
             {
                 t = (TextBox)sender;
                 item = (PO.OrderItemPO)t.DataContext;
-
             }
             else
             {
@@ -111,7 +117,9 @@ public partial class CustomerCart : Page
             return;
         }
     }
+    #endregion
 
+    #region Up+Down+Text Amount Button
     private void Down_Click(object sender, RoutedEventArgs e)
     {
         var b = (Button)sender;
@@ -140,6 +148,9 @@ public partial class CustomerCart : Page
         int amount = ((PO.OrderItemPO)b.DataContext)?.Amount ?? 0;
         UpdateAmount(sender, amount + 1);
     }
+    #endregion
+
+    #region EmptyCart_Click
     private void EmptyCart_Click(object sender, RoutedEventArgs e)
     {
         cartPO?.Items?.Clear();
@@ -147,7 +158,10 @@ public partial class CustomerCart : Page
         cartBo!.TotalPrice = 0;
         cartPO!.TotalPrice = 0;
     }
-    private void back_click(object sender, RoutedEventArgs e)=> myframe.Content = null;
+    #endregion
 
+    #region GoBack_click
+    private void back_click(object sender, RoutedEventArgs e)=> myframe.Content = null;
+    #endregion
 
 }

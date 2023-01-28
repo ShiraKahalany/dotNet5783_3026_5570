@@ -34,6 +34,7 @@ public partial class OrderConfirmationPage : Page
         ItemsListView.ItemsSource = BOcart.Items;
     }
 
+    #region PlaceOrder_Click
     private void PlaceOrder_Click(object sender, RoutedEventArgs e)
     {
         try
@@ -81,9 +82,12 @@ public partial class OrderConfirmationPage : Page
         }
 
     }
+    #endregion
 
+    #region ContinueShopping_Click
     private void ContinueShopping_Click(object sender, RoutedEventArgs e)
     {
         myframe.Content = new Products.CatalogPage("all", myframe, BOcart);
     }
+    #endregion
 }

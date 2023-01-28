@@ -47,7 +47,7 @@ public partial class OrderTracking : Page
         ItemsListView.ItemsSource = poItems;
     }
 
-
+    #region UpdateDel_Click
     private void UpdateDel_Click(object sender, RoutedEventArgs e)
     {
         bool isStatusChanged = true;
@@ -75,9 +75,10 @@ public partial class OrderTracking : Page
         order = boOrder.CopyFields<BO.Order, PO.OrderPO>(order);
         if (isStatusChanged && stat!= BO.OrderStatus.None)
             ob.Remove(poorder);
-        // }
     }
+    #endregion
 
+    #region UpdateShip_Click
     private void UpdateShip_Click(object sender, RoutedEventArgs e)
     {
         bool isStatusChanged = true;
@@ -100,12 +101,16 @@ public partial class OrderTracking : Page
         if (isStatusChanged &&(stat != BO.OrderStatus.None))
             ob.Remove(poorder);
     }
+    #endregion
 
+    #region GoBack_click
     private void back_click(object sender, RoutedEventArgs e)
     {
         NavigationService.GoBack();
     }
+    #endregion
 
+    #region UpdateItem
     private void updateItem(object sender, RoutedEventArgs e)
     {
         if(order.Status != BO.OrderStatus.Ordered)
@@ -116,4 +121,5 @@ public partial class OrderTracking : Page
         PO.OrderItemPO? poitem = ((Button)(sender)).DataContext as PO.OrderItemPO;
         new UpdateItemInOrder(poitem!, poItems, ob, order, poorder).ShowDialog();
     }
+    #endregion
 }

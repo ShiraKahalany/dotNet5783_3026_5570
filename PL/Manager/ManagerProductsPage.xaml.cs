@@ -33,8 +33,11 @@ public partial class ManagerProductsPage : Page
     }
 
 
+    #region AddProduct_Click
     private void AddProduct_Click(object sender, RoutedEventArgs e) => new Products.AddProduct(observeproducts).ShowDialog();
+    #endregion
 
+    #region AttributeSelector_SelectionChanged
     private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if ((BO.Category)AttributeSelector.SelectedItem == BO.Category.All)
@@ -44,7 +47,9 @@ public partial class ManagerProductsPage : Page
         observeproducts.Clear();
         observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
     }
+    #endregion
 
+    #region ProductListView_MouseDoubleClick
     private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         new ProductUpdateAndActions((PO.ProductPO)ProductListView.SelectedItem, observeproducts).ShowDialog();
@@ -55,7 +60,9 @@ public partial class ManagerProductsPage : Page
             observeproducts = BOproducts.ToObservableByConverter<BO.Product, PO.ProductPO>(observeproducts, PL.Tools.CopyProp<BO.Product, PO.ProductPO>);
         }
     }
+    #endregion
 
+    #region DeleteProduct_Click
     private void DeleteProduct_Click(object sender, RoutedEventArgs e)
     {
         var result=MessageBox.Show("Are you sure you want to delete the product?", "Delete product", MessageBoxButton.YesNo);
@@ -81,11 +88,13 @@ public partial class ManagerProductsPage : Page
         if(isDelete)
             observeproducts.Remove(po!);
     }
+    #endregion
 
+    #region ShowDeletedProducts_Click
     private void ShowDeletedProducts_Click(object sender, RoutedEventArgs e)
     {
         myframe.Content = new Manager.ProductsArchivePage(observeproducts);
     }
-
+    #endregion
 }
 

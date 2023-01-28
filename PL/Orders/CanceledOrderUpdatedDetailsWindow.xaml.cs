@@ -43,7 +43,7 @@ namespace PL.Orders
                 totalPrice=bl.Order.Restore(poorder.ID);
                 thePrice.Text = totalPrice.ToString();
                 ob.Remove(poorder);
-                BO.Order or=bl.Order.GetOrderById(poorder.ID);
+                BO.Order or=bl.Order.GetOrderById(poorder.ID)!;
                 poorder = or.CopyFields(poorder);
                 observeproductsToSave.Add(poorder);
 
@@ -64,9 +64,11 @@ namespace PL.Orders
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        #region OK_Click
+        private void OK_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
+        #endregion
     }
 }

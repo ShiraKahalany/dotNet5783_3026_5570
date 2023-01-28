@@ -52,22 +52,26 @@ public partial class OrdersArchivePage : Page
         }
     }
 
-
+    #region RestoreOrder_Click
     private void RestoreOrder_Click(object sender, RoutedEventArgs e)
     {
         PO.OrderForListPO? POor = ((Button)(sender)).DataContext as PO.OrderForListPO;
         new PL.Orders.CanceledOrderUpdatedDetailsWindow(POor!, ob,observeproductsToSave).ShowDialog();
     }
+    #endregion
 
+    #region GoBack_Click
     private void GoBack_Click(object sender, RoutedEventArgs e)
     {
         NavigationService.GoBack();
     }
+    #endregion
 
+    #region ProductListView_MouseDoubleClick
     private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         PO.OrderForListPO po = (PO.OrderForListPO)((ListView)sender).SelectedItem;
         myframe.Content = new Orders.DeletedOrderPage(po, ob, observeproductsToSave, myframe);
     }
-
+    #endregion
 }

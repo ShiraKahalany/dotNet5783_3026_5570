@@ -55,15 +55,18 @@ public partial class DeletedOrderPage : Page
         ItemsListView.ItemsSource = boOrder.Items;
     }
 
-
+    #region GoBack_click
     private void back_click(object sender, RoutedEventArgs e)
     {
         NavigationService.GoBack();
     }
+    #endregion
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    #region Reorder_Click
+    private void Reorder_Click(object sender, RoutedEventArgs e)
     {
         new Orders.CanceledOrderUpdatedDetailsWindow(poorder, ob, observeproductsToSave).ShowDialog();
         NavigationService.GoBack();
     }
+    #endregion
 }

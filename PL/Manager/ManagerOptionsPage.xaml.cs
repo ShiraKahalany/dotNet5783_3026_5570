@@ -25,10 +25,16 @@ public partial class ManagerOptionsPage : Page
         InitializeComponent();
     }
 
+    #region Products Click
     private void Button_Click_Products(object sender, RoutedEventArgs e) => MainManagerOptionsFrame.Content = new ManagerProductsPage(MainManagerOptionsFrame);
+    #endregion
+
+    #region Orders Click
     private void Button_Click_Orders(object sender, RoutedEventArgs e) => MainManagerOptionsFrame.Content = new ManagerOrdersPage(MainManagerOptionsFrame);
+    #endregion
 
+    #region Track The Process Of Sending Orders Click
     private void TrackOrders_Button_Click(object sender, RoutedEventArgs e)=> new OrderTrackingWindow().Show();
-
+    #endregion
 
 }

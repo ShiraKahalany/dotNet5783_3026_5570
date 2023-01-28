@@ -46,6 +46,7 @@ public partial class ManagerOrdersPage : Page
 
     }
 
+    #region AttributeSelector_SelectionChanged
     private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if ((BO.OrderStatus)AttributeSelector.SelectedItem == BO.OrderStatus.None)
@@ -73,14 +74,18 @@ public partial class ManagerOrdersPage : Page
         ob.Clear();
         ob = BOorderforlist!.ToObservableByConverter<BO.OrderForList, PO.OrderForListPO>(ob, PL.Tools.CopyProp<BO.OrderForList, PO.OrderForListPO>);
     }
+    #endregion
 
+    #region OrderListView_MouseDoubleClick
     private void OrderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         PO.OrderForListPO po=(PO.OrderForListPO)((ListView)sender).SelectedItem;
         BO.OrderStatus selectedStatus = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), AttributeSelector.SelectedItem.ToString()!);
         myframe.Content = new Orders.OrderTracking(po, ob, selectedStatus);
     }
+    #endregion
 
+    #region DeleteOrder_Click
     private void DeleteOrder_Click(object sender, RoutedEventArgs e)
     {
         var result = MessageBox.Show("Are you sure you want to cancel the order?", "Delete order", MessageBoxButton.YesNo);
@@ -114,7 +119,9 @@ public partial class ManagerOrdersPage : Page
         }
         
     }
+    #endregion
 
+    #region ShowDeletedOrders_Click
     private void ShowDeletedOrders_Click(object sender, RoutedEventArgs e) => myframe.Content = new Manager.OrdersArchivePage(ob, myframe);
-
+    #endregion
 }

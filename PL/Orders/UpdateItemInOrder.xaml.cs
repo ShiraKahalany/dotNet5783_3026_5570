@@ -29,12 +29,15 @@ public partial class UpdateItemInOrder : Window
         comboBox.SelectedItem = 1;
     }
 
+    #region Update_Click
     private void Update_Click(object sender, RoutedEventArgs e)
     {
         int amount = (int)(comboBox.SelectedItem);
         UpdateAmountOfItem(amount);
     }
+    #endregion
 
+    #region Delete_Click
     private void Delete_Click(object sender, RoutedEventArgs e)
     { 
         if(itemsList.Count==1)
@@ -45,7 +48,9 @@ public partial class UpdateItemInOrder : Window
         }
         UpdateAmountOfItem(0); 
     }
+    #endregion
 
+    #region UpdateAmountOfItem
     private void UpdateAmountOfItem(int amount)
     {
         try
@@ -70,4 +75,5 @@ public partial class UpdateItemInOrder : Window
         }
         Close();
     }
+    #endregion
 }
