@@ -58,7 +58,7 @@
         <ListView  Name="ProductListView"
                    MouseDoubleClick="ProductListView_MouseDoubleClick" 
                    FontSize="13"
-                   MaxWidth="650"
+                   MaxWidth="710"
                    Background="{x:Null}"  RenderTransformOrigin="0.9,0.9" Margin="104,56,104,35" Grid.RowSpan="2">
 
 
@@ -66,6 +66,13 @@
 
             <ListView.View>
                 <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Employee Information">
+                    <GridViewColumn Header="Picture"  Width="60">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Margin="10,10,0,0" Source="{Binding Path=Path}"></Image>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="ID"  Width="110" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
