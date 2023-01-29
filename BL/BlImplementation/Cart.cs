@@ -100,7 +100,7 @@ internal class Cart : ICart
             throw new BO.NoNameException();
         if (cart.CustomerAddress == null)
             throw new BO.NoAddressException();
-        if ((cart.CustomerEmail == null) || (!cart.CustomerEmail.Contains('@')))
+        if ((cart.CustomerEmail == null) || (!Tools.CorrectEmail(cart.CustomerEmail)))
             throw new BO.IllegalEmailException();
         if (cart.Items == null || cart.Items.Count == 0)
             throw new BO.NotItemsInCartException();
@@ -161,4 +161,6 @@ internal class Cart : ICart
         }
     }
     #endregion
+
+    
 }

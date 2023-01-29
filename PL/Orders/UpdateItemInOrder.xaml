@@ -22,7 +22,7 @@
             </Style.Resources>
         </Style>
     </Window.Resources>
-    <Grid Background="#f5f5f0">
+    <Grid Background="White">
         <Button Content="Try Update" HorizontalAlignment="Center" Margin="0,323,0,0" VerticalAlignment="Top" Height="38" Width="144" Background="{x:Null}" FontSize="17" FontFamily="Century Gothic" Click="Update_Click" BorderBrush="#DD310D4F"/>
         <Label Content="Item ID:" HorizontalAlignment="Left" Margin="78,84,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
         <Label Content="Product Name:" HorizontalAlignment="Center" Margin="0,117,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16" FontWeight="Bold"/>
@@ -32,7 +32,7 @@
         <Label Content="{Binding Amount}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="214,195,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="16"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,243,0,96" Height="45" Width="200" Background="#FF090909">
             <Label Padding="15,0,5,0" Content="Change Amount:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Century Gothic" Foreground="#FFFEFEFE"/>
-            <ComboBox MaxDropDownHeight="150" Name="comboBox" FontFamily="Century Gothic" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="29" FontSize="13" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="#89F8F2F2" Background="Transparent" Foreground="#FFF10AE6"/>
+            <ComboBox MaxDropDownHeight="150" Name="comboBox" FontFamily="Century Gothic" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="29" FontSize="13" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="#89F8F2F2" Background="Transparent" Foreground="Black"/>
         </StackPanel>
         <Label Content="Update item" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" Foreground="#DD360C5A" FontSize="26"/>
         <Button Content="Delete Item" HorizontalAlignment="Center" VerticalAlignment="Top" Height="26" Width="136" Background="{x:Null}" FontSize="14" FontFamily="Century Gothic" Click="Delete_Click" BorderBrush="#DD720D0A" Margin="0,377,0,0"/>

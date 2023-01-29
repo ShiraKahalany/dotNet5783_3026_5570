@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Reflection;
+using System.Text.RegularExpressions;
 namespace BlApi;
 
 public static class Tools
@@ -341,6 +342,14 @@ public static class Tools
     }
     #endregion
 
+    #region CorrectEmail
+    public static bool CorrectEmail(string email)
+        //Func that checkes the that the email address is correct
+    {
+        const string pattern = @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*@((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))\z";
+        return Regex.IsMatch(email, pattern);
+    }
+    #endregion
 }
 
 
