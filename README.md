@@ -1,57 +1,39 @@
-# 🌐 HomeDecor Store
+# 🪞 HomeDecor Store
 
-## 📌 Overview
-The **E-Commerce Management System** is designed to streamline the management of products and orders for online retail businesses. This platform facilitates efficient cart operations, order tracking, and inventory management, making it an ideal solution for small to medium-sized e-commerce enterprises. By automating essential processes, the system enhances operational efficiency and improves user experience for both customers and administrators.
+## 📌 Overview  
+HomeDecor is an efficient Management System that empowers online retailers to manage products, orders, and customer interactions seamlessly. Ideal for small to medium-sized businesses, it simplifies cart operations, order tracking, and inventory management, significantly enhancing operational efficiency and user satisfaction.
 
-## ✨ Features
-- **Product Management**: Enable seamless addition, updating, and removal of products from the inventory.
-- **Order Tracking**: Keep track of order statuses from placement through to delivery.
-- **Cart Operations**: Manage user sessions and allow products to be added to a shopping cart easily.
-- **User Authentication**: Secure user login and registration to provide personalized experiences.
-- **Exception Handling**: Comprehensive management of errors and exceptions throughout the application.
+## ✨ Features  
+- **Product Management**: Effortlessly add, update, or remove products from your inventory.  
+- **Order Tracking**: Monitor order statuses from placement to delivery in real-time.  
+- **Cart Operations**: Simplified management of user sessions for smooth shopping experiences.  
+- **User Authentication**: Secure login and registration for personalized customer experiences.  
+- **Exception Handling**: Robust management of errors throughout the application.  
 
-## 🛠 Tech Stack
-- **Languages**: C#
-- **Framework**: .NET
-- **ORM**: Entity Framework
-- **Configuration**: XML files for managing application settings.
+## 🛠 Tech Stack  
+- **Languages**: C#  
+- **Framework**: .NET  
+- **ORM**: Entity Framework  
+- **Configuration**: XML files    
 
-## 🏗 Architecture
-The system utilizes a **3-layer architecture** composed of:
-- **Data Access Layer (DAL)**: Responsible for all database interactions and data model definitions.
-- **Business Logic Layer (BLL)**: Contains core business rules and application logic focused on product and order management.
-- **Presentation Layer (PL)**: Handles user interactions and processes requests, delivering a user-friendly interface.
+## 🏗 Architecture  
+HomeDecoremploys a **3-layer architecture**:  
+- **Data Access Layer (DAL)**: Manages all database interactions and data models.  
+- **Business Logic Layer (BLL)**: Enforces core business rules around product and order management.  
+- **Presentation Layer (PL)**: Engages users and processes requests via a user-friendly interface.  
 
-This structured approach facilitates easy maintenance, testing, and scalability, ensuring the system can adapt as it grows.
-
-## 📂 Folder Structure
+## 📂 Folder Structure  
 ```plaintext
-ECommerceManagementSystem/
-├── BL/
-│   ├── BL.csproj
-│   ├── IProduct.cs
-│   ├── IOrder.cs
-│   └── ... (other business logic components)
-├── DalFacade/
-│   ├── DalFacade.csproj
-│   ├── DO/
-│   └── ... (data access components)
-├── DalList/
-│   ├── DalList.csproj
-│   └── ... (list implementations)
-├── xml/
-│   ├── product.xml
-│   ├── orders.xml
+BloomCart/
+├── BL/                   # Business Logic
+├── DalFacade/           # Data Access Interface
+├── DalList/             # List Implementations
+├── xml/                 # XML Configuration Files
+└── PL/                  # Presentation Layer
 ```
 
-### ▶️ Running the Project
-To run the project, navigate to the project directory and execute the following commands:
+## ▶️ How to Run  
 ```bash
 dotnet restore
 dotnet run
 ```
-
-### 🖼 Suggested Screenshots
-- **Admin Panel**
-- **Analytics / Charts Page**
-- **Upload Page**
